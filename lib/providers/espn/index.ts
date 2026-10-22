@@ -3,6 +3,7 @@
  * response shapes. Everything returns the app's own types (lib/providers/types.ts).
  */
 import type { DataProvider, GameDetail, Scoreboard, Team } from "@/lib/providers/types";
+import { fetchDefenseVsPosition } from "./defense";
 import {
   outlooksRequest,
   parseByeWeeks,
@@ -90,4 +91,5 @@ export const espnProvider: DataProvider = {
   getPlayerNews: fetchPlayerNews,
   getLeagueNews: fetchLeagueNews,
   getInjuries: fetchInjuries,
+  getDefenseVsPosition: fetchDefenseVsPosition,
 };

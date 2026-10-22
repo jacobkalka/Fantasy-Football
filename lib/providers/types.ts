@@ -217,6 +217,30 @@ export interface Scoreboard {
   games: Game[];
 }
 
+/** The positions a defense is graded against (kickers and D/ST aren't). */
+export type OffensePosition = "QB" | "RB" | "WR" | "TE";
+
+/** Everything opposing players at one position did against one defense this season. */
+export interface DefenseAllowed {
+  /** Games this defense has played so far (byes don't count). */
+  games: number;
+  /** Season totals for every opposing player at this position, added together. */
+  stats: StatLine;
+}
+
+/**
+ * "Defense vs. position": what each NFL defense has given up to QBs, RBs, WRs and TEs.
+ * The provider only adds up stats; turning them into points and ranks happens in app code,
+ * so each scoring format can be ranked separately.
+ */
+export interface DefenseVsPosition {
+  season: number;
+  /** Last week included. Only finished weeks count; 0 means no games yet. */
+  throughWeek: number;
+  /** Team id → position → what that defense allowed. */
+  teams: Record<string, Partial<Record<OffensePosition, DefenseAllowed>>>;
+}
+
 /** Everything the app needs from a sports data source. */
 export interface DataProvider {
   /** This week's games (the source decides which week is current), or a specific week. */
@@ -231,4 +255,6 @@ export interface DataProvider {
   getPlayerNews(playerId: string): Promise<NewsItem[]>;
   getLeagueNews(): Promise<NewsItem[]>;
   getInjuries(): Promise<Injury[]>;
+  /** What each defense has allowed to each position, weeks 1 through `throughWeek`. */
+  getDefenseVsPosition(season: number, throughWeek: number): Promise<DefenseVsPosition>;
 }

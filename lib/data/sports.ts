@@ -73,3 +73,13 @@ export async function getInjuries() {
   cacheLife("outlook");
   return sports.getInjuries();
 }
+
+/**
+ * What each defense has allowed to QBs, RBs, WRs and TEs through `throughWeek`.
+ * Only changes when games finish, and one copy serves every Start/Sit comparison.
+ */
+export async function getDefenseVsPosition(season: number, throughWeek: number) {
+  "use cache: remote";
+  cacheLife("outlook");
+  return sports.getDefenseVsPosition(season, throughWeek);
+}
