@@ -1,4 +1,4 @@
-# Snap Count *(working name)*
+# The Feed
 
 A live fantasy football tracker. ESPN's app tells you your score; this tells you **what
 happened**: every play that moved your players' points, in plain English, as it happens.

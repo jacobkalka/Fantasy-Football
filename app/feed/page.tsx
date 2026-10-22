@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { ComingUp } from "@/components/ui/ComingUp";
 
-export const metadata: Metadata = { title: "Feed" };
+export const metadata: Metadata = { title: "Live feed" };
 
 export default function FeedPage() {
   return (

@@ -1,5 +1,5 @@
-/** The app's name, in one place. "Snap Count" is a placeholder until the owner picks one. */
-export const APP_NAME = "Snap Count";
+/** The app's name, in one place. */
+export const APP_NAME = "The Feed";
 
 export const APP_DESCRIPTION =
   "Live fantasy football: every play that moves your score, in plain English, as it happens.";

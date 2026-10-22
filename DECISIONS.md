@@ -8,7 +8,7 @@ picking the project back up.
 | Date | Decision | Why |
 |------|----------|-----|
 | 2026-10-22 | **Look: Direction A, "Control Room"** (near-black terminal, electric lime `#C8FF2E` for points gained, red with a − sign for points lost, hairline borders, square corners). Chosen by the owner from three mockups (A Control Room, B Primetime, C Box Score). | Closest to the brief: "broadcast control room meets trading terminal". |
-| 2026-10-22 | App name is a placeholder (`Snap Count`) in `lib/config.ts`. | The owner hasn't picked a name yet; it's one constant to change. |
+| 2026-10-22 | **Name: The Feed** (chosen by the owner over Snap Count, Drive Report, Red Zone Radio). Lives in `lib/config.ts` as `APP_NAME`. The Feed tab keeps its name. | Owner's choice. One constant to change if it ever needs renaming. |
 | 2026-10-22 | Unbuilt tabs show an honest "Arrives in phase N" panel, and the Team tab shows build progress (`lib/roadmap.ts`). | The live URL stays working and truthful at every step; no fake data. |
 
 ## Stack
