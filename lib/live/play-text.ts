@@ -8,6 +8,9 @@ export function cleanPlayText(text: string): string {
     text
       // Formation notes at the start: "(Shotgun)", "(No Huddle, Shotgun)", "(Punt formation)".
       .replace(/^(\s*\([^)]*\)\s*)+/, "")
+      // Officials' notes about eligible linemen: "B.Fisher reported in as eligible."
+      .replace(/(^|\.\s+)[A-Z][A-Za-z'.-]*\.[A-Za-z' -]+ reported in as eligible\.\s*/g, "$1")
+      .replace(/^(\s*\([^)]*\)\s*)+/, "")
       // Who made the tackle: "(T.Jefferson)" / "(D.Henley; N.Barrett)" / "(N.Herbig, C.Heyward)".
       .replace(/\s*\((?:[A-Z][A-Za-z'.-]*\.[A-Za-z' .-]+)(?:[;,]\s*[A-Z][A-Za-z'.-]*\.[A-Za-z' .-]+)*\)/g, "")
       // Assists in brackets: "[M.Crosby]".

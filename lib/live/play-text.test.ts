@@ -28,6 +28,15 @@ describe("cleanPlayText", () => {
     );
   });
 
+  it("drops eligible-receiver announcements", () => {
+    expect(cleanPlayText("B.Fisher reported in as eligible. C.Stroud pass deep right to N.Collins to JAX 9 for 42 yards (D.Lloyd).")).toBe(
+      "C.Stroud pass deep right to N.Collins to JAX 9 for 42 yards.",
+    );
+    expect(cleanPlayText("B.Fisher reported in as eligible.  (Shotgun) J.Jordan left tackle for 25 yards, TOUCHDOWN.")).toBe(
+      "J.Jordan left tackle for 25 yards, TOUCHDOWN.",
+    );
+  });
+
   it("leaves non-name parentheses alone", () => {
     expect(cleanPlayText("R.Johnson up the middle to ATL 45 for 4 yards (J.Bates). FUMBLES (J.Bates), RECOVERED by ATL-H.Perkins at ATL 43.")).toBe(
       "R.Johnson up the middle to ATL 45 for 4 yards. FUMBLES, RECOVERED by ATL-H.Perkins at ATL 43.",

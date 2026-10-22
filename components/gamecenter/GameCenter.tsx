@@ -1,12 +1,12 @@
 "use client";
 
-import { motion } from "motion/react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { UpdatedAgo } from "@/components/live/UpdatedAgo";
+import { ReplayControls } from "@/components/motion/ReplayControls";
 import { Segmented } from "@/components/ui/Segmented";
 import { periodLabel } from "@/lib/format";
 import { usePoll } from "@/lib/hooks/usePoll";
-import { REPLAY_SPEEDS, useReplay } from "@/lib/hooks/useReplay";
+import { useReplay } from "@/lib/hooks/useReplay";
 import type { GameView, LeaderView } from "@/lib/live/game-view";
 import type { Team } from "@/lib/providers/types";
 import { useRoster } from "@/lib/roster/store";
@@ -113,51 +113,7 @@ export function GameCenter({ initial }: { initial: GameView }) {
         )}
       </div>
 
-      {replay.active && (
-        <motion.div
-          initial={{ opacity: 0, y: -8 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="glass flex flex-wrap items-center gap-2 p-3"
-        >
-          <button
-            type="button"
-            onClick={replay.toggle}
-            disabled={replay.done}
-            className="glass-chip pressable flex size-11 items-center justify-center rounded-xl text-lg text-ink disabled:opacity-40"
-            aria-label={replay.playing ? "Pause replay" : "Play replay"}
-          >
-            {replay.playing ? "❚❚" : "▶"}
-          </button>
-          <Segmented
-            options={REPLAY_SPEEDS}
-            value={replay.speed}
-            onChange={replay.setSpeed}
-            label="Replay speed"
-            className="flex-1"
-          />
-          <button
-            type="button"
-            onClick={replay.skipToEnd}
-            className="glass-chip pressable rounded-xl px-3 py-2.5 font-mono text-[10px] tracking-[0.1em] text-ink uppercase"
-          >
-            Skip
-          </button>
-          <button
-            type="button"
-            onClick={replay.stop}
-            className="glass-chip pressable rounded-xl px-3 py-2.5 font-mono text-[10px] tracking-[0.1em] text-muted uppercase"
-          >
-            Exit
-          </button>
-          <div className="h-1 w-full overflow-hidden rounded-full bg-white/5">
-            <motion.div
-              className="h-full rounded-full bg-gain"
-              animate={{ width: `${(replay.shown / Math.max(1, view.plays.length)) * 100}%` }}
-              transition={{ ease: "linear", duration: 0.3 }}
-            />
-          </div>
-        </motion.div>
-      )}
+      {replay.active && <ReplayControls replay={replay} total={view.plays.length} />}
 
       {homeWinPct !== null && game.state !== "pre" && (
         <WinProbabilityBar away={game.away.team} home={game.home.team} homeWinPct={homeWinPct} />

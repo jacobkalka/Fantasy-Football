@@ -14,7 +14,7 @@ export type ReplaySpeed = (typeof REPLAY_SPEEDS)[number]["value"];
  * time between them (sped up), so a final game looks and moves like a live one.
  * `times` are the plays' real-world timestamps in ms (or NaN when unknown).
  */
-export function useReplay(times: number[]) {
+export function useReplay(times: number[], { maxWaitMs = 2500 }: { maxWaitMs?: number } = {}) {
   const [active, setActive] = useState(false);
   const [playing, setPlaying] = useState(false);
   const [shown, setShown] = useState(0);
@@ -25,11 +25,11 @@ export function useReplay(times: number[]) {
     if (!active || !playing || shown >= total) return;
     const gap = shown === 0 ? 0 : times[shown] - times[shown - 1];
     const real = Number.isFinite(gap) && gap > 0 ? gap : 20_000;
-    // Never faster than a quarter second or slower than 2.5 s per play, so it stays watchable.
-    const wait = Math.min(2500, Math.max(250, real / Number(speed)));
+    // Never faster than a quarter second or slower than `maxWaitMs` per play, so it stays watchable.
+    const wait = Math.min(maxWaitMs, Math.max(250, real / Number(speed)));
     const timer = window.setTimeout(() => setShown((n) => n + 1), wait);
     return () => window.clearTimeout(timer);
-  }, [active, playing, shown, total, times, speed]);
+  }, [active, playing, shown, total, times, speed, maxWaitMs]);
 
   const start = useCallback(() => {
     setShown(0);
