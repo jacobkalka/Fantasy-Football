@@ -159,7 +159,10 @@ export function PlayerSheet({
                       {live?.game?.state === "in" ? "Estimated finish" : "Projected"}
                     </p>
                     <p className="font-display text-5xl leading-none font-bold text-ink-soft">
-                      {(live?.liveProjection ?? live?.projection ?? info?.projection)?.toFixed(1) ?? "–"}
+                      {(live?.game?.state === "in"
+                        ? live.liveProjection
+                        : (live?.projection ?? info?.projection)
+                      )?.toFixed(1) ?? "–"}
                     </p>
                   </div>
                 </div>

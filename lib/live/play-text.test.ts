@@ -37,6 +37,12 @@ describe("cleanPlayText", () => {
     );
   });
 
+  it("puts a space between glued sentences without splitting player names", () => {
+    expect(
+      cleanPlayText("T.Lawrence pass short right to B.Tuten pushed ob at HST 1 for 11 yards.Penalty on HST, Defensive Too Many Men on Field, declined."),
+    ).toBe("T.Lawrence pass short right to B.Tuten pushed ob at HST 1 for 11 yards. Penalty on HST, Defensive Too Many Men on Field, declined.");
+  });
+
   it("leaves non-name parentheses alone", () => {
     expect(cleanPlayText("R.Johnson up the middle to ATL 45 for 4 yards (J.Bates). FUMBLES (J.Bates), RECOVERED by ATL-H.Perkins at ATL 43.")).toBe(
       "R.Johnson up the middle to ATL 45 for 4 yards. FUMBLES, RECOVERED by ATL-H.Perkins at ATL 43.",

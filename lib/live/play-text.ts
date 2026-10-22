@@ -15,6 +15,8 @@ export function cleanPlayText(text: string): string {
       .replace(/\s*\((?:[A-Z][A-Za-z'.-]*\.[A-Za-z' .-]+)(?:[;,]\s*[A-Z][A-Za-z'.-]*\.[A-Za-z' .-]+)*\)/g, "")
       // Assists in brackets: "[M.Crosby]".
       .replace(/\s*\[[^\]]*\]/g, "")
+      // ESPN sometimes glues sentences together: "for 11 yards.Penalty on HST" (but never touch "B.Tuten").
+      .replace(/([a-z0-9])\.(?=[A-Z][a-z]{2,})/g, "$1. ")
       .replace(/\s{2,}/g, " ")
       .replace(/\s+([.,])/g, "$1")
       .trim()
