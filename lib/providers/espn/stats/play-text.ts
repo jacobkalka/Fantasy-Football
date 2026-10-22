@@ -275,3 +275,79 @@ export function laterals(main: string): { name: string; gain?: Gain }[] {
   }
   return found;
 }
+
+// ---------------------------------------------------------------------------
+// Kicking
+// ---------------------------------------------------------------------------
+
+/** A field goal try: "J.Slye 44 yard field goal is GOOD" / "is No Good" / "is BLOCKED". */
+export interface FieldGoal {
+  /** Who kicked it, as the text names him ("J.Slye"). */
+  kicker: string;
+  distance: number;
+  made: boolean;
+}
+
+const FIELD_GOAL = new RegExp(String.raw`(?:(${NAME}) )?(\d+) yard field goal is (GOOD|No Good|BLOCKED|Blocked)`);
+
+export function fieldGoal(main: string): FieldGoal | undefined {
+  const match = FIELD_GOAL.exec(main);
+  if (!match) return undefined;
+  return { kicker: match[1] ?? "", distance: Number(match[2]), made: match[3] === "GOOD" };
+}
+
+/** ESPN's distance bands: under 40, 40-49, 50-59, 60 and longer. */
+export function fieldGoalBand(distance: number): "0_39" | "40_49" | "50_59" | "60" {
+  if (distance < 40) return "0_39";
+  if (distance < 50) return "40_49";
+  if (distance < 60) return "50_59";
+  return "60";
+}
+
+/**
+ * The extra point after a touchdown: true if good, false if missed or blocked,
+ * undefined when there was no kick (a two-point try, or no try at all).
+ * Reads "S.Shrader extra point is GOOD" in the try, or ESPN's short form at
+ * the end of the text: "(Will Reichard Kick)" / "(Ryan Fitzgerald PAT failed)".
+ */
+export function extraPoint(main: string, tryText: string): boolean | undefined {
+  const long = /extra point is (GOOD|No Good|BLOCKED|Blocked)/.exec(tryText);
+  if (long) return long[1] === "GOOD";
+  const short = /\([^()]*? (Kick|PAT \w+)\)\s*$/.exec(main);
+  if (short) return short[1] === "Kick";
+  return undefined;
+}
+
+/** "...DEFENSIVE TWO-POINT ATTEMPT. ... ATTEMPT SUCCEEDS." The defense returned a try for 2. */
+export function defensiveTwoPoint(tryText: string): boolean {
+  const at = tryText.indexOf("DEFENSIVE TWO-POINT ATTEMPT");
+  return at !== -1 && /ATTEMPT SUCCEEDS/.test(tryText.slice(at));
+}
+
+/**
+ * Yards a team loses on a sack, as ESPN's box score counts them: the text's
+ * "sacked at ATL 22 for -10 yards". If the QB fumbled and the ball was
+ * recovered AHEAD of where he went down, the loss is measured to the recovery
+ * spot instead, and is 0 if that's past the line of scrimmage. Checked against
+ * the week 1-6 box scores ("sacked at ATL 2 for -8 yards ... recovered by
+ * ATL-R.Neuzil at ATL 3" counts -7). A recovery further back keeps the text's
+ * number; the box score sometimes differs by a yard or two there.
+ */
+export function sackYards(main: string): number | undefined {
+  const gain = firstGain(main);
+  if (!gain) return undefined;
+  const [, fumble] = main.slice(gain.index).split(/\bFUMBLES\b/);
+  const recovery = fumble && new RegExp(String.raw`(RECOVERED|recovered) by ([A-Z]{2,3})-\S+ at ${SPOT}`).exec(fumble);
+  const spot = recovery && spotFrom(recovery[3], recovery[4], recovery[5]);
+  if (!gain.end || !recovery || !spot) return gain.yards;
+  // Capitals: the other team (the defense) recovered. Lower case: the offense did.
+  const team = recovery[2];
+  const defenseOwns = recovery[1] === "RECOVERED";
+  const toGoal = (s: Spot) =>
+    s.side === undefined ? 50 : (s.side === team) === defenseOwns ? s.line : 100 - s.line;
+  const sackSpot = toGoal(gain.end);
+  const recoveredAt = toGoal(spot);
+  if (recoveredAt >= sackSpot) return gain.yards; // recovered behind where he went down
+  const lineOfScrimmage = sackSpot + gain.yards; // yards is negative on a sack
+  return Math.min(0, lineOfScrimmage - recoveredAt);
+}

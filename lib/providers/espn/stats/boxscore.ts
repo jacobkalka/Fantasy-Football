@@ -9,10 +9,18 @@
  *     athletes[]       = { athlete: { id, displayName }, stats: ["24/34", "312", ...] }
  *
  * Note: ESPN's box score has no two-point conversions; those come from the plays.
+ *
+ * Kickers: the "kicking" category only has made/attempted counts ("1/2"), but
+ * fantasy points depend on each field goal's distance. The same summary also
+ * carries the game's play-by-play (drives[].plays[].text, e.g. "C.Santos 50
+ * yard field goal is GOOD"), so we read the distances from there and match
+ * each kick to the kicker by name. Counts always come from the box score;
+ * the distance bands come from that text.
  */
 import type { PlayerGameLine } from "@/lib/providers/types";
 import type { StatKey } from "@/lib/stats";
 import { arr, get, obj, str, type Json } from "../json";
+import { afterReplayReversal, fieldGoal, fieldGoalBand, isNoPlay, splitTry } from "./play-text";
 
 /**
  * For each box-score category, which ESPN column becomes which of our stats.
@@ -45,6 +53,14 @@ const CATEGORY_KEYS: Readonly<Record<string, Readonly<Record<string, StatKey>>>>
   },
   kickReturns: { kickReturnTouchdowns: "retTd" },
   puntReturns: { puntReturnTouchdowns: "retTd" },
+  kicking: {
+    fieldGoalsMade: "fgMade",
+    fieldGoalAttempts: "fgAtt",
+    extraPointsMade: "xpMade",
+    extraPointAttempts: "xpAtt",
+  },
+  // Punters score nothing; they're listed so a play's punter can be matched to a team.
+  punting: {},
 };
 
 /** "312" -> 312, "--" or "" -> undefined. */
@@ -61,6 +77,7 @@ function toNumber(value: string): number | undefined {
  */
 export function parseBoxscore(summary: unknown): Record<string, PlayerGameLine> {
   const lines: Record<string, PlayerGameLine> = {};
+  const kickerIds = new Set<string>();
 
   for (const teamBlock of arr(get(summary as Json, "boxscore", "players"))) {
     const teamId = str(get(teamBlock, "team", "id"));
@@ -73,6 +90,7 @@ export function parseBoxscore(summary: unknown): Record<string, PlayerGameLine> 
       for (const row of arr(obj(category).athletes)) {
         const playerId = str(get(row, "athlete", "id"));
         if (!playerId) continue;
+        if (str(obj(category).name) === "kicking") kickerIds.add(playerId);
         const line = (lines[playerId] ??= {
           playerId,
           name: str(get(row, "athlete", "displayName")),
@@ -96,5 +114,49 @@ export function parseBoxscore(summary: unknown): Record<string, PlayerGameLine> 
       }
     }
   }
+  addKickerDetails(lines, kickerIds, summary);
   return lines;
+}
+
+/** Misses from made/attempted, and field goals by distance from the summary's play-by-play. */
+function addKickerDetails(lines: Record<string, PlayerGameLine>, kickerIds: Set<string>, summary: unknown) {
+  const kickers = [...kickerIds].map((id) => lines[id]);
+  for (const { stats } of kickers) {
+    const fgMiss = (stats.fgAtt ?? 0) - (stats.fgMade ?? 0);
+    const xpMiss = (stats.xpAtt ?? 0) - (stats.xpMade ?? 0);
+    if (fgMiss > 0) stats.fgMiss = fgMiss;
+    if (xpMiss > 0) stats.xpMiss = xpMiss;
+  }
+  if (kickers.length === 0) return;
+
+  for (const text of summaryPlayTexts(summary)) {
+    const { main } = splitTry(afterReplayReversal(text));
+    const kick = isNoPlay(main) ? undefined : fieldGoal(main);
+    const kicker = kick && kickerNamed(kick.kicker, kickers);
+    if (!kick || !kicker) continue;
+    const key: StatKey = `${kick.made ? "fgMade" : "fgMiss"}${fieldGoalBand(kick.distance)}`;
+    kicker.stats[key] = (kicker.stats[key] ?? 0) + 1;
+  }
+}
+
+/** Every play description in the summary's drives (finished and current), each once. */
+function summaryPlayTexts(summary: unknown): string[] {
+  const drives = obj(get(summary as Json, "drives"));
+  const texts = new Map<string, string>();
+  for (const drive of [...arr(drives.previous), drives.current]) {
+    for (const play of arr(obj(drive).plays)) texts.set(str(get(play, "id")), str(get(play, "text")));
+  }
+  return [...texts.values()];
+}
+
+/** "C.Santos" -> the kicker whose name is Cairo Santos (same first letter and last name). */
+function kickerNamed(shortName: string, kickers: PlayerGameLine[]): PlayerGameLine | undefined {
+  const match = /^([A-Z][a-z]{0,2})\.(.+)$/.exec(shortName);
+  if (!match) return kickers.length === 1 ? kickers[0] : undefined;
+  const [, initial, last] = match;
+  const found = kickers.filter((k) => {
+    const name = k.name.replace(/\s+(Jr\.?|Sr\.?|II|III|IV)$/i, "").toLowerCase();
+    return name.endsWith(` ${last.toLowerCase()}`) && name.startsWith(initial.toLowerCase());
+  });
+  return found.length === 1 ? found[0] : undefined;
 }

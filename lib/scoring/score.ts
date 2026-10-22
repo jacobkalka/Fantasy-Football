@@ -19,13 +19,24 @@ export type ScoreResult = {
 // Display order for parts: passing, then rushing, then receiving, then
 // returns and fumbles. Within each group: yards, TD, 2-pt, then catches.
 // That reads like a play description: "+7.4 yds, +6 TD, +1 reception".
+// Kickers and D/ST come after: kicks, then plays (TDs first), then the
+// points/yards-allowed tiers, whose swaps read "−3 pts allowed 7-13, +1 pts allowed 14-17".
 const PREFERRED_ORDER: StatKey[] = [
   "passYds", "passTd", "pass2pt", "passInt",
   "rushYds", "rushTd", "rush2pt",
   "recYds", "recTd", "rec2pt", "rec",
   "retTd", "fumRecTd", "fumLost",
+  "fgMade0_39", "fgMade40_49", "fgMade50_59", "fgMade60", "fgMiss", "xpMade", "xpMiss",
+  "dstIntTd", "dstFumTd", "dstBlkTd", "dstInt", "dstFumRec", "dstSack", "dstBlk",
+  "dstSafety", "dst2ptRet", "dst1ptSafety",
+  "dstPa0", "dstPa1_6", "dstPa7_13", "dstPa14_17", "dstPa18_21", "dstPa22_27",
+  "dstPa28_34", "dstPa35_45", "dstPa46",
+  "dstYa0_99", "dstYa100_199", "dstYa200_299", "dstYa300_349", "dstYa350_399",
+  "dstYa400_449", "dstYa450_499", "dstYa500_549", "dstYa550",
   // These score 0 in the presets, but a custom league might reward them.
   "passCmp", "passAtt", "rushAtt", "targets",
+  "fgMade", "fgAtt", "xpAtt", "fgMiss0_39", "fgMiss40_49", "fgMiss50_59", "fgMiss60",
+  "dstPa", "dstYa",
 ];
 
 /** Every stat key in display order. A key added to lib/stats.ts later goes at the end. */

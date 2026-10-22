@@ -73,6 +73,67 @@ describe("fantasyStatsToStatLine against ESPN's own PPR totals", () => {
   });
 });
 
+describe("kickers and D/STs against ESPN's own week-6 PPR totals", () => {
+  // Every kicker and D/ST that played in week 6 (samples/fantasy-kona-k-dst-week6.json).
+  const players = loadPlayers("fantasy-kona-k-dst-week6.json");
+
+  it("has all 28 D/STs and 28 kickers", () => {
+    expect(players.filter((p) => p.player.id < 0)).toHaveLength(28);
+    expect(players.filter((p) => p.player.id > 0)).toHaveLength(28);
+  });
+
+  for (const { player } of players) {
+    it(`${player.fullName} scores ESPN's ${player.stats[0].appliedTotal}`, () => {
+      const line = fantasyStatsToStatLine(player.stats[0].stats);
+      expect(scoreStatLine(line, PPR).total).toBeCloseTo(player.stats[0].appliedTotal, 2);
+    });
+  }
+
+  it("reads tiers as 0/1 switches and keeps the raw totals", () => {
+    const chiefs = players.find((p) => p.player.id === -16012)!.player.stats[0].stats;
+    expect(fantasyStatsToStatLine(chiefs)).toMatchObject({
+      dstPa: 6,
+      dstPa1_6: 1,
+      dstYa: 259,
+      dstYa200_299: 1,
+      dstSack: 4,
+      dstInt: 1,
+      dstFumRec: 1,
+    });
+  });
+});
+
+describe("our presets match ESPN's default league settings", () => {
+  // samples/fantasy-league-defaults-scoring.json: ESPN's "FFL PPR Scoring" defaults.
+  type Item = { statId: number; points: number; pointsOverrides: Record<string, number> };
+  const url = new URL("../../../../samples/fantasy-league-defaults-scoring.json", import.meta.url);
+  const items = (JSON.parse(readFileSync(url, "utf8")) as { settings: { scoringSettings: { scoringItems: Item[] } } })
+    .settings.scoringSettings.scoringItems;
+
+  it("knows every stat ESPN scores", () => {
+    expect(items.length).toBe(46);
+    const unknown = items.filter((item) => !ESPN_STAT_IDS[String(item.statId)]);
+    expect(unknown).toEqual([]);
+  });
+
+  for (const item of items) {
+    const key = ESPN_STAT_IDS[String(item.statId)];
+    // "16" is ESPN's D/ST lineup slot; D/ST stats only score through that override.
+    const espnPoints = item.pointsOverrides["16"] ?? item.points;
+    it(`ESPN stat ${item.statId} (${key}) is worth ${espnPoints}`, () => {
+      expect(PPR[key] ?? 0).toBe(espnPoints);
+    });
+  }
+
+  it("scores every other stat 0, like ESPN", () => {
+    const scored = new Set(items.map((item) => String(item.statId)));
+    const scoredKeys = new Set([...scored].map((id) => ESPN_STAT_IDS[id]));
+    for (const key of Object.values(ESPN_STAT_IDS)) {
+      if (!scoredKeys.has(key)) expect(PPR[key] ?? 0, key).toBe(0);
+    }
+  });
+});
+
 describe("fantasyStatsToStatLine details", () => {
   it("ignores ids we don't use, like 68 (every fumble, not just lost ones)", () => {
     expect(fantasyStatsToStatLine({ "68": 2, "72": 1, "999": 5 })).toEqual({ fumLost: 1 });

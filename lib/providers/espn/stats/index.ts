@@ -17,3 +17,13 @@ export {
   totalsFromPlays,
 } from "./plays";
 export { buildNameIndex, type NameIndex } from "./names";
+export {
+  defensePlayDeltas,
+  defenseStatLine,
+  dstPlayerId,
+  dstTeamId,
+  pointsAllowedTier,
+  yardsAllowedTier,
+  type DefenseGame,
+  type DefensePlayDelta,
+} from "./dst";

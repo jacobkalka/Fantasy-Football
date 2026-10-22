@@ -16,7 +16,7 @@ pointer to what replaced them.
 | 2026-10-22 | The Feed defaults to **Key plays** (worth ≥ 1 point, a touchdown, or an injury); "All plays" shows every point-moving play. | Every 1-yard completion is a +0.04 entry for a QB; the default view should tell the story, not the noise. |
 | 2026-10-22 | **Replay mode** is client-side: finished games (Game Center) and finished weeks (Feed) replay their real plays on a sped-up clock (30×/60×/180×). | Lets the app be tested and demoed on days without games, with real data, no database needed. |
 | 2026-10-22 | Finished games show ESPN's **pregame** projection ("proj 15.9"); live games show a running estimate ("est 21.3") = points so far + the share of the projection still to play. | Lets you see who beat their projection; estimates are labeled as estimates. |
-| 2026-10-22 | Kickers and D/ST can be rostered; their scoring was deferred by the plan and is being added next (shows "pts soon" until then). | Plan §5.1: "Kicker / defense (D/ST) scoring in a later phase." |
+| 2026-10-22 | ~~Kickers and D/ST scoring deferred ("pts soon").~~ Replaced the same day: kickers and D/ST score live (see Scoring engine). | Lineups felt broken without them. |
 
 ## Stack
 
@@ -62,6 +62,9 @@ pointer to what replaced them.
 | 2026-10-22 | `roundPoints` rounds to 2 decimals, halves away from zero, strips float noise, never returns −0. Totals are the rounded sum of exact values. | Avoids `0.30000000000000004`-style errors. |
 | 2026-10-22 | Feed breakdowns keep up to 2 decimals ("+2.96 yds") while headline points show 1 ("+9.4"). | With 1 decimal, a 1-yard pass would read "+0 yds". |
 | 2026-10-22 | `reconcile()` compares rounded drift to a 0.05 tolerance and always returns the **official** number as the headline. | Plan §5.3. |
+| 2026-10-22 | **Kicker and D/ST scoring** uses ESPN's own default league settings (fetched from `leaguedefaults/3?view=mSettings`, saved in `samples/fantasy-league-defaults-scoring.json`; a test checks all 46 scoring items against our presets). K: FG <40 = 3, 40–49 = 4, 50–59 = 5, 60+ = 6, any miss −1, PAT 1 (a missed PAT costs nothing). D/ST: sack 1, INT 2, fumble recovery 2, blocked kick 2, safety 2, defensive/return TD 6, plus points-allowed tiers (0 → +5 … 46+ → −5) and yards-allowed tiers (<100 → +5 … 550+ → −7). Same in all three formats. | Verified: all 52 kickers and 52 D/STs in 26 real games, and 60 ESPN K/DST projections, match ESPN's official points exactly. |
+| 2026-10-22 | Points- and yards-allowed **tiers are 0/1 stat keys** (`dstPa7_13`, `dstYa300_349`…). A play that moves a defense into a new tier is a normal stat change (`dstPa7_13: −1, dstPa14_17: +1`), so per-play points still add up to the total. A D/ST starts each game at +10 (0 points, 0 yards allowed). | Keeps the scoring engine linear and the feed honest about why a defense lost points. |
+| 2026-10-22 | **ESPN's points allowed** = opponent's points minus 6 for each pick-six/fumble-return TD against your offense and minus 2 for each safety (the PAT after a pick-six still counts); punt-return and blocked-punt TDs count against you. Only sacks credited to a defender count. Kicker field-goal distances come from the play text (box scores have no distances). D/ST changes are computed per game (`defensePlayDeltas`), not stored on plays, so Game Center doesn't show nameless "Player" chips. | Matches ESPN's help page and all 24 such cases in Weeks 1–5. Unverified so far (not seen in real data yet): two-point returns, one-point safeties, blocked PATs. |
 
 ## Database (Supabase)
 

@@ -24,6 +24,8 @@ const BOX_KEYS: StatKey[] = [
   "rushAtt", "rushYds", "rushTd",
   "targets", "rec", "recYds", "recTd",
   "fumLost", "retTd",
+  "fgMade", "fgAtt", "fgMiss", "fgMade0_39", "fgMade40_49", "fgMade50_59", "fgMade60",
+  "fgMiss0_39", "fgMiss40_49", "fgMiss50_59", "fgMiss60", "xpMade", "xpAtt", "xpMiss",
 ];
 
 function pick(line: StatLine, keys: StatKey[]): StatLine {
@@ -236,13 +238,14 @@ describe("deltasForPlay: passing", () => {
     expect(deltas(p)).toEqual({});
   });
 
-  it("touchdown pass: the extra-point kicker (also tagged patScorer) gets nothing", () => {
+  it("touchdown pass, and the extra point goes to the kicker", () => {
     const p = play("Passing Touchdown", "(Shotgun) C.Stroud pass short right to F.Moreau for 6 yards, TOUCHDOWN. K.Fairbairn extra point is GOOD, Center-A.Brinkman, Holder-K.Kroeger.", [
       ["passer", "4432577"], ["receiver", "3843945"], ["scorer", "3843945"], ["kicker", "2971573"], ["patScorer", "2971573"],
     ], { yards: 6, scoring: true });
     expect(deltas(p)).toEqual({
       "4432577": { passAtt: 1, passCmp: 1, passYds: 6, passTd: 1 },
       "3843945": { targets: 1, rec: 1, recYds: 6, recTd: 1 },
+      "2971573": { xpAtt: 1, xpMade: 1 },
     });
   });
 
@@ -253,6 +256,7 @@ describe("deltasForPlay: passing", () => {
     expect(deltas(p)).toEqual({
       "4685720": { passAtt: 1, passCmp: 1, passYds: 19, passTd: 1 },
       "4372780": { targets: 1, rec: 1, recYds: 19, recTd: 1 },
+      "4568263": { xpAtt: 1, xpMiss: 1 }, // "(Ryan Fitzgerald PAT failed)"
     });
   });
 
@@ -276,7 +280,10 @@ describe("deltasForPlay: rushing", () => {
     const p = play("Rushing Touchdown", "B.Fisher reported in as eligible.  J.Jordan left tackle for 25 yards, TOUCHDOWN. K.Fairbairn extra point is GOOD, Center-A.Brinkman, Holder-K.Kroeger.", [
       ["rusher", "4429939"], ["scorer", "4429939"], ["kicker", "2971573"], ["patScorer", "2971573"],
     ], { yards: 25, scoring: true });
-    expect(deltas(p)).toEqual({ "4429939": { rushAtt: 1, rushYds: 25, rushTd: 1 } });
+    expect(deltas(p)).toEqual({
+      "4429939": { rushAtt: 1, rushYds: 25, rushTd: 1 },
+      "2971573": { xpAtt: 1, xpMade: 1 },
+    });
   });
 
   it("kneel-downs are carries with lost yards", () => {
@@ -421,6 +428,54 @@ describe("deltasForPlay: fumbles", () => {
   });
 });
 
+describe("deltasForPlay: kickers", () => {
+  it("a made field goal counts in its distance band (under 40: 3 points in ESPN's default)", () => {
+    const p = play("Field Goal Good", "K.Fairbairn 25 yard field goal is GOOD, Center-A.Brinkman, Holder-K.Kroeger.", [
+      ["kicker", "2971573"], ["scorer", "2971573"], ["snapper", "4690999"], ["holder", "4570033"],
+    ], { scoring: true, scoreValue: 3 });
+    expect(deltas(p)).toEqual({ "2971573": { fgAtt: 1, fgMade: 1, fgMade0_39: 1 } });
+  });
+
+  it("40-49 and 60+ bands", () => {
+    const fortyNine = play("Field Goal Good", " K.Fairbairn 49 yard field goal is GOOD, Center-A.Brinkman, Holder-K.Kroeger.", [
+      ["kicker", "2971573"], ["scorer", "2971573"],
+    ], { scoring: true, scoreValue: 3 });
+    const sixty = play("Field Goal Good", "C.Little 60 yard field goal is GOOD, Center-J.Bobenmoyer, Holder-L.Cooke.", [
+      ["kicker", "4686361"], ["scorer", "4686361"],
+    ], { scoring: true, scoreValue: 3 });
+    expect(deltas(fortyNine)["2971573"]).toMatchObject({ fgMade40_49: 1 });
+    expect(deltas(sixty)["4686361"]).toMatchObject({ fgMade60: 1 });
+  });
+
+  it("a missed field goal is an attempt and a miss, by band", () => {
+    const p = play("Field Goal Missed", "C.Santos 56 yard field goal is No Good, Wide Left, Center-S.Daly, Holder-T.Taylor.", [
+      ["kicker", "17427"], ["snapper", "2980138"], ["holder", "4686889"],
+    ]);
+    expect(deltas(p)).toEqual({ "17427": { fgAtt: 1, fgMiss: 1, fgMiss50_59: 1 } });
+  });
+
+  it("a blocked field goal wiped out by a penalty counts nothing (game 401872997, not in samples/)", () => {
+    const p = play("Penalty", "A.Szmyt 42 yard field goal is BLOCKED (K.Martin), Center-R.Sunahara, Holder-C.Bojorquez, RECOVERED by BLT-T.Jones at BLT 23.PENALTY on BLT-K.Martin, Defensive Offside, 5 yards, enforced at BLT 23 - No Play.", [
+      ["blocker", "1"], ["penalized", "1"], ["kicker", "4258620"],
+    ]);
+    expect(deltas(p)).toEqual({});
+  });
+
+  it("a missed extra point is an attempt and a miss (game 401873006, not in samples/)", () => {
+    const p = play("Rushing Touchdown", "(Shotgun) K.Walker up the middle for 33 yards, TOUCHDOWN. H.Butker extra point is No Good, Wide Left, Center-J.Winchester, Holder-M.Araiza.", [
+      ["rusher", "1"], ["scorer", "1"], ["kicker", "3055899"], ["patScorer", "3055899"],
+    ], { yards: 33, scoring: true, scoreValue: 6 });
+    expect(deltas(p)["3055899"]).toEqual({ xpAtt: 1, xpMiss: 1 });
+  });
+
+  it("the short form '(Jason Myers Kick)' is a made extra point (game 401872955, not in samples/)", () => {
+    const p = play("Fumble Recovery (Own)", "Eric Saubert 13 Yd pass from Sam Darnold (Jason Myers Kick)", [
+      ["passer", "3912547"], ["receiver", "2975863"], ["kicker", "2473037"], ["recoverer", "2975863"], ["patScorer", "2473037"], ["scorer", "2975863"],
+    ], { yards: 13, scoring: true, scoreValue: 6 });
+    expect(deltas(p)["2473037"]).toEqual({ xpAtt: 1, xpMade: 1 });
+  });
+});
+
 describe("deltasForPlay: two-point tries and special teams touchdowns", () => {
   it("successful 2-pt pass after a TD pass: pass2pt for the passer, rec2pt for the catcher", () => {
     const p = play("Passing Touchdown", "(Shotgun) M.Penix pass short left to K.Pitts for 10 yards, TOUCHDOWN. TWO-POINT CONVERSION ATTEMPT. M.Penix pass to Z.Branch is complete. ATTEMPT SUCCEEDS.", [
@@ -458,7 +513,8 @@ describe("deltasForPlay: two-point tries and special teams touchdowns", () => {
     const p = play("Blocked Punt Touchdown", "R.Sanchez punt is BLOCKED by J.Chestnut, Center-L.Rhodes, RECOVERED by TEN-O.Oladejo at IND 14. O.Oladejo for 14 yards, TOUCHDOWN. IND-R.Sanchez was injured during the play. PENALTY on TEN, Unsportsmanlike Conduct, 15 yards, enforced between downs. J.Slye extra point is GOOD, Center-M.Cox, Holder-T.Townsend.", [
       ["punter", "3914922"], ["blocker", "4431613"], ["kicker", "3124084"], ["patScorer", "3124084"], ["scorer", "4876057"], ["other", "4367567"],
     ], { yards: 14, scoring: true });
-    expect(deltas(p)).toEqual({});
+    // Only the extra point (J.Slye) counts for a player; the TD itself is the Titans D/ST's (dst.ts).
+    expect(deltas(p)).toEqual({ "3124084": { xpAtt: 1, xpMade: 1 } });
   });
 
   // No kick or punt return TD (or offensive fumble-recovery TD) happened in

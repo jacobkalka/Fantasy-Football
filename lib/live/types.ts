@@ -69,7 +69,7 @@ export interface PlayerLive {
   projection: number | null;
   /** Points so far + the share of the projection still to play. An estimate. */
   liveProjection: number | null;
-  /** Kickers and defenses are tracked, but their scoring arrives in a later phase. */
+  /** False only for positions the scoring engine can't score (none today; kept for future positions). */
   scoringSupported: boolean;
 }
 

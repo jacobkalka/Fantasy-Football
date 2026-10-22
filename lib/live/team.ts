@@ -14,6 +14,7 @@ import {
   scoreStatLine,
   type ScoringFormat,
 } from "@/lib/scoring";
+import { defensePlayDeltas, defenseStatLine } from "@/lib/providers";
 import type { StatLine } from "@/lib/stats";
 import { cleanPlayText } from "./play-text";
 import { teamLite, type FeedItem, type PlayerGame, type PlayerLive, type TeamLive } from "./types";
@@ -38,6 +39,7 @@ export interface TeamLiveInput {
 }
 
 const TWO_POINT_KEYS = ["pass2pt", "rush2pt", "rec2pt"] as const;
+const TOUCHDOWN_KEYS = ["passTd", "rushTd", "recTd", "retTd", "fumRecTd", "dstIntTd", "dstFumTd", "dstBlkTd"] as const;
 
 /** D/ST "players" use ESPN fantasy ids like -16012 (team 12). */
 export function teamIdOf(player: RosterInput): string | null {
@@ -109,7 +111,8 @@ export function buildTeamLive(input: TeamLiveInput): TeamLive {
 
   const players: PlayerLive[] = input.roster.map((rp) => {
     const teamId = teamIdOf(rp);
-    const scoringSupported = rp.position !== "K" && rp.position !== "DST";
+    const scoringSupported = true; // kickers and D/ST included since the K/DST phase
+    const isDefense = rp.position === "DST";
     const game = findGame(input.scoreboard.games, teamId);
     const detail = game ? input.details[game.id] : undefined;
     const outlook = outlooks.get(rp.playerId);
@@ -117,37 +120,45 @@ export function buildTeamLive(input: TeamLiveInput): TeamLive {
       outlook?.projection && scoringSupported ? scoreStatLine(outlook.projection, rules).total : null;
 
     // Every play that changed this player's stats, and what each was worth.
+    // A D/ST is a whole team: its changes (sacks, turnovers, points- and
+    // yards-allowed tiers) come from the game as a whole, not from play.deltas.
+    const changes =
+      isDefense && detail && teamId
+        ? defensePlayDeltas(detail, teamId)
+        : (detail?.plays ?? []).flatMap((play) => {
+            const delta = play.deltas.find((d) => d.playerId === rp.playerId);
+            return delta ? [{ play, stats: delta.stats }] : [];
+          });
     let fromPlays: StatLine = {};
     let playPoints = 0;
     const shortName = playTextName(rp.name);
-    for (const play of detail?.plays ?? []) {
-      const delta = play.deltas.find((d) => d.playerId === rp.playerId);
-      if (delta) {
-        fromPlays = addStatLines(fromPlays, delta.stats);
-        const scored = scoreDelta(delta.stats, rules);
-        playPoints += scored.points;
-        if (scored.points !== 0 && scoringSupported) {
-          feed.push({
-            id: `${play.id}:${rp.playerId}`,
-            kind: "points",
-            playId: play.id,
-            gameId: play.gameId,
-            playerId: rp.playerId,
-            playerName: rp.name,
-            teamId,
-            period: play.period,
-            clock: play.clock,
-            sequence: play.sequence,
-            wallclock: play.wallclock,
-            text: cleanPlayText(play.text),
-            playType: play.type,
-            isTouchdown: (delta.stats.passTd ?? 0) + (delta.stats.rushTd ?? 0) + (delta.stats.recTd ?? 0) + (delta.stats.retTd ?? 0) + (delta.stats.fumRecTd ?? 0) > 0,
-            points: scored.points,
-            parts: scored.parts,
-          });
-        }
+    for (const { play, stats: delta } of changes) {
+      fromPlays = addStatLines(fromPlays, delta);
+      const scored = scoreDelta(delta, rules);
+      playPoints += scored.points;
+      if (scored.points !== 0 && scoringSupported) {
+        feed.push({
+          id: `${play.id}:${rp.playerId}`,
+          kind: "points",
+          playId: play.id,
+          gameId: play.gameId,
+          playerId: rp.playerId,
+          playerName: rp.name,
+          teamId,
+          period: play.period,
+          clock: play.clock,
+          sequence: play.sequence,
+          wallclock: play.wallclock,
+          text: cleanPlayText(play.text),
+          playType: play.type,
+          isTouchdown: TOUCHDOWN_KEYS.some((key) => (delta[key] ?? 0) > 0),
+          points: scored.points,
+          parts: scored.parts,
+        });
       }
-      const note = rp.position !== "DST" ? injuryNote(play.text, shortName) : null;
+    }
+    for (const play of isDefense ? [] : (detail?.plays ?? [])) {
+      const note = injuryNote(play.text, shortName);
       if (note) {
         feed.push({
           id: `${play.id}:injury:${rp.playerId}`,
@@ -171,7 +182,9 @@ export function buildTeamLive(input: TeamLiveInput): TeamLive {
     }
 
     // Official numbers win. Box scores leave out 2-point conversions, so add those from the plays.
-    const box = detail?.boxscore[rp.playerId]?.stats;
+    // A D/ST's official line is built from the box score and the final score (defenseStatLine).
+    const box =
+      isDefense && detail && teamId ? defenseStatLine(detail, teamId) : detail?.boxscore[rp.playerId]?.stats;
     let stats: StatLine = box ? { ...box } : fromPlays;
     if (box) {
       for (const key of TWO_POINT_KEYS) {

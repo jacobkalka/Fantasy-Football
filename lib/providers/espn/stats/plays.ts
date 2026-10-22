@@ -19,6 +19,9 @@ import {
   afterReplayReversal,
   ballLosses,
   creditedYards,
+  extraPoint,
+  fieldGoal,
+  fieldGoalBand,
   firstGain,
   intendedReceiverName,
   isNoPlay,
@@ -193,6 +196,15 @@ function withRole(play: Play, role: string): string[] {
  *    a pass gives the "patPasser" pass2pt and the "patScorer" rec2pt; a run
  *    gives the "patScorer" rush2pt. "patScorer" also names the kicker on an
  *    ordinary extra point, so it only counts on a successful two-point try.
+ * 10. Kickers: "44 yard field goal is GOOD" gives the "kicker" an attempt, a
+ *    make and the make for its distance band (under 40, 40-49, 50-59, 60+);
+ *    "No Good" or "BLOCKED" gives an attempt and a miss (also by band). The
+ *    extra point after a touchdown ("extra point is GOOD" / "No Good" /
+ *    "Blocked", or the short "(X Kick)" / "(X PAT failed)") goes to the
+ *    "patScorer" (the extra-point kicker), else the last listed "kicker".
+ *
+ * Team defense (D/ST) changes depend on the whole game (the score, yards so
+ * far), so they're worked out separately: see dst.ts.
  *
  * `names` (built by parseCorePlays from the whole game) is only needed for
  * rules 3 and 6, where a player is named in the text but not listed with a
@@ -307,6 +319,22 @@ export function deltasForPlay(play: Play, names?: NameIndex): PlayerStatDelta[] 
         ? returners[0]
         : (fumblers[nextFumbler++] ?? fumblers[fumblers.length - 1]);
     if (loss.lost) ledger.add(player, "fumLost");
+  }
+
+  // --- Kicking -----------------------------------------------------------------
+  const fg = fieldGoal(main);
+  const kicker = withRole(play, "kicker")[0];
+  if (fg && kicker) {
+    const band = fieldGoalBand(fg.distance);
+    ledger.add(kicker, "fgAtt");
+    ledger.add(kicker, fg.made ? "fgMade" : "fgMiss");
+    ledger.add(kicker, fg.made ? `fgMade${band}` : `fgMiss${band}`);
+  }
+  const xp = isNoPlay(tryText) ? undefined : extraPoint(main, tryText);
+  if (xp !== undefined) {
+    const xpKicker = withRole(play, "patScorer")[0] ?? withRole(play, "kicker").at(-1);
+    ledger.add(xpKicker, "xpAtt");
+    ledger.add(xpKicker, xp ? "xpMade" : "xpMiss");
   }
 
   // --- Two-point try -----------------------------------------------------------

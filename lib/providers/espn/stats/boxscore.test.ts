@@ -67,6 +67,36 @@ describe("parseBoxscore", () => {
     expect(checked).toBe(10);
   });
 
+  it("reads kickers: counts from the box score, distances from the summary's play-by-play", () => {
+    // Cairo Santos: 1/2 field goals (made from 50, missed from 56), 4/4 extra points.
+    expect(CHI_ATL["17427"]).toMatchObject({
+      name: "Cairo Santos",
+      teamId: "3",
+      stats: { fgMade: 1, fgAtt: 2, fgMiss: 1, fgMade50_59: 1, fgMiss50_59: 1, xpMade: 4, xpAtt: 4 },
+    });
+    // Ka'imi Fairbairn: 25 and 49 yards.
+    expect(HOU_JAX["2971573"].stats).toEqual({ fgMade: 2, fgAtt: 2, fgMade0_39: 1, fgMade40_49: 1, xpMade: 4, xpAtt: 4 });
+  });
+
+  it("kicker lines match ESPN's fantasy feed for every kicker in both games", () => {
+    const { players } = load("fantasy-kona-k-dst-week6.json") as {
+      players: { player: { id: number; stats: { externalId: string; stats: Record<string, number> }[] } }[];
+    };
+    const boxes = { "401872996": HOU_JAX, "401872999": CHI_ATL } as Record<string, typeof HOU_JAX>;
+    let checked = 0;
+    for (const { player } of players) {
+      const game = boxes[player.stats[0].externalId];
+      if (!game || player.id < 0) continue;
+      expect(game[String(player.id)].stats).toEqual(fantasyStatsToStatLine(player.stats[0].stats));
+      checked++;
+    }
+    expect(checked).toBe(4);
+  });
+
+  it("lists punters (no stats) so their plays can be matched to a team", () => {
+    expect(CHI_ATL["4686889"]).toMatchObject({ name: "Tory Taylor", teamId: "3", stats: {} });
+  });
+
   it("never throws on missing or odd data", () => {
     expect(parseBoxscore(undefined)).toEqual({});
     expect(parseBoxscore({ boxscore: { players: "nope" } })).toEqual({});

@@ -33,6 +33,16 @@ const ROSTER: (RosterInput & { espnPpr: number })[] = [
   { playerId: "4870612", name: "Zachariah Branch", position: "WR", teamId: "1", espnPpr: 0.9 },
   { playerId: "4426386", name: "Roschon Johnson", position: "RB", teamId: "3", espnPpr: 14.5 },
   { playerId: "4431611", name: "Caleb Williams", position: "QB", teamId: "3", espnPpr: 16.5 },
+  // Kickers and D/STs in the same two games (samples/fantasy-kona-k-dst-week6.json).
+  { playerId: "2971573", name: "Ka'imi Fairbairn", position: "K", teamId: "34", espnPpr: 11 },
+  { playerId: "4686361", name: "Cam Little", position: "K", teamId: "30", espnPpr: 10 },
+  { playerId: "17427", name: "Cairo Santos", position: "K", teamId: "3", espnPpr: 8 },
+  { playerId: "10621", name: "Nick Folk", position: "K", teamId: "1", espnPpr: 1 },
+  // D/STs have no team id of their own here: it comes from the id (-16034 = team 34).
+  { playerId: "-16034", name: "Texans D/ST", position: "DST", teamId: null, espnPpr: -2 },
+  { playerId: "-16030", name: "Jaguars D/ST", position: "DST", teamId: null, espnPpr: -2 },
+  { playerId: "-16003", name: "Bears D/ST", position: "DST", teamId: null, espnPpr: 13 },
+  { playerId: "-16001", name: "Falcons D/ST", position: "DST", teamId: null, espnPpr: 4 },
 ];
 
 const scoreboard = parseScoreboard(sample("scoreboard-week6-final.json"));
@@ -82,6 +92,29 @@ describe("live team engine on real Week 6 games", () => {
     }
     const tds = live.feed.filter((f) => f.isTouchdown && f.playerId === "4882093");
     expect(tds).toHaveLength(2); // Tuten's two receiving TDs
+  });
+
+  it("scores kickers by field goal distance, play by play", () => {
+    const live = build();
+    const little = live.players.find((p) => p.playerId === "4686361")!;
+    expect(little.scoringSupported).toBe(true);
+    expect(little.stats).toMatchObject({ fgMade: 1, fgAtt: 1, fgMade60: 1, xpMade: 4, xpAtt: 4 });
+    const kicks = live.feed.filter((f) => f.playerId === "4686361").map((f) => f.points);
+    expect(kicks.sort()).toEqual([1, 1, 1, 1, 6]); // four PATs and a 60-yard field goal
+  });
+
+  it("scores a D/ST live: 10 points at kickoff, then sacks, takeaways and tier changes", () => {
+    const live = build();
+    const bears = live.players.find((p) => p.playerId === "-16003")!;
+    expect(bears).toMatchObject({ teamId: "3", scoringSupported: true, points: 13, correction: 0 });
+    expect(bears.stats).toMatchObject({ dstPa: 23, dstPa22_27: 1, dstYa: 257, dstYa200_299: 1, dstSack: 5, dstFumRec: 3 });
+
+    const feed = live.feed.filter((f) => f.playerId === "-16003").reverse(); // oldest first
+    expect(feed[0]).toMatchObject({ playType: "Kickoff", points: 10 }); // 0 points and 0 yards allowed
+    expect(feed.some((f) => f.parts.some((p) => p.key === "dstSack"))).toBe(true);
+    // Allowing the first points switches off the 0-points-allowed tier (worth 5).
+    expect(feed.some((f) => f.parts.some((p) => p.key === "dstPa0" && p.points === -5))).toBe(true);
+    expect(feed.reduce((sum, f) => sum + f.points, 0)).toBeCloseTo(13, 5);
   });
 
   it("scores the same stats differently by format", () => {
