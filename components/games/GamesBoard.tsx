@@ -2,6 +2,7 @@
 
 import { motion } from "motion/react";
 import { UpdatedAgo } from "@/components/live/UpdatedAgo";
+import { WeekPicker } from "@/components/team/WeekPicker";
 import { Notice, SectionLabel } from "@/components/ui/bits";
 import type { Stamped } from "@/lib/data/sports";
 import { dayLabel } from "@/lib/format";
@@ -52,9 +53,10 @@ function GameList({ games }: { games: Game[] }) {
   );
 }
 
-export function GamesBoard({ initial }: { initial: Stamped<Scoreboard> }) {
+export function GamesBoard({ initial, currentWeek }: { initial: Stamped<Scoreboard>; currentWeek: number }) {
   const hydrated = useHydrated();
-  const { data, delayed } = usePoll<Stamped<Scoreboard>>("/api/scoreboard", {
+  const pastWeek = initial.week !== currentWeek;
+  const { data, delayed } = usePoll<Stamped<Scoreboard>>(`/api/scoreboard${pastWeek ? `?week=${initial.week}` : ""}`, {
     initial,
     intervalMs: scoreboardInterval,
   });
@@ -65,10 +67,8 @@ export function GamesBoard({ initial }: { initial: Stamped<Scoreboard> }) {
 
   return (
     <div className="flex flex-col gap-6">
-      <div className="flex items-center justify-between px-1">
-        <p className="font-mono text-[11px] tracking-[0.1em] text-muted uppercase">
-          {board.games.length} games
-        </p>
+      <div className="flex items-center justify-between gap-3">
+        <WeekPicker currentWeek={currentWeek} week={board.week} />
         <UpdatedAgo fetchedAt={board.fetchedAt} delayed={delayed} live={live.length > 0} />
       </div>
 

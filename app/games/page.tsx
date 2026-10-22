@@ -8,10 +8,16 @@ import { getScoreboard } from "@/lib/data/sports";
 
 export const metadata: Metadata = { title: "Games" };
 
-async function Board() {
+async function Board({ searchParams }: { searchParams: PageProps<"/games">["searchParams"] }) {
   // Live scores are always fetched for a real visitor, never baked in at build time.
   await connection();
-  const board = await getScoreboard().catch(() => null);
+  const requested = Number((await searchParams).week);
+  const current = await getScoreboard().catch(() => null);
+  const week = Number.isInteger(requested) && requested > 0 && requested <= 18 ? requested : undefined;
+  const board =
+    current && week && week !== current.week
+      ? await getScoreboard(week, current.season).catch(() => null)
+      : current;
   if (!board) {
     return (
       <Notice title="Data delayed" tone="warn">
@@ -22,7 +28,7 @@ async function Board() {
   }
   return (
     <Reveal>
-      <GamesBoard initial={board} />
+      <GamesBoard key={board.week} initial={board} currentWeek={current?.week ?? board.week} />
     </Reveal>
   );
 }
@@ -39,12 +45,12 @@ function BoardSkeleton() {
   );
 }
 
-export default function GamesPage() {
+export default function GamesPage(props: PageProps<"/games">) {
   return (
     <Screen>
-      <PageTitle kicker="This week">Games</PageTitle>
+      <PageTitle kicker="Live scores">Games</PageTitle>
       <Suspense fallback={<BoardSkeleton />}>
-        <Board />
+        <Board searchParams={props.searchParams} />
       </Suspense>
     </Screen>
   );
