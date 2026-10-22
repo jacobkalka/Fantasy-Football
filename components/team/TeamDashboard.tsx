@@ -14,10 +14,18 @@ import { useTeamLive, useWeekParam } from "@/lib/hooks/useTeamLive";
 import type { FeedItem, PlayerLive } from "@/lib/live/types";
 import { isStarter, sortLineup } from "@/lib/roster/lineup";
 import { roundPoints } from "@/lib/scoring";
+import { Segmented } from "@/components/ui/Segmented";
+import { usePreference } from "@/lib/hooks/usePreference";
+import { LineupField } from "./LineupField";
 import { PlayerRow } from "./PlayerRow";
 import { WeekPicker } from "./WeekPicker";
 
 const FORMAT_LABEL = { standard: "Standard", half: "Half PPR", ppr: "PPR" } as const;
+
+const VIEWS = [
+  { value: "field", label: "Field" },
+  { value: "list", label: "List" },
+] as const;
 
 /** Running total of a set of players' points, play by play, oldest first. */
 function momentum(feed: FeedItem[], ids: Set<string>) {
@@ -67,6 +75,7 @@ export function TeamDashboard() {
   const { roster, ready, data, delayed } = useTeamLive(week);
   const teams = useTeams();
   const [open, setOpen] = useState<SheetPlayer | null>(null);
+  const [view, setView] = usePreference<"field" | "list">("lineup-view", "field");
   const allTeams = { ...teams, ...data?.teams };
 
   const byId = new Map<string, PlayerLive>((data?.players ?? []).map((p) => [p.playerId, p]));
@@ -156,9 +165,27 @@ export function TeamDashboard() {
         </Notice>
       )}
 
-      <section>
-        <SectionLabel>Starters</SectionLabel>
-        <ul className="flex flex-col gap-2.5">{starters.map(row)}</ul>
+      <section className="flex flex-col gap-2">
+        <div className="flex items-center justify-between gap-3">
+          <SectionLabel className="pb-0">Starters</SectionLabel>
+          <Segmented
+            options={VIEWS}
+            value={view}
+            onChange={setView}
+            label="Lineup view"
+            className="w-40"
+          />
+        </div>
+        {view === "field" ? (
+          <LineupField
+            starters={starters}
+            live={byId}
+            teams={allTeams}
+            onOpen={(p) => setOpen({ playerId: p.playerId, name: p.name, headshot: p.headshot, live: byId.get(p.playerId) })}
+          />
+        ) : (
+          <ul className="flex flex-col gap-2.5">{starters.map(row)}</ul>
+        )}
       </section>
 
       {bench.length > 0 && (
