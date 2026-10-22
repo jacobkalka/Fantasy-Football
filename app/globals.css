@@ -1,0 +1,77 @@
+@import "tailwindcss";
+
+/*
+  Design tokens: every color and font the app uses lives here.
+  Components only use these names (bg-ground, text-gain, font-display, ...),
+  so changing the whole look means editing this one block.
+
+  Current look: Direction A, "Control Room" (dark terminal, electric lime).
+*/
+@theme {
+  --color-ground: #07090b;
+  --color-raised: #0b0f12;
+  --color-panel: #0d1114;
+  --color-line: #1b2227;
+  --color-line-soft: #141a1e;
+
+  --color-ink: #e8edf0;
+  --color-ink-strong: #f4f7f8;
+  --color-ink-soft: #d3dadf;
+  --color-muted: #8a959d;
+
+  /* Points gained and lost. Always paired with a + or − sign, never color alone. */
+  --color-gain: #c8ff2e;
+  --color-gain-ink: #07090b;
+  --color-loss: #ff7a87;
+  --color-loss-line: #ff5a6a;
+}
+
+@theme inline {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-barlow), "Arial Narrow", sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  background: var(--color-ground);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+/*
+  Scores use fixed-width digits so they don't jiggle as they change. Applied only
+  to number displays: on body text it also widens Inter's hyphens.
+*/
+.font-display {
+  font-variant-numeric: tabular-nums;
+}
+
+@keyframes live-pulse {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--color-gain) 55%, transparent);
+  }
+  70% {
+    box-shadow: 0 0 0 7px transparent;
+  }
+  100% {
+    box-shadow: 0 0 0 0 transparent;
+  }
+}
+
+.live-dot {
+  animation: live-pulse 1.8s ease-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

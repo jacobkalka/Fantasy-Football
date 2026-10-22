@@ -1,0 +1,122 @@
+# Setup guide
+
+Step-by-step instructions for the accounts and settings this app needs. Do each part when the
+build reaches it; you don't need everything on day one.
+
+| Part | What | Needed for |
+|------|------|------------|
+| [1](#1-put-the-app-online-vercel) | Put the app online (Vercel) | Now (Phase 0) |
+| [2](#2-let-claude-reach-espn) | Let Claude reach ESPN's data | Now (before Phase 1) |
+| [3](#3-environment-variables-in-plain-english) | Environment variables, explained | Read once |
+| [4](#4-create-the-database-supabase) | Create the database (Supabase) | Phase 3–4 |
+| [5](#5-the-live-data-worker-railway) | The live-data worker (Railway) | Phase 3 |
+
+---
+
+## 1. Put the app online (Vercel)
+
+Vercel takes the code on GitHub and turns it into a website. Every time new code is pushed,
+Vercel rebuilds the site automatically.
+
+1. Go to **vercel.com** and click **Sign Up**.
+2. Choose **Hobby** (the free plan) and pick **Continue with GitHub**. Sign in with the GitHub
+   account that owns `jacobkalka/Fantasy-Football`.
+3. On your Vercel dashboard click **Add New…** → **Project**.
+4. Under **Import Git Repository**, find **Fantasy-Football** and click **Import**.
+   - Not in the list? Click **Adjust GitHub App Permissions** (or "Configure GitHub App"), give
+     Vercel access to the `Fantasy-Football` repository, then come back.
+5. Vercel detects it's a Next.js app. Leave every setting as it is and click **Deploy**.
+6. Wait about a minute. When you see the confetti, click the preview image (or **Continue to
+   Dashboard** → **Visit**). That's your live URL. Bookmark it on your phone.
+
+**What you should see:** a dark screen with the app name in the top left, "MY TEAM" in big
+letters, a build-progress list, and a tab bar along the bottom (Team · Feed · Games · Start/Sit ·
+Chat). Tap the tabs; each one says which phase brings it to life.
+
+> **Which code is online?** Vercel publishes the repository's *default branch*. Right now the
+> only branch is the one Claude works on, so that's what you'll see. Later we can set up a `main`
+> branch so only finished work goes live.
+
+## 2. Let Claude reach ESPN
+
+The live scores come from ESPN's public data. The cloud computer Claude works on has a
+firewall that currently blocks ESPN, so Claude can't look at real responses before building
+Phase 1. (Your live site on Vercel is **not** affected; this is only about Claude's workspace.)
+
+1. In the Claude app, open this coding session.
+2. At the top, open the **cloud environment** menu (it shows the environment's name) and click
+   **Edit** (on some versions this is under **Settings**).
+3. Find **Network access**. Either:
+   - choose a broader access level, **or**
+   - keep **Limited** (or **Custom**) and add these under **Allowed domains**, leaving
+     **Allow package managers** ticked:
+     ```
+     site.api.espn.com
+     site.web.api.espn.com
+     sports.core.api.espn.com
+     a.espncdn.com
+     fantasy.espn.com
+     lm-api-reads.fantasy.espn.com
+     ```
+4. Save. Then tell Claude it's done. You may need to start a new session for the change to apply.
+
+Official instructions: <https://code.claude.com/docs/en/cloud-environments#network-access>
+
+## 3. Environment variables in plain English
+
+Some settings are secret, like passwords and keys to other services. They can't go in the code,
+because the code is on GitHub where others could read it. Instead they're stored as
+**environment variables**: named values (like `SUPABASE_SECRET_KEY=abc123…`) that you type into
+a settings screen, and the app reads them while it runs.
+
+There are two places they live:
+
+- **On Vercel** (for the live site): Project → **Settings** → **Environment Variables**. Type the
+  name in *Key*, paste the value in *Value*, click **Save**. Then redeploy (Deployments → ⋯ →
+  **Redeploy**) so the site picks them up.
+- **In a file called `.env.local`** (only if you ever run the app on your own computer). This
+  file is ignored by git, so it never gets uploaded.
+
+The file `.env.example` in the project lists every variable name with blank values. It's a
+checklist, not a place for real secrets.
+
+Two rules:
+
+1. **Never paste a secret into chat, code, or a GitHub issue.** Only into Vercel/Supabase/Railway
+   settings screens.
+2. Names that start with `NEXT_PUBLIC_` are visible to anyone using the site. Only non-secret
+   values get that prefix.
+
+## 4. Create the database (Supabase)
+
+*Needed from Phase 3/4. Skip for now.*
+
+Supabase stores accounts, rosters and chat, and pushes live updates to everyone's screen.
+
+1. Go to **supabase.com** → **Start your project** → sign in with GitHub.
+2. Click **New project**. Pick your organization (create one if asked, free plan).
+3. Fill in:
+   - **Name:** `fantasy-football`
+   - **Database password:** click **Generate a password**, then save it in a password manager.
+     (You'll rarely need it, but it can't be shown again.)
+   - **Region:** the one closest to you (e.g. *East US*).
+4. Click **Create new project** and wait a couple of minutes.
+5. Get the three values the app needs. Click **Connect** at the top of the project (or go to
+   **Project Settings** → **API Keys**):
+   - **Project URL** → this is `NEXT_PUBLIC_SUPABASE_URL`
+   - **Publishable key** (starts with `sb_publishable_`) → `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`
+   - **Secret key** (starts with `sb_secret_`, click to reveal) → `SUPABASE_SECRET_KEY`.
+     This one is a master key: it goes only into Vercel/Railway settings, nowhere else.
+6. Add all three to Vercel as described in [part 3](#3-environment-variables-in-plain-english).
+7. Set up the tables: open **SQL Editor** in Supabase, paste each file from
+   `supabase/migrations/` in order (oldest first), and click **Run**. Claude will walk you through
+   this when we get there. Details are in `supabase/README.md`.
+
+## 5. The live-data worker (Railway)
+
+*Needed from Phase 3. Skip for now.*
+
+Vercel runs code only when someone loads a page, so it can't watch games all Sunday. A small
+"worker" program will run nonstop on Railway, check ESPN every few seconds during games, and
+save new plays to Supabase. One worker serves every user. Claude will add step-by-step
+instructions here when the worker is built.
