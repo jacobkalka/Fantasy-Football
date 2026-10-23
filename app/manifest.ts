@@ -40,6 +40,38 @@ export default function manifest(): MetadataRoute.Manifest {
       { src: "/icon-maskable-192.png", sizes: "192x192", type: "image/png", purpose: "maskable" },
       { src: "/icon-maskable-512.png", sizes: "512x512", type: "image/png", purpose: "maskable" },
     ],
+    // Real screens of the app (a real roster, real projections). Android and desktop Chrome show
+    // them in a larger install dialog. Retake with scripts/store-screenshots.mjs after a redesign.
+    screenshots: [
+      {
+        src: "/screenshots/home-phone.png",
+        sizes: "780x1688",
+        type: "image/png",
+        form_factor: "narrow",
+        label: "Home: this week's projection and the lineup decisions that need you",
+      },
+      {
+        src: "/screenshots/lineup-phone.png",
+        sizes: "780x1688",
+        type: "image/png",
+        form_factor: "narrow",
+        label: "Lineup: live points for every starter, play by play",
+      },
+      {
+        src: "/screenshots/startsit-phone.png",
+        sizes: "780x1688",
+        type: "image/png",
+        form_factor: "narrow",
+        label: "Start/Sit: who to start, how sure we are, and why",
+      },
+      {
+        src: "/screenshots/home-wide.png",
+        sizes: "1440x900",
+        type: "image/png",
+        form_factor: "wide",
+        label: "FantasyLab on a computer",
+      },
+    ],
     // Long-press the app icon (Android, desktop) to jump straight to these screens.
     shortcuts: [
       { name: "Home", url: "/", description: "Your fantasy dashboard", icons: shortcutIcons },

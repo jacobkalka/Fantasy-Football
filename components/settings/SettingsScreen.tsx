@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { ButtonLink } from "@/components/ui/Button";
+import { useEffect, useState, useSyncExternalStore } from "react";
+import { appBuildTime, checkForUpdate, InstallSetting, installHint, useInstallRoute } from "@/components/pwa";
+import { Button, ButtonLink } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { Icon } from "@/components/ui/Icon";
 import { Segmented } from "@/components/ui/Segmented";
@@ -21,6 +22,52 @@ function Row({ label, hint, children }: { label: string; hint?: string; children
       </div>
       <div className="shrink-0">{children}</div>
     </div>
+  );
+}
+
+const noSubscribe = () => () => {};
+const buildLabel = () =>
+  appBuildTime()?.toLocaleString([], { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" }) ?? null;
+
+/** Install status, version and "check for updates". */
+function AppCard() {
+  const route = useInstallRoute();
+  // Shown in your own time zone, so only in the browser.
+  const built = useSyncExternalStore(noSubscribe, buildLabel, () => null);
+  const [check, setCheck] = useState<"idle" | "checking" | "ready" | "current" | "unavailable">("idle");
+  const result = {
+    idle: null,
+    checking: "Checking…",
+    ready: "A new version is ready: tap Update at the bottom of the screen.",
+    current: "You have the newest version.",
+    unavailable: "Can't check right now (offline, or updates aren't running in this browser).",
+  }[check];
+
+  return (
+    <Card>
+      <h2 className="mb-4 text-[16px] leading-6 font-semibold">The app</h2>
+      <div className="flex flex-col divide-y divide-rule">
+        <Row label="Install the app" hint={installHint(route)}>
+          <InstallSetting />
+        </Row>
+        <Row
+          label="Updates"
+          hint={result ?? `New versions download by themselves and switch over when you tap Update.${built ? ` This one is from ${built}.` : ""}`}
+        >
+          <Button
+            size="sm"
+            icon="refresh"
+            disabled={check === "checking"}
+            onClick={async () => {
+              setCheck("checking");
+              setCheck(await checkForUpdate());
+            }}
+          >
+            Check now
+          </Button>
+        </Row>
+      </div>
+    </Card>
   );
 }
 
@@ -105,7 +152,9 @@ export function SettingsScreen() {
         </div>
       </Card>
 
-      <Card className="lg:col-span-2">
+      <AppCard />
+
+      <Card>
         <h2 className="mb-4 text-[16px] leading-6 font-semibold">Your data</h2>
         <div className="flex flex-col divide-y divide-rule">
           <Row
@@ -126,7 +175,10 @@ export function SettingsScreen() {
               </button>
             )}
           </Row>
-          <Row label="On another phone or browser" hint="Each web address keeps its own saved data. Sign in, or send yourself a team link.">
+          <Row
+            label="On another phone or browser"
+            hint="Each browser, web address and iPhone Home Screen app keeps its own saved data. Sign in, or send yourself a team link."
+          >
             <div className="flex gap-2">
               <ButtonLink href="/team/edit" size="sm" icon="share">
                 Team link

@@ -1,21 +1,29 @@
 import Link from "next/link";
+import { Suspense } from "react";
 import { AccountButton } from "@/components/auth/AccountButton";
 import { Icon } from "@/components/ui/Icon";
+import { BackButton } from "./BackButton";
 import { Wordmark } from "./Brand";
 import { GlobalSearch } from "./GlobalSearch";
 
 /**
- * Phone: the wordmark, search, settings and your account; it scrolls away with the page
- * (the tab bar stays). Desktop: a slim bar with player search and your account.
+ * Phone: the wordmark (with a back arrow on detail screens), search, settings and your
+ * account; it scrolls away with the page (the tab bar stays). Desktop: a slim bar with player search and your account.
  */
 export function TopBar() {
   return (
     <>
       <header className="pt-[var(--safe-top)] lg:hidden">
         <div className="flex h-14 items-center justify-between gap-2 px-4">
-          <Link href="/" aria-label="FantasyLab home" className="-ml-1 rounded-lg p-1">
-            <Wordmark height={19} />
-          </Link>
+          <div className="flex min-w-0 items-center gap-1">
+            {/* Detail screens get a back arrow (the installed app on iPhone has no back button). */}
+            <Suspense fallback={null}>
+              <BackButton />
+            </Suspense>
+            <Link href="/" aria-label="FantasyLab home" className="-ml-1 rounded-lg p-1">
+              <Wordmark height={19} />
+            </Link>
+          </div>
           <div className="flex items-center gap-0.5">
             <GlobalSearch variant="icon" />
             <Link

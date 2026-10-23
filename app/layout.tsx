@@ -11,6 +11,7 @@ import { Sidebar, SidebarFrame, SidebarNav } from "@/components/shell/Sidebar";
 import { TopBar } from "@/components/shell/TopBar";
 import { APP_DESCRIPTION, APP_NAME } from "@/lib/config";
 import { MOTION_BOOT_SCRIPT } from "@/lib/motion/preference";
+import { PWA_BOOT_SCRIPT } from "@/lib/pwa/boot";
 import { pwaMetadata, pwaViewport } from "@/lib/pwa/metadata";
 import "./globals.css";
 
@@ -28,11 +29,13 @@ export const viewport: Viewport = { ...pwaViewport };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    // data-motion is set by the head script before React starts, hence suppressHydrationWarning.
+    // data-motion and data-standalone are set by the head scripts before React starts, hence suppressHydrationWarning.
     <html lang="en" className={`${inter.variable} h-full antialiased`} suppressHydrationWarning>
       <head>
         {/* Decide full or reduced animations before anything paints (lib/motion/preference.ts). */}
         <script dangerouslySetInnerHTML={{ __html: MOTION_BOOT_SCRIPT }} />
+        {/* Installed-app mode and the browser's install offer (lib/pwa/boot.ts). */}
+        <script dangerouslySetInnerHTML={{ __html: PWA_BOOT_SCRIPT }} />
       </head>
       <body className="min-h-full">
         <MotionProvider>

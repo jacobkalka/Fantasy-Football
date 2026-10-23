@@ -5,7 +5,10 @@
   - Keeps copies of the app's own files (code, styles, fonts, icons) so screens open fast and
     work without a connection.
   - Pages: always asks the server first. If the server doesn't answer within 3 seconds, or the
-    phone is offline, it shows the last good copy of that page, or the offline page.
+    phone is offline, it shows the last good copy of that page, or the offline page. Those pages
+    are app screens whose numbers load separately (from /api/, never stored), so a saved copy
+    can't show an old score, projection or injury. The exception, the game pages, put live
+    scores in the page itself, so they are never saved at all.
   - NEVER stores live fantasy data: everything under /api/ (scores, projections, rankings, news,
     injuries, start/sit, players...), sign-in routes, Supabase and any request carrying a login
     goes straight to the network, untouched. Offline, those requests simply fail and the screen
@@ -19,7 +22,7 @@
   Registered only in production builds (components/pwa/service-worker.ts).
 */
 
-const REVISION = 1;
+const REVISION = 2;
 const BUILD = new URL(self.location.href).searchParams.get("v") || "0";
 
 const PREFIX = "fantasylab-";
@@ -41,6 +44,8 @@ const SAVED_AT_HEADER = "x-fantasylab-saved-at";
 const NETWORK_ONLY_PREFIXES = ["/api/", "/auth/"];
 /** Pages that are never stored (sign-in and account screens). They still get the offline page. */
 const PRIVATE_PAGE_PREFIXES = ["/api", "/auth", "/account"];
+/** Pages with live scores in the page itself (not loaded separately): never stored, so never stale. */
+const LIVE_PAGE_PREFIXES = ["/games"];
 
 const TIMED_OUT = Symbol("timed out");
 
@@ -127,7 +132,10 @@ function isStaticAsset(url) {
 // ── Pages: network first, then the last good copy, then the offline page ────
 
 async function handleNavigation(event, url) {
-  const storable = !startsWithAny(url.pathname, PRIVATE_PAGE_PREFIXES) && url.pathname !== OFFLINE_URL;
+  const storable =
+    !startsWithAny(url.pathname, PRIVATE_PAGE_PREFIXES) &&
+    !startsWithAny(url.pathname, LIVE_PAGE_PREFIXES) &&
+    url.pathname !== OFFLINE_URL;
   const key = url.href;
 
   let stored = Promise.resolve();

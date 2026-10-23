@@ -58,3 +58,19 @@ export function decodeTeam(code: string): SharedTeam | null {
     return null;
   }
 }
+
+/** The full team link for a roster, e.g. https://…/team/import?t=… */
+export function teamLink(roster: Roster, origin: string): string {
+  return `${origin}/team/import?t=${encodeTeam(roster)}`;
+}
+
+/**
+ * The team code inside something pasted: a whole team link, or just the code. Null when the
+ * text holds no team we can read.
+ */
+export function teamCodeFrom(text: string): string | null {
+  const trimmed = text.trim();
+  const fromLink = trimmed.match(/[?&]t=([A-Za-z0-9_-]+)/)?.[1];
+  const code = fromLink ?? (/^[A-Za-z0-9_-]{12,}$/.test(trimmed) ? trimmed : null);
+  return code && decodeTeam(code) ? code : null;
+}

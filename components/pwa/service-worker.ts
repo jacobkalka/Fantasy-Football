@@ -121,6 +121,41 @@ function watch(reg: ServiceWorkerRegistration) {
   });
 }
 
+/** When this version of the app was built (from PWA_BUILD_ID), or null in development. */
+export function appBuildTime(): Date | null {
+  const value = Number(process.env.PWA_BUILD_ID);
+  return Number.isFinite(value) && value > 1e12 ? new Date(value) : null;
+}
+
+/**
+ * Asks the server whether a newer version exists. "ready": downloaded and waiting for Update
+ * (the prompt shows); "current": this is the newest; "unavailable": offline support isn't
+ * running here (development, private browsing) or the server couldn't be reached.
+ */
+export async function checkForUpdate(): Promise<"ready" | "current" | "unavailable"> {
+  const reg = registration;
+  if (!reg) return "unavailable";
+  try {
+    await reg.update();
+  } catch {
+    return "unavailable";
+  }
+  const worker = reg.installing;
+  if (worker) {
+    // Wait for the download to finish (or fail).
+    await new Promise<void>((resolve) => {
+      const done = () => {
+        if (worker.state === "installed" || worker.state === "redundant" || worker.state === "activated") resolve();
+      };
+      worker.addEventListener("statechange", done);
+      window.setTimeout(resolve, 15_000);
+    });
+  }
+  const ready = Boolean(reg.waiting && reg.active);
+  setState({ updateReady: ready, updating: state.updating });
+  return ready ? "ready" : "current";
+}
+
 /** Activates the waiting version and reloads this page once it has taken over. */
 export function applyPwaUpdate() {
   const waiting = registration?.waiting;

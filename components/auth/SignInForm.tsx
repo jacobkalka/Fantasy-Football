@@ -3,6 +3,7 @@
 import { AnimatePresence, motion } from "motion/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useInstallRoute } from "@/components/pwa/install";
 import { Skeleton } from "@/components/ui/bits";
 import {
   fetchSignInOptions,
@@ -41,6 +42,7 @@ export function SignInForm() {
   const linkError = params.get("error");
 
   const [step, setStep] = useState<"email" | "code">("email");
+  const installedApp = useInstallRoute() === "installed";
   const [email, setEmail] = useState("");
   const [code, setCode] = useState("");
   const [busy, setBusy] = useState(false);
@@ -179,8 +181,10 @@ export function SignInForm() {
                 One tap away
               </h2>
               <p className="text-[15px] leading-relaxed text-ink-soft">
-                We sent a sign-in link to <strong className="text-ink">{email}</strong>. Open it on this device. If
-                the email shows a code, you can type it here instead.
+                We sent a sign-in link to <strong className="text-ink">{email}</strong>.{" "}
+                {installedApp
+                  ? "Type the code from the email here: in the Home Screen app, the link would open your browser instead."
+                  : "Open it on this device. If the email shows a code, you can type it here instead."}
               </p>
             </div>
             <label className="flex flex-col gap-1.5">

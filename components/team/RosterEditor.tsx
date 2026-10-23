@@ -10,7 +10,7 @@ import { SkeletonRows } from "@/components/ui/States";
 import { visibleTeamColor } from "@/lib/color";
 import { useTeams } from "@/lib/hooks/useTeams";
 import { canFill, MAX_ROSTER, sortLineup, type Slot } from "@/lib/roster/lineup";
-import { encodeTeam } from "@/lib/roster/share";
+import { teamLink } from "@/lib/roster/share";
 import { rosterActions, useRoster } from "@/lib/roster/store";
 import type { ScoringFormat } from "@/lib/scoring";
 
@@ -40,7 +40,7 @@ export function RosterEditor() {
   const [copied, setCopied] = useState<"copied" | "failed" | null>(null);
 
   const copyLink = async () => {
-    const url = `${window.location.origin}/team/import?t=${encodeTeam(roster)}`;
+    const url = teamLink(roster, window.location.origin);
     try {
       if (navigator.share && window.matchMedia("(pointer: coarse)").matches) {
         await navigator.share({ title: `${roster.name || "My Team"} on FantasyLab`, url });
@@ -95,14 +95,16 @@ export function RosterEditor() {
               const starter = player.slot !== "BENCH";
               return (
                 <li key={player.playerId} className="flex min-h-14 items-center gap-3 px-2 py-2">
-                  <label className="relative shrink-0">
+                  <label className="relative block shrink-0">
                     <span className="sr-only">Lineup spot for {player.name}</span>
+                    {/*
+                      The real select is invisible on top of the pill, at 16px so iPhone doesn't
+                      zoom the page when it's tapped; the small pill underneath shows the spot.
+                    */}
                     <select
                       value={player.slot}
                       onChange={(e) => rosterActions.move(player.playerId, e.target.value as Slot)}
-                      className={`h-8 w-[72px] appearance-none rounded-full pr-5 pl-3 text-[12px] font-semibold ${
-                        starter ? "bg-ink text-black" : "bg-well text-muted"
-                      }`}
+                      className="peer absolute inset-0 size-full cursor-pointer appearance-none text-[16px] opacity-0"
                     >
                       {ALL_SLOTS.filter((slot) => canFill(slot, player.position)).map((slot) => (
                         <option key={slot} value={slot} className="bg-raised text-ink">
@@ -110,6 +112,14 @@ export function RosterEditor() {
                         </option>
                       ))}
                     </select>
+                    <span
+                      aria-hidden="true"
+                      className={`pointer-events-none flex h-8 w-[72px] items-center rounded-full pr-5 pl-3 text-[12px] font-semibold peer-focus-visible:ring-2 peer-focus-visible:ring-accent ${
+                        starter ? "bg-ink text-black" : "bg-well text-muted"
+                      }`}
+                    >
+                      {SLOT_LABEL[player.slot]}
+                    </span>
                     <Icon
                       name="chevronDown"
                       size={14}

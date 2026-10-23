@@ -40,6 +40,14 @@ const PATHS = {
   menu: "M4 7h16 M4 12h16 M4 17h16",
   calculator: "M6 3h12v18H6z M9 7h6 M9 11h.01 M12 11h.01 M15 11h.01 M9 14.5h.01 M12 14.5h.01 M15 14.5v3.5 M9 18h.01 M12 18h.01",
   trend: "M3.5 17 9 11.5l3.5 3.5L20 7.5 M14.5 7.5H20V13",
+  /** iPhone's "Add to Home Screen": a rounded square with a plus. */
+  addSquare: "M7 4h10a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3Z M12 8.5v7 M8.5 12h7",
+  more: "M5.5 12h.01 M12 12h.01 M18.5 12h.01",
+  moreVertical: "M12 5.5v.01 M12 12v.01 M12 18.5v.01",
+  download: "M12 4v11 M7.5 10.5 12 15l4.5-4.5 M5 19.5h14",
+  copy: "M9 9h10v11H9z M15 9V4H5v11h4",
+  phone: "M8 3h8a1.5 1.5 0 0 1 1.5 1.5v15A1.5 1.5 0 0 1 16 21H8a1.5 1.5 0 0 1-1.5-1.5v-15A1.5 1.5 0 0 1 8 3Z M11 18h2",
+  compass: "M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z m3.5-12.5-2 5-5 2 2-5z",
 } as const;
 
 export type IconName = keyof typeof PATHS;

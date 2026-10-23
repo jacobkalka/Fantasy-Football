@@ -258,6 +258,22 @@ try {
     iconProblems.length === 0 && manifest.icons.some((i) => i.purpose === "maskable"),
     iconProblems.join("; ") || manifest.icons.map((i) => `${i.src} (${i.purpose})`).join(", "),
   );
+  const shotProblems = [];
+  for (const shot of manifest.screenshots ?? []) {
+    const response = await fetch(`${BASE}${shot.src}`);
+    const size = pngSize(Buffer.from(await response.arrayBuffer()));
+    const ratio = Math.max(size.width, size.height) / Math.min(size.width, size.height);
+    if (!response.ok || `${size.width}x${size.height}` !== shot.sizes || ratio > 2.3 || Math.min(size.width, size.height) < 320) {
+      shotProblems.push(`${shot.src} ${response.status} ${size.width}x${size.height}`);
+    }
+  }
+  check(
+    "Screenshots for the install dialog load at their declared sizes (phone + wide)",
+    shotProblems.length === 0 &&
+      manifest.screenshots?.some((s) => s.form_factor === "narrow") &&
+      manifest.screenshots?.some((s) => s.form_factor === "wide"),
+    shotProblems.join("; ") || `${manifest.screenshots?.length ?? 0} screenshots`,
+  );
   check(
     "Shortcuts for the main destinations",
     ["/", "/team", "/start-sit", "/players", "/trades"].every((u) => manifest.shortcuts?.some((s) => s.url === u)),
@@ -298,6 +314,34 @@ try {
     splashProblems.join("; ") || `${head.splash.length} images, portrait + landscape`,
   );
 
+  section("Install experience");
+  await page.goto(`${BASE}/`, { waitUntil: "load" });
+  const installCard = page.locator("#install-card-title");
+  await installCard.waitFor({ state: "visible", timeout: 15_000 }).catch(() => {});
+  check("In a browser tab, Home offers to install the app", await installCard.isVisible());
+  note(
+    (await page.evaluate(() => Boolean(window.__fantasylabInstall)))
+      ? "Chromium offered its install dialog (captured: Install opens it)"
+      : "Chromium didn't offer its install dialog here (the Install button shows the steps instead)",
+  );
+  await page.goto(`${BASE}/settings`, { waitUntil: "load" });
+  // Lower cards fade in as they're scrolled to.
+  await page.getByText("Install the app", { exact: true }).scrollIntoViewIfNeeded();
+  await page.waitForTimeout(1200);
+  check("Settings has an install row", await page.getByText("Install the app", { exact: true }).isVisible());
+  // The installed app, as iPhone reports it (navigator.standalone), in a separate tab.
+  const appPage = await context.newPage();
+  await appPage.addInitScript(() => Object.defineProperty(Navigator.prototype, "standalone", { get: () => true, configurable: true }));
+  await appPage.goto(`${BASE}/`, { waitUntil: "load" });
+  check(
+    "The installed app is recognised before the first paint (html[data-standalone])",
+    await appPage.evaluate(() => document.documentElement.hasAttribute("data-standalone")),
+  );
+  await appPage.locator("#bring-team-title").waitFor({ state: "visible", timeout: 15_000 }).catch(() => {});
+  check("The installed app with no team offers to bring it over", await appPage.locator("#bring-team-title").isVisible());
+  check("No install card inside the installed app", (await appPage.locator("#install-card-title").count()) === 0);
+  await appPage.close();
+
   section("Online browsing (fills the caches)");
   for (const p of ["/games", "/team", "/feed", "/auth/sign-in", "/"]) {
     await page.goto(`${BASE}${p}`, { waitUntil: "networkidle", timeout: 60_000 });
@@ -335,7 +379,12 @@ try {
   const pagesCache = cached[names.find((n) => n.includes("-pages-"))] ?? [];
   check(
     "Visited pages are saved for offline use",
-    ["/", "/games", "/team", "/feed"].every((p) => pagesCache.some((u) => new URL(u).pathname === p)),
+    ["/", "/team", "/feed"].every((p) => pagesCache.some((u) => new URL(u).pathname === p)),
+    pagesCache.map((u) => new URL(u).pathname).join(", "),
+  );
+  check(
+    "Game pages (live scores inside the page) are never saved",
+    pagesCache.every((u) => !/^\/games(\/|$)/.test(new URL(u).pathname)),
     pagesCache.map((u) => new URL(u).pathname).join(", "),
   );
   const staticCache = cached[names.find((n) => n.includes("-static-"))] ?? [];
@@ -378,16 +427,16 @@ try {
 
   section("Offline (server unreachable)");
   proxy.state.mode = "down";
-  let response = await page.goto(`${BASE}/games`, { waitUntil: "load" });
+  let response = await page.goto(`${BASE}/feed`, { waitUntil: "load" });
   check(
     "Navigating to a visited page shows its saved copy",
-    response?.status() === 200 && response.fromServiceWorker() && (await page.title()).startsWith("Games"),
+    response?.status() === 200 && response.fromServiceWorker() && (await page.title()).startsWith("Plays"),
     `status ${response?.status()}, from service worker: ${response?.fromServiceWorker()}, title "${await page.title()}"`,
   );
   response = await page.reload({ waitUntil: "load" });
   check(
     "Reloading a visited page while offline works",
-    response?.fromServiceWorker() && (await page.title()).startsWith("Games"),
+    response?.fromServiceWorker() && (await page.title()).startsWith("Plays"),
     `title "${await page.title()}"`,
   );
   const offlineApi2 = await page.evaluate(async () => {
@@ -398,9 +447,16 @@ try {
     }
   });
   check("Server unreachable, /api requests fail (never served from cache)", offlineApi2.startsWith("failed"), offlineApi2);
+  const here = () => new URL(page.url()).pathname + new URL(page.url()).search;
+  await page.goto(`${BASE}/games`, { waitUntil: "load" });
+  await page.waitForTimeout(800);
+  check(
+    "A visited game page offline shows the offline page, never old scores",
+    (await heading(page)) === "You're offline" && here() === "/offline?from=%2Fgames",
+    `h1 "${await heading(page)}", address ${here()}`,
+  );
   response = await page.goto(`${BASE}/trades/calculator`, { waitUntil: "load" });
   await page.waitForTimeout(800);
-  const here = () => new URL(page.url()).pathname + new URL(page.url()).search;
   check(
     "Navigating to a page never visited shows the offline page",
     response?.fromServiceWorker() && (await heading(page)) === "You're offline" && here() === "/offline?from=%2Ftrades%2Fcalculator",
@@ -416,12 +472,12 @@ try {
   }
   // In-app navigation (tab bar) while offline: Next.js falls back to a full page load, which the
   // worker answers. (With next.config `experimental.useOffline` it would wait for the connection instead.)
-  await page.goto(`${BASE}/games`, { waitUntil: "load" });
+  await page.goto(`${BASE}/feed`, { waitUntil: "load" });
   await page.locator('nav[aria-label="Main"] a[href="/players"]:visible').first().click();
   await page.waitForTimeout(3000);
   check(
     "Tab-bar navigation while offline opens a saved copy or the offline page (doesn't hang or error)",
-    !page.url().startsWith("chrome-error") && new URL(page.url()).pathname !== "/games" && (await heading(page)) !== null,
+    !page.url().startsWith("chrome-error") && new URL(page.url()).pathname !== "/feed" && (await heading(page)) !== null,
     `now at ${here()}, h1 "${await heading(page)}"`,
   );
   // Back online, "Try again" on the offline page returns to the screen that couldn't load.
@@ -438,14 +494,22 @@ try {
   await page.goto(`${BASE}/team`, { waitUntil: "load" });
   proxy.state.mode = "slow-html";
   const started = Date.now();
-  response = await page.goto(`${BASE}/games`, { waitUntil: "domcontentloaded" });
+  response = await page.goto(`${BASE}/feed`, { waitUntil: "domcontentloaded" });
   const elapsed = Date.now() - started;
   check(
     "A slow page falls back to its saved copy after about 3 s",
-    response?.fromServiceWorker() && elapsed < 5500 && (await page.title()).startsWith("Games"),
+    response?.fromServiceWorker() && elapsed < 5500 && (await page.title()).startsWith("Plays"),
     `shown after ${elapsed} ms (server answers after 6000 ms)`,
   );
   await page.waitForTimeout(4000); // let the slow response finish and refresh the saved copy
+  const startedLive = Date.now();
+  response = await page.goto(`${BASE}/games`, { waitUntil: "domcontentloaded" });
+  const elapsedLive = Date.now() - startedLive;
+  check(
+    "A slow game page waits for fresh scores (no saved copy to fall back to)",
+    elapsedLive >= 5500 && (await page.title()).startsWith("Games"),
+    `shown after ${elapsedLive} ms, title "${await page.title()}"`,
+  );
   proxy.state.mode = "up";
 
   section("Dynamic data is never served from the cache (summary)");

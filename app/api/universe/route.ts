@@ -22,7 +22,8 @@ export async function GET(request: NextRequest) {
     const week = analysisWeek(board.seasonType, board.week);
     const universe = await getPlayerUniverse(board.season, week);
     return Response.json(scoreUniverse(universe, formatParam as ScoringFormat), {
-      headers: { "cache-control": "public, max-age=300, stale-while-revalidate=3600" },
+      // Projections and injuries: browser copies stay short. (Offline support never stores /api/.)
+      headers: { "cache-control": "public, max-age=120, stale-while-revalidate=600" },
     });
   } catch (error) {
     console.error("universe failed", error);

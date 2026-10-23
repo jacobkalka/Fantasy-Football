@@ -121,7 +121,9 @@ Supabase stores accounts, rosters and chat, and pushes live updates to everyone'
      **Authentication → SMTP Settings** (Resend has a free plan), or add their emails as project
      members while testing.
    - Optional but recommended, **Email Templates**: add `{{ .Token }}` to the "Magic Link" and
-     "Confirm signup" emails so the 6-digit code works when the email opens in a different app.
+     "Confirm signup" emails so the 6-digit code works when the email opens in a different app,
+     and in the iPhone Home Screen app (there the link opens Safari, so typing the code is the
+     way to sign in).
    - Optional, **Google sign-in**: in Google Cloud Console create an OAuth client (Web
      application) with redirect URI `https://<project-ref>.supabase.co/auth/v1/callback`, then
      paste its ID and secret under **Authentication → Sign In / Providers → Google**. The Google

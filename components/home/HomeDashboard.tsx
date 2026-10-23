@@ -5,6 +5,7 @@ import { useMemo } from "react";
 import { UpdatedAgo } from "@/components/live/UpdatedAgo";
 import { AnimatedNumber } from "@/components/motion/AnimatedNumber";
 import { Reveal } from "@/components/motion/Reveal";
+import { BringYourTeam, InstallCard } from "@/components/pwa";
 import { ButtonLink } from "@/components/ui/Button";
 import { Card, CardHeader, Pill } from "@/components/ui/Card";
 import { Icon } from "@/components/ui/Icon";
@@ -45,6 +46,8 @@ function HomeSkeleton() {
 function Welcome() {
   return (
     <div className="grid gap-4 lg:grid-cols-2">
+      {/* Installed app with no team yet (iPhone keeps it apart from the browser's). */}
+      <BringYourTeam />
       <EmptyState
         title="Start by adding your team"
         icon="team"
@@ -74,6 +77,7 @@ function Welcome() {
           ))}
         </ul>
       </Card>
+      <InstallCard className="lg:col-span-2" />
     </div>
   );
 }
@@ -230,6 +234,8 @@ export function HomeDashboard() {
           </Card>
         )}
       </Reveal>
+      {/* For people using FantasyLab in a browser tab: put it on the Home Screen. */}
+      <InstallCard />
     </div>
   );
 }

@@ -39,7 +39,8 @@ export async function getTeams() {
 
 export async function getPlayers(season: number) {
   "use cache: remote";
-  cacheLife("reference");
+  // The list carries injury status and % rostered, so it's refreshed like other news, not like team info.
+  cacheLife("outlook");
   return sports.getPlayers(season);
 }
 

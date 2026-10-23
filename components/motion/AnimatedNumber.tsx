@@ -29,12 +29,18 @@ export function AnimatedNumber({
     if (!columns) return;
     const reduce = prefersReducedMotion();
     columns.forEach((column, i) => {
+      // yPercent: 0 always. GSAP reads an element shifted by exactly half its height (the
+      // "5" column: -5em of 10em) as -50% centering and would add it on top, rolling the 5 out of view.
       const y = `${-Number(column.dataset.digit)}em`;
-      if (reduce) gsap.set(column, { y });
+      if (reduce) gsap.set(column, { y, yPercent: 0 });
       else if (first.current) {
         // Spin up from zero, the left digits settling last like a slot machine.
-        gsap.fromTo(column, { y: 0 }, { y, duration: 0.9 + (columns.length - i) * 0.08, ease: "power3.out", delay: 0.15 });
-      } else gsap.to(column, { y, duration: MOTION.slow, ease: "power3.out" });
+        gsap.fromTo(
+          column,
+          { y: 0, yPercent: 0 },
+          { y, yPercent: 0, duration: 0.9 + (columns.length - i) * 0.08, ease: "power3.out", delay: 0.15 },
+        );
+      } else gsap.to(column, { y, yPercent: 0, duration: MOTION.slow, ease: "power3.out" });
     });
     first.current = false;
   }, [text]);

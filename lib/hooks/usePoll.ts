@@ -86,16 +86,23 @@ export function usePoll<T>(
         void tick();
       }
     };
+    // Back online: fetch now instead of waiting out the error back-off.
+    const onOnline = () => {
+      failures.current = 0;
+      onVisible();
+    };
 
     // Fetch right away unless the server already handed us data for this exact URL.
     if (latestUrl.current !== url) void tick();
     else schedule();
     document.addEventListener("visibilitychange", onVisible);
+    window.addEventListener("online", onOnline);
     return () => {
       stopped = true;
       controller.abort();
       clearTimeout(timer.current);
       document.removeEventListener("visibilitychange", onVisible);
+      window.removeEventListener("online", onOnline);
     };
   }, [url, run]);
 
