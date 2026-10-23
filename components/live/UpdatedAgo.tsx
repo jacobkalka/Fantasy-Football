@@ -19,9 +19,7 @@ export function UpdatedAgo({
   const stale = delayed || (live && age > 60_000);
   return (
     <span
-      className={`tabular inline-flex items-center gap-1.5 text-[12px] ${
-        stale ? "text-warning" : live ? "text-positive" : "text-faint"
-      }`}
+      className={`tabular inline-flex items-center gap-1.5 text-[12px] ${ stale ? "text-warning" : live ? "text-positive" : "text-faint" }`}
       aria-live="polite"
     >
       {live && !stale && <LiveDot />}

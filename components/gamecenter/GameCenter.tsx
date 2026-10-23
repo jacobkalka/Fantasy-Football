@@ -106,7 +106,7 @@ export function GameCenter({ initial }: { initial: GameView }) {
           <button
             type="button"
             onClick={replay.start}
-            className="glass-gain pressable rounded-xl px-3.5 py-2 font-mono text-[11px] font-bold tracking-[0.1em] text-gain uppercase"
+            className="glass-gain pressable rounded-xl px-3.5 py-2 text-[12px] font-bold text-gain"
           >
             ▶ Replay game
           </button>

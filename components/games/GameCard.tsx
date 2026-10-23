@@ -28,18 +28,16 @@ function SideRow({
       </span>
       <div className="flex min-w-0 flex-1 items-center gap-2">
         <span
-          className={`font-display text-2xl leading-none font-bold tracking-wide ${
-            leading || !showScore ? "text-ink-strong" : "text-muted"
-          }`}
+          className={`text-[20px] leading-7 font-semibold ${ leading || !showScore ? "text-ink" : "text-muted" }`}
         >
           {side.team.abbr}
         </span>
-        {side.record && <span className="font-mono text-[10px] text-muted">{side.record}</span>}
+        {side.record && <span className="text-[12px] text-muted">{side.record}</span>}
         {hasBall && <Football />}
       </div>
       {showScore && (
         <span
-          className={`font-display text-4xl leading-none font-bold ${leading ? "text-ink-strong" : "text-muted"}`}
+          className={`tabular text-[26px] leading-8 font-semibold ${leading ? "text-ink" : "text-muted"}`}
           style={{ transform: "translateZ(20px)" }}
         >
           <AnimatedNumber value={side.score} decimals={0} />
@@ -79,7 +77,7 @@ export function GameCard({ game }: { game: Game }) {
       >
         <>
           <div className="flex flex-col gap-2.5">
-            <div className="flex items-center justify-between font-mono text-[11px] tracking-[0.06em] uppercase">
+            <div className="flex items-center justify-between text-[12px]">
               {status}
               <span className="text-muted">
                 {game.state === "pre"
@@ -94,9 +92,9 @@ export function GameCard({ game }: { game: Game }) {
           </div>
         </>
         {live && (game.situation?.downDistance || redZone) && (
-          <div className="flex items-center gap-2 border-t border-line-soft pt-2.5 font-mono text-[11px] text-ink-soft">
+          <div className="flex items-center gap-2 border-t border-line-soft pt-2.5 text-[12px] text-ink-soft">
             {redZone && (
-              <span className="rounded-md bg-redzone/20 px-1.5 py-0.5 text-[10px] font-bold tracking-[0.1em] text-redzone uppercase ring-1 ring-redzone/50">
+              <span className="rounded-md bg-redzone/20 px-1.5 py-0.5 text-[12px] font-bold text-redzone ring-1 ring-redzone/50">
                 Red zone
               </span>
             )}

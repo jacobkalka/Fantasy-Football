@@ -50,13 +50,13 @@ function Side({ side, score, showScore, leading, hasBall, align }: {
         <TeamLogo abbr={side.team.abbr} logo={side.team.logo} color={side.team.color} size={58} />
       </span>
       <div className={`flex items-center gap-1.5 ${align === "right" ? "flex-row-reverse" : ""}`}>
-        <span className="font-display text-2xl leading-none font-bold tracking-wide">{side.team.abbr}</span>
+        <span className="text-[18px] leading-6 font-semibold">{side.team.abbr}</span>
         {hasBall && <Football />}
       </div>
-      {side.record && <span className="font-mono text-[10px] text-muted">{side.record}</span>}
+      {side.record && <span className="text-[12px] text-muted">{side.record}</span>}
       {showScore && (
         <span
-          className={`font-display text-[64px] leading-[0.85] font-bold ${leading ? "text-ink-strong" : "text-muted"}`}
+          className={`tabular text-[44px] leading-[48px] font-semibold tracking-[-0.02em] ${leading ? "text-ink" : "text-muted"}`}
           style={{ transform: "translateZ(30px)" }}
         >
           <AnimatedNumber value={score} decimals={0} />
@@ -86,24 +86,22 @@ export function Scorebug({ game, state }: { game: Game; state: ScoreState }) {
           />
           <div className="flex min-w-24 flex-col items-center gap-2 pt-4 text-center">
             {state.replay && (
-              <span className="rounded-md bg-sky/15 px-2 py-0.5 font-mono text-[10px] font-bold tracking-[0.14em] text-sky ring-1 ring-sky/40">
+              <span className="rounded-md bg-sky/15 px-2 py-0.5 text-[12px] font-bold text-sky ring-1 ring-sky/40">
                 REPLAY
               </span>
             )}
             <span
-              className={`inline-flex items-center gap-1.5 font-mono text-[12px] tracking-[0.06em] uppercase ${
-                state.live ? "text-gain" : "text-ink-soft"
-              }`}
+              className={`inline-flex items-center gap-1.5 text-[12px] ${ state.live ? "text-gain" : "text-ink-soft" }`}
             >
               {state.live && <LiveDot />}
               {game.state === "pre" && !state.replay && hydrated ? kickoffLabel(game.kickoff) : state.status}
             </span>
             {state.live && state.downDistance && (
-              <span className="font-mono text-[11px] leading-snug text-muted">{state.downDistance}</span>
+              <span className="text-[12px] leading-snug text-muted">{state.downDistance}</span>
             )}
             {state.isRedZone && state.live && (
               <motion.span
-                className="rounded-md bg-redzone/20 px-2 py-0.5 font-mono text-[10px] font-bold tracking-[0.14em] text-redzone ring-1 ring-redzone/50"
+                className="rounded-md bg-redzone/20 px-2 py-0.5 text-[12px] font-bold text-redzone ring-1 ring-redzone/50"
                 animate={{ opacity: [1, 0.55, 1] }}
                 transition={{ duration: 1.4, repeat: Infinity }}
               >
@@ -111,7 +109,7 @@ export function Scorebug({ game, state }: { game: Game; state: ScoreState }) {
               </motion.span>
             )}
             {game.state === "pre" && game.odds?.details && (
-              <span className="font-mono text-[11px] text-muted">
+              <span className="text-[12px] text-muted">
                 {game.odds.details}
                 {game.odds.overUnder ? ` · O/U ${game.odds.overUnder}` : ""}
               </span>
@@ -128,7 +126,7 @@ export function Scorebug({ game, state }: { game: Game; state: ScoreState }) {
         </div>
       </>
       {(game.venue || game.broadcast) && (
-        <p className="mt-4 border-t border-line-soft pt-3 text-center font-mono text-[10px] tracking-[0.06em] text-muted uppercase">
+        <p className="mt-4 border-t border-line-soft pt-3 text-center text-[12px] text-muted">
           {[game.venue?.name, game.venue?.city, game.broadcast, game.weather?.temperature !== undefined && !game.venue?.indoor ? `${game.weather.temperature}°` : null]
             .filter(Boolean)
             .join(" · ")}

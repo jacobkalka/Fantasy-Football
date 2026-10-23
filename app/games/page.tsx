@@ -3,6 +3,7 @@ import { connection } from "next/server";
 import { Suspense } from "react";
 import { GamesBoard } from "@/components/games/GamesBoard";
 import { Reveal, Screen } from "@/components/motion/Screen";
+import { SectionTabs } from "@/components/shell/SectionTabs";
 import { Notice, PageTitle, Skeleton } from "@/components/ui/bits";
 import { getScoreboard } from "@/lib/data/sports";
 
@@ -48,7 +49,10 @@ function BoardSkeleton() {
 export default function GamesPage(props: PageProps<"/games">) {
   return (
     <Screen>
-      <PageTitle kicker="Live scores">Games</PageTitle>
+      <div>
+        <SectionTabs section="/feed" current="/games" />
+        <PageTitle sub="Scores, odds and kickoffs for every game this week">Games</PageTitle>
+      </div>
       <Suspense fallback={<BoardSkeleton />}>
         <Board searchParams={props.searchParams} />
       </Suspense>

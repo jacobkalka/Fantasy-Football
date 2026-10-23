@@ -25,7 +25,7 @@ export function TouchdownBurst({ color = "#c8ff2e" }: { color?: string }) {
         />
       ))}
       <motion.span
-        className="absolute font-display text-3xl font-bold tracking-[0.12em] text-gain [text-shadow:0_0_24px_rgb(200_255_46/0.8)]"
+        className="absolute text-3xl font-bold text-gain"
         initial={{ scale: 0.4, opacity: 0, rotate: -6 }}
         animate={{ scale: [0.4, 1.15, 1], opacity: [0, 1, 0], rotate: 0 }}
         transition={{ duration: 1.4, times: [0, 0.25, 1] }}

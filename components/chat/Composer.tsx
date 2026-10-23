@@ -103,11 +103,11 @@ export function Composer({
                 void send();
               }
             }}
-            className="max-h-[132px] min-h-11 flex-1 resize-none bg-transparent px-3 py-2.5 text-[16px] leading-snug text-ink-strong outline-none placeholder:text-muted/80 disabled:opacity-50"
+            className="max-h-[132px] min-h-11 flex-1 resize-none bg-transparent px-3 py-2.5 text-[16px] leading-snug text-ink outline-none placeholder:text-muted/80 disabled:opacity-50"
           />
           <span
             id="chat-counter"
-            className={`self-center font-mono text-[10px] tabular-nums ${near ? "text-alert" : "text-muted"} ${length === 0 ? "sr-only" : ""}`}
+            className={`self-center text-[12px] tabular-nums ${near ? "text-alert" : "text-muted"} ${length === 0 ? "sr-only" : ""}`}
           >
             {length}/{MAX_MESSAGE_LENGTH}
             <span className="sr-only"> characters</span>

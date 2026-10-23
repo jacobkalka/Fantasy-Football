@@ -14,7 +14,7 @@ export function WinProbabilityBar({ away, home, homeWinPct }: { away: Team; home
   const awayPct = 100 - homePct;
   return (
     <div className="glass flex flex-col gap-2 p-4">
-      <div className="flex items-center justify-between font-mono text-[11px] tracking-[0.06em] uppercase">
+      <div className="flex items-center justify-between text-[12px]">
         <span className={awayPct >= homePct ? "text-ink-strong" : "text-muted"}>
           {away.abbr} {awayPct}%
         </span>
@@ -51,7 +51,7 @@ export function FieldBar({ away, home, field }: { away: Team; home: Team; field:
   const redZone = yardsToGo <= 20;
   return (
     <div className="glass flex flex-col gap-2 p-4">
-      <div className="flex items-center justify-between font-mono text-[11px] tracking-[0.06em] text-muted uppercase">
+      <div className="flex items-center justify-between text-[12px] text-muted">
         <span>Ball on the field</span>
         <span className={redZone ? "text-redzone" : ""}>{yardsToGo} yds to the end zone</span>
       </div>
@@ -76,7 +76,7 @@ export function FieldBar({ away, home, field }: { away: Team; home: Team; field:
           )}
         </div>
         <motion.div
-          className="absolute top-1/2 -translate-x-1/2 -translate-y-1/2 drop-shadow-[0_0_8px_rgb(255_255_255/0.6)]"
+          className="absolute top-1/2 -translate-x-1/2 -translate-y-1/2"
           initial={false}
           animate={{ left: `${8 + field.ballOn * 0.84}%` }}
           transition={spring}
@@ -84,7 +84,7 @@ export function FieldBar({ away, home, field }: { away: Team; home: Team; field:
           <Football />
         </motion.div>
       </div>
-      <div className="flex justify-between font-mono text-[10px] text-muted">
+      <div className="flex justify-between text-[12px] text-muted">
         <span>{away.abbr} goal</span>
         <span>50</span>
         <span>{home.abbr} goal</span>

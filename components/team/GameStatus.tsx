@@ -40,7 +40,7 @@ export function GameStatus({
       <LiveDot />
       {game.statusText} · {score} {vs} {opp}
       {game.isRedZone && (
-        <span className="inline-flex h-[18px] items-center rounded-full bg-negative-soft px-1.5 text-[11px] font-semibold text-negative">
+        <span className="inline-flex h-[18px] items-center rounded-full bg-negative-soft px-1.5 text-[12px] font-semibold text-negative">
           Red zone
         </span>
       )}

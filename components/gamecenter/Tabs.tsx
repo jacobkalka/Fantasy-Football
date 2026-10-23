@@ -46,26 +46,24 @@ function PlayRow({
       <div className="flex gap-3">
         <div className="flex w-11 shrink-0 flex-col items-center gap-1 pt-0.5">
           {team && <TeamLogo abbr={team.abbr} logo={team.logo} color={team.color} size={22} />}
-          <span className="font-mono text-[10px] text-muted">{play.clock}</span>
+          <span className="text-[12px] text-muted">{play.clock}</span>
         </div>
         <div className="flex min-w-0 flex-1 flex-col gap-1.5">
           {play.scoring && (
-            <span className="font-mono text-[10px] font-bold tracking-[0.16em] text-gain uppercase">
+            <span className="text-[12px] font-bold text-gain">
               {scoringLabel(play)} · {play.awayScore}–{play.homeScore}
             </span>
           )}
           {play.isTurnover && !play.scoring && (
-            <span className="font-mono text-[10px] font-bold tracking-[0.16em] text-loss uppercase">Turnover</span>
+            <span className="text-[12px] font-bold text-loss">Turnover</span>
           )}
-          <p className={`text-[14px] leading-snug ${play.scoring ? "text-ink-strong" : "text-ink-soft"}`}>{play.text}</p>
+          <p className={`text-[14px] leading-snug ${play.scoring ? "text-ink" : "text-ink-soft"}`}>{play.text}</p>
           {play.fantasy.length > 0 && (
             <div className="flex flex-wrap gap-1.5">
               {play.fantasy.slice(0, 3).map((f) => (
                 <span
                   key={f.playerId}
-                  className={`rounded-md px-1.5 py-0.5 font-mono text-[10px] ring-1 ${
-                    f.points > 0 ? "bg-gain/10 text-gain ring-gain/30" : "bg-loss/10 text-loss ring-loss/30"
-                  }`}
+                  className={`rounded-md px-1.5 py-0.5 text-[12px] ring-1 ${ f.points > 0 ? "bg-gain/10 text-gain ring-gain/30" : "bg-loss/10 text-loss ring-loss/30" }`}
                 >
                   {shortName(players[f.playerId]?.name ?? "Player")} {formatPoints(f.points)}
                 </span>
@@ -106,7 +104,7 @@ export function PlaysList({
     <div className="flex flex-col gap-4">
       {groups.map((group) => (
         <section key={`${group.period}-${group.plays[0].id}`} className="flex flex-col gap-1">
-          <h3 className="px-1 pb-1 font-mono text-[11px] tracking-[0.12em] text-muted uppercase">
+          <h3 className="px-1 pb-1 text-[12px] text-muted">
             {group.period <= 4 ? `Quarter ${group.period}` : periodLabel(group.period)}
           </h3>
           <ul className="glass divide-y divide-line-soft overflow-hidden px-3">
@@ -132,7 +130,7 @@ export function PlaysList({
         <button
           type="button"
           onClick={() => setAll(true)}
-          className="glass-chip pressable self-center rounded-xl px-4 py-2 font-mono text-[11px] tracking-[0.1em] text-ink uppercase"
+          className="glass-chip pressable self-center rounded-xl px-4 py-2 text-[12px] text-ink"
         >
           Show all {newestFirst.length} plays
         </button>
@@ -178,12 +176,12 @@ export function DrivesList({
             >
               {team && <TeamLogo abbr={team.abbr} logo={team.logo} color={team.color} size={28} />}
               <div className="min-w-0 flex-1">
-                <p className="text-[14px] font-semibold text-ink-strong">{drive.description || "Drive"}</p>
-                <p className="font-mono text-[10px] text-muted">
+                <p className="text-[14px] font-semibold text-ink">{drive.description || "Drive"}</p>
+                <p className="text-[12px] text-muted">
                   {periodLabel(drive.startPeriod)} {drive.startClock}
                 </p>
               </div>
-              <span className={`rounded-lg px-2 py-1 font-mono text-[10px] font-bold tracking-[0.06em] uppercase ${resultTone(drive.result)}`}>
+              <span className={`rounded-lg px-2 py-1 text-[12px] font-bold ${resultTone(drive.result)}`}>
                 {drive.result}
               </span>
             </button>
@@ -197,7 +195,7 @@ export function DrivesList({
                 >
                   {drivePlays.map((play) => (
                     <li key={play.id} className="py-2 text-[13px] leading-snug text-ink-soft">
-                      <span className="mr-2 font-mono text-[10px] text-muted">{play.clock}</span>
+                      <span className="mr-2 text-[12px] text-muted">{play.clock}</span>
                       {play.text}
                     </li>
                   ))}
@@ -224,7 +222,7 @@ export function TeamStatsTable({ stats, away, home }: { stats: TeamStat[]; away:
     <div className="glass flex flex-col gap-3 p-4">
       <div className="flex items-center justify-between">
         <TeamLogo abbr={away.abbr} logo={away.logo} color={away.color} size={26} />
-        <span className="font-mono text-[10px] tracking-[0.12em] text-muted uppercase">Team stats</span>
+        <span className="text-[12px] text-muted">Team stats</span>
         <TeamLogo abbr={home.abbr} logo={home.logo} color={home.color} size={26} />
       </div>
       {stats.map((s) => {
@@ -234,9 +232,9 @@ export function TeamStatsTable({ stats, away, home }: { stats: TeamStat[]; away:
         return (
           <div key={s.name + s.label} className="flex flex-col gap-1">
             <div className="flex items-baseline justify-between gap-3">
-              <span className="font-display text-xl font-bold">{s.away}</span>
+              <span className="text-xl font-bold">{s.away}</span>
               <span className="text-center text-[12px] text-muted">{s.label}</span>
-              <span className="font-display text-xl font-bold">{s.home}</span>
+              <span className="text-xl font-bold">{s.home}</span>
             </div>
             {share !== null && (
               <div className="flex h-1 gap-0.5 overflow-hidden rounded-full">
@@ -282,11 +280,11 @@ export function FantasyLeaders({
             transition={{ delay: index * 0.03 }}
             className="flex items-center gap-3 px-4 py-3"
           >
-            <span className="w-5 font-mono text-[11px] text-muted">{index + 1}</span>
+            <span className="w-5 text-[12px] text-muted">{index + 1}</span>
             <PlayerAvatar name={player?.name ?? "Player"} headshot={player?.headshot} teamColor={visibleTeamColor(team)} size={42} />
             <div className="min-w-0 flex-1">
-              <p className="truncate text-[15px] font-semibold text-ink-strong">{player?.name ?? "Player"}</p>
-              <p className="truncate font-mono text-[10px] text-muted">{leader.summary}</p>
+              <p className="truncate text-[15px] font-semibold text-ink">{player?.name ?? "Player"}</p>
+              <p className="truncate text-[12px] text-muted">{leader.summary}</p>
             </div>
             <PointsBadge points={leader.points} />
           </motion.li>

@@ -75,9 +75,7 @@ export function Segmented<T extends string>({
             role="radio"
             aria-checked={active}
             onClick={() => onChange(option.value)}
-            className={`relative flex-1 rounded-full whitespace-nowrap transition-colors ${
-              size === "sm" ? "h-7 px-3 text-[13px]" : "h-8 px-3.5 text-[14px]"
-            } ${active ? "font-medium text-ink" : "text-muted hover:text-ink"}`}
+            className={`relative flex-1 rounded-full whitespace-nowrap transition-colors ${ size === "sm" ? "h-7 px-3 text-[13px]" : "h-8 px-3.5 text-[14px]" } ${active ? "font-medium text-ink" : "text-muted hover:text-ink"}`}
           >
             {option.label}
           </button>

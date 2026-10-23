@@ -28,10 +28,10 @@ export function SetupNeeded({ feature }: { feature: keyof typeof COPY }) {
             <path d="M18 16v5M15.5 18.5h5" />
           </svg>
         </span>
-        <p className="font-mono text-[11px] tracking-[0.1em] text-sky uppercase">Not connected yet</p>
+        <p className="text-[12px] text-sky">Not connected yet</p>
       </div>
       <div className="flex flex-col gap-2">
-        <h2 className="font-display text-3xl leading-none font-bold tracking-wide text-ink-strong uppercase">{copy.title}</h2>
+        <h2 className="text-[20px] leading-7 font-semibold text-ink">{copy.title}</h2>
         <p className="text-[15px] leading-relaxed text-ink-soft">{copy.body}</p>
         <p className="text-[15px] leading-relaxed text-ink-soft">
           Everything else already works on this device: build your team, follow the live feed and watch the games.
@@ -41,7 +41,7 @@ export function SetupNeeded({ feature }: { feature: keyof typeof COPY }) {
         href={SUPABASE_SETUP_URL}
         target="_blank"
         rel="noreferrer"
-        className="glass-chip pressable flex min-h-11 items-center justify-between gap-3 rounded-2xl px-4 py-3 text-[14px] font-semibold text-ink-strong"
+        className="glass-chip pressable flex min-h-11 items-center justify-between gap-3 rounded-2xl px-4 py-3 text-[14px] font-semibold text-ink"
       >
         <span>How to connect it: setup guide, part 4</span>
         <span aria-hidden="true" className="text-sky">

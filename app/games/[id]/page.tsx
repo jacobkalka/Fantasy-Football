@@ -35,7 +35,7 @@ export default function GamePage(props: PageProps<"/games/[id]">) {
     <Screen>
       <Link
         href="/games"
-        className="self-start px-1 pt-2 font-mono text-[11px] tracking-[0.1em] text-muted uppercase hover:text-ink"
+        className="self-start px-1 pt-2 text-[12px] text-muted hover:text-ink"
       >
         ← All games
       </Link>

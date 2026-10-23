@@ -18,18 +18,18 @@ export function ChatGate({ next, children }: { next: string; children: (userId: 
   if (auth.status === "signed-out") {
     return (
       <TiltCard className="glass flex flex-col items-center gap-4 px-6 py-9 text-center" max={6}>
-        <span className="text-5xl" style={{ transform: "translateZ(36px)" }} aria-hidden="true">
+        <span className="text-5xl" aria-hidden="true">
           💬
         </span>
         <div className="flex flex-col gap-1.5">
-          <h2 className="font-display text-3xl font-bold tracking-wide text-ink-strong uppercase">Sign in to chat</h2>
+          <h2 className="text-[20px] leading-7 font-semibold text-ink">Sign in to chat</h2>
           <p className="text-[15px] leading-relaxed text-ink-soft">
             Talk through every play with everyone, in a room for each game, or with your league. It takes one email.
           </p>
         </div>
         <Link
           href={`/auth/sign-in?next=${encodeURIComponent(next)}`}
-          className="glass-gain pressable rounded-2xl px-6 py-3 font-mono text-[12px] font-bold tracking-[0.12em] text-gain uppercase"
+          className="glass-gain pressable rounded-2xl px-6 py-3 text-[12px] font-bold text-gain"
           style={{ transform: "translateZ(24px)" }}
         >
           Sign in

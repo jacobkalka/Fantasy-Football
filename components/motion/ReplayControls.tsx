@@ -32,14 +32,14 @@ export function ReplayControls({
         <button
           type="button"
           onClick={replay.skipToEnd}
-          className="glass-chip pressable rounded-xl px-3 py-2.5 font-mono text-[10px] tracking-[0.1em] text-ink uppercase"
+          className="glass-chip pressable rounded-xl px-3 py-2.5 text-[12px] text-ink"
         >
           Skip
         </button>
         <button
           type="button"
           onClick={replay.stop}
-          className="glass-chip pressable rounded-xl px-3 py-2.5 font-mono text-[10px] tracking-[0.1em] text-muted uppercase"
+          className="glass-chip pressable rounded-xl px-3 py-2.5 text-[12px] text-muted"
         >
           Exit
         </button>

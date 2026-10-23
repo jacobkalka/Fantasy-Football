@@ -1,16 +1,14 @@
-import { Suspense } from "react";
-import { Screen } from "@/components/motion/Screen";
-import { TeamDashboard } from "@/components/team/TeamDashboard";
-import { PageTitle, Skeleton } from "@/components/ui/bits";
+import { HomeDashboard } from "@/components/home/HomeDashboard";
+import { PageTitle } from "@/components/ui/bits";
+import { HomeTitle } from "@/components/home/HomeTitle";
 
-export default function TeamPage() {
+export default function HomePage() {
   return (
-    <Screen>
-      <PageTitle kicker="Live fantasy">My team</PageTitle>
-      {/* The dashboard reads ?week= from the URL, which needs a Suspense boundary. */}
-      <Suspense fallback={<Skeleton className="h-64 rounded-3xl" />}>
-        <TeamDashboard />
-      </Suspense>
-    </Screen>
+    <>
+      <PageTitle sub="What needs your attention this week">
+        <HomeTitle />
+      </PageTitle>
+      <HomeDashboard />
+    </>
   );
 }

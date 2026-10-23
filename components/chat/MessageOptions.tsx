@@ -106,7 +106,7 @@ function OptionsBody({
         }}
       >
         <div>
-          <h2 className="font-display text-2xl font-bold tracking-wide text-ink-strong uppercase">Report message</h2>
+          <h2 className="text-[18px] leading-6 font-semibold text-ink">Report message</h2>
           <p className="text-[14px] text-ink-soft">A moderator will review it. @{authorName} won&apos;t know who reported it.</p>
         </div>
         <fieldset className="flex flex-col gap-1.5">
@@ -114,9 +114,7 @@ function OptionsBody({
           {REPORT_REASONS.map((option) => (
             <label
               key={option}
-              className={`flex min-h-12 cursor-pointer items-center gap-3 rounded-2xl px-4 text-[15px] ${
-                reason === option ? "glass-gain text-ink-strong" : "glass-chip text-ink-soft"
-              }`}
+              className={`flex min-h-12 cursor-pointer items-center gap-3 rounded-2xl px-4 text-[15px] ${ reason === option ? "glass-gain text-ink" : "glass-chip text-ink-soft" }`}
             >
               <input
                 type="radio"
@@ -131,13 +129,13 @@ function OptionsBody({
           ))}
         </fieldset>
         <label className="flex flex-col gap-1.5">
-          <span className="font-mono text-[11px] tracking-[0.1em] text-muted uppercase">More details (optional)</span>
+          <span className="text-[12px] text-muted">More details (optional)</span>
           <textarea
             value={details}
             onChange={(e) => setDetails(e.target.value)}
             maxLength={300}
             rows={2}
-            className="glass-chip w-full rounded-2xl px-4 py-3 text-[16px] text-ink-strong outline-none focus-visible:ring-2 focus-visible:ring-gain/70"
+            className="glass-chip w-full rounded-2xl px-4 py-3 text-[16px] text-ink outline-none focus-visible:ring-2 focus-visible:ring-gain/70"
           />
         </label>
         <div className="flex gap-2">
@@ -147,7 +145,7 @@ function OptionsBody({
           <button
             type="submit"
             disabled={busy}
-            className="glass-gain pressable min-h-12 flex-[2] rounded-2xl font-mono text-[12px] font-bold tracking-[0.1em] text-gain uppercase disabled:opacity-50"
+            className="glass-gain pressable min-h-12 flex-[2] rounded-2xl text-[12px] font-bold text-gain disabled:opacity-50"
           >
             {busy ? "Sending…" : "Send report"}
           </button>
@@ -161,7 +159,7 @@ function OptionsBody({
     return (
       <div className="flex flex-col gap-4">
         <div>
-          <h2 className="font-display text-2xl font-bold tracking-wide text-ink-strong uppercase">
+          <h2 className="text-[18px] leading-6 font-semibold text-ink">
             {block ? `Block @${authorName}?` : "Delete this message?"}
           </h2>
           <p className="text-[14px] leading-relaxed text-ink-soft">
@@ -184,7 +182,7 @@ function OptionsBody({
               else onDelete();
               onClose();
             }}
-            className="min-h-12 flex-[2] rounded-2xl border border-loss-line/50 bg-loss/15 font-mono text-[12px] font-bold tracking-[0.1em] text-loss uppercase"
+            className="min-h-12 flex-[2] rounded-2xl border border-loss-line/50 bg-loss/15 text-[12px] font-bold text-loss"
           >
             {block ? "Block" : "Delete"}
           </button>
@@ -197,7 +195,7 @@ function OptionsBody({
     <div className="flex flex-col gap-3">
       {!message.deleted && (
         <div>
-          <p className="px-1 pb-2 font-mono text-[11px] tracking-[0.1em] text-muted uppercase">React</p>
+          <p className="px-1 pb-2 text-[12px] text-muted">React</p>
           <div className="grid grid-cols-6 gap-1.5">
             {REACTIONS.map((emoji) => {
               const pressed = message.reactions.some((r) => r.userId === me && r.emoji === emoji);

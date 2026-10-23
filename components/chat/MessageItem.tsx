@@ -35,12 +35,10 @@ function Reactions({
             onClick={() => onToggle(r.emoji)}
             aria-pressed={r.mine}
             aria-label={`${REACTION_LABELS[r.emoji]}: ${r.count}${r.mine ? ", including you. Tap to remove yours" : ". Tap to add yours"}`}
-            className={`relative flex h-8 items-center gap-1 rounded-full px-2.5 text-[13px] after:absolute after:-inset-y-1.5 after:inset-x-0 after:content-[''] ${
-              r.mine ? "glass-gain text-gain" : "glass-chip text-ink-soft"
-            }`}
+            className={`relative flex h-8 items-center gap-1 rounded-full px-2.5 text-[13px] after:absolute after:-inset-y-1.5 after:inset-x-0 after:content-[''] ${ r.mine ? "glass-gain text-gain" : "glass-chip text-ink-soft" }`}
           >
             <span aria-hidden="true">{r.emoji}</span>
-            <span className="font-mono text-[11px] font-bold tabular-nums">{r.count}</span>
+            <span className="text-[12px] font-bold tabular-nums">{r.count}</span>
           </motion.button>
         </li>
       ))}
@@ -74,11 +72,7 @@ export function MessageItem({
     </div>
   ) : (
     <div
-      className={`flex min-w-0 flex-col gap-2 rounded-[1.25rem] px-3.5 py-2.5 text-[15px] leading-snug ${
-        mine
-          ? "rounded-br-md border border-gain/35 bg-gain/[0.13] text-ink-strong shadow-[inset_0_1px_0_rgb(255_255_255/0.22),0_10px_24px_-14px_rgb(200_255_46/0.5)] backdrop-blur-xl"
-          : "glass-chip rounded-bl-md text-ink"
-      } ${message.pending ? "opacity-60" : ""}`}
+      className={`flex min-w-0 flex-col gap-2 rounded-[1.25rem] px-3.5 py-2.5 text-[15px] leading-snug ${ mine ? "rounded-br-md border border-gain/35 bg-gain/[0.13] text-ink shadow-[inset_0_1px_0_rgb(255_255_255/0.22),0_10px_24px_-14px_rgb(200_255_46/0.5)] backdrop-blur-xl" : "glass-chip rounded-bl-md text-ink" } ${message.pending ? "opacity-60" : ""}`}
     >
       {decoded.play && <SharedPlayCard play={decoded.play} compact />}
       {text && <p className="break-words whitespace-pre-wrap">{text}</p>}
@@ -102,7 +96,7 @@ export function MessageItem({
         ))}
       <div className={`flex max-w-[80%] min-w-0 flex-col gap-1 ${mine ? "items-end" : "items-start"}`}>
         {firstInGroup && (
-          <p className="px-1 font-mono text-[10.5px] tracking-[0.04em] text-muted">
+          <p className="px-1 text-[12px] text-muted">
             {!mine && <span className="font-semibold text-ink-soft">@{name} </span>}
             <time dateTime={message.createdAt}>{message.pending ? "Sending…" : time}</time>
           </p>

@@ -6,9 +6,7 @@ export function InjuryBadge({ status, long = false }: { status?: string; long?: 
   if (!label) return null;
   return (
     <span
-      className={`inline-flex h-[18px] shrink-0 items-center rounded-full px-1.5 text-[11px] leading-none font-semibold ${
-        label.tone === "bad" ? "bg-negative-soft text-negative" : "bg-warning-soft text-warning"
-      }`}
+      className={`inline-flex h-[18px] shrink-0 items-center rounded-full px-1.5 text-[12px] leading-none font-semibold ${ label.tone === "bad" ? "bg-negative-soft text-negative" : "bg-warning-soft text-warning" }`}
       title={label.long}
     >
       {long ? label.long : label.short}

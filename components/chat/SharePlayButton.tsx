@@ -52,8 +52,8 @@ function ShareForm({ item, userId, onClose }: { item: FeedItem; userId: string; 
     return (
       <div className="flex flex-col gap-4" role="status">
         <div>
-          <p className="font-mono text-[11px] tracking-[0.12em] text-gain uppercase">✓ Shared</p>
-          <h2 className="font-display text-3xl leading-none font-bold tracking-wide text-ink-strong uppercase">
+          <p className="text-[12px] text-gain">✓ Shared</p>
+          <h2 className="text-[20px] leading-7 font-semibold text-ink">
             {destination === "game" ? "Posted in the game room" : "Posted for everyone"}
           </h2>
         </div>
@@ -64,7 +64,7 @@ function ShareForm({ item, userId, onClose }: { item: FeedItem; userId: string; 
           <Link
             href={roomHref(room)}
             onClick={onClose}
-            className="glass-gain pressable flex min-h-12 flex-[2] items-center justify-center rounded-2xl font-mono text-[12px] font-bold tracking-[0.1em] text-gain uppercase"
+            className="glass-gain pressable flex min-h-12 flex-[2] items-center justify-center rounded-2xl text-[12px] font-bold text-gain"
           >
             Open the chat →
           </Link>
@@ -75,11 +75,11 @@ function ShareForm({ item, userId, onClose }: { item: FeedItem; userId: string; 
 
   return (
     <form onSubmit={share} className="flex flex-col gap-4">
-      <h2 className="font-display text-3xl leading-none font-bold tracking-wide text-ink-strong uppercase">Share this play</h2>
+      <h2 className="text-[20px] leading-7 font-semibold text-ink">Share this play</h2>
       <SharedPlayCard play={play} />
       <Segmented options={DESTINATIONS} value={destination} onChange={setDestination} label="Share to" />
       <label className="flex flex-col gap-1.5">
-        <span className="flex justify-between font-mono text-[11px] tracking-[0.1em] text-muted uppercase">
+        <span className="flex justify-between text-[12px] text-muted">
           <span>Add a comment (optional)</span>
           <span className="tabular-nums">
             {comment.length}/{SHARE_COMMENT_MAX}
@@ -90,7 +90,7 @@ function ShareForm({ item, userId, onClose }: { item: FeedItem; userId: string; 
           onChange={(e) => setComment(e.target.value)}
           maxLength={SHARE_COMMENT_MAX}
           placeholder="Called it."
-          className="glass-chip min-h-12 w-full rounded-2xl px-4 text-[16px] text-ink-strong outline-none placeholder:text-muted/70 focus-visible:ring-2 focus-visible:ring-gain/70"
+          className="glass-chip min-h-12 w-full rounded-2xl px-4 text-[16px] text-ink outline-none placeholder:text-muted/70 focus-visible:ring-2 focus-visible:ring-gain/70"
         />
       </label>
       {error && (
@@ -101,7 +101,7 @@ function ShareForm({ item, userId, onClose }: { item: FeedItem; userId: string; 
       <button
         type="submit"
         disabled={status === "sending"}
-        className="glass-gain pressable min-h-12 rounded-2xl font-mono text-[12px] font-bold tracking-[0.12em] text-gain uppercase disabled:opacity-50"
+        className="glass-gain pressable min-h-12 rounded-2xl text-[12px] font-bold text-gain disabled:opacity-50"
       >
         {status === "sending" ? "Sharing…" : "Share to chat"}
       </button>
@@ -122,7 +122,7 @@ export function SharePlayButton({ item }: { item: FeedItem }) {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="relative -mr-1 -mb-1 flex min-h-9 items-center gap-1.5 rounded-full px-3 font-mono text-[10px] tracking-[0.1em] text-muted uppercase transition-colors after:absolute after:-inset-y-1 after:inset-x-0 after:content-[''] hover:bg-white/5 hover:text-ink"
+        className="relative -mr-1 -mb-1 flex min-h-9 items-center gap-1.5 rounded-full px-3 text-[12px] text-muted transition-colors after:absolute after:-inset-y-1 after:inset-x-0 after:content-[''] hover:bg-white/5 hover:text-ink"
         aria-label={`Share ${item.playerName}'s play to chat`}
       >
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">

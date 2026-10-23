@@ -109,7 +109,7 @@ export function FeedList() {
         <button
           type="button"
           onClick={replay.start}
-          className="glass-gain pressable self-start rounded-xl px-3.5 py-2 font-mono text-[11px] font-bold tracking-[0.1em] text-gain uppercase"
+          className="glass-gain pressable self-start rounded-xl px-3.5 py-2 text-[12px] font-bold text-gain"
         >
           ▶ Replay week {data.week}
         </button>
@@ -117,10 +117,10 @@ export function FeedList() {
       {replay.active && (
         <ReplayControls replay={replay} total={chronological.length}>
           <div className="flex items-end justify-between px-1">
-            <span className="font-mono text-[11px] tracking-[0.1em] text-muted uppercase">
+            <span className="text-[12px] text-muted">
               Replaying week {data?.week} · starters
             </span>
-            <span className="font-display text-5xl leading-none font-bold text-ink-strong">
+            <span className="tabular text-[34px] leading-10 font-semibold text-ink">
               <AnimatedNumber value={replayTotal} />
             </span>
           </div>

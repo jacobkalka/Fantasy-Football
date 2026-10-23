@@ -18,7 +18,7 @@ import { SetupNeeded } from "./SetupNeeded";
 const INPUT =
   "glass-chip min-h-12 w-full rounded-2xl px-4 text-[16px] text-ink-strong placeholder:text-muted/70 outline-none focus-visible:ring-2 focus-visible:ring-gain/70";
 const PRIMARY =
-  "glass-gain pressable flex min-h-12 w-full items-center justify-center rounded-2xl px-4 font-mono text-[12px] font-bold tracking-[0.12em] text-gain uppercase disabled:opacity-50 disabled:hover:translate-y-0";
+  "glass-gain pressable flex min-h-12 w-full items-center justify-center rounded-2xl px-4 text-[12px] font-bold text-gain disabled:opacity-50 disabled:hover:translate-y-0";
 
 function ErrorText({ id, children }: { id: string; children: React.ReactNode }) {
   return (
@@ -110,7 +110,7 @@ export function SignInForm() {
             transition={{ type: "spring", stiffness: 380, damping: 32 }}
           >
             <div className="flex flex-col gap-1.5">
-              <h2 className="font-display text-3xl leading-none font-bold tracking-wide text-ink-strong uppercase">
+              <h2 className="text-[20px] leading-7 font-semibold text-ink">
                 Save your team. Join the chat.
               </h2>
               <p className="text-[15px] leading-relaxed text-ink-soft">
@@ -119,7 +119,7 @@ export function SignInForm() {
               </p>
             </div>
             <label className="flex flex-col gap-1.5">
-              <span className="font-mono text-[11px] tracking-[0.1em] text-muted uppercase">Email</span>
+              <span className="text-[12px] text-muted">Email</span>
               <input
                 type="email"
                 required
@@ -138,7 +138,7 @@ export function SignInForm() {
             </button>
             {googleOn && (
               <>
-                <div className="flex items-center gap-3 font-mono text-[10px] tracking-[0.12em] text-muted uppercase" aria-hidden="true">
+                <div className="flex items-center gap-3 text-[12px] text-muted" aria-hidden="true">
                   <span className="h-px flex-1 bg-line" />
                   or
                   <span className="h-px flex-1 bg-line" />
@@ -147,7 +147,7 @@ export function SignInForm() {
                   type="button"
                   onClick={onGoogle}
                   disabled={busy}
-                  className="glass-chip pressable flex min-h-12 w-full items-center justify-center gap-2.5 rounded-2xl px-4 text-[15px] font-semibold text-ink-strong disabled:opacity-50"
+                  className="glass-chip pressable flex min-h-12 w-full items-center justify-center gap-2.5 rounded-2xl px-4 text-[15px] font-semibold text-ink disabled:opacity-50"
                 >
                   <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
                     <path d="M21.6 12.2c0-.7-.1-1.4-.2-2H12v3.8h5.4a4.6 4.6 0 0 1-2 3v2.5h3.2c1.9-1.7 3-4.3 3-7.3Z" />
@@ -174,17 +174,17 @@ export function SignInForm() {
             transition={{ type: "spring", stiffness: 380, damping: 32 }}
           >
             <div className="flex flex-col gap-1.5">
-              <p className="font-mono text-[11px] tracking-[0.1em] text-gain uppercase">Check your email</p>
-              <h2 className="font-display text-3xl leading-none font-bold tracking-wide text-ink-strong uppercase">
+              <p className="text-[12px] text-gain">Check your email</p>
+              <h2 className="text-[20px] leading-7 font-semibold text-ink">
                 One tap away
               </h2>
               <p className="text-[15px] leading-relaxed text-ink-soft">
-                We sent a sign-in link to <strong className="text-ink-strong">{email}</strong>. Open it on this device. If
+                We sent a sign-in link to <strong className="text-ink">{email}</strong>. Open it on this device. If
                 the email shows a code, you can type it here instead.
               </p>
             </div>
             <label className="flex flex-col gap-1.5">
-              <span className="font-mono text-[11px] tracking-[0.1em] text-muted uppercase">Code from the email</span>
+              <span className="text-[12px] text-muted">Code from the email</span>
               <input
                 type="text"
                 inputMode="numeric"
@@ -194,7 +194,7 @@ export function SignInForm() {
                 placeholder="123456"
                 value={code}
                 onChange={(e) => setCode(e.target.value.replace(/\D/g, ""))}
-                className={`${INPUT} font-mono tracking-[0.3em]`}
+                className={`${INPUT}`}
                 aria-describedby={error ? "code-error" : undefined}
               />
             </label>

@@ -113,9 +113,7 @@ export function ChatRoom({ room, me, placeholder }: { room: RoomRef; me: string;
     <section aria-label="Chat messages" className="flex flex-col">
       <div className="flex items-center justify-between px-1 pb-1">
         <span
-          className={`inline-flex items-center gap-1.5 font-mono text-[10px] tracking-[0.1em] uppercase ${
-            state.live === "live" ? "text-gain" : state.live === "offline" ? "text-alert" : "text-muted"
-          }`}
+          className={`inline-flex items-center gap-1.5 text-[12px] ${ state.live === "live" ? "text-gain" : state.live === "offline" ? "text-alert" : "text-muted" }`}
           aria-live="polite"
         >
           {state.live === "live" && <LiveDot />}
@@ -126,7 +124,7 @@ export function ChatRoom({ room, me, placeholder }: { room: RoomRef; me: string;
             type="button"
             onClick={loadOlder}
             disabled={state.loadingOlder}
-            className="min-h-11 rounded-xl px-3 font-mono text-[10.5px] tracking-[0.08em] text-sky uppercase hover:bg-white/5 disabled:opacity-50"
+            className="min-h-11 rounded-xl px-3 text-[12px] text-sky hover:bg-white/5 disabled:opacity-50"
           >
             {state.loadingOlder ? "Loading…" : "Load earlier"}
           </button>
@@ -147,7 +145,7 @@ export function ChatRoom({ room, me, placeholder }: { room: RoomRef; me: string;
           <span className="text-4xl" aria-hidden="true">
             🏈
           </span>
-          <p className="font-display text-2xl font-bold tracking-wide text-ink-strong uppercase">Quiet in here</p>
+          <p className="text-[18px] leading-6 font-semibold text-ink">Quiet in here</p>
           <p className="text-[14px] text-ink-soft">Be the first to say something. Messages appear for everyone instantly.</p>
         </div>
       )}
@@ -157,7 +155,7 @@ export function ChatRoom({ room, me, placeholder }: { room: RoomRef; me: string;
         {timeline.map((day) => (
           <section key={day.key} aria-label={day.label} className="relative">
             <div className="sticky top-[calc(max(env(safe-area-inset-top),0.75rem)+3.75rem)] z-10 flex justify-center py-2">
-              <span className="glass-chip rounded-full px-3 py-1 font-mono text-[10px] tracking-[0.12em] text-muted uppercase">
+              <span className="glass-chip rounded-full px-3 py-1 text-[12px] text-muted">
                 {day.label}
               </span>
             </div>
@@ -204,9 +202,7 @@ export function ChatRoom({ room, me, placeholder }: { room: RoomRef; me: string;
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: 12, scale: 0.9 }}
                   transition={{ type: "spring", stiffness: 460, damping: 30 }}
-                  className={`pointer-events-auto flex min-h-11 items-center gap-2 self-center rounded-full px-4 font-mono text-[11px] font-bold tracking-[0.08em] uppercase ${
-                    unseen > 0 ? "glass-gain text-gain" : "glass-bar text-ink-soft"
-                  }`}
+                  className={`pointer-events-auto flex min-h-11 items-center gap-2 self-center rounded-full px-4 text-[12px] font-bold ${ unseen > 0 ? "glass-gain text-gain" : "glass-bar text-ink-soft" }`}
                 >
                   {unseen > 0 ? `${unseen} new ${unseen === 1 ? "message" : "messages"}` : "Latest"}
                   <span aria-hidden="true">↓</span>

@@ -30,7 +30,7 @@ function GameRoomCard({ game }: { game: Game }) {
         <TeamLogo abbr={game.home.team.abbr} logo={game.home.team.logo} color={game.home.team.color} size={34} />
       </span>
       <span className="flex min-w-0 flex-1 flex-col">
-        <span className="font-display text-xl leading-none font-bold tracking-wide text-ink-strong">
+        <span className="text-xl leading-none font-bold text-ink">
           {game.away.team.abbr} @ {game.home.team.abbr}
           {game.state !== "pre" && (
             <span className="ml-2 text-muted">
@@ -38,12 +38,12 @@ function GameRoomCard({ game }: { game: Game }) {
             </span>
           )}
         </span>
-        <span className={`mt-1 flex items-center gap-1.5 font-mono text-[10.5px] ${live ? "text-gain" : "text-muted"}`}>
+        <span className={`mt-1 flex items-center gap-1.5 text-[12px] ${live ? "text-gain" : "text-muted"}`}>
           {live && <LiveDot />}
           {status}
         </span>
       </span>
-      <span className="font-mono text-[11px] text-muted" aria-hidden="true">
+      <span className="text-[12px] text-muted" aria-hidden="true">
         Chat →
       </span>
     </Link>
@@ -119,8 +119,8 @@ export function LeagueRooms({ userId }: { userId: string }) {
             href={roomHref({ type: "league", leagueId: league.leagueId })}
             className="glass pressable flex min-h-16 items-center justify-between gap-3 px-4 py-3"
           >
-            <span className="font-display text-xl font-bold tracking-wide text-ink-strong">{league.name}</span>
-            <span className="font-mono text-[11px] text-muted">Private · Chat →</span>
+            <span className="text-xl font-bold text-ink">{league.name}</span>
+            <span className="text-[12px] text-muted">Private · Chat →</span>
           </Link>
         </li>
       ))}

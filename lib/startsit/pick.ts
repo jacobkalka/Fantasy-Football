@@ -40,3 +40,11 @@ export function togglePick(current: string[], id: string): string[] {
   if (current.includes(id)) return current.filter((x) => x !== id);
   return current.length >= MAX_PICK ? current : [...current, id];
 }
+
+/**
+ * Ids from the URL for any players, on the roster or not (Start/Sit can compare an
+ * outside player against yours), unique, at most MAX_PICK.
+ */
+export function idsFromUrl(value: string | null): string[] {
+  return [...new Set((value ?? "").split(",").map((s) => s.trim()))].filter((id) => /^-?\d{1,12}$/.test(id)).slice(0, MAX_PICK);
+}

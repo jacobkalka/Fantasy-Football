@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import type { RosterPlayer, Slot } from "@/lib/roster/lineup";
 import type { Position } from "@/lib/providers/types";
-import { defaultPick, pickFromUrl, togglePick } from "./pick";
+import { defaultPick, idsFromUrl, pickFromUrl, togglePick } from "./pick";
 
 const p = (playerId: string, position: Position, slot: Slot): RosterPlayer => ({
   playerId,
@@ -41,5 +41,12 @@ describe("pickFromUrl / togglePick", () => {
     expect(togglePick(["1"], "2")).toEqual(["1", "2"]);
     expect(togglePick(["1", "2"], "1")).toEqual(["2"]);
     expect(togglePick(["1", "2", "3"], "5")).toEqual(["1", "2", "3"]);
+  });
+});
+
+describe("idsFromUrl", () => {
+  it("keeps any player ids, unique, at most three, and drops junk", () => {
+    expect(idsFromUrl("3915416, 4362628,3915416,abc,,-16012,99")).toEqual(["3915416", "4362628", "-16012"]);
+    expect(idsFromUrl(null)).toEqual([]);
   });
 });

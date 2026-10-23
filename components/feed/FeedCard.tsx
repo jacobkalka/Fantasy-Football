@@ -44,23 +44,23 @@ export function FeedCard({
         <div className="flex min-w-0 flex-1 flex-col gap-1">
           <div className="flex items-center gap-2">
             {injury ? (
-              <span className="rounded-md bg-alert/15 px-1.5 py-0.5 font-mono text-[10px] font-bold tracking-[0.08em] text-alert ring-1 ring-alert/40">
+              <span className="rounded-md bg-alert/15 px-1.5 py-0.5 text-[12px] font-bold text-alert ring-1 ring-alert/40">
                 INJURY
               </span>
             ) : (
               <PointsBadge points={item.points} />
             )}
-            <span className="truncate text-[15px] font-semibold text-ink-strong">{item.playerName}</span>
-            <span className="ml-auto shrink-0 font-mono text-[11px] text-muted">
+            <span className="truncate text-[15px] font-semibold text-ink">{item.playerName}</span>
+            <span className="ml-auto shrink-0 text-[12px] text-muted">
               {periodLabel(item.period)} {item.clock}
             </span>
           </div>
           {item.isTouchdown && (
-            <span className="font-mono text-[10px] font-bold tracking-[0.16em] text-gain uppercase">Touchdown</span>
+            <span className="text-[12px] font-bold text-gain">Touchdown</span>
           )}
           <p className="text-[14px] leading-snug text-ink-soft">{item.text}</p>
           {!injury && item.parts.length > 0 && (
-            <p className="font-mono text-[11px] text-muted">{formatBreakdown(item.parts)}</p>
+            <p className="text-[12px] text-muted">{formatBreakdown(item.parts)}</p>
           )}
           {/* Only shows when chat is available (database connected and signed in). */}
           <SharePlayButton item={item} />

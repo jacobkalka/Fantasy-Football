@@ -34,8 +34,8 @@ function GameTitle({ gameId }: { gameId: string }) {
   if (!game) {
     return (
       <div className="min-w-0">
-        <p className="font-mono text-[10px] tracking-[0.12em] text-sky uppercase">Game room</p>
-        <h1 className="font-display text-2xl leading-none font-bold tracking-wide text-ink-strong uppercase">Game chat</h1>
+        <p className="text-[12px] text-sky">Game room</p>
+        <h1 className="text-[20px] leading-7 font-semibold text-ink">Game chat</h1>
       </div>
     );
   }
@@ -47,7 +47,7 @@ function GameTitle({ gameId }: { gameId: string }) {
         <TeamLogo abbr={game.home.team.abbr} logo={game.home.team.logo} color={game.home.team.color} size={30} />
       </span>
       <div className="min-w-0">
-        <h1 className="font-display text-2xl leading-none font-bold tracking-wide text-ink-strong uppercase">
+        <h1 className="text-[20px] leading-7 font-semibold text-ink">
           {game.away.team.abbr} @ {game.home.team.abbr}
           {game.state !== "pre" && (
             <span className="ml-2 text-ink-soft">
@@ -55,7 +55,7 @@ function GameTitle({ gameId }: { gameId: string }) {
             </span>
           )}
         </h1>
-        <p className={`mt-0.5 flex items-center gap-1.5 font-mono text-[10.5px] ${live ? "text-gain" : "text-muted"}`}>
+        <p className={`mt-0.5 flex items-center gap-1.5 text-[12px] ${live ? "text-gain" : "text-muted"}`}>
           {live && <LiveDot />}
           {game.state === "pre" ? "Pregame chat" : game.statusText}
         </p>
@@ -68,8 +68,8 @@ function RoomTitle({ room }: { room: RoomRef }) {
   if (room.type === "game") return <GameTitle gameId={room.gameId} />;
   return (
     <div className="min-w-0">
-      <p className="font-mono text-[10px] tracking-[0.12em] text-sky uppercase">{room.type === "league" ? "Private" : "Everyone"}</p>
-      <h1 className="font-display text-2xl leading-none font-bold tracking-wide text-ink-strong uppercase">
+      <p className="text-[12px] text-sky">{room.type === "league" ? "Private" : "Everyone"}</p>
+      <h1 className="text-[20px] leading-7 font-semibold text-ink">
         {room.type === "league" ? "League chat" : "Global chat"}
       </h1>
     </div>

@@ -173,7 +173,7 @@ body {
 }
 @utility glass-gain {
   background: #ffffff;
-  color: #000000;
+  color: #000000 !important;
 }
 
 /* Something you can press: a quick, small press. No hover lift (it moves the layout under the cursor). */

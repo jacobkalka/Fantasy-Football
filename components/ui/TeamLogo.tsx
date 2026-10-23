@@ -21,7 +21,7 @@ export function TeamLogo({
   if (!logo || failed) {
     return (
       <span
-        className={`inline-flex shrink-0 items-center justify-center rounded-full font-display font-bold text-ink-strong ${className}`}
+        className={`inline-flex shrink-0 items-center justify-center rounded-full font-bold text-ink ${className}`}
         style={{ width: size, height: size, fontSize: size * 0.36, background: color ?? "#333" }}
         aria-label={abbr}
         role="img"
@@ -36,7 +36,7 @@ export function TeamLogo({
       alt={abbr}
       width={size}
       height={size}
-      className={`shrink-0 object-contain drop-shadow-[0_4px_10px_rgb(0_0_0/0.6)] ${className}`}
+      className={`shrink-0 object-contain ${className}`}
       onError={() => setFailed(true)}
     />
   );

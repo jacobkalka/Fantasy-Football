@@ -61,7 +61,7 @@ export function FloatingNotice({
                   notice.action?.run();
                   onDismiss();
                 }}
-                className="min-h-11 shrink-0 rounded-xl px-3 font-mono text-[11px] font-bold tracking-[0.08em] text-gain uppercase hover:bg-white/5"
+                className="min-h-11 shrink-0 rounded-xl px-3 text-[12px] font-bold text-gain hover:bg-white/5"
               >
                 {notice.action.label}
               </button>
