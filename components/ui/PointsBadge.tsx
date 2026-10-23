@@ -1,6 +1,6 @@
 import { formatPoints, roundPoints } from "@/lib/scoring";
 
-/** "+9.4" on lime glass, "−2.0" outlined in red, "0.0" muted. The sign always carries the meaning. */
+/** "+9.4" green, "−2.0" red, "0.0" grey: a pale tint with the sign always carrying the meaning. */
 export function PointsBadge({
   points,
   size = "md",
@@ -12,20 +12,14 @@ export function PointsBadge({
 }) {
   const rounded = roundPoints(points, 1);
   const sizes = {
-    sm: "px-1.5 text-sm",
-    md: "px-2 py-0.5 text-lg",
-    lg: "px-3 py-1 text-3xl",
+    sm: "h-[22px] px-1.5 text-[12px]",
+    md: "h-7 px-2 text-[14px]",
+    lg: "h-9 px-3 text-[18px]",
   }[size];
   const tone =
-    rounded > 0
-      ? "glass-gain text-gain"
-      : rounded < 0
-        ? "border border-loss-line/70 bg-loss/10 text-loss"
-        : "glass-chip text-muted";
+    rounded > 0 ? "bg-positive-soft text-positive" : rounded < 0 ? "bg-negative-soft text-negative" : "bg-well text-muted";
   return (
-    <span
-      className={`inline-flex items-center rounded-lg font-display leading-tight font-bold ${sizes} ${tone} ${className}`}
-    >
+    <span className={`tabular inline-flex items-center rounded-full font-semibold ${sizes} ${tone} ${className}`}>
       {formatPoints(points)}
     </span>
   );

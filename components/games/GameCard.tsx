@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { ViewTransition } from "react";
 import { AnimatedNumber } from "@/components/motion/AnimatedNumber";
 import { TiltCard } from "@/components/motion/TiltCard";
 import { LiveDot } from "@/components/ui/bits";
@@ -73,12 +72,12 @@ export function GameCard({ game }: { game: Game }) {
   );
 
   return (
-    <Link href={`/games/${game.id}`} transitionTypes={["nav-forward"]} className="block">
+    <Link href={`/games/${game.id}`} className="block">
       <TiltCard
         className="glass flex flex-col gap-3 p-4"
         style={{ "--glow": live ? `${glowTeam.color}cc` : "transparent" } as React.CSSProperties}
       >
-        <ViewTransition name={`game-${game.id}`} share="morph" default="none">
+        <>
           <div className="flex flex-col gap-2.5">
             <div className="flex items-center justify-between font-mono text-[11px] tracking-[0.06em] uppercase">
               {status}
@@ -93,7 +92,7 @@ export function GameCard({ game }: { game: Game }) {
             <SideRow side={game.away} hasBall={live && possession === game.away.team.id} leading={awayLeads} showScore={showScore} />
             <SideRow side={game.home} hasBall={live && possession === game.home.team.id} leading={homeLeads} showScore={showScore} />
           </div>
-        </ViewTransition>
+        </>
         {live && (game.situation?.downDistance || redZone) && (
           <div className="flex items-center gap-2 border-t border-line-soft pt-2.5 font-mono text-[11px] text-ink-soft">
             {redZone && (

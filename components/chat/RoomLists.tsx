@@ -22,7 +22,6 @@ function GameRoomCard({ game }: { game: Game }) {
   return (
     <Link
       href={roomHref({ type: "game", gameId: game.id })}
-      transitionTypes={["nav-forward"]}
       className="glass pressable flex min-h-16 items-center gap-3 px-4 py-3"
       style={{ "--glow": live ? "rgb(200 255 46 / 0.35)" : "transparent" } as React.CSSProperties}
     >
@@ -118,7 +117,6 @@ export function LeagueRooms({ userId }: { userId: string }) {
         <li key={league.leagueId}>
           <Link
             href={roomHref({ type: "league", leagueId: league.leagueId })}
-            transitionTypes={["nav-forward"]}
             className="glass pressable flex min-h-16 items-center justify-between gap-3 px-4 py-3"
           >
             <span className="font-display text-xl font-bold tracking-wide text-ink-strong">{league.name}</span>

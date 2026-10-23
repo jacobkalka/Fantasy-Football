@@ -134,6 +134,8 @@ export interface PlayerRow {
  * what it describes lets the database refuse duplicates (`on conflict do nothing`).
  */
 export function stableUuid(key: string): string {
+  // The "the-feed:" prefix is the app's old name; it must never change, or every
+  // event would get a new id and could be stored a second time.
   const bytes = createHash("sha1").update(`the-feed:${key}`).digest().subarray(0, 16);
   bytes[6] = (bytes[6] & 0x0f) | 0x50; // version 5
   bytes[8] = (bytes[8] & 0x3f) | 0x80; // RFC 4122 variant

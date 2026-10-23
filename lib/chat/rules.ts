@@ -12,14 +12,15 @@ export const COMMUNITY_RULES = [
   { title: "Report it, block it", body: "Tap ⋯ on any message to report it or block the sender. Moderators review every report." },
 ] as const;
 
-const KEY = "the-feed:chat-rules:v1";
+const KEY = "fantasylab:chat-rules:v1";
+const LEGACY_KEY = "the-feed:chat-rules:v1";
 const listeners = new Set<() => void>();
 let accepted: boolean | null = null;
 
 function read(): boolean {
   if (accepted !== null) return accepted;
   try {
-    accepted = window.localStorage.getItem(KEY) === "accepted";
+    accepted = (window.localStorage.getItem(KEY) ?? window.localStorage.getItem(LEGACY_KEY)) === "accepted";
   } catch {
     accepted = false;
   }

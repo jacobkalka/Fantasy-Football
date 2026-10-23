@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "motion/react";
-import { ViewTransition } from "react";
 import { Football } from "@/components/games/Football";
 import { AnimatedNumber } from "@/components/motion/AnimatedNumber";
 import { TiltCard } from "@/components/motion/TiltCard";
@@ -75,7 +74,7 @@ export function Scorebug({ game, state }: { game: Game; state: ScoreState }) {
   const glow = state.isRedZone ? "#ff4d5e" : state.live ? visibleTeamColor(glowTeam) : "transparent";
   return (
     <TiltCard className="glass p-5" max={6} style={{ "--glow": `${glow}cc` } as React.CSSProperties}>
-      <ViewTransition name={`game-${game.id}`} share="morph" default="none">
+      <>
         <div className="grid grid-cols-[1fr_auto_1fr] items-start gap-2">
           <Side
             side={game.away}
@@ -127,7 +126,7 @@ export function Scorebug({ game, state }: { game: Game; state: ScoreState }) {
             align="right"
           />
         </div>
-      </ViewTransition>
+      </>
       {(game.venue || game.broadcast) && (
         <p className="mt-4 border-t border-line-soft pt-3 text-center font-mono text-[10px] tracking-[0.06em] text-muted uppercase">
           {[game.venue?.name, game.venue?.city, game.broadcast, game.weather?.temperature !== undefined && !game.venue?.indoor ? `${game.weather.temperature}°` : null]

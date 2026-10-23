@@ -1,63 +1,71 @@
 import type { Metadata, Viewport } from "next";
-import { Barlow_Condensed, Inter, JetBrains_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import { Suspense } from "react";
+import { RosterSync } from "@/components/auth/RosterSync";
+import { HydrationMarker } from "@/components/motion/hydration";
 import { MotionProvider } from "@/components/motion/MotionProvider";
-import { AppHeader } from "@/components/shell/AppHeader";
-import { TabBar, TabBarLinks } from "@/components/shell/TabBar";
-import { Ambient } from "@/components/ui/Ambient";
+import { BottomBar, BottomBarFrame, BottomBarLinks } from "@/components/shell/BottomBar";
+import { Sidebar, SidebarFrame, SidebarNav } from "@/components/shell/Sidebar";
+import { TopBar } from "@/components/shell/TopBar";
 import { APP_DESCRIPTION, APP_NAME } from "@/lib/config";
 import "./globals.css";
 
+// One typeface (DECISIONS.md, "Design"): Inter, with tabular figures for numbers.
 const inter = Inter({ variable: "--font-inter", subsets: ["latin"] });
-
-const barlow = Barlow_Condensed({
-  variable: "--font-barlow",
-  subsets: ["latin"],
-  weight: ["500", "600", "700"],
-});
-
-const jetbrains = JetBrains_Mono({
-  variable: "--font-jetbrains",
-  subsets: ["latin"],
-  weight: ["400", "500", "700"],
-});
 
 export const metadata: Metadata = {
   title: { default: APP_NAME, template: `%s · ${APP_NAME}` },
   description: APP_DESCRIPTION,
   applicationName: APP_NAME,
   appleWebApp: { capable: true, title: APP_NAME, statusBarStyle: "black-translucent" },
+  formatDetection: { telephone: false },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#04060a",
+  themeColor: "#000000",
+  colorScheme: "dark",
   viewportFit: "cover",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html
-      lang="en"
-      className={`${inter.variable} ${barlow.variable} ${jetbrains.variable} h-full antialiased`}
-    >
+    <html lang="en" className={`${inter.variable} h-full antialiased`}>
       <body className="min-h-full">
         <MotionProvider>
-          <Ambient />
-          <div className="mx-auto flex min-h-dvh w-full max-w-xl flex-col">
-            <AppHeader />
-            <main className="flex-1 px-3 pt-1 pb-32">{children}</main>
-          </div>
-          <nav
-            aria-label="Main"
-            className="fixed inset-x-0 bottom-0 z-40 px-3 pb-[max(env(safe-area-inset-bottom),0.75rem)]"
+          <HydrationMarker />
+          <a
+            href="#main"
+            className="sr-only z-50 rounded-full bg-ink px-4 py-2 text-black focus:not-sr-only focus:fixed focus:top-3 focus:left-3"
           >
-            <div className="mx-auto max-w-md">
-              {/* The tab bar reads the URL; Suspense keeps pages with dynamic URLs fast to load. */}
-              <Suspense fallback={<TabBarLinks pathname={null} />}>
-                <TabBar />
-              </Suspense>
+            Skip to content
+          </a>
+          <div className="lg:flex">
+            <SidebarFrame
+              nav={
+                // The sidebar reads the URL; Suspense keeps pages with dynamic URLs fast to load.
+                <Suspense fallback={<SidebarNav pathname={null} />}>
+                  <Sidebar />
+                </Suspense>
+              }
+              footer={null}
+            />
+            <div className="flex min-h-dvh min-w-0 flex-1 flex-col">
+              <TopBar />
+              <main
+                id="main"
+                className="mx-auto w-full max-w-[1120px] flex-1 px-4 pb-[calc(var(--tabbar-height)+max(10px,var(--safe-bottom))+32px)] sm:px-6 lg:px-10 lg:pb-16"
+              >
+                {children}
+              </main>
             </div>
-          </nav>
+          </div>
+          <BottomBarFrame>
+            <Suspense fallback={<BottomBarLinks pathname={null} />}>
+              <BottomBar />
+            </Suspense>
+          </BottomBarFrame>
+          {/* Keeps your team saved to your account while you're signed in (mounted once). */}
+          <RosterSync />
         </MotionProvider>
       </body>
     </html>

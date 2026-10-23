@@ -28,7 +28,9 @@ import { requireSupabase } from "./client";
 import { friendlyDbError, isNetworkError } from "./db-errors";
 import { createAccountRoster, fetchAccountRoster, RosterGoneError, saveAccountRoster } from "./rosters";
 
-const MEMORY_KEY = "the-feed:roster-sync:v1";
+const MEMORY_KEY = "fantasylab:roster-sync:v1";
+/** Where this was saved before the app was renamed; read once if the new key is empty. */
+const LEGACY_MEMORY_KEY = "the-feed:roster-sync:v1";
 /** Wait this long after the last edit before saving. */
 const DEBOUNCE_MS = 1_200;
 
@@ -62,7 +64,7 @@ function setState(patch: Partial<RosterSyncState>) {
 
 function readMemory(): SyncMemory | null {
   try {
-    const raw = window.localStorage.getItem(MEMORY_KEY);
+    const raw = window.localStorage.getItem(MEMORY_KEY) ?? window.localStorage.getItem(LEGACY_MEMORY_KEY);
     const parsed = raw ? (JSON.parse(raw) as SyncMemory) : null;
     return parsed && typeof parsed.userId === "string" && typeof parsed.signature === "string" ? parsed : null;
   } catch {

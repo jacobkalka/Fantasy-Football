@@ -4,7 +4,7 @@ import { LiveDot } from "@/components/ui/bits";
 import { agoLabel } from "@/lib/format";
 import { useNow } from "@/lib/hooks/useNow";
 
-/** "● Updated 6s ago", turning amber with "Data delayed" when the feed stalls. */
+/** "● Live · updated 6s ago", turning amber with "Data delayed" when the feed stalls. */
 export function UpdatedAgo({
   fetchedAt,
   delayed,
@@ -19,13 +19,13 @@ export function UpdatedAgo({
   const stale = delayed || (live && age > 60_000);
   return (
     <span
-      className={`inline-flex items-center gap-1.5 font-mono text-[10px] tracking-[0.08em] uppercase ${
-        stale ? "text-alert" : live ? "text-gain" : "text-muted"
+      className={`tabular inline-flex items-center gap-1.5 text-[12px] ${
+        stale ? "text-warning" : live ? "text-positive" : "text-faint"
       }`}
       aria-live="polite"
     >
-      {live && <LiveDot />}
-      {stale ? "Data delayed · " : "Updated "}
+      {live && !stale && <LiveDot />}
+      {stale ? "Data delayed · " : live ? "Live · updated " : "Updated "}
       {now && fetchedAt ? agoLabel(age) : "just now"}
     </span>
   );

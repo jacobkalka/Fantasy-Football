@@ -165,7 +165,6 @@ function SyncCard() {
       <div className="flex flex-wrap gap-2">
         <Link
           href="/team/edit"
-          transitionTypes={["nav-forward"]}
           className="glass-chip pressable flex min-h-11 items-center rounded-xl px-4 font-mono text-[11px] font-bold tracking-[0.1em] text-ink-strong uppercase"
         >
           Edit team

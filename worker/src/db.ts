@@ -67,7 +67,7 @@ export function connect(databaseUrl: string): Db {
     connect_timeout: 15,
     prepare: false, // works with Supabase's session AND transaction poolers
     onnotice: () => {},
-    connection: { application_name: "the-feed-worker" },
+    connection: { application_name: "fantasylab-worker" },
     ...sslSetting(databaseUrl),
   });
   const db = wrap(sql);

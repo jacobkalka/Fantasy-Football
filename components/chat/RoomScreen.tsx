@@ -15,7 +15,6 @@ function BackLink({ room }: { room: RoomRef }) {
   return (
     <Link
       href={href}
-      transitionTypes={["nav-back"]}
       className="glass-chip pressable flex size-11 shrink-0 items-center justify-center rounded-full text-ink"
       aria-label="All chat rooms"
     >

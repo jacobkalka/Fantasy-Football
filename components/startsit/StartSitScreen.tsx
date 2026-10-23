@@ -66,7 +66,6 @@ function EmptyInvite() {
       </div>
       <Link
         href="/team/edit"
-        transitionTypes={["nav-forward"]}
         className="glass-gain pressable rounded-2xl px-6 py-3 font-mono text-[12px] font-bold tracking-[0.12em] text-gain uppercase"
       >
         Add players

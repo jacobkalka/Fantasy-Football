@@ -1,25 +1,71 @@
 "use client";
 
-import { motion } from "motion/react";
-import { useId } from "react";
+import { useLayoutEffect, useRef } from "react";
+import { gsap, MOTION } from "@/lib/motion/gsap";
 
-/** A glass pill switch (e.g. Standard · Half · PPR). The highlight slides between options. */
+/**
+ * A segmented switch (e.g. Standard · Half · PPR). The selected option sits on a raised
+ * pill that slides to it. As wide as its options; full width only when asked.
+ */
 export function Segmented<T extends string>({
   options,
   value,
   onChange,
   label,
   className = "",
+  size = "md",
 }: {
   options: readonly { value: T; label: string }[];
   value: T;
   onChange: (value: T) => void;
   label: string;
   className?: string;
+  size?: "sm" | "md";
 }) {
-  const id = useId();
+  const track = useRef<HTMLDivElement>(null);
+  const thumb = useRef<HTMLSpanElement>(null);
+  const placed = useRef(false);
+
+  useLayoutEffect(() => {
+    const root = track.current;
+    const pill = thumb.current;
+    const target = root?.querySelector<HTMLElement>('[aria-checked="true"]');
+    if (!root || !pill || !target) return;
+    const move = { x: target.offsetLeft, width: target.offsetWidth };
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!placed.current || reduce) {
+      gsap.set(pill, move);
+      placed.current = true;
+    } else {
+      gsap.to(pill, { ...move, duration: MOTION.base, ease: "power3.out" });
+    }
+  }, [value, options]);
+
+  // Keep the pill under its option when the layout width changes.
+  useLayoutEffect(() => {
+    const root = track.current;
+    if (!root) return;
+    const observer = new ResizeObserver(() => {
+      const target = root.querySelector<HTMLElement>('[aria-checked="true"]');
+      if (target && thumb.current) gsap.set(thumb.current, { x: target.offsetLeft, width: target.offsetWidth });
+    });
+    observer.observe(root);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <div role="radiogroup" aria-label={label} className={`glass-chip flex gap-1 rounded-2xl p-1 ${className}`}>
+    <div
+      ref={track}
+      role="radiogroup"
+      aria-label={label}
+      className={`relative inline-flex rounded-full bg-surface p-1 ${className}`}
+    >
+      <span
+        ref={thumb}
+        className="absolute top-1 bottom-1 left-0 rounded-full bg-well"
+        style={{ width: 0 }}
+        aria-hidden="true"
+      />
       {options.map((option) => {
         const active = option.value === value;
         return (
@@ -29,19 +75,11 @@ export function Segmented<T extends string>({
             role="radio"
             aria-checked={active}
             onClick={() => onChange(option.value)}
-            className={`relative flex-1 rounded-xl px-2.5 py-2 font-mono text-[11px] tracking-[0.06em] whitespace-nowrap uppercase transition-colors ${
-              active ? "text-gain" : "text-muted hover:text-ink"
-            }`}
+            className={`relative flex-1 rounded-full whitespace-nowrap transition-colors ${
+              size === "sm" ? "h-7 px-3 text-[13px]" : "h-8 px-3.5 text-[14px]"
+            } ${active ? "font-medium text-ink" : "text-muted hover:text-ink"}`}
           >
-            {active && (
-              <motion.span
-                layoutId={`seg-${id}`}
-                className="glass-gain absolute inset-0 rounded-xl"
-                transition={{ type: "spring", stiffness: 460, damping: 34 }}
-                aria-hidden="true"
-              />
-            )}
-            <span className="relative">{option.label}</span>
+            {option.label}
           </button>
         );
       })}

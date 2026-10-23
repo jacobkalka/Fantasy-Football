@@ -1,14 +1,18 @@
 "use client";
 
-import { AnimatePresence, motion } from "motion/react";
-import { SectionLabel } from "@/components/ui/bits";
+import { useState } from "react";
+import { Button } from "@/components/ui/Button";
+import { Card } from "@/components/ui/Card";
+import { Icon } from "@/components/ui/Icon";
 import { PlayerAvatar } from "@/components/ui/PlayerAvatar";
 import { Segmented } from "@/components/ui/Segmented";
+import { SkeletonRows } from "@/components/ui/States";
+import { visibleTeamColor } from "@/lib/color";
 import { useTeams } from "@/lib/hooks/useTeams";
 import { canFill, MAX_ROSTER, sortLineup, type Slot } from "@/lib/roster/lineup";
+import { encodeTeam } from "@/lib/roster/share";
 import { rosterActions, useRoster } from "@/lib/roster/store";
 import type { ScoringFormat } from "@/lib/scoring";
-import { visibleTeamColor } from "@/lib/color";
 
 const FORMATS = [
   { value: "standard", label: "Standard" },
@@ -33,91 +37,125 @@ export function RosterEditor() {
   const { roster, ready } = useRoster();
   const teams = useTeams();
   const players = sortLineup(roster.players);
+  const [copied, setCopied] = useState<"copied" | "failed" | null>(null);
+
+  const copyLink = async () => {
+    const url = `${window.location.origin}/team/import?t=${encodeTeam(roster)}`;
+    try {
+      if (navigator.share && window.matchMedia("(pointer: coarse)").matches) {
+        await navigator.share({ title: `${roster.name || "My Team"} on FantasyLab`, url });
+        return;
+      }
+      await navigator.clipboard.writeText(url);
+      setCopied("copied");
+    } catch {
+      setCopied("failed");
+    }
+    window.setTimeout(() => setCopied(null), 2500);
+  };
 
   return (
     <section className="flex flex-col gap-4" aria-label="Your roster">
-      <div className="glass flex flex-col gap-3 p-4">
+      <Card className="flex flex-col gap-4">
         <label className="flex flex-col gap-1.5">
-          <span className="font-mono text-[11px] tracking-[0.1em] text-muted uppercase">Team name</span>
+          <span className="text-[13px] text-muted">Team name</span>
           <input
-            defaultValue={roster.name}
-            key={ready ? "ready" : "loading"}
-            onBlur={(e) => rosterActions.rename(e.target.value)}
+            // Saved as you type, so nothing is lost if you leave mid-edit.
+            value={ready ? roster.name : ""}
+            onChange={(e) => rosterActions.rename(e.target.value)}
+            placeholder="My Team"
             maxLength={40}
-            className="rounded-xl bg-white/5 px-3 py-2.5 text-[16px] text-ink-strong ring-1 ring-line focus:ring-2 focus:ring-gain/60 focus:outline-none"
+            disabled={!ready}
+            className="h-11 rounded-xl bg-raised px-3.5 text-[16px] text-ink placeholder:text-faint focus:ring-2 focus:ring-accent focus:outline-none"
           />
         </label>
         <div className="flex flex-col gap-1.5">
-          <span className="font-mono text-[11px] tracking-[0.1em] text-muted uppercase">Scoring</span>
+          <span className="text-[13px] text-muted">League scoring</span>
           <Segmented options={FORMATS} value={roster.format} onChange={rosterActions.setFormat} label="Scoring format" />
         </div>
-      </div>
+      </Card>
 
-      <div>
-        <SectionLabel action={<span>{roster.players.length}/{MAX_ROSTER}</span>}>Roster</SectionLabel>
-        {players.length === 0 ? (
-          <p className="glass px-4 py-6 text-center text-sm text-ink-soft">
-            No players yet. Search below and tap <span className="text-gain">+</span> to add them.
+      <Card>
+        <div className="mb-2 flex items-center justify-between gap-3">
+          <h2 className="text-[16px] leading-6 font-semibold">Roster</h2>
+          <span className="tabular text-[13px] text-muted">
+            {roster.players.length} of {MAX_ROSTER}
+          </span>
+        </div>
+        {!ready ? (
+          <SkeletonRows rows={5} height={56} />
+        ) : players.length === 0 ? (
+          <p className="rounded-xl bg-raised px-4 py-5 text-[14px] text-muted">
+            No players yet. Search below and tap + to add them.
           </p>
         ) : (
-          <ul className="glass divide-y divide-line-soft overflow-hidden">
-            <AnimatePresence initial={false}>
-              {players.map((player) => {
-                const team = player.teamId ? teams[player.teamId] : undefined;
-                return (
-                  <motion.li
-                    key={player.playerId}
-                    layout
-                    initial={{ opacity: 0, x: -12 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: 24, transition: { duration: 0.18 } }}
-                    className="flex items-center gap-3 px-4 py-2.5"
-                  >
-                    <label className="relative">
-                      <span className="sr-only">Lineup slot for {player.name}</span>
-                      <select
-                        value={player.slot}
-                        onChange={(e) => rosterActions.move(player.playerId, e.target.value as Slot)}
-                        className={`w-16 appearance-none rounded-lg py-1.5 text-center font-mono text-[11px] font-bold tracking-wide ${
-                          player.slot === "BENCH" ? "glass-chip text-muted" : "glass-gain text-gain"
-                        }`}
-                      >
-                        {ALL_SLOTS.filter((slot) => canFill(slot, player.position)).map((slot) => (
-                          <option key={slot} value={slot} className="bg-raised text-ink">
-                            {SLOT_LABEL[slot]}
-                          </option>
-                        ))}
-                      </select>
-                    </label>
-                    <PlayerAvatar
-                      name={player.name}
-                      headshot={player.position === "DST" ? team?.logo : player.headshot}
-                      teamColor={visibleTeamColor(team)}
-                      size={38}
-                    />
-                    <div className="min-w-0 flex-1">
-                      <p className="truncate text-[15px] font-semibold text-ink-strong">{player.name}</p>
-                      <p className="font-mono text-[11px] text-muted">
-                        {player.position === "DST" ? "D/ST" : player.position} · {team?.abbr ?? "FA"}
-                      </p>
-                    </div>
-                    <button
-                      type="button"
-                      onClick={() => rosterActions.remove(player.playerId)}
-                      aria-label={`Remove ${player.name}`}
-                      className="flex size-9 items-center justify-center rounded-full text-muted transition-colors hover:bg-loss/15 hover:text-loss"
+          <ul className="-mx-2 flex flex-col divide-y divide-rule">
+            {players.map((player) => {
+              const team = player.teamId ? teams[player.teamId] : undefined;
+              const starter = player.slot !== "BENCH";
+              return (
+                <li key={player.playerId} className="flex min-h-14 items-center gap-3 px-2 py-2">
+                  <label className="relative shrink-0">
+                    <span className="sr-only">Lineup spot for {player.name}</span>
+                    <select
+                      value={player.slot}
+                      onChange={(e) => rosterActions.move(player.playerId, e.target.value as Slot)}
+                      className={`h-8 w-[72px] appearance-none rounded-full pr-5 pl-3 text-[12px] font-semibold ${
+                        starter ? "bg-ink text-black" : "bg-well text-muted"
+                      }`}
                     >
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-                        <path d="M6 6l12 12M18 6 6 18" />
-                      </svg>
-                    </button>
-                  </motion.li>
-                );
-              })}
-            </AnimatePresence>
+                      {ALL_SLOTS.filter((slot) => canFill(slot, player.position)).map((slot) => (
+                        <option key={slot} value={slot} className="bg-raised text-ink">
+                          {SLOT_LABEL[slot]}
+                        </option>
+                      ))}
+                    </select>
+                    <Icon
+                      name="chevronDown"
+                      size={14}
+                      className={`pointer-events-none absolute top-1/2 right-2 -translate-y-1/2 ${starter ? "text-black" : "text-muted"}`}
+                    />
+                  </label>
+                  <PlayerAvatar
+                    name={player.name}
+                    headshot={player.position === "DST" ? team?.logo : player.headshot}
+                    teamColor={visibleTeamColor(team)}
+                    size={36}
+                  />
+                  <div className="min-w-0 flex-1">
+                    <p className="truncate text-[15px] leading-5 font-medium">{player.name}</p>
+                    <p className="text-[13px] leading-5 text-muted">
+                      {player.position === "DST" ? "D/ST" : player.position} · {team?.abbr ?? "Free agent"}
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => rosterActions.remove(player.playerId)}
+                    aria-label={`Remove ${player.name}`}
+                    className="pressable grid size-10 shrink-0 place-items-center rounded-full text-faint hover:bg-negative-soft hover:text-negative"
+                  >
+                    <Icon name="close" size={18} />
+                  </button>
+                </li>
+              );
+            })}
           </ul>
         )}
-      </div>
+        {players.length > 0 && (
+          <div className="mt-4 flex flex-wrap items-center gap-3 border-t border-rule pt-4">
+            <Button size="sm" icon="share" onClick={copyLink}>
+              Team link
+            </Button>
+            <p className="text-[13px] text-muted" role="status">
+              {copied === "copied"
+                ? "Link copied. Open it on your other device to bring this team over."
+                : copied === "failed"
+                  ? "Couldn't copy. Try again, or sign in to keep your team in sync everywhere."
+                  : "Open your team on another phone or browser."}
+            </p>
+          </div>
+        )}
+      </Card>
     </section>
   );
 }

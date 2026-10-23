@@ -1,24 +1,17 @@
 "use client";
 
-import { AnimatePresence, motion } from "motion/react";
-import { useDeferredValue, useEffect, useMemo, useState } from "react";
-import { Notice, Skeleton } from "@/components/ui/bits";
+import Link from "next/link";
+import { useDeferredValue, useMemo, useRef, useState } from "react";
+import { Card } from "@/components/ui/Card";
+import { Icon } from "@/components/ui/Icon";
 import { PlayerAvatar } from "@/components/ui/PlayerAvatar";
-import { Segmented } from "@/components/ui/Segmented";
+import { ErrorState, SkeletonRows } from "@/components/ui/States";
+import { visibleTeamColor } from "@/lib/color";
+import { searchPlayers, usePlayers } from "@/lib/hooks/usePlayers";
 import { useTeams } from "@/lib/hooks/useTeams";
+import { gsap } from "@/lib/motion/gsap";
 import type { Player, Position } from "@/lib/providers/types";
 import { rosterActions, useRoster } from "@/lib/roster/store";
-import { visibleTeamColor } from "@/lib/color";
-
-let playersCache: Player[] | null = null;
-
-function normalize(s: string) {
-  return s
-    .normalize("NFD")
-    .replace(/[̀-ͯ]/g, "")
-    .replace(/[^a-z0-9 ]/gi, "")
-    .toLowerCase();
-}
 
 const POSITIONS = [
   { value: "ALL", label: "All" },
@@ -32,130 +25,111 @@ const POSITIONS = [
 
 type Filter = (typeof POSITIONS)[number]["value"];
 
+/** Add players to your team: search by name or team, filter by position, tap + to add. */
 export function PlayerSearch() {
-  const [players, setPlayers] = useState<Player[] | null>(playersCache);
-  const [failed, setFailed] = useState(false);
+  const { players, error, retry } = usePlayers();
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState<Filter>("ALL");
-  const [message, setMessage] = useState<string | null>(null);
+  const [message, setMessage] = useState<{ text: string; ok: boolean } | null>(null);
   const deferred = useDeferredValue(query);
   const teams = useTeams();
   const { roster } = useRoster();
   const onRoster = useMemo(() => new Set(roster.players.map((p) => p.playerId)), [roster.players]);
-
-  useEffect(() => {
-    if (playersCache) return;
-    fetch("/api/players")
-      .then((r) => (r.ok ? r.json() : Promise.reject(new Error("failed"))))
-      .then((body: { players: Player[] }) => {
-        playersCache = body.players;
-        setPlayers(body.players);
-      })
-      .catch(() => setFailed(true));
-  }, []);
+  const status = useRef<HTMLParagraphElement>(null);
 
   const results = useMemo(() => {
     if (!players) return [];
-    const q = normalize(deferred.trim());
-    return players
-      .filter((p) => filter === "ALL" || p.position === (filter as Position))
-      .filter((p) => {
-        if (!q) return true;
-        const name = normalize(p.name);
-        const team = p.teamId ? normalize(teams[p.teamId]?.abbr ?? "") : "";
-        return name.includes(q) || name.split(" ").some((part) => part.startsWith(q)) || team === q;
-      })
-      .slice(0, 40);
+    const pool = filter === "ALL" ? players : players.filter((p) => p.position === (filter as Position));
+    return searchPlayers(pool, deferred, (id) => (id ? (teams[id]?.abbr ?? null) : null), 40);
   }, [players, deferred, filter, teams]);
 
   function add(player: Player) {
     const result = rosterActions.add(player);
-    setMessage(result.ok ? `${player.name} added` : (result.reason ?? null));
+    setMessage({ text: result.ok ? `${player.name} added` : (result.reason ?? "Couldn't add"), ok: result.ok });
+    if (status.current && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      gsap.fromTo(status.current, { autoAlpha: 0, y: -4 }, { autoAlpha: 1, y: 0, duration: 0.2 });
+    }
     window.setTimeout(() => setMessage(null), 2200);
   }
 
   return (
-    <section className="flex flex-col gap-3" aria-label="Add players">
-      <label className="glass-chip flex items-center gap-3 rounded-2xl px-4 py-3 focus-within:ring-2 focus-within:ring-gain/60">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted" aria-hidden="true">
-          <circle cx="11" cy="11" r="7" />
-          <path d="m20 20-3.5-3.5" />
-        </svg>
+    <Card as="section" aria-label="Add players" className="flex flex-col gap-3">
+      <h2 className="text-[16px] leading-6 font-semibold">Add players</h2>
+      <label className="flex h-11 items-center gap-2.5 rounded-full bg-raised px-4 focus-within:ring-2 focus-within:ring-accent">
+        <Icon name="search" size={18} className="text-faint" />
         <span className="sr-only">Search players</span>
         <input
           type="search"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="Search players or a team (e.g. KC)"
-          className="w-full bg-transparent text-[16px] text-ink-strong placeholder:text-muted focus:outline-none"
+          placeholder="Name or team (e.g. KC)"
+          className="h-full w-full bg-transparent text-[16px] text-ink placeholder:text-faint focus:outline-none"
           autoComplete="off"
           enterKeyHint="search"
         />
       </label>
-      <div className="-mx-1 overflow-x-auto px-1 pb-1">
-        <Segmented options={POSITIONS} value={filter} onChange={setFilter} label="Position" className="min-w-max" />
+      <div className="no-scrollbar -mx-5 flex gap-1.5 overflow-x-auto px-5" role="radiogroup" aria-label="Position">
+        {POSITIONS.map((p) => (
+          <button
+            key={p.value}
+            type="button"
+            role="radio"
+            aria-checked={filter === p.value}
+            onClick={() => setFilter(p.value)}
+            className={`h-8 shrink-0 rounded-full px-3.5 text-[13px] transition-colors ${
+              filter === p.value ? "bg-ink font-medium text-black" : "bg-raised text-muted hover:text-ink"
+            }`}
+          >
+            {p.label}
+          </button>
+        ))}
       </div>
 
-      <AnimatePresence>
-        {message && (
-          <motion.p
-            initial={{ opacity: 0, y: -6 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -6 }}
-            className="glass-chip self-start rounded-xl px-3 py-1.5 font-mono text-[11px] text-gain"
-            role="status"
-          >
-            {message}
-          </motion.p>
-        )}
-      </AnimatePresence>
+      {/* Fixed height so the list below doesn't jump when a message appears. */}
+      <p ref={status} role="status" className={`h-5 text-[13px] ${message?.ok ? "text-positive" : "text-warning"}`}>
+        {message?.text ?? ""}
+      </p>
 
-      {failed && <Notice title="Data delayed" tone="warn">Couldn&apos;t load the player list from ESPN. Try again in a minute.</Notice>}
-      {!players && !failed && (
-        <div className="flex flex-col gap-2">
-          {[0, 1, 2, 3, 4].map((i) => (
-            <Skeleton key={i} className="h-16 rounded-2xl" />
-          ))}
-        </div>
-      )}
+      {error && <ErrorState what="Couldn't load the player list from ESPN." onRetry={retry} />}
+      {!players && !error && <SkeletonRows rows={6} height={56} />}
 
-      <ul className="glass divide-y divide-line-soft overflow-hidden">
+      <ul className="-mx-2 flex flex-col divide-y divide-rule">
         {results.map((player) => {
           const team = player.teamId ? teams[player.teamId] : undefined;
           const added = onRoster.has(player.id);
           return (
-            <li key={player.id} className="flex items-center gap-3 px-4 py-2.5">
+            <li key={player.id} className="flex min-h-14 items-center gap-3 px-2 py-1.5">
               <PlayerAvatar
                 name={player.name}
                 headshot={player.position === "DST" ? team?.logo : player.headshot}
                 teamColor={visibleTeamColor(team)}
-                size={40}
+                size={36}
               />
-              <div className="min-w-0 flex-1">
-                <p className="truncate text-[15px] font-semibold text-ink-strong">{player.name}</p>
-                <p className="font-mono text-[11px] text-muted">
-                  {player.position === "DST" ? "D/ST" : player.position} · {team?.abbr ?? "FA"}
-                  {player.percentOwned ? ` · ${Math.round(player.percentOwned)}% rostered` : ""}
+              <Link href={`/players/${player.id}`} className="min-w-0 flex-1 rounded-md hover:underline">
+                <p className="truncate text-[15px] leading-5 font-medium">{player.name}</p>
+                <p className="text-[13px] leading-5 text-muted">
+                  {player.position === "DST" ? "D/ST" : player.position} · {team?.abbr ?? "Free agent"}
+                  {player.percentOwned != null ? ` · ${Math.round(player.percentOwned)}% rostered` : ""}
                 </p>
-              </div>
-              <motion.button
+              </Link>
+              <button
                 type="button"
-                whileTap={{ scale: 0.88 }}
                 onClick={() => (added ? rosterActions.remove(player.id) : add(player))}
                 aria-label={added ? `Remove ${player.name}` : `Add ${player.name}`}
-                className={`flex size-10 items-center justify-center rounded-full text-xl font-bold ${
-                  added ? "glass-gain text-gain" : "glass-chip text-ink"
+                aria-pressed={added}
+                className={`pressable grid size-10 shrink-0 place-items-center rounded-full ${
+                  added ? "bg-ink text-black" : "bg-raised text-ink hover:bg-well"
                 }`}
               >
-                {added ? "✓" : "+"}
-              </motion.button>
+                <Icon name={added ? "check" : "plus"} size={18} />
+              </button>
             </li>
           );
         })}
         {players && results.length === 0 && (
-          <li className="px-4 py-6 text-center text-sm text-muted">No players match &ldquo;{query}&rdquo;.</li>
+          <li className="px-2 py-6 text-[14px] text-muted">No players match “{query}”.</li>
         )}
       </ul>
-    </section>
+    </Card>
   );
 }

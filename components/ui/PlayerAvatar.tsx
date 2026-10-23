@@ -9,7 +9,7 @@ function initials(name: string) {
 }
 
 /**
- * A player's headshot inside a glowing ring of their team's color. Falls back
+ * A player's headshot on a dark disc with a thin ring in their team's colour. Falls back
  * to initials if ESPN has no photo (common for rookies and practice-squad players).
  */
 export function PlayerAvatar({
@@ -33,8 +33,8 @@ export function PlayerAvatar({
       style={{
         width: size,
         height: size,
-        background: `radial-gradient(circle at 50% 30%, color-mix(in srgb, ${teamColor} 55%, #10161c), #0a0e12 75%)`,
-        boxShadow: `0 0 0 2px ${teamColor}, 0 0 18px -4px ${teamColor}, inset 0 1px 0 rgb(255 255 255 / 0.25)`,
+        background: `color-mix(in srgb, ${teamColor} 22%, #161616)`,
+        boxShadow: `inset 0 0 0 1.5px color-mix(in srgb, ${teamColor} 80%, transparent)`,
       }}
     >
       {showPhoto ? (
@@ -49,7 +49,7 @@ export function PlayerAvatar({
         />
       ) : (
         <span
-          className="flex h-full w-full items-center justify-center font-display font-bold text-ink-strong"
+          className="flex h-full w-full items-center justify-center font-semibold text-ink"
           style={{ fontSize: size * 0.36 }}
           role="img"
           aria-label={name}

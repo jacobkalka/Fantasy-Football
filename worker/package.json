@@ -1,8 +1,8 @@
 {
-  "name": "the-feed-worker",
+  "name": "fantasylab-worker",
   "version": "0.1.0",
   "private": true,
-  "description": "The Feed's live-data worker: polls ESPN and writes live games, plays and points into Supabase.",
+  "description": "FantasyLab's live-data worker: polls ESPN and writes live games, plays and points into Supabase.",
   "type": "module",
   "main": "start.mjs",
   "engines": {

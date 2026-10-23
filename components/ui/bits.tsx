@@ -1,4 +1,5 @@
 /** Small shared pieces of UI. */
+export { Skeleton } from "./States";
 
 export function LiveDot({ className = "" }: { className?: string }) {
   return (
@@ -9,6 +10,7 @@ export function LiveDot({ className = "" }: { className?: string }) {
   );
 }
 
+/** A section's heading inside a screen: sentence case, 16px, with an optional action on the right. */
 export function SectionLabel({
   children,
   action,
@@ -19,28 +21,39 @@ export function SectionLabel({
   className?: string;
 }) {
   return (
-    <div
-      className={`flex items-center justify-between px-1 pb-2 font-mono text-[11px] tracking-[0.1em] text-muted uppercase ${className}`}
-    >
-      <h2>{children}</h2>
+    <div className={`flex items-center justify-between gap-3 pb-3 ${className}`}>
+      <h2 className="text-[16px] leading-6 font-semibold">{children}</h2>
       {action}
     </div>
   );
 }
 
-export function Skeleton({ className = "" }: { className?: string }) {
-  return <div className={`skeleton rounded-xl ${className}`} aria-hidden="true" />;
-}
-
-export function PageTitle({ children, kicker }: { children: React.ReactNode; kicker?: React.ReactNode }) {
+/**
+ * The screen's title (its one h1) with an optional line under it that says something
+ * about the data (the week, the finding), and optional actions on the right.
+ */
+export function PageTitle({
+  children,
+  kicker,
+  sub,
+  actions,
+}: {
+  children: React.ReactNode;
+  /** Older name for `sub`. */
+  kicker?: React.ReactNode;
+  sub?: React.ReactNode;
+  actions?: React.ReactNode;
+}) {
+  const line = sub ?? kicker;
   return (
-    <div className="flex flex-col gap-1 px-1 pt-2 pb-4">
-      {kicker && (
-        <p className="font-mono text-[11px] tracking-[0.12em] text-gain uppercase">{kicker}</p>
-      )}
-      <h1 className="font-display text-5xl leading-[0.9] font-bold tracking-wide uppercase text-ink-strong [text-shadow:0_2px_24px_rgb(200_255_46/0.15)]">
-        {children}
-      </h1>
+    <div className="flex items-end justify-between gap-4 pt-2 pb-5 lg:pt-6">
+      <div className="min-w-0">
+        <h1 className="text-[24px] leading-8 font-semibold tracking-[-0.015em] lg:text-[28px] lg:leading-9">
+          {children}
+        </h1>
+        {line && <p className="mt-1 text-[14px] leading-5 text-muted">{line}</p>}
+      </div>
+      {actions && <div className="flex shrink-0 items-center gap-2">{actions}</div>}
     </div>
   );
 }
@@ -56,13 +69,9 @@ export function Notice({
   tone?: "info" | "warn";
 }) {
   return (
-    <div className="glass flex flex-col gap-1.5 p-5">
-      <p
-        className={`font-mono text-[11px] tracking-[0.1em] uppercase ${tone === "warn" ? "text-alert" : "text-sky"}`}
-      >
-        {title}
-      </p>
-      {children && <div className="text-[15px] leading-relaxed text-ink-soft">{children}</div>}
+    <div className="card flex flex-col gap-1 p-5">
+      <p className={`text-[15px] leading-6 font-medium ${tone === "warn" ? "text-warning" : "text-ink"}`}>{title}</p>
+      {children && <div className="text-[14px] leading-5 text-muted">{children}</div>}
     </div>
   );
 }

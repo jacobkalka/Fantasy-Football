@@ -1,21 +1,20 @@
 "use client";
 
-import { motion } from "motion/react";
-import Link from "next/link";
 import { useState } from "react";
 import { UpdatedAgo } from "@/components/live/UpdatedAgo";
 import { AnimatedNumber } from "@/components/motion/AnimatedNumber";
-import { TiltCard } from "@/components/motion/TiltCard";
+import { Reveal } from "@/components/motion/Reveal";
 import { PlayerSheet, type SheetPlayer } from "@/components/player/PlayerSheet";
-import { Notice, SectionLabel, Skeleton } from "@/components/ui/bits";
-import { Sparkline } from "@/components/ui/Sparkline";
+import { ButtonLink } from "@/components/ui/Button";
+import { Card } from "@/components/ui/Card";
+import { Segmented } from "@/components/ui/Segmented";
+import { EmptyState, ErrorState, Skeleton, SkeletonRows } from "@/components/ui/States";
+import { usePreference } from "@/lib/hooks/usePreference";
 import { useTeams } from "@/lib/hooks/useTeams";
 import { useTeamLive, useWeekParam } from "@/lib/hooks/useTeamLive";
-import type { FeedItem, PlayerLive } from "@/lib/live/types";
+import type { PlayerLive } from "@/lib/live/types";
 import { isStarter, sortLineup } from "@/lib/roster/lineup";
 import { roundPoints } from "@/lib/scoring";
-import { Segmented } from "@/components/ui/Segmented";
-import { usePreference } from "@/lib/hooks/usePreference";
 import { LineupField } from "./LineupField";
 import { PlayerRow } from "./PlayerRow";
 import { WeekPicker } from "./WeekPicker";
@@ -23,50 +22,23 @@ import { WeekPicker } from "./WeekPicker";
 const FORMAT_LABEL = { standard: "Standard", half: "Half PPR", ppr: "PPR" } as const;
 
 const VIEWS = [
-  { value: "field", label: "Field" },
   { value: "list", label: "List" },
+  { value: "field", label: "Field" },
 ] as const;
 
-/** Running total of a set of players' points, play by play, oldest first. */
-function momentum(feed: FeedItem[], ids: Set<string>) {
-  let total = 0;
-  const values = [0];
-  for (const item of [...feed].reverse()) {
-    if (item.kind !== "points" || !ids.has(item.playerId)) continue;
-    total += item.points;
-    values.push(roundPoints(total));
-  }
-  return values;
-}
-
-function EmptyTeam() {
+/** The same frame as the loaded screen, with grey bars, so nothing jumps when data arrives. */
+function LineupSkeleton() {
   return (
-    <TiltCard className="glass flex flex-col items-center gap-4 px-6 py-10 text-center">
-      <motion.div
-        className="font-display text-7xl leading-none font-bold text-gain [text-shadow:0_0_40px_rgb(200_255_46/0.5)]"
-        animate={{ rotateY: [0, 18, 0, -18, 0] }}
-        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-        style={{ transform: "translateZ(40px)" }}
-        aria-hidden="true"
-      >
-        0.0
-      </motion.div>
-      <div className="flex flex-col gap-1.5">
-        <h2 className="font-display text-3xl font-bold tracking-wide uppercase">Build your team</h2>
-        <p className="text-[15px] leading-relaxed text-ink-soft">
-          Search for your players and pick your league&apos;s scoring. Every play that moves their points shows up here
-          live, in plain English.
-        </p>
-      </div>
-      <Link
-        href="/team/edit"
-        transitionTypes={["nav-forward"]}
-        className="glass-gain pressable rounded-2xl px-6 py-3 font-mono text-[12px] font-bold tracking-[0.12em] text-gain uppercase"
-        style={{ transform: "translateZ(30px)" }}
-      >
-        Add players
-      </Link>
-    </TiltCard>
+    <div className="flex flex-col gap-4" aria-busy="true" aria-label="Loading your team">
+      <Card>
+        <Skeleton className="h-4 w-40" />
+        <Skeleton className="mt-3 h-10 w-28" />
+        <Skeleton className="mt-3 h-4 w-56" />
+      </Card>
+      <Card>
+        <SkeletonRows rows={9} height={64} />
+      </Card>
+    </div>
   );
 }
 
@@ -75,17 +47,27 @@ export function TeamDashboard() {
   const { roster, ready, data, delayed } = useTeamLive(week);
   const teams = useTeams();
   const [open, setOpen] = useState<SheetPlayer | null>(null);
-  const [view, setView] = usePreference<"field" | "list">("lineup-view", "field");
+  const [view, setView] = usePreference<"field" | "list">("lineup-view", "list");
   const allTeams = { ...teams, ...data?.teams };
 
   const byId = new Map<string, PlayerLive>((data?.players ?? []).map((p) => [p.playerId, p]));
   const lineup = sortLineup(roster.players);
   const starters = lineup.filter(isStarter);
   const bench = lineup.filter((p) => !isStarter(p));
-  const starterIds = new Set(starters.map((p) => p.playerId));
 
-  if (!ready) return <Skeleton className="h-64 rounded-3xl" />;
-  if (roster.players.length === 0) return <EmptyTeam />;
+  if (!ready) return <LineupSkeleton />;
+  if (roster.players.length === 0) {
+    return (
+      <EmptyState
+        title="Add your team to see it here"
+        icon="team"
+        action={{ label: "Add players", href: "/team/edit" }}
+      >
+        Search for your players and pick your league&apos;s scoring. Every play that moves their points shows up live.
+        Your team is saved on this device, and to your account if you sign in.
+      </EmptyState>
+    );
+  }
 
   const startersLive = starters.map((p) => byId.get(p.playerId)).filter((p): p is PlayerLive => Boolean(p));
   const total = roundPoints(startersLive.reduce((sum, p) => sum + p.points, 0));
@@ -97,103 +79,100 @@ export function TeamDashboard() {
     ? roundPoints(
         startersLive.reduce(
           (sum, p) =>
-            sum + (allDone ? (p.projection ?? 0) : p.game?.state === "post" ? p.points : (p.liveProjection ?? p.projection ?? p.points)),
+            sum +
+            (allDone
+              ? (p.projection ?? 0)
+              : p.game?.state === "post"
+                ? p.points
+                : (p.liveProjection ?? p.projection ?? p.points)),
           0,
         ),
       )
     : null;
   const feed = data?.feed ?? [];
+  const openPlayer = (p: (typeof lineup)[number]) =>
+    setOpen({ playerId: p.playerId, name: p.name, headshot: p.headshot, live: byId.get(p.playerId) });
 
-  const row = (p: (typeof lineup)[number]) => (
-    <motion.li key={p.playerId} layout transition={{ type: "spring", stiffness: 300, damping: 30 }}>
-      <PlayerRow
-        slot={p.slot}
-        name={p.name}
-        headshot={p.headshot}
-        live={byId.get(p.playerId)}
-        momentum={momentum(feed, new Set([p.playerId]))}
-        teams={allTeams}
-        onOpen={() => setOpen({ playerId: p.playerId, name: p.name, headshot: p.headshot, live: byId.get(p.playerId) })}
-      />
-    </motion.li>
+  const rows = (players: typeof lineup) => (
+    <ul className="-mx-2 flex flex-col divide-y divide-rule">
+      {players.map((p) => (
+        <li key={p.playerId}>
+          <PlayerRow
+            slot={p.slot}
+            name={p.name}
+            headshot={p.headshot}
+            live={byId.get(p.playerId)}
+            teams={allTeams}
+            onOpen={() => openPlayer(p)}
+          />
+        </li>
+      ))}
+    </ul>
   );
 
   return (
-    <div className="flex flex-col gap-5">
-      <TiltCard className="glass flex flex-col gap-3 p-5" max={6}>
-        <div className="flex items-center justify-between font-mono text-[11px] tracking-[0.08em] text-muted uppercase">
-          <span className="truncate">
-            {roster.name} · {FORMAT_LABEL[roster.format]}
-          </span>
+    <div className="flex flex-col gap-4">
+      <Card>
+        <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
+          <p className="min-w-0 truncate text-[14px] text-muted">
+            {roster.name.trim() || "My Team"} · {FORMAT_LABEL[roster.format]}
+          </p>
           <UpdatedAgo fetchedAt={data?.fetchedAt} delayed={delayed} live={data?.anyLive} />
         </div>
-        <div className="flex items-end justify-between gap-4" style={{ transform: "translateZ(36px)" }}>
-          <span className="font-display text-[84px] leading-[0.8] font-bold text-ink-strong drop-shadow-[0_4px_24px_rgb(200_255_46/0.3)]">
-            {data ? <AnimatedNumber value={total} /> : "–"}
-          </span>
-          {feed.length > 0 && <Sparkline values={momentum(feed, starterIds)} width={110} height={44} />}
+        <div className="mt-2 flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <p className="text-[40px] leading-[44px] font-semibold tracking-[-0.02em]">
+              {data ? <AnimatedNumber value={total} /> : <Skeleton className="h-10 w-28" />}
+              <span className="ml-1.5 text-[15px] font-normal tracking-normal text-faint">pts</span>
+            </p>
+            <p className="tabular mt-1 text-[14px] text-muted">
+              {projected !== null && (
+                <>
+                  {playing > 0 ? "On pace for" : allDone ? "Projected" : "Projected"}{" "}
+                  <span className="text-ink">{projected.toFixed(1)}</span>
+                  {" · "}
+                </>
+              )}
+              <span className={playing ? "text-positive" : undefined}>{playing} playing</span> · {toPlay} yet to play
+            </p>
+          </div>
+          {data && <WeekPicker currentWeek={data.currentWeek} week={week} />}
         </div>
-        <div className="flex flex-wrap gap-x-4 gap-y-1 font-mono text-[11px] text-muted uppercase">
-          {projected !== null && (
-            <span>
-              {playing > 0 ? "Est" : allDone ? "Projected" : "Proj"} <span className="text-ink">{projected.toFixed(1)}</span>
-            </span>
-          )}
-          <span>
-            Playing <span className={playing ? "text-gain" : "text-ink"}>{playing}</span>
-          </span>
-          <span>
-            Yet to play <span className="text-ink">{toPlay}</span>
-          </span>
-        </div>
-      </TiltCard>
-
-      <div className="flex items-center justify-between gap-3">
-        {data ? <WeekPicker currentWeek={data.currentWeek} week={week} /> : <span />}
-        <Link
-          href="/team/edit"
-          transitionTypes={["nav-forward"]}
-          className="glass-chip pressable shrink-0 rounded-xl px-4 py-2 font-mono text-[11px] tracking-[0.1em] text-ink uppercase"
-        >
-          Edit team
-        </Link>
-      </div>
+      </Card>
 
       {delayed && !data && (
-        <Notice title="Data delayed" tone="warn">
-          ESPN isn&apos;t responding right now. Your points will appear as soon as it does.
-        </Notice>
+        <ErrorState what="ESPN isn't responding right now. Your points will appear as soon as it does." />
       )}
 
-      <section className="flex flex-col gap-2">
-        <div className="flex items-center justify-between gap-3">
-          <SectionLabel className="pb-0">Starters</SectionLabel>
-          <Segmented
-            options={VIEWS}
-            value={view}
-            onChange={setView}
-            label="Lineup view"
-            className="w-40"
-          />
-        </div>
-        {view === "field" ? (
-          <LineupField
-            starters={starters}
-            live={byId}
-            teams={allTeams}
-            onOpen={(p) => setOpen({ playerId: p.playerId, name: p.name, headshot: p.headshot, live: byId.get(p.playerId) })}
-          />
-        ) : (
-          <ul className="flex flex-col gap-2.5">{starters.map(row)}</ul>
+      <Reveal className="flex flex-col gap-4" stagger={false}>
+        <Card>
+          <div className="mb-2 flex items-center justify-between gap-3">
+            <h2 className="text-[16px] leading-6 font-semibold">Starters</h2>
+            <Segmented options={VIEWS} value={view} onChange={setView} label="Lineup view" size="sm" />
+          </div>
+          {view === "field" ? (
+            <LineupField starters={starters} live={byId} teams={allTeams} onOpen={openPlayer} />
+          ) : (
+            rows(starters)
+          )}
+        </Card>
+
+        {bench.length > 0 && (
+          <Card>
+            <h2 className="mb-2 text-[16px] leading-6 font-semibold">Bench</h2>
+            {rows(bench)}
+          </Card>
         )}
-      </section>
 
-      {bench.length > 0 && (
-        <section>
-          <SectionLabel>Bench</SectionLabel>
-          <ul className="flex flex-col gap-2.5 opacity-85">{bench.map(row)}</ul>
-        </section>
-      )}
+        <div className="flex flex-wrap gap-2">
+          <ButtonLink href="/team/edit" icon="edit">
+            Edit roster
+          </ButtonLink>
+          <ButtonLink href="/start-sit" icon="swap">
+            Start/Sit help
+          </ButtonLink>
+        </div>
+      </Reveal>
 
       <PlayerSheet
         player={open ? { ...open, live: byId.get(open.playerId) } : null}
