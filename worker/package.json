@@ -1,0 +1,27 @@
+{
+  "name": "the-feed-worker",
+  "version": "0.1.0",
+  "private": true,
+  "description": "The Feed's live-data worker: polls ESPN and writes live games, plays and points into Supabase.",
+  "type": "module",
+  "main": "start.mjs",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "node start.mjs",
+    "once": "node start.mjs once",
+    "replay": "node start.mjs replay",
+    "clean-replays": "node start.mjs clean-replays",
+    "typecheck": "tsc --noEmit -p .",
+    "test": "cd .. && npx vitest run worker"
+  },
+  "dependencies": {
+    "postgres": "^3.4.9",
+    "tsx": "^4.23.15"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.5",
+    "typescript": "^5.9.3"
+  }
+}

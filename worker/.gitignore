@@ -1,0 +1,2 @@
+# The worker's own installed packages (the root .gitignore only covers the app's).
+node_modules/

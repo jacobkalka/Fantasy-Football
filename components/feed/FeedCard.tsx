@@ -1,5 +1,6 @@
 "use client";
 
+import { SharePlayButton } from "@/components/chat/SharePlayButton";
 import { TouchdownBurst } from "@/components/motion/TouchdownBurst";
 import { PlayerAvatar } from "@/components/ui/PlayerAvatar";
 import { PointsBadge } from "@/components/ui/PointsBadge";
@@ -61,6 +62,8 @@ export function FeedCard({
           {!injury && item.parts.length > 0 && (
             <p className="font-mono text-[11px] text-muted">{formatBreakdown(item.parts)}</p>
           )}
+          {/* Only shows when chat is available (database connected and signed in). */}
+          <SharePlayButton item={item} />
         </div>
       </div>
     </article>
