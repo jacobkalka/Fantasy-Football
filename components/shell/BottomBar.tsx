@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { useLayoutEffect, useRef } from "react";
 import { LiquidGlass } from "@/components/glass/LiquidGlass";
 import { Icon } from "@/components/ui/Icon";
-import { gsap, MOTION } from "@/lib/motion/gsap";
+import { gsap, prefersReducedMotion } from "@/lib/motion/gsap";
 import { NAV, sectionFor } from "@/lib/config";
 
 /**
@@ -28,9 +28,9 @@ export function BottomBarLinks({ pathname }: { pathname: string | null }) {
       return;
     }
     const to = { x: target.offsetLeft, width: target.offsetWidth, autoAlpha: 1 };
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reduce = prefersReducedMotion();
     if (!placed.current || reduce) gsap.set(pill, to);
-    else gsap.to(pill, { ...to, duration: MOTION.slow, ease: "power3.out" });
+    else gsap.to(pill, { ...to, duration: 0.5, ease: "back.out(1.4)" });
     placed.current = true;
   }, [active?.href]);
 
@@ -48,6 +48,12 @@ export function BottomBarLinks({ pathname }: { pathname: string | null }) {
           <Link
             key={item.href}
             href={item.href}
+            onClick={(event) => {
+              // A small bounce on the icon you tapped.
+              if (prefersReducedMotion()) return;
+              const icon = event.currentTarget.querySelector("svg");
+              if (icon) gsap.fromTo(icon, { scale: 0.8, y: 2 }, { scale: 1, y: 0, duration: 0.45, ease: "back.out(2.2)" });
+            }}
             aria-current={on && pathname === item.href ? "page" : undefined}
             data-active={on ? "" : undefined}
             className={`pressable relative flex flex-1 flex-col items-center justify-center gap-0.5 rounded-[22px] ${

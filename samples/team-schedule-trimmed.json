@@ -1,0 +1,2464 @@
+{
+ "12": {
+  "team": {
+   "id": "12",
+   "abbreviation": "KC",
+   "displayName": "Kansas City Chiefs"
+  },
+  "requestedSeason": {
+   "year": 2026,
+   "type": 2,
+   "name": "Regular Season",
+   "displayName": "2026"
+  },
+  "byeWeek": 5,
+  "events": [
+   {
+    "id": "401872931",
+    "date": "2026-09-15T00:15Z",
+    "week": {
+     "number": 1,
+     "text": "Week 1"
+    },
+    "seasonType": {
+     "id": "2",
+     "type": 2,
+     "abbreviation": "reg"
+    },
+    "competitions": [
+     {
+      "status": {
+       "type": {
+        "state": "post",
+        "completed": true,
+        "description": "Final"
+       }
+      },
+      "competitors": [
+       {
+        "id": "12",
+        "homeAway": "home",
+        "winner": true,
+        "team": {
+         "id": "12",
+         "abbreviation": "KC",
+         "displayName": "Kansas City Chiefs"
+        },
+        "score": {
+         "value": 31,
+         "displayValue": "31"
+        }
+       },
+       {
+        "id": "7",
+        "homeAway": "away",
+        "winner": false,
+        "team": {
+         "id": "7",
+         "abbreviation": "DEN",
+         "displayName": "Denver Broncos"
+        },
+        "score": {
+         "value": 10,
+         "displayValue": "10"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "401872945",
+    "date": "2026-09-21T00:20Z",
+    "week": {
+     "number": 2,
+     "text": "Week 2"
+    },
+    "seasonType": {
+     "id": "2",
+     "type": 2,
+     "abbreviation": "reg"
+    },
+    "competitions": [
+     {
+      "status": {
+       "type": {
+        "state": "post",
+        "completed": true,
+        "description": "Final"
+       }
+      },
+      "competitors": [
+       {
+        "id": "12",
+        "homeAway": "home",
+        "winner": true,
+        "team": {
+         "id": "12",
+         "abbreviation": "KC",
+         "displayName": "Kansas City Chiefs"
+        },
+        "score": {
+         "value": 33,
+         "displayValue": "33"
+        }
+       },
+       {
+        "id": "11",
+        "homeAway": "away",
+        "winner": false,
+        "team": {
+         "id": "11",
+         "abbreviation": "IND",
+         "displayName": "Indianapolis Colts"
+        },
+        "score": {
+         "value": 30,
+         "displayValue": "30"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "401872952",
+    "date": "2026-09-27T17:00Z",
+    "week": {
+     "number": 3,
+     "text": "Week 3"
+    },
+    "seasonType": {
+     "id": "2",
+     "type": 2,
+     "abbreviation": "reg"
+    },
+    "competitions": [
+     {
+      "status": {
+       "type": {
+        "state": "post",
+        "completed": true,
+        "description": "Final"
+       }
+      },
+      "competitors": [
+       {
+        "id": "15",
+        "homeAway": "home",
+        "winner": false,
+        "team": {
+         "id": "15",
+         "abbreviation": "MIA",
+         "displayName": "Miami Dolphins"
+        },
+        "score": {
+         "value": 10,
+         "displayValue": "10"
+        }
+       },
+       {
+        "id": "12",
+        "homeAway": "away",
+        "winner": true,
+        "team": {
+         "id": "12",
+         "abbreviation": "KC",
+         "displayName": "Kansas City Chiefs"
+        },
+        "score": {
+         "value": 24,
+         "displayValue": "24"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "401872976",
+    "date": "2026-10-04T20:25Z",
+    "week": {
+     "number": 4,
+     "text": "Week 4"
+    },
+    "seasonType": {
+     "id": "2",
+     "type": 2,
+     "abbreviation": "reg"
+    },
+    "competitions": [
+     {
+      "status": {
+       "type": {
+        "state": "post",
+        "completed": true,
+        "description": "Final"
+       }
+      },
+      "competitors": [
+       {
+        "id": "13",
+        "homeAway": "home",
+        "winner": false,
+        "team": {
+         "id": "13",
+         "abbreviation": "LV",
+         "displayName": "Las Vegas Raiders"
+        },
+        "score": {
+         "value": 27,
+         "displayValue": "27"
+        }
+       },
+       {
+        "id": "12",
+        "homeAway": "away",
+        "winner": true,
+        "team": {
+         "id": "12",
+         "abbreviation": "KC",
+         "displayName": "Kansas City Chiefs"
+        },
+        "score": {
+         "value": 30,
+         "displayValue": "30"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "401873006",
+    "date": "2026-10-18T20:25Z",
+    "week": {
+     "number": 6,
+     "text": "Week 6"
+    },
+    "seasonType": {
+     "id": "2",
+     "type": 2,
+     "abbreviation": "reg"
+    },
+    "competitions": [
+     {
+      "status": {
+       "type": {
+        "state": "post",
+        "completed": true,
+        "description": "Final"
+       }
+      },
+      "competitors": [
+       {
+        "id": "12",
+        "homeAway": "home",
+        "winner": true,
+        "team": {
+         "id": "12",
+         "abbreviation": "KC",
+         "displayName": "Kansas City Chiefs"
+        },
+        "score": {
+         "value": 22,
+         "displayValue": "22"
+        }
+       },
+       {
+        "id": "24",
+        "homeAway": "away",
+        "winner": false,
+        "team": {
+         "id": "24",
+         "abbreviation": "LAC",
+         "displayName": "Los Angeles Chargers"
+        },
+        "score": {
+         "value": 6,
+         "displayValue": "6"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "401873022",
+    "date": "2026-10-26T00:20Z",
+    "week": {
+     "number": 7,
+     "text": "Week 7"
+    },
+    "seasonType": {
+     "id": "2",
+     "type": 2,
+     "abbreviation": "reg"
+    },
+    "competitions": [
+     {
+      "status": {
+       "type": {
+        "state": "pre",
+        "completed": false,
+        "description": "Scheduled"
+       }
+      },
+      "competitors": [
+       {
+        "id": "26",
+        "homeAway": "home",
+        "team": {
+         "id": "26",
+         "abbreviation": "SEA",
+         "displayName": "Seattle Seahawks"
+        }
+       },
+       {
+        "id": "12",
+        "homeAway": "away",
+        "team": {
+         "id": "12",
+         "abbreviation": "KC",
+         "displayName": "Kansas City Chiefs"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "401873033",
+    "date": "2026-11-01T21:25Z",
+    "week": {
+     "number": 8,
+     "text": "Week 8"
+    },
+    "seasonType": {
+     "id": "2",
+     "type": 2,
+     "abbreviation": "reg"
+    },
+    "competitions": [
+     {
+      "status": {
+       "type": {
+        "state": "pre",
+        "completed": false,
+        "description": "Scheduled"
+       }
+      },
+      "competitors": [
+       {
+        "id": "7",
+        "homeAway": "home",
+        "team": {
+         "id": "7",
+         "abbreviation": "DEN",
+         "displayName": "Denver Broncos"
+        }
+       },
+       {
+        "id": "12",
+        "homeAway": "away",
+        "team": {
+         "id": "12",
+         "abbreviation": "KC",
+         "displayName": "Kansas City Chiefs"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "401873045",
+    "date": "2026-11-08T18:00Z",
+    "week": {
+     "number": 9,
+     "text": "Week 9"
+    },
+    "seasonType": {
+     "id": "2",
+     "type": 2,
+     "abbreviation": "reg"
+    },
+    "competitions": [
+     {
+      "status": {
+       "type": {
+        "state": "pre",
+        "completed": false,
+        "description": "Scheduled"
+       }
+      },
+      "competitors": [
+       {
+        "id": "12",
+        "homeAway": "home",
+        "team": {
+         "id": "12",
+         "abbreviation": "KC",
+         "displayName": "Kansas City Chiefs"
+        }
+       },
+       {
+        "id": "20",
+        "homeAway": "away",
+        "team": {
+         "id": "20",
+         "abbreviation": "NYJ",
+         "displayName": "New York Jets"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "401873058",
+    "date": "2026-11-15T18:00Z",
+    "week": {
+     "number": 10,
+     "text": "Week 10"
+    },
+    "seasonType": {
+     "id": "2",
+     "type": 2,
+     "abbreviation": "reg"
+    },
+    "competitions": [
+     {
+      "status": {
+       "type": {
+        "state": "pre",
+        "completed": false,
+        "description": "Scheduled"
+       }
+      },
+      "competitors": [
+       {
+        "id": "1",
+        "homeAway": "home",
+        "team": {
+         "id": "1",
+         "abbreviation": "ATL",
+         "displayName": "Atlanta Falcons"
+        }
+       },
+       {
+        "id": "12",
+        "homeAway": "away",
+        "team": {
+         "id": "12",
+         "abbreviation": "KC",
+         "displayName": "Kansas City Chiefs"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "401873067",
+    "date": "2026-11-22T18:00Z",
+    "week": {
+     "number": 11,
+     "text": "Week 11"
+    },
+    "seasonType": {
+     "id": "2",
+     "type": 2,
+     "abbreviation": "reg"
+    },
+    "competitions": [
+     {
+      "status": {
+       "type": {
+        "state": "pre",
+        "completed": false,
+        "description": "Scheduled"
+       }
+      },
+      "competitors": [
+       {
+        "id": "12",
+        "homeAway": "home",
+        "team": {
+         "id": "12",
+         "abbreviation": "KC",
+         "displayName": "Kansas City Chiefs"
+        }
+       },
+       {
+        "id": "22",
+        "homeAway": "away",
+        "team": {
+         "id": "22",
+         "abbreviation": "ARI",
+         "displayName": "Arizona Cardinals"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "401873082",
+    "date": "2026-11-27T01:20Z",
+    "week": {
+     "number": 12,
+     "text": "Week 12"
+    },
+    "seasonType": {
+     "id": "2",
+     "type": 2,
+     "abbreviation": "reg"
+    },
+    "competitions": [
+     {
+      "status": {
+       "type": {
+        "state": "pre",
+        "completed": false,
+        "description": "Scheduled"
+       }
+      },
+      "competitors": [
+       {
+        "id": "2",
+        "homeAway": "home",
+        "team": {
+         "id": "2",
+         "abbreviation": "BUF",
+         "displayName": "Buffalo Bills"
+        }
+       },
+       {
+        "id": "12",
+        "homeAway": "away",
+        "team": {
+         "id": "12",
+         "abbreviation": "KC",
+         "displayName": "Kansas City Chiefs"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "401873096",
+    "date": "2026-12-04T01:15Z",
+    "week": {
+     "number": 13,
+     "text": "Week 13"
+    },
+    "seasonType": {
+     "id": "2",
+     "type": 2,
+     "abbreviation": "reg"
+    },
+    "competitions": [
+     {
+      "status": {
+       "type": {
+        "state": "pre",
+        "completed": false,
+        "description": "Scheduled"
+       }
+      },
+      "competitors": [
+       {
+        "id": "14",
+        "homeAway": "home",
+        "team": {
+         "id": "14",
+         "abbreviation": "LAR",
+         "displayName": "Los Angeles Rams"
+        }
+       },
+       {
+        "id": "12",
+        "homeAway": "away",
+        "team": {
+         "id": "12",
+         "abbreviation": "KC",
+         "displayName": "Kansas City Chiefs"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "401873119",
+    "date": "2026-12-13T21:25Z",
+    "week": {
+     "number": 14,
+     "text": "Week 14"
+    },
+    "seasonType": {
+     "id": "2",
+     "type": 2,
+     "abbreviation": "reg"
+    },
+    "competitions": [
+     {
+      "status": {
+       "type": {
+        "state": "pre",
+        "completed": false,
+        "description": "Scheduled"
+       }
+      },
+      "competitors": [
+       {
+        "id": "4",
+        "homeAway": "home",
+        "team": {
+         "id": "4",
+         "abbreviation": "CIN",
+         "displayName": "Cincinnati Bengals"
+        }
+       },
+       {
+        "id": "12",
+        "homeAway": "away",
+        "team": {
+         "id": "12",
+         "abbreviation": "KC",
+         "displayName": "Kansas City Chiefs"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "401873139",
+    "date": "2026-12-22T01:15Z",
+    "week": {
+     "number": 15,
+     "text": "Week 15"
+    },
+    "seasonType": {
+     "id": "2",
+     "type": 2,
+     "abbreviation": "reg"
+    },
+    "competitions": [
+     {
+      "status": {
+       "type": {
+        "state": "pre",
+        "completed": false,
+        "description": "Scheduled"
+       }
+      },
+      "competitors": [
+       {
+        "id": "12",
+        "homeAway": "home",
+        "team": {
+         "id": "12",
+         "abbreviation": "KC",
+         "displayName": "Kansas City Chiefs"
+        }
+       },
+       {
+        "id": "17",
+        "homeAway": "away",
+        "team": {
+         "id": "17",
+         "abbreviation": "NE",
+         "displayName": "New England Patriots"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "401873153",
+    "date": "2026-12-27T21:25Z",
+    "week": {
+     "number": 16,
+     "text": "Week 16"
+    },
+    "seasonType": {
+     "id": "2",
+     "type": 2,
+     "abbreviation": "reg"
+    },
+    "competitions": [
+     {
+      "status": {
+       "type": {
+        "state": "pre",
+        "completed": false,
+        "description": "Scheduled"
+       }
+      },
+      "competitors": [
+       {
+        "id": "12",
+        "homeAway": "home",
+        "team": {
+         "id": "12",
+         "abbreviation": "KC",
+         "displayName": "Kansas City Chiefs"
+        }
+       },
+       {
+        "id": "25",
+        "homeAway": "away",
+        "team": {
+         "id": "25",
+         "abbreviation": "SF",
+         "displayName": "San Francisco 49ers"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "401873158",
+    "date": "2027-01-03T05:00Z",
+    "week": {
+     "number": 17,
+     "text": "Week 17"
+    },
+    "seasonType": {
+     "id": "2",
+     "type": 2,
+     "abbreviation": "reg"
+    },
+    "competitions": [
+     {
+      "status": {
+       "type": {
+        "state": "pre",
+        "completed": false,
+        "description": "Scheduled"
+       }
+      },
+      "competitors": [
+       {
+        "id": "24",
+        "homeAway": "home",
+        "team": {
+         "id": "24",
+         "abbreviation": "LAC",
+         "displayName": "Los Angeles Chargers"
+        }
+       },
+       {
+        "id": "12",
+        "homeAway": "away",
+        "team": {
+         "id": "12",
+         "abbreviation": "KC",
+         "displayName": "Kansas City Chiefs"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "401873178",
+    "date": "2027-01-10T05:00Z",
+    "week": {
+     "number": 18,
+     "text": "Week 18"
+    },
+    "seasonType": {
+     "id": "2",
+     "type": 2,
+     "abbreviation": "reg"
+    },
+    "competitions": [
+     {
+      "status": {
+       "type": {
+        "state": "pre",
+        "completed": false,
+        "description": "Scheduled"
+       }
+      },
+      "competitors": [
+       {
+        "id": "12",
+        "homeAway": "home",
+        "team": {
+         "id": "12",
+         "abbreviation": "KC",
+         "displayName": "Kansas City Chiefs"
+        }
+       },
+       {
+        "id": "13",
+        "homeAway": "away",
+        "team": {
+         "id": "13",
+         "abbreviation": "LV",
+         "displayName": "Las Vegas Raiders"
+        }
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ "14": {
+  "team": {
+   "id": "14",
+   "abbreviation": "LAR",
+   "displayName": "Los Angeles Rams"
+  },
+  "requestedSeason": {
+   "year": 2026,
+   "type": 2,
+   "name": "Regular Season",
+   "displayName": "2026"
+  },
+  "byeWeek": 11,
+  "events": [
+   {
+    "id": "401872657",
+    "date": "2026-09-11T00:35Z",
+    "week": {
+     "number": 1,
+     "text": "Week 1"
+    },
+    "seasonType": {
+     "id": "2",
+     "type": 2,
+     "abbreviation": "reg"
+    },
+    "competitions": [
+     {
+      "status": {
+       "type": {
+        "state": "post",
+        "completed": true,
+        "description": "Final"
+       }
+      },
+      "competitors": [
+       {
+        "id": "14",
+        "homeAway": "home",
+        "winner": false,
+        "team": {
+         "id": "14",
+         "abbreviation": "LAR",
+         "displayName": "Los Angeles Rams"
+        },
+        "score": {
+         "value": 7,
+         "displayValue": "7"
+        }
+       },
+       {
+        "id": "25",
+        "homeAway": "away",
+        "winner": true,
+        "team": {
+         "id": "25",
+         "abbreviation": "SF",
+         "displayName": "San Francisco 49ers"
+        },
+        "score": {
+         "value": 27,
+         "displayValue": "27"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "401872947",
+    "date": "2026-09-22T00:15Z",
+    "week": {
+     "number": 2,
+     "text": "Week 2"
+    },
+    "seasonType": {
+     "id": "2",
+     "type": 2,
+     "abbreviation": "reg"
+    },
+    "competitions": [
+     {
+      "status": {
+       "type": {
+        "state": "post",
+        "completed": true,
+        "description": "Final"
+       }
+      },
+      "competitors": [
+       {
+        "id": "14",
+        "homeAway": "home",
+        "winner": true,
+        "team": {
+         "id": "14",
+         "abbreviation": "LAR",
+         "displayName": "Los Angeles Rams"
+        },
+        "score": {
+         "value": 28,
+         "displayValue": "28"
+        }
+       },
+       {
+        "id": "19",
+        "homeAway": "away",
+        "winner": false,
+        "team": {
+         "id": "19",
+         "abbreviation": "NYG",
+         "displayName": "New York Giants"
+        },
+        "score": {
+         "value": 6,
+         "displayValue": "6"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "401872962",
+    "date": "2026-09-28T00:20Z",
+    "week": {
+     "number": 3,
+     "text": "Week 3"
+    },
+    "seasonType": {
+     "id": "2",
+     "type": 2,
+     "abbreviation": "reg"
+    },
+    "competitions": [
+     {
+      "status": {
+       "type": {
+        "state": "post",
+        "completed": true,
+        "description": "Final"
+       }
+      },
+      "competitors": [
+       {
+        "id": "7",
+        "homeAway": "home",
+        "winner": true,
+        "team": {
+         "id": "7",
+         "abbreviation": "DEN",
+         "displayName": "Denver Broncos"
+        },
+        "score": {
+         "value": 30,
+         "displayValue": "30"
+        }
+       },
+       {
+        "id": "14",
+        "homeAway": "away",
+        "winner": false,
+        "team": {
+         "id": "14",
+         "abbreviation": "LAR",
+         "displayName": "Los Angeles Rams"
+        },
+        "score": {
+         "value": 26,
+         "displayValue": "26"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "401872970",
+    "date": "2026-10-04T17:00Z",
+    "week": {
+     "number": 4,
+     "text": "Week 4"
+    },
+    "seasonType": {
+     "id": "2",
+     "type": 2,
+     "abbreviation": "reg"
+    },
+    "competitions": [
+     {
+      "status": {
+       "type": {
+        "state": "post",
+        "completed": true,
+        "description": "Final"
+       }
+      },
+      "competitors": [
+       {
+        "id": "21",
+        "homeAway": "home",
+        "winner": false,
+        "team": {
+         "id": "21",
+         "abbreviation": "PHI",
+         "displayName": "Philadelphia Eagles"
+        },
+        "score": {
+         "value": 20,
+         "displayValue": "20"
+        }
+       },
+       {
+        "id": "14",
+        "homeAway": "away",
+        "winner": true,
+        "team": {
+         "id": "14",
+         "abbreviation": "LAR",
+         "displayName": "Los Angeles Rams"
+        },
+        "score": {
+         "value": 24,
+         "displayValue": "24"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "401872994",
+    "date": "2026-10-13T00:15Z",
+    "week": {
+     "number": 5,
+     "text": "Week 5"
+    },
+    "seasonType": {
+     "id": "2",
+     "type": 2,
+     "abbreviation": "reg"
+    },
+    "competitions": [
+     {
+      "status": {
+       "type": {
+        "state": "post",
+        "completed": true,
+        "description": "Final"
+       }
+      },
+      "competitors": [
+       {
+        "id": "14",
+        "homeAway": "home",
+        "winner": false,
+        "team": {
+         "id": "14",
+         "abbreviation": "LAR",
+         "displayName": "Los Angeles Rams"
+        },
+        "score": {
+         "value": 34,
+         "displayValue": "34"
+        }
+       },
+       {
+        "id": "2",
+        "homeAway": "away",
+        "winner": true,
+        "team": {
+         "id": "2",
+         "abbreviation": "BUF",
+         "displayName": "Buffalo Bills"
+        },
+        "score": {
+         "value": 37,
+         "displayValue": "37"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "401873004",
+    "date": "2026-10-18T20:05Z",
+    "week": {
+     "number": 6,
+     "text": "Week 6"
+    },
+    "seasonType": {
+     "id": "2",
+     "type": 2,
+     "abbreviation": "reg"
+    },
+    "competitions": [
+     {
+      "status": {
+       "type": {
+        "state": "post",
+        "completed": true,
+        "description": "Final"
+       }
+      },
+      "competitors": [
+       {
+        "id": "14",
+        "homeAway": "home",
+        "winner": false,
+        "team": {
+         "id": "14",
+         "abbreviation": "LAR",
+         "displayName": "Los Angeles Rams"
+        },
+        "score": {
+         "value": 16,
+         "displayValue": "16"
+        }
+       },
+       {
+        "id": "22",
+        "homeAway": "away",
+        "winner": true,
+        "team": {
+         "id": "22",
+         "abbreviation": "ARI",
+         "displayName": "Arizona Cardinals"
+        },
+        "score": {
+         "value": 18,
+         "displayValue": "18"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "401873021",
+    "date": "2026-10-25T20:25Z",
+    "week": {
+     "number": 7,
+     "text": "Week 7"
+    },
+    "seasonType": {
+     "id": "2",
+     "type": 2,
+     "abbreviation": "reg"
+    },
+    "competitions": [
+     {
+      "status": {
+       "type": {
+        "state": "pre",
+        "completed": false,
+        "description": "Scheduled"
+       }
+      },
+      "competitors": [
+       {
+        "id": "13",
+        "homeAway": "home",
+        "team": {
+         "id": "13",
+         "abbreviation": "LV",
+         "displayName": "Las Vegas Raiders"
+        }
+       },
+       {
+        "id": "14",
+        "homeAway": "away",
+        "team": {
+         "id": "14",
+         "abbreviation": "LAR",
+         "displayName": "Los Angeles Rams"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "401873032",
+    "date": "2026-11-01T21:05Z",
+    "week": {
+     "number": 8,
+     "text": "Week 8"
+    },
+    "seasonType": {
+     "id": "2",
+     "type": 2,
+     "abbreviation": "reg"
+    },
+    "competitions": [
+     {
+      "status": {
+       "type": {
+        "state": "pre",
+        "completed": false,
+        "description": "Scheduled"
+       }
+      },
+      "competitors": [
+       {
+        "id": "14",
+        "homeAway": "home",
+        "team": {
+         "id": "14",
+         "abbreviation": "LAR",
+         "displayName": "Los Angeles Rams"
+        }
+       },
+       {
+        "id": "24",
+        "homeAway": "away",
+        "team": {
+         "id": "24",
+         "abbreviation": "LAC",
+         "displayName": "Los Angeles Chargers"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "401873043",
+    "date": "2026-11-08T18:00Z",
+    "week": {
+     "number": 9,
+     "text": "Week 9"
+    },
+    "seasonType": {
+     "id": "2",
+     "type": 2,
+     "abbreviation": "reg"
+    },
+    "competitions": [
+     {
+      "status": {
+       "type": {
+        "state": "pre",
+        "completed": false,
+        "description": "Scheduled"
+       }
+      },
+      "competitors": [
+       {
+        "id": "28",
+        "homeAway": "home",
+        "team": {
+         "id": "28",
+         "abbreviation": "WSH",
+         "displayName": "Washington Commanders"
+        }
+       },
+       {
+        "id": "14",
+        "homeAway": "away",
+        "team": {
+         "id": "14",
+         "abbreviation": "LAR",
+         "displayName": "Los Angeles Rams"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "401873061",
+    "date": "2026-11-15T21:05Z",
+    "week": {
+     "number": 10,
+     "text": "Week 10"
+    },
+    "seasonType": {
+     "id": "2",
+     "type": 2,
+     "abbreviation": "reg"
+    },
+    "competitions": [
+     {
+      "status": {
+       "type": {
+        "state": "pre",
+        "completed": false,
+        "description": "Scheduled"
+       }
+      },
+      "competitors": [
+       {
+        "id": "22",
+        "homeAway": "home",
+        "team": {
+         "id": "22",
+         "abbreviation": "ARI",
+         "displayName": "Arizona Cardinals"
+        }
+       },
+       {
+        "id": "14",
+        "homeAway": "away",
+        "team": {
+         "id": "14",
+         "abbreviation": "LAR",
+         "displayName": "Los Angeles Rams"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "401873079",
+    "date": "2026-11-26T01:00Z",
+    "week": {
+     "number": 12,
+     "text": "Week 12"
+    },
+    "seasonType": {
+     "id": "2",
+     "type": 2,
+     "abbreviation": "reg"
+    },
+    "competitions": [
+     {
+      "status": {
+       "type": {
+        "state": "pre",
+        "completed": false,
+        "description": "Scheduled"
+       }
+      },
+      "competitors": [
+       {
+        "id": "14",
+        "homeAway": "home",
+        "team": {
+         "id": "14",
+         "abbreviation": "LAR",
+         "displayName": "Los Angeles Rams"
+        }
+       },
+       {
+        "id": "9",
+        "homeAway": "away",
+        "team": {
+         "id": "9",
+         "abbreviation": "GB",
+         "displayName": "Green Bay Packers"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "401873096",
+    "date": "2026-12-04T01:15Z",
+    "week": {
+     "number": 13,
+     "text": "Week 13"
+    },
+    "seasonType": {
+     "id": "2",
+     "type": 2,
+     "abbreviation": "reg"
+    },
+    "competitions": [
+     {
+      "status": {
+       "type": {
+        "state": "pre",
+        "completed": false,
+        "description": "Scheduled"
+       }
+      },
+      "competitors": [
+       {
+        "id": "14",
+        "homeAway": "home",
+        "team": {
+         "id": "14",
+         "abbreviation": "LAR",
+         "displayName": "Los Angeles Rams"
+        }
+       },
+       {
+        "id": "12",
+        "homeAway": "away",
+        "team": {
+         "id": "12",
+         "abbreviation": "KC",
+         "displayName": "Kansas City Chiefs"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "401873120",
+    "date": "2026-12-13T21:25Z",
+    "week": {
+     "number": 14,
+     "text": "Week 14"
+    },
+    "seasonType": {
+     "id": "2",
+     "type": 2,
+     "abbreviation": "reg"
+    },
+    "competitions": [
+     {
+      "status": {
+       "type": {
+        "state": "pre",
+        "completed": false,
+        "description": "Scheduled"
+       }
+      },
+      "competitors": [
+       {
+        "id": "25",
+        "homeAway": "home",
+        "team": {
+         "id": "25",
+         "abbreviation": "SF",
+         "displayName": "San Francisco 49ers"
+        }
+       },
+       {
+        "id": "14",
+        "homeAway": "away",
+        "team": {
+         "id": "14",
+         "abbreviation": "LAR",
+         "displayName": "Los Angeles Rams"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "401873136",
+    "date": "2026-12-20T21:25Z",
+    "week": {
+     "number": 15,
+     "text": "Week 15"
+    },
+    "seasonType": {
+     "id": "2",
+     "type": 2,
+     "abbreviation": "reg"
+    },
+    "competitions": [
+     {
+      "status": {
+       "type": {
+        "state": "pre",
+        "completed": false,
+        "description": "Scheduled"
+       }
+      },
+      "competitors": [
+       {
+        "id": "14",
+        "homeAway": "home",
+        "team": {
+         "id": "14",
+         "abbreviation": "LAR",
+         "displayName": "Los Angeles Rams"
+        }
+       },
+       {
+        "id": "6",
+        "homeAway": "away",
+        "team": {
+         "id": "6",
+         "abbreviation": "DAL",
+         "displayName": "Dallas Cowboys"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "401873143",
+    "date": "2026-12-26T01:15Z",
+    "week": {
+     "number": 16,
+     "text": "Week 16"
+    },
+    "seasonType": {
+     "id": "2",
+     "type": 2,
+     "abbreviation": "reg"
+    },
+    "competitions": [
+     {
+      "status": {
+       "type": {
+        "state": "pre",
+        "completed": false,
+        "description": "Scheduled"
+       }
+      },
+      "competitors": [
+       {
+        "id": "26",
+        "homeAway": "home",
+        "team": {
+         "id": "26",
+         "abbreviation": "SEA",
+         "displayName": "Seattle Seahawks"
+        }
+       },
+       {
+        "id": "14",
+        "homeAway": "away",
+        "team": {
+         "id": "14",
+         "abbreviation": "LAR",
+         "displayName": "Los Angeles Rams"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "401873159",
+    "date": "2027-01-03T05:00Z",
+    "week": {
+     "number": 17,
+     "text": "Week 17"
+    },
+    "seasonType": {
+     "id": "2",
+     "type": 2,
+     "abbreviation": "reg"
+    },
+    "competitions": [
+     {
+      "status": {
+       "type": {
+        "state": "pre",
+        "completed": false,
+        "description": "Scheduled"
+       }
+      },
+      "competitors": [
+       {
+        "id": "27",
+        "homeAway": "home",
+        "team": {
+         "id": "27",
+         "abbreviation": "TB",
+         "displayName": "Tampa Bay Buccaneers"
+        }
+       },
+       {
+        "id": "14",
+        "homeAway": "away",
+        "team": {
+         "id": "14",
+         "abbreviation": "LAR",
+         "displayName": "Los Angeles Rams"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "401873185",
+    "date": "2027-01-10T05:00Z",
+    "week": {
+     "number": 18,
+     "text": "Week 18"
+    },
+    "seasonType": {
+     "id": "2",
+     "type": 2,
+     "abbreviation": "reg"
+    },
+    "competitions": [
+     {
+      "status": {
+       "type": {
+        "state": "pre",
+        "completed": false,
+        "description": "Scheduled"
+       }
+      },
+      "competitors": [
+       {
+        "id": "14",
+        "homeAway": "home",
+        "team": {
+         "id": "14",
+         "abbreviation": "LAR",
+         "displayName": "Los Angeles Rams"
+        }
+       },
+       {
+        "id": "26",
+        "homeAway": "away",
+        "team": {
+         "id": "26",
+         "abbreviation": "SEA",
+         "displayName": "Seattle Seahawks"
+        }
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ "22": {
+  "team": {
+   "id": "22",
+   "abbreviation": "ARI",
+   "displayName": "Arizona Cardinals"
+  },
+  "requestedSeason": {
+   "year": 2026,
+   "type": 2,
+   "name": "Regular Season",
+   "displayName": "2026"
+  },
+  "byeWeek": 14,
+  "events": [
+   {
+    "id": "401872926",
+    "date": "2026-09-13T20:25Z",
+    "week": {
+     "number": 1,
+     "text": "Week 1"
+    },
+    "seasonType": {
+     "id": "2",
+     "type": 2,
+     "abbreviation": "reg"
+    },
+    "competitions": [
+     {
+      "status": {
+       "type": {
+        "state": "post",
+        "completed": true,
+        "description": "Final"
+       }
+      },
+      "competitors": [
+       {
+        "id": "24",
+        "homeAway": "home",
+        "winner": false,
+        "team": {
+         "id": "24",
+         "abbreviation": "LAC",
+         "displayName": "Los Angeles Chargers"
+        },
+        "score": {
+         "value": 14,
+         "displayValue": "14"
+        }
+       },
+       {
+        "id": "22",
+        "homeAway": "away",
+        "winner": true,
+        "team": {
+         "id": "22",
+         "abbreviation": "ARI",
+         "displayName": "Arizona Cardinals"
+        },
+        "score": {
+         "value": 26,
+         "displayValue": "26"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "401872943",
+    "date": "2026-09-20T20:25Z",
+    "week": {
+     "number": 2,
+     "text": "Week 2"
+    },
+    "seasonType": {
+     "id": "2",
+     "type": 2,
+     "abbreviation": "reg"
+    },
+    "competitions": [
+     {
+      "status": {
+       "type": {
+        "state": "post",
+        "completed": true,
+        "description": "Final"
+       }
+      },
+      "competitors": [
+       {
+        "id": "22",
+        "homeAway": "home",
+        "winner": false,
+        "team": {
+         "id": "22",
+         "abbreviation": "ARI",
+         "displayName": "Arizona Cardinals"
+        },
+        "score": {
+         "value": 7,
+         "displayValue": "7"
+        }
+       },
+       {
+        "id": "26",
+        "homeAway": "away",
+        "winner": true,
+        "team": {
+         "id": "26",
+         "abbreviation": "SEA",
+         "displayName": "Seattle Seahawks"
+        },
+        "score": {
+         "value": 31,
+         "displayValue": "31"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "401872958",
+    "date": "2026-09-27T20:05Z",
+    "week": {
+     "number": 3,
+     "text": "Week 3"
+    },
+    "seasonType": {
+     "id": "2",
+     "type": 2,
+     "abbreviation": "reg"
+    },
+    "competitions": [
+     {
+      "status": {
+       "type": {
+        "state": "post",
+        "completed": true,
+        "description": "Final"
+       }
+      },
+      "competitors": [
+       {
+        "id": "25",
+        "homeAway": "home",
+        "winner": true,
+        "team": {
+         "id": "25",
+         "abbreviation": "SF",
+         "displayName": "San Francisco 49ers"
+        },
+        "score": {
+         "value": 36,
+         "displayValue": "36"
+        }
+       },
+       {
+        "id": "22",
+        "homeAway": "away",
+        "winner": false,
+        "team": {
+         "id": "22",
+         "abbreviation": "ARI",
+         "displayName": "Arizona Cardinals"
+        },
+        "score": {
+         "value": 30,
+         "displayValue": "30"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "401872966",
+    "date": "2026-10-04T17:00Z",
+    "week": {
+     "number": 4,
+     "text": "Week 4"
+    },
+    "seasonType": {
+     "id": "2",
+     "type": 2,
+     "abbreviation": "reg"
+    },
+    "competitions": [
+     {
+      "status": {
+       "type": {
+        "state": "post",
+        "completed": true,
+        "description": "Final"
+       }
+      },
+      "competitors": [
+       {
+        "id": "19",
+        "homeAway": "home",
+        "winner": true,
+        "team": {
+         "id": "19",
+         "abbreviation": "NYG",
+         "displayName": "New York Giants"
+        },
+        "score": {
+         "value": 36,
+         "displayValue": "36"
+        }
+       },
+       {
+        "id": "22",
+        "homeAway": "away",
+        "winner": false,
+        "team": {
+         "id": "22",
+         "abbreviation": "ARI",
+         "displayName": "Arizona Cardinals"
+        },
+        "score": {
+         "value": 24,
+         "displayValue": "24"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "401872991",
+    "date": "2026-10-11T20:25Z",
+    "week": {
+     "number": 5,
+     "text": "Week 5"
+    },
+    "seasonType": {
+     "id": "2",
+     "type": 2,
+     "abbreviation": "reg"
+    },
+    "competitions": [
+     {
+      "status": {
+       "type": {
+        "state": "post",
+        "completed": true,
+        "description": "Final"
+       }
+      },
+      "competitors": [
+       {
+        "id": "22",
+        "homeAway": "home",
+        "winner": false,
+        "team": {
+         "id": "22",
+         "abbreviation": "ARI",
+         "displayName": "Arizona Cardinals"
+        },
+        "score": {
+         "value": 21,
+         "displayValue": "21"
+        }
+       },
+       {
+        "id": "8",
+        "homeAway": "away",
+        "winner": true,
+        "team": {
+         "id": "8",
+         "abbreviation": "DET",
+         "displayName": "Detroit Lions"
+        },
+        "score": {
+         "value": 45,
+         "displayValue": "45"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "401873004",
+    "date": "2026-10-18T20:05Z",
+    "week": {
+     "number": 6,
+     "text": "Week 6"
+    },
+    "seasonType": {
+     "id": "2",
+     "type": 2,
+     "abbreviation": "reg"
+    },
+    "competitions": [
+     {
+      "status": {
+       "type": {
+        "state": "post",
+        "completed": true,
+        "description": "Final"
+       }
+      },
+      "competitors": [
+       {
+        "id": "14",
+        "homeAway": "home",
+        "winner": false,
+        "team": {
+         "id": "14",
+         "abbreviation": "LAR",
+         "displayName": "Los Angeles Rams"
+        },
+        "score": {
+         "value": 16,
+         "displayValue": "16"
+        }
+       },
+       {
+        "id": "22",
+        "homeAway": "away",
+        "winner": true,
+        "team": {
+         "id": "22",
+         "abbreviation": "ARI",
+         "displayName": "Arizona Cardinals"
+        },
+        "score": {
+         "value": 18,
+         "displayValue": "18"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "401873019",
+    "date": "2026-10-25T20:05Z",
+    "week": {
+     "number": 7,
+     "text": "Week 7"
+    },
+    "seasonType": {
+     "id": "2",
+     "type": 2,
+     "abbreviation": "reg"
+    },
+    "competitions": [
+     {
+      "status": {
+       "type": {
+        "state": "pre",
+        "completed": false,
+        "description": "Scheduled"
+       }
+      },
+      "competitors": [
+       {
+        "id": "22",
+        "homeAway": "home",
+        "team": {
+         "id": "22",
+         "abbreviation": "ARI",
+         "displayName": "Arizona Cardinals"
+        }
+       },
+       {
+        "id": "7",
+        "homeAway": "away",
+        "team": {
+         "id": "7",
+         "abbreviation": "DEN",
+         "displayName": "Denver Broncos"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "401873024",
+    "date": "2026-11-01T18:00Z",
+    "week": {
+     "number": 8,
+     "text": "Week 8"
+    },
+    "seasonType": {
+     "id": "2",
+     "type": 2,
+     "abbreviation": "reg"
+    },
+    "competitions": [
+     {
+      "status": {
+       "type": {
+        "state": "pre",
+        "completed": false,
+        "description": "Scheduled"
+       }
+      },
+      "competitors": [
+       {
+        "id": "6",
+        "homeAway": "home",
+        "team": {
+         "id": "6",
+         "abbreviation": "DAL",
+         "displayName": "Dallas Cowboys"
+        }
+       },
+       {
+        "id": "22",
+        "homeAway": "away",
+        "team": {
+         "id": "22",
+         "abbreviation": "ARI",
+         "displayName": "Arizona Cardinals"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "401873048",
+    "date": "2026-11-08T21:25Z",
+    "week": {
+     "number": 9,
+     "text": "Week 9"
+    },
+    "seasonType": {
+     "id": "2",
+     "type": 2,
+     "abbreviation": "reg"
+    },
+    "competitions": [
+     {
+      "status": {
+       "type": {
+        "state": "pre",
+        "completed": false,
+        "description": "Scheduled"
+       }
+      },
+      "competitors": [
+       {
+        "id": "26",
+        "homeAway": "home",
+        "team": {
+         "id": "26",
+         "abbreviation": "SEA",
+         "displayName": "Seattle Seahawks"
+        }
+       },
+       {
+        "id": "22",
+        "homeAway": "away",
+        "team": {
+         "id": "22",
+         "abbreviation": "ARI",
+         "displayName": "Arizona Cardinals"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "401873061",
+    "date": "2026-11-15T21:05Z",
+    "week": {
+     "number": 10,
+     "text": "Week 10"
+    },
+    "seasonType": {
+     "id": "2",
+     "type": 2,
+     "abbreviation": "reg"
+    },
+    "competitions": [
+     {
+      "status": {
+       "type": {
+        "state": "pre",
+        "completed": false,
+        "description": "Scheduled"
+       }
+      },
+      "competitors": [
+       {
+        "id": "22",
+        "homeAway": "home",
+        "team": {
+         "id": "22",
+         "abbreviation": "ARI",
+         "displayName": "Arizona Cardinals"
+        }
+       },
+       {
+        "id": "14",
+        "homeAway": "away",
+        "team": {
+         "id": "14",
+         "abbreviation": "LAR",
+         "displayName": "Los Angeles Rams"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "401873067",
+    "date": "2026-11-22T18:00Z",
+    "week": {
+     "number": 11,
+     "text": "Week 11"
+    },
+    "seasonType": {
+     "id": "2",
+     "type": 2,
+     "abbreviation": "reg"
+    },
+    "competitions": [
+     {
+      "status": {
+       "type": {
+        "state": "pre",
+        "completed": false,
+        "description": "Scheduled"
+       }
+      },
+      "competitors": [
+       {
+        "id": "12",
+        "homeAway": "home",
+        "team": {
+         "id": "12",
+         "abbreviation": "KC",
+         "displayName": "Kansas City Chiefs"
+        }
+       },
+       {
+        "id": "22",
+        "homeAway": "away",
+        "team": {
+         "id": "22",
+         "abbreviation": "ARI",
+         "displayName": "Arizona Cardinals"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "401873092",
+    "date": "2026-11-29T21:25Z",
+    "week": {
+     "number": 12,
+     "text": "Week 12"
+    },
+    "seasonType": {
+     "id": "2",
+     "type": 2,
+     "abbreviation": "reg"
+    },
+    "competitions": [
+     {
+      "status": {
+       "type": {
+        "state": "pre",
+        "completed": false,
+        "description": "Scheduled"
+       }
+      },
+      "competitors": [
+       {
+        "id": "22",
+        "homeAway": "home",
+        "team": {
+         "id": "22",
+         "abbreviation": "ARI",
+         "displayName": "Arizona Cardinals"
+        }
+       },
+       {
+        "id": "28",
+        "homeAway": "away",
+        "team": {
+         "id": "28",
+         "abbreviation": "WSH",
+         "displayName": "Washington Commanders"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "401873104",
+    "date": "2026-12-06T21:05Z",
+    "week": {
+     "number": 13,
+     "text": "Week 13"
+    },
+    "seasonType": {
+     "id": "2",
+     "type": 2,
+     "abbreviation": "reg"
+    },
+    "competitions": [
+     {
+      "status": {
+       "type": {
+        "state": "pre",
+        "completed": false,
+        "description": "Scheduled"
+       }
+      },
+      "competitors": [
+       {
+        "id": "22",
+        "homeAway": "home",
+        "team": {
+         "id": "22",
+         "abbreviation": "ARI",
+         "displayName": "Arizona Cardinals"
+        }
+       },
+       {
+        "id": "21",
+        "homeAway": "away",
+        "team": {
+         "id": "21",
+         "abbreviation": "PHI",
+         "displayName": "Philadelphia Eagles"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "401873135",
+    "date": "2026-12-20T21:05Z",
+    "week": {
+     "number": 15,
+     "text": "Week 15"
+    },
+    "seasonType": {
+     "id": "2",
+     "type": 2,
+     "abbreviation": "reg"
+    },
+    "competitions": [
+     {
+      "status": {
+       "type": {
+        "state": "pre",
+        "completed": false,
+        "description": "Scheduled"
+       }
+      },
+      "competitors": [
+       {
+        "id": "22",
+        "homeAway": "home",
+        "team": {
+         "id": "22",
+         "abbreviation": "ARI",
+         "displayName": "Arizona Cardinals"
+        }
+       },
+       {
+        "id": "20",
+        "homeAway": "away",
+        "team": {
+         "id": "20",
+         "abbreviation": "NYJ",
+         "displayName": "New York Jets"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "401873148",
+    "date": "2026-12-27T18:00Z",
+    "week": {
+     "number": 16,
+     "text": "Week 16"
+    },
+    "seasonType": {
+     "id": "2",
+     "type": 2,
+     "abbreviation": "reg"
+    },
+    "competitions": [
+     {
+      "status": {
+       "type": {
+        "state": "pre",
+        "completed": false,
+        "description": "Scheduled"
+       }
+      },
+      "competitors": [
+       {
+        "id": "18",
+        "homeAway": "home",
+        "team": {
+         "id": "18",
+         "abbreviation": "NO",
+         "displayName": "New Orleans Saints"
+        }
+       },
+       {
+        "id": "22",
+        "homeAway": "away",
+        "team": {
+         "id": "22",
+         "abbreviation": "ARI",
+         "displayName": "Arizona Cardinals"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "401873168",
+    "date": "2027-01-03T21:05Z",
+    "week": {
+     "number": 17,
+     "text": "Week 17"
+    },
+    "seasonType": {
+     "id": "2",
+     "type": 2,
+     "abbreviation": "reg"
+    },
+    "competitions": [
+     {
+      "status": {
+       "type": {
+        "state": "pre",
+        "completed": false,
+        "description": "Scheduled"
+       }
+      },
+      "competitors": [
+       {
+        "id": "22",
+        "homeAway": "home",
+        "team": {
+         "id": "22",
+         "abbreviation": "ARI",
+         "displayName": "Arizona Cardinals"
+        }
+       },
+       {
+        "id": "13",
+        "homeAway": "away",
+        "team": {
+         "id": "13",
+         "abbreviation": "LV",
+         "displayName": "Las Vegas Raiders"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "401873184",
+    "date": "2027-01-10T05:00Z",
+    "week": {
+     "number": 18,
+     "text": "Week 18"
+    },
+    "seasonType": {
+     "id": "2",
+     "type": 2,
+     "abbreviation": "reg"
+    },
+    "competitions": [
+     {
+      "status": {
+       "type": {
+        "state": "pre",
+        "completed": false,
+        "description": "Scheduled"
+       }
+      },
+      "competitors": [
+       {
+        "id": "22",
+        "homeAway": "home",
+        "team": {
+         "id": "22",
+         "abbreviation": "ARI",
+         "displayName": "Arizona Cardinals"
+        }
+       },
+       {
+        "id": "25",
+        "homeAway": "away",
+        "team": {
+         "id": "25",
+         "abbreviation": "SF",
+         "displayName": "San Francisco 49ers"
+        }
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ }
+}

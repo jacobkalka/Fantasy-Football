@@ -9,7 +9,7 @@ import { ErrorState, SkeletonRows } from "@/components/ui/States";
 import { visibleTeamColor } from "@/lib/color";
 import { searchPlayers, usePlayers } from "@/lib/hooks/usePlayers";
 import { useTeams } from "@/lib/hooks/useTeams";
-import { gsap } from "@/lib/motion/gsap";
+import { gsap, prefersReducedMotion } from "@/lib/motion/gsap";
 import type { Player, Position } from "@/lib/providers/types";
 import { rosterActions, useRoster } from "@/lib/roster/store";
 
@@ -46,7 +46,7 @@ export function PlayerSearch() {
   function add(player: Player) {
     const result = rosterActions.add(player);
     setMessage({ text: result.ok ? `${player.name} added` : (result.reason ?? "Couldn't add"), ok: result.ok });
-    if (status.current && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    if (status.current && !prefersReducedMotion()) {
       gsap.fromTo(status.current, { autoAlpha: 0, y: -4 }, { autoAlpha: 1, y: 0, duration: 0.2 });
     }
     window.setTimeout(() => setMessage(null), 2200);

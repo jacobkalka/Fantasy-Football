@@ -1,0 +1,381 @@
+{
+ "8439": {
+  "id": "8439",
+  "fullName": "Aaron Rodgers",
+  "displayName": "Aaron Rodgers",
+  "weight": 223,
+  "displayWeight": "223 lbs",
+  "height": 74,
+  "displayHeight": "6' 2\"",
+  "age": 42,
+  "dateOfBirth": "1983-12-02T08:00Z",
+  "debutYear": 2005,
+  "birthPlace": {
+   "city": "Chico",
+   "state": "CA",
+   "country": "USA"
+  },
+  "jersey": "8",
+  "experience": {
+   "years": 22
+  },
+  "active": true,
+  "status": {
+   "id": "1",
+   "name": "Active",
+   "type": "active",
+   "abbreviation": "Active"
+  },
+  "position": {
+   "id": "8",
+   "abbreviation": "QB"
+  },
+  "team": {
+   "$ref": "http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/seasons/2026/teams/23?lang=en&region=us"
+  },
+  "draft": {
+   "displayText": "Year: 2005 Round: 1 Pick: 24",
+   "round": 1,
+   "year": 2005,
+   "selection": 24,
+   "team": {
+    "$ref": "http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/seasons/2005/teams/9?lang=en&region=us"
+   }
+  }
+ },
+ "15795": {
+  "id": "15795",
+  "fullName": "DeAndre Hopkins",
+  "displayName": "DeAndre Hopkins",
+  "weight": 210,
+  "displayWeight": "210 lbs",
+  "height": 73,
+  "displayHeight": "6' 1\"",
+  "age": 34,
+  "dateOfBirth": "1992-06-06T07:00Z",
+  "debutYear": 2013,
+  "birthPlace": {
+   "city": "Central",
+   "state": "SC",
+   "country": "USA"
+  },
+  "jersey": "10",
+  "experience": {
+   "years": 13
+  },
+  "active": true,
+  "status": {
+   "id": "9",
+   "name": "Free Agent",
+   "type": "free-agent",
+   "abbreviation": "FA"
+  },
+  "position": {
+   "id": "1",
+   "abbreviation": "WR"
+  },
+  "team": {
+   "$ref": "http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/seasons/2026/teams/33?lang=en&region=us"
+  },
+  "draft": {
+   "displayText": "Year: 2013 Round: 1 Pick: 27",
+   "round": 1,
+   "year": 2013,
+   "selection": 27,
+   "team": {
+    "$ref": "http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/seasons/2013/teams/34?lang=en&region=us"
+   }
+  }
+ },
+ "15847": {
+  "id": "15847",
+  "fullName": "Travis Kelce",
+  "displayName": "Travis Kelce",
+  "weight": 250,
+  "displayWeight": "250 lbs",
+  "height": 77,
+  "displayHeight": "6' 5\"",
+  "age": 37,
+  "dateOfBirth": "1989-10-05T07:00Z",
+  "debutYear": 2013,
+  "birthPlace": {
+   "city": "Cleveland Heights",
+   "state": "OH",
+   "country": "USA"
+  },
+  "jersey": "87",
+  "experience": {
+   "years": 14
+  },
+  "active": true,
+  "status": {
+   "id": "1",
+   "name": "Active",
+   "type": "active",
+   "abbreviation": "Active"
+  },
+  "position": {
+   "id": "7",
+   "abbreviation": "TE"
+  },
+  "team": {
+   "$ref": "http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/seasons/2026/teams/12?lang=en&region=us"
+  },
+  "draft": {
+   "displayText": "Year: 2013 Round: 3 Pick: 63",
+   "round": 3,
+   "year": 2013,
+   "selection": 63,
+   "team": {
+    "$ref": "http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/seasons/2013/teams/12?lang=en&region=us"
+   }
+  }
+ },
+ "16800": {
+  "id": "16800",
+  "fullName": "Davante Adams",
+  "displayName": "Davante Adams",
+  "weight": 204,
+  "displayWeight": "204 lbs",
+  "height": 73,
+  "displayHeight": "6' 1\"",
+  "age": 33,
+  "dateOfBirth": "1992-12-24T08:00Z",
+  "debutYear": 2014,
+  "birthPlace": {
+   "city": "Palo Alto",
+   "state": "CA",
+   "country": "USA"
+  },
+  "jersey": "17",
+  "experience": {
+   "years": 13
+  },
+  "active": true,
+  "status": {
+   "id": "13",
+   "name": "Day-To-Day",
+   "type": "day-to-day",
+   "abbreviation": "Day-To-Day"
+  },
+  "position": {
+   "id": "1",
+   "abbreviation": "WR"
+  },
+  "team": {
+   "$ref": "http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/seasons/2026/teams/14?lang=en&region=us"
+  },
+  "draft": {
+   "displayText": "Year: 2014 Round: 2 Pick: 53",
+   "round": 2,
+   "year": 2014,
+   "selection": 53,
+   "team": {
+    "$ref": "http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/seasons/2014/teams/9?lang=en&region=us"
+   }
+  }
+ },
+ "3139477": {
+  "id": "3139477",
+  "fullName": "Patrick Mahomes",
+  "displayName": "Patrick Mahomes",
+  "weight": 225,
+  "displayWeight": "225 lbs",
+  "height": 74,
+  "displayHeight": "6' 2\"",
+  "age": 31,
+  "dateOfBirth": "1995-09-17T07:00Z",
+  "debutYear": 2017,
+  "birthPlace": {
+   "city": "Whitehouse",
+   "state": "TX",
+   "country": "USA"
+  },
+  "jersey": "15",
+  "experience": {
+   "years": 10
+  },
+  "active": true,
+  "status": {
+   "id": "1",
+   "name": "Active",
+   "type": "active",
+   "abbreviation": "Active"
+  },
+  "position": {
+   "id": "8",
+   "abbreviation": "QB"
+  },
+  "team": {
+   "$ref": "http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/seasons/2026/teams/12?lang=en&region=us"
+  },
+  "draft": {
+   "displayText": "Year: 2017 Round: 1 Pick: 10",
+   "round": 1,
+   "year": 2017,
+   "selection": 10,
+   "team": {
+    "$ref": "http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/seasons/2017/teams/12?lang=en&region=us"
+   }
+  }
+ },
+ "3953687": {
+  "id": "3953687",
+  "fullName": "Brandon Aubrey",
+  "displayName": "Brandon Aubrey",
+  "weight": 218,
+  "displayWeight": "218 lbs",
+  "height": 75,
+  "displayHeight": "6' 3\"",
+  "age": 31,
+  "dateOfBirth": "1995-03-14T08:00Z",
+  "birthPlace": {},
+  "jersey": "17",
+  "experience": {
+   "years": 4
+  },
+  "active": true,
+  "status": {
+   "id": "1",
+   "name": "Active",
+   "type": "active",
+   "abbreviation": "Active"
+  },
+  "position": {
+   "id": "22",
+   "abbreviation": "PK"
+  },
+  "team": {
+   "$ref": "http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/seasons/2026/teams/6?lang=en&region=us"
+  }
+ },
+ "4362628": {
+  "id": "4362628",
+  "fullName": "Ja'Marr Chase",
+  "displayName": "Ja'Marr Chase",
+  "weight": 205,
+  "displayWeight": "205 lbs",
+  "height": 72,
+  "displayHeight": "6' 0\"",
+  "age": 26,
+  "dateOfBirth": "2000-03-01T08:00Z",
+  "birthPlace": {
+   "city": "Harvey",
+   "state": "LA",
+   "country": "USA"
+  },
+  "jersey": "1",
+  "experience": {
+   "years": 6
+  },
+  "active": true,
+  "status": {
+   "id": "1",
+   "name": "Active",
+   "type": "active",
+   "abbreviation": "Active"
+  },
+  "position": {
+   "id": "1",
+   "abbreviation": "WR"
+  },
+  "team": {
+   "$ref": "http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/seasons/2026/teams/4?lang=en&region=us"
+  },
+  "draft": {
+   "displayText": "Year: 2021 Round: 1 Pick: 5",
+   "round": 1,
+   "year": 2021,
+   "selection": 5,
+   "team": {
+    "$ref": "http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/seasons/2021/teams/4?lang=en&region=us"
+   }
+  }
+ },
+ "4430807": {
+  "id": "4430807",
+  "fullName": "Bijan Robinson",
+  "displayName": "Bijan Robinson",
+  "weight": 215,
+  "displayWeight": "215 lbs",
+  "height": 71,
+  "displayHeight": "5' 11\"",
+  "age": 24,
+  "dateOfBirth": "2002-01-30T08:00Z",
+  "birthPlace": {
+   "city": "Tucson",
+   "state": "AZ",
+   "country": "USA"
+  },
+  "jersey": "7",
+  "experience": {
+   "years": 4
+  },
+  "active": true,
+  "status": {
+   "id": "1",
+   "name": "Active",
+   "type": "active",
+   "abbreviation": "Active"
+  },
+  "position": {
+   "id": "9",
+   "abbreviation": "RB"
+  },
+  "team": {
+   "$ref": "http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/seasons/2026/teams/1?lang=en&region=us"
+  },
+  "draft": {
+   "displayText": "Year: 2023 Round: 1 Pick: 8",
+   "round": 1,
+   "year": 2023,
+   "selection": 8,
+   "team": {
+    "$ref": "http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/seasons/2023/teams/1?lang=en&region=us"
+   }
+  }
+ },
+ "4870808": {
+  "id": "4870808",
+  "fullName": "Jeremiyah Love",
+  "displayName": "Jeremiyah Love",
+  "weight": 212,
+  "displayWeight": "212 lbs",
+  "height": 72,
+  "displayHeight": "6' 0\"",
+  "age": 21,
+  "dateOfBirth": "2005-05-31T07:00Z",
+  "birthPlace": {
+   "city": "St. Louis",
+   "state": "MO",
+   "country": "USA"
+  },
+  "jersey": "4",
+  "experience": {
+   "years": 0
+  },
+  "active": true,
+  "status": {
+   "id": "1",
+   "name": "Active",
+   "type": "active",
+   "abbreviation": "Active"
+  },
+  "position": {
+   "id": "9",
+   "abbreviation": "RB"
+  },
+  "team": {
+   "$ref": "http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/seasons/2026/teams/22?lang=en&region=us"
+  },
+  "draft": {
+   "displayText": "Year: 2026 Round: 1 Pick: 3",
+   "round": 1,
+   "year": 2026,
+   "selection": 3,
+   "team": {
+    "$ref": "http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/seasons/2026/teams/22?lang=en&region=us"
+   }
+  }
+ }
+}

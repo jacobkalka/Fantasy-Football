@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { gsap, MOTION, useGSAP } from "@/lib/motion/gsap";
+import { gsap, MOTION, prefersReducedMotion, useGSAP } from "@/lib/motion/gsap";
 
 /**
  * A number that rolls from its old value to its new one when it changes (a team
@@ -36,7 +36,7 @@ export function CountUp({
     () => {
       const el = ref.current;
       if (!el || shown.current === value) return;
-      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const reduce = prefersReducedMotion();
       const proxy = { n: shown.current };
       shown.current = value;
       if (reduce) {

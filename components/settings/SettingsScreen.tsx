@@ -86,8 +86,21 @@ export function SettingsScreen() {
               size="sm"
             />
           </Row>
-          <Row label="Motion" hint="FantasyLab follows your device's “Reduce motion” setting." >
-            <span className="text-[13px] text-muted">Automatic</span>
+          <Row
+            label="Animations"
+            hint="Full always shows every animation. Match device follows your phone's Reduce Motion switch."
+          >
+            <Segmented
+              options={[
+                { value: "full", label: "Full" },
+                { value: "reduced", label: "Reduced" },
+                { value: "device", label: "Match device" },
+              ]}
+              value={ready ? settings.motion : "device"}
+              onChange={settingsActions.setMotion}
+              label="Animations"
+              size="sm"
+            />
           </Row>
         </div>
       </Card>

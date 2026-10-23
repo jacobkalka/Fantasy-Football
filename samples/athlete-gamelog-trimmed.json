@@ -1,0 +1,2015 @@
+{
+ "15847": {
+  "names": [
+   "receptions",
+   "receivingTargets",
+   "receivingYards",
+   "yardsPerReception",
+   "receivingTouchdowns",
+   "longReception",
+   "rushingAttempts",
+   "rushingYards",
+   "yardsPerRushAttempt",
+   "longRushing",
+   "rushingTouchdowns",
+   "fumbles",
+   "fumblesLost",
+   "fumblesForced",
+   "kicksBlocked"
+  ],
+  "labels": [
+   "REC",
+   "TGTS",
+   "YDS",
+   "AVG",
+   "TD",
+   "LNG",
+   "CAR",
+   "YDS",
+   "AVG",
+   "LNG",
+   "TD",
+   "FUM",
+   "LST",
+   "FF",
+   "KB"
+  ],
+  "events": {
+   "401872931": {
+    "id": "401872931",
+    "week": 1,
+    "atVs": "vs",
+    "gameDate": "2026-09-15T00:15:00.000+00:00",
+    "score": "31-10",
+    "homeTeamId": "12",
+    "awayTeamId": "7",
+    "homeTeamScore": "31",
+    "awayTeamScore": "10",
+    "gameResult": "W",
+    "opponent": {
+     "id": "7",
+     "abbreviation": "DEN",
+     "displayName": "Denver Broncos"
+    },
+    "team": {
+     "id": "12",
+     "abbreviation": "KC"
+    }
+   },
+   "401872945": {
+    "id": "401872945",
+    "week": 2,
+    "atVs": "vs",
+    "gameDate": "2026-09-21T00:20:00.000+00:00",
+    "score": "33-30 OT",
+    "homeTeamId": "12",
+    "awayTeamId": "11",
+    "homeTeamScore": "33",
+    "awayTeamScore": "30",
+    "gameResult": "W",
+    "opponent": {
+     "id": "11",
+     "abbreviation": "IND",
+     "displayName": "Indianapolis Colts"
+    },
+    "team": {
+     "id": "12",
+     "abbreviation": "KC"
+    }
+   },
+   "401872952": {
+    "id": "401872952",
+    "week": 3,
+    "atVs": "@",
+    "gameDate": "2026-09-27T17:00:00.000+00:00",
+    "score": "24-10",
+    "homeTeamId": "15",
+    "awayTeamId": "12",
+    "homeTeamScore": "10",
+    "awayTeamScore": "24",
+    "gameResult": "W",
+    "opponent": {
+     "id": "15",
+     "abbreviation": "MIA",
+     "displayName": "Miami Dolphins"
+    },
+    "team": {
+     "id": "12",
+     "abbreviation": "KC"
+    }
+   },
+   "401872976": {
+    "id": "401872976",
+    "week": 4,
+    "atVs": "@",
+    "gameDate": "2026-10-04T20:25:00.000+00:00",
+    "score": "30-27",
+    "homeTeamId": "13",
+    "awayTeamId": "12",
+    "homeTeamScore": "27",
+    "awayTeamScore": "30",
+    "gameResult": "W",
+    "opponent": {
+     "id": "13",
+     "abbreviation": "LV",
+     "displayName": "Las Vegas Raiders"
+    },
+    "team": {
+     "id": "12",
+     "abbreviation": "KC"
+    }
+   },
+   "401873006": {
+    "id": "401873006",
+    "week": 6,
+    "atVs": "vs",
+    "gameDate": "2026-10-18T20:25:00.000+00:00",
+    "score": "22-6",
+    "homeTeamId": "12",
+    "awayTeamId": "24",
+    "homeTeamScore": "22",
+    "awayTeamScore": "6",
+    "gameResult": "W",
+    "opponent": {
+     "id": "24",
+     "abbreviation": "LAC",
+     "displayName": "Los Angeles Chargers"
+    },
+    "team": {
+     "id": "12",
+     "abbreviation": "KC"
+    }
+   }
+  },
+  "seasonTypes": [
+   {
+    "displayName": "2026 Regular Season",
+    "categories": [
+     {
+      "displayName": "Regular Season Stats",
+      "type": "event",
+      "splitType": "2",
+      "events": [
+       {
+        "eventId": "401873006",
+        "stats": [
+         "4",
+         "5",
+         "53",
+         "13.3",
+         "0",
+         "24",
+         "0",
+         "0",
+         "0.0",
+         "0",
+         "0",
+         "0",
+         "0",
+         "-",
+         "-"
+        ]
+       },
+       {
+        "eventId": "401872976",
+        "stats": [
+         "2",
+         "4",
+         "15",
+         "7.5",
+         "0",
+         "10",
+         "0",
+         "0",
+         "0.0",
+         "0",
+         "0",
+         "0",
+         "0",
+         "-",
+         "-"
+        ]
+       },
+       {
+        "eventId": "401872952",
+        "stats": [
+         "2",
+         "2",
+         "59",
+         "29.5",
+         "1",
+         "48",
+         "0",
+         "0",
+         "0.0",
+         "0",
+         "0",
+         "0",
+         "0",
+         "-",
+         "-"
+        ]
+       },
+       {
+        "eventId": "401872945",
+        "stats": [
+         "9",
+         "11",
+         "101",
+         "11.2",
+         "1",
+         "18",
+         "0",
+         "0",
+         "0.0",
+         "0",
+         "0",
+         "0",
+         "0",
+         "-",
+         "-"
+        ]
+       },
+       {
+        "eventId": "401872931",
+        "stats": [
+         "3",
+         "5",
+         "71",
+         "23.7",
+         "0",
+         "59",
+         "0",
+         "0",
+         "0.0",
+         "0",
+         "0",
+         "0",
+         "0",
+         "-",
+         "-"
+        ]
+       }
+      ],
+      "totals": [
+       "20",
+       "28",
+       "299",
+       "14.9",
+       "2",
+       "59",
+       "0",
+       "0",
+       "0.0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "-",
+       "-"
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ "16800": {
+  "names": [
+   "receptions",
+   "receivingTargets",
+   "receivingYards",
+   "yardsPerReception",
+   "receivingTouchdowns",
+   "longReception",
+   "rushingAttempts",
+   "rushingYards",
+   "yardsPerRushAttempt",
+   "longRushing",
+   "rushingTouchdowns",
+   "fumbles",
+   "fumblesLost",
+   "fumblesForced",
+   "kicksBlocked"
+  ],
+  "labels": [
+   "REC",
+   "TGTS",
+   "YDS",
+   "AVG",
+   "TD",
+   "LNG",
+   "CAR",
+   "YDS",
+   "AVG",
+   "LNG",
+   "TD",
+   "FUM",
+   "LST",
+   "FF",
+   "KB"
+  ],
+  "events": {
+   "401872657": {
+    "id": "401872657",
+    "week": 1,
+    "atVs": "vs",
+    "gameDate": "2026-09-11T00:35:00.000+00:00",
+    "score": "27-7",
+    "homeTeamId": "14",
+    "awayTeamId": "25",
+    "homeTeamScore": "7",
+    "awayTeamScore": "27",
+    "gameResult": "L",
+    "opponent": {
+     "id": "25",
+     "abbreviation": "SF",
+     "displayName": "San Francisco 49ers"
+    },
+    "team": {
+     "id": "14",
+     "abbreviation": "LAR"
+    }
+   },
+   "401872947": {
+    "id": "401872947",
+    "week": 2,
+    "atVs": "vs",
+    "gameDate": "2026-09-22T00:15:00.000+00:00",
+    "score": "28-6",
+    "homeTeamId": "14",
+    "awayTeamId": "19",
+    "homeTeamScore": "28",
+    "awayTeamScore": "6",
+    "gameResult": "W",
+    "opponent": {
+     "id": "19",
+     "abbreviation": "NYG",
+     "displayName": "New York Giants"
+    },
+    "team": {
+     "id": "14",
+     "abbreviation": "LAR"
+    }
+   },
+   "401872962": {
+    "id": "401872962",
+    "week": 3,
+    "atVs": "@",
+    "gameDate": "2026-09-28T00:20:00.000+00:00",
+    "score": "30-26",
+    "homeTeamId": "7",
+    "awayTeamId": "14",
+    "homeTeamScore": "30",
+    "awayTeamScore": "26",
+    "gameResult": "L",
+    "opponent": {
+     "id": "7",
+     "abbreviation": "DEN",
+     "displayName": "Denver Broncos"
+    },
+    "team": {
+     "id": "14",
+     "abbreviation": "LAR"
+    }
+   },
+   "401872970": {
+    "id": "401872970",
+    "week": 4,
+    "atVs": "@",
+    "gameDate": "2026-10-04T17:00:00.000+00:00",
+    "score": "24-20",
+    "homeTeamId": "21",
+    "awayTeamId": "14",
+    "homeTeamScore": "20",
+    "awayTeamScore": "24",
+    "gameResult": "W",
+    "opponent": {
+     "id": "21",
+     "abbreviation": "PHI",
+     "displayName": "Philadelphia Eagles"
+    },
+    "team": {
+     "id": "14",
+     "abbreviation": "LAR"
+    }
+   },
+   "401872994": {
+    "id": "401872994",
+    "week": 5,
+    "atVs": "vs",
+    "gameDate": "2026-10-13T00:15:00.000+00:00",
+    "score": "37-34 OT",
+    "homeTeamId": "14",
+    "awayTeamId": "2",
+    "homeTeamScore": "34",
+    "awayTeamScore": "37",
+    "gameResult": "L",
+    "opponent": {
+     "id": "2",
+     "abbreviation": "BUF",
+     "displayName": "Buffalo Bills"
+    },
+    "team": {
+     "id": "14",
+     "abbreviation": "LAR"
+    }
+   },
+   "401873004": {
+    "id": "401873004",
+    "week": 6,
+    "atVs": "vs",
+    "gameDate": "2026-10-18T20:05:00.000+00:00",
+    "score": "18-16",
+    "homeTeamId": "14",
+    "awayTeamId": "22",
+    "homeTeamScore": "16",
+    "awayTeamScore": "18",
+    "gameResult": "L",
+    "opponent": {
+     "id": "22",
+     "abbreviation": "ARI",
+     "displayName": "Arizona Cardinals"
+    },
+    "team": {
+     "id": "14",
+     "abbreviation": "LAR"
+    }
+   }
+  },
+  "seasonTypes": [
+   {
+    "displayName": "2026 Regular Season",
+    "categories": [
+     {
+      "displayName": "Regular Season Stats",
+      "type": "event",
+      "splitType": "2",
+      "events": [
+       {
+        "eventId": "401873004",
+        "stats": [
+         "3",
+         "4",
+         "39",
+         "13.0",
+         "0",
+         "16",
+         "0",
+         "0",
+         "0.0",
+         "0",
+         "0",
+         "0",
+         "0",
+         "-",
+         "-"
+        ]
+       },
+       {
+        "eventId": "401872994",
+        "stats": [
+         "5",
+         "7",
+         "51",
+         "10.2",
+         "2",
+         "15",
+         "0",
+         "0",
+         "0.0",
+         "0",
+         "0",
+         "0",
+         "0",
+         "-",
+         "-"
+        ]
+       },
+       {
+        "eventId": "401872970",
+        "stats": [
+         "4",
+         "9",
+         "32",
+         "8.0",
+         "0",
+         "12",
+         "0",
+         "0",
+         "0.0",
+         "0",
+         "0",
+         "0",
+         "0",
+         "-",
+         "-"
+        ]
+       },
+       {
+        "eventId": "401872962",
+        "stats": [
+         "7",
+         "13",
+         "137",
+         "19.6",
+         "0",
+         "49",
+         "0",
+         "0",
+         "0.0",
+         "0",
+         "0",
+         "0",
+         "0",
+         "-",
+         "-"
+        ]
+       },
+       {
+        "eventId": "401872947",
+        "stats": [
+         "8",
+         "10",
+         "195",
+         "24.4",
+         "2",
+         "64",
+         "0",
+         "0",
+         "0.0",
+         "0",
+         "0",
+         "0",
+         "0",
+         "0",
+         "0"
+        ]
+       },
+       {
+        "eventId": "401872657",
+        "stats": [
+         "3",
+         "6",
+         "26",
+         "8.7",
+         "0",
+         "13",
+         "0",
+         "0",
+         "0.0",
+         "0",
+         "0",
+         "0",
+         "0",
+         "-",
+         "-"
+        ]
+       }
+      ],
+      "totals": [
+       "30",
+       "49",
+       "480",
+       "16.0",
+       "4",
+       "64",
+       "0",
+       "0",
+       "0.0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "0"
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ "3139477": {
+  "names": [
+   "completions",
+   "passingAttempts",
+   "passingYards",
+   "completionPct",
+   "yardsPerPassAttempt",
+   "passingTouchdowns",
+   "interceptions",
+   "longPassing",
+   "sacks",
+   "QBRating",
+   "adjQBR",
+   "rushingAttempts",
+   "rushingYards",
+   "yardsPerRushAttempt",
+   "rushingTouchdowns",
+   "longRushing"
+  ],
+  "labels": [
+   "CMP",
+   "ATT",
+   "YDS",
+   "CMP%",
+   "AVG",
+   "TD",
+   "INT",
+   "LNG",
+   "SACK",
+   "RTG",
+   "QBR",
+   "CAR",
+   "YDS",
+   "AVG",
+   "TD",
+   "LNG"
+  ],
+  "events": {
+   "401872931": {
+    "id": "401872931",
+    "week": 1,
+    "atVs": "vs",
+    "gameDate": "2026-09-15T00:15:00.000+00:00",
+    "score": "31-10",
+    "homeTeamId": "12",
+    "awayTeamId": "7",
+    "homeTeamScore": "31",
+    "awayTeamScore": "10",
+    "gameResult": "W",
+    "opponent": {
+     "id": "7",
+     "abbreviation": "DEN",
+     "displayName": "Denver Broncos"
+    },
+    "team": {
+     "id": "12",
+     "abbreviation": "KC"
+    }
+   },
+   "401872945": {
+    "id": "401872945",
+    "week": 2,
+    "atVs": "vs",
+    "gameDate": "2026-09-21T00:20:00.000+00:00",
+    "score": "33-30 OT",
+    "homeTeamId": "12",
+    "awayTeamId": "11",
+    "homeTeamScore": "33",
+    "awayTeamScore": "30",
+    "gameResult": "W",
+    "opponent": {
+     "id": "11",
+     "abbreviation": "IND",
+     "displayName": "Indianapolis Colts"
+    },
+    "team": {
+     "id": "12",
+     "abbreviation": "KC"
+    }
+   },
+   "401872952": {
+    "id": "401872952",
+    "week": 3,
+    "atVs": "@",
+    "gameDate": "2026-09-27T17:00:00.000+00:00",
+    "score": "24-10",
+    "homeTeamId": "15",
+    "awayTeamId": "12",
+    "homeTeamScore": "10",
+    "awayTeamScore": "24",
+    "gameResult": "W",
+    "opponent": {
+     "id": "15",
+     "abbreviation": "MIA",
+     "displayName": "Miami Dolphins"
+    },
+    "team": {
+     "id": "12",
+     "abbreviation": "KC"
+    }
+   },
+   "401872976": {
+    "id": "401872976",
+    "week": 4,
+    "atVs": "@",
+    "gameDate": "2026-10-04T20:25:00.000+00:00",
+    "score": "30-27",
+    "homeTeamId": "13",
+    "awayTeamId": "12",
+    "homeTeamScore": "27",
+    "awayTeamScore": "30",
+    "gameResult": "W",
+    "opponent": {
+     "id": "13",
+     "abbreviation": "LV",
+     "displayName": "Las Vegas Raiders"
+    },
+    "team": {
+     "id": "12",
+     "abbreviation": "KC"
+    }
+   },
+   "401873006": {
+    "id": "401873006",
+    "week": 6,
+    "atVs": "vs",
+    "gameDate": "2026-10-18T20:25:00.000+00:00",
+    "score": "22-6",
+    "homeTeamId": "12",
+    "awayTeamId": "24",
+    "homeTeamScore": "22",
+    "awayTeamScore": "6",
+    "gameResult": "W",
+    "opponent": {
+     "id": "24",
+     "abbreviation": "LAC",
+     "displayName": "Los Angeles Chargers"
+    },
+    "team": {
+     "id": "12",
+     "abbreviation": "KC"
+    }
+   }
+  },
+  "seasonTypes": [
+   {
+    "displayName": "2026 Regular Season",
+    "categories": [
+     {
+      "displayName": "Regular Season Stats",
+      "type": "event",
+      "splitType": "2",
+      "events": [
+       {
+        "eventId": "401873006",
+        "stats": [
+         "23",
+         "30",
+         "272",
+         "76.7",
+         "9.1",
+         "0",
+         "1",
+         "31",
+         "0",
+         "89.9",
+         "69.4",
+         "5",
+         "16",
+         "3.2",
+         "0",
+         "10"
+        ]
+       },
+       {
+        "eventId": "401872976",
+        "stats": [
+         "15",
+         "30",
+         "225",
+         "50.0",
+         "7.5",
+         "2",
+         "0",
+         "55",
+         "2",
+         "97.2",
+         "56.5",
+         "2",
+         "0",
+         "0.0",
+         "0",
+         "1"
+        ]
+       },
+       {
+        "eventId": "401872952",
+        "stats": [
+         "20",
+         "24",
+         "246",
+         "83.3",
+         "10.3",
+         "2",
+         "1",
+         "48",
+         "0",
+         "119.8",
+         "61.1",
+         "1",
+         "1",
+         "1.0",
+         "0",
+         "1"
+        ]
+       },
+       {
+        "eventId": "401872945",
+        "stats": [
+         "32",
+         "47",
+         "382",
+         "68.1",
+         "8.1",
+         "3",
+         "0",
+         "45",
+         "2",
+         "114.0",
+         "82.9",
+         "2",
+         "17",
+         "8.5",
+         "0",
+         "13"
+        ]
+       },
+       {
+        "eventId": "401872931",
+        "stats": [
+         "15",
+         "27",
+         "184",
+         "55.6",
+         "6.8",
+         "2",
+         "1",
+         "59",
+         "2",
+         "86.0",
+         "52.8",
+         "7",
+         "23",
+         "3.3",
+         "1",
+         "15"
+        ]
+       }
+      ],
+      "totals": [
+       "105",
+       "158",
+       "1,309",
+       "66.5",
+       "8.3",
+       "9",
+       "3",
+       "59",
+       "6",
+       "103.1",
+       "68.2",
+       "17",
+       "57",
+       "3.4",
+       "1",
+       "15"
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ "3953687": {
+  "names": [
+   "fieldGoalsMade1_19-fieldGoalAttempts1_19",
+   "fieldGoalsMade20_29-fieldGoalAttempts20_29",
+   "fieldGoalsMade30_39-fieldGoalAttempts30_39",
+   "fieldGoalsMade40_49-fieldGoalAttempts40_49",
+   "fieldGoalsMade50-fieldGoalAttempts50",
+   "longFieldGoalMade",
+   "fieldGoalPct",
+   "fieldGoalsMade-fieldGoalAttempts",
+   "fieldGoalsMadeYardsAverage",
+   "extraPointsMade-extraPointAttempts",
+   "totalKickingPoints"
+  ],
+  "labels": [
+   "1-19\t",
+   "20-29\t",
+   "30-39",
+   "40-49\t",
+   "50+",
+   "LNG",
+   "FG%",
+   "FG",
+   "AVG",
+   "XP",
+   "PTS"
+  ],
+  "events": {
+   "401872930": {
+    "id": "401872930",
+    "week": 1,
+    "atVs": "@",
+    "gameDate": "2026-09-14T00:20:00.000+00:00",
+    "score": "28-20",
+    "homeTeamId": "19",
+    "awayTeamId": "6",
+    "homeTeamScore": "28",
+    "awayTeamScore": "20",
+    "gameResult": "L",
+    "opponent": {
+     "id": "19",
+     "abbreviation": "NYG",
+     "displayName": "New York Giants"
+    },
+    "team": {
+     "id": "6",
+     "abbreviation": "DAL"
+    }
+   },
+   "401872944": {
+    "id": "401872944",
+    "week": 2,
+    "atVs": "vs",
+    "gameDate": "2026-09-20T20:25:00.000+00:00",
+    "score": "37-20",
+    "homeTeamId": "6",
+    "awayTeamId": "28",
+    "homeTeamScore": "37",
+    "awayTeamScore": "20",
+    "gameResult": "W",
+    "opponent": {
+     "id": "28",
+     "abbreviation": "WSH",
+     "displayName": "Washington Commanders"
+    },
+    "team": {
+     "id": "6",
+     "abbreviation": "DAL"
+    }
+   },
+   "401872960": {
+    "id": "401872960",
+    "week": 3,
+    "atVs": "vs",
+    "gameDate": "2026-09-27T20:25:00.000+00:00",
+    "score": "34-31",
+    "homeTeamId": "6",
+    "awayTeamId": "33",
+    "homeTeamScore": "31",
+    "awayTeamScore": "34",
+    "gameResult": "L",
+    "opponent": {
+     "id": "33",
+     "abbreviation": "BAL",
+     "displayName": "Baltimore Ravens"
+    },
+    "team": {
+     "id": "6",
+     "abbreviation": "DAL"
+    }
+   },
+   "401872967": {
+    "id": "401872967",
+    "week": 4,
+    "atVs": "@",
+    "gameDate": "2026-10-04T17:00:00.000+00:00",
+    "score": "34-30",
+    "homeTeamId": "34",
+    "awayTeamId": "6",
+    "homeTeamScore": "30",
+    "awayTeamScore": "34",
+    "gameResult": "W",
+    "opponent": {
+     "id": "34",
+     "abbreviation": "HOU",
+     "displayName": "Houston Texans"
+    },
+    "team": {
+     "id": "6",
+     "abbreviation": "DAL"
+    }
+   },
+   "401872980": {
+    "id": "401872980",
+    "week": 5,
+    "atVs": "vs",
+    "gameDate": "2026-10-09T00:15:00.000+00:00",
+    "score": "24-16",
+    "homeTeamId": "6",
+    "awayTeamId": "27",
+    "homeTeamScore": "16",
+    "awayTeamScore": "24",
+    "gameResult": "L",
+    "opponent": {
+     "id": "27",
+     "abbreviation": "TB",
+     "displayName": "Tampa Bay Buccaneers"
+    },
+    "team": {
+     "id": "6",
+     "abbreviation": "DAL"
+    }
+   },
+   "401873007": {
+    "id": "401873007",
+    "week": 6,
+    "atVs": "@",
+    "gameDate": "2026-10-19T00:20:00.000+00:00",
+    "score": "23-13",
+    "homeTeamId": "9",
+    "awayTeamId": "6",
+    "homeTeamScore": "23",
+    "awayTeamScore": "13",
+    "gameResult": "L",
+    "opponent": {
+     "id": "9",
+     "abbreviation": "GB",
+     "displayName": "Green Bay Packers"
+    },
+    "team": {
+     "id": "6",
+     "abbreviation": "DAL"
+    }
+   }
+  },
+  "seasonTypes": [
+   {
+    "displayName": "2026 Regular Season",
+    "categories": [
+     {
+      "displayName": "Regular Season Stats",
+      "type": "event",
+      "splitType": "2",
+      "events": [
+       {
+        "eventId": "401873007",
+        "stats": [
+         "0-0",
+         "0-0",
+         "0-0",
+         "0-0",
+         "0-0",
+         "0",
+         "0.0",
+         "0-0",
+         "-",
+         "1-1",
+         "1"
+        ]
+       },
+       {
+        "eventId": "401872980",
+        "stats": [
+         "0-0",
+         "0-0",
+         "0-0",
+         "1-1",
+         "0-0",
+         "41",
+         "100.0",
+         "1-1",
+         "41",
+         "1-1",
+         "4"
+        ]
+       },
+       {
+        "eventId": "401872967",
+        "stats": [
+         "0-0",
+         "0-0",
+         "1-1",
+         "0-0",
+         "1-3",
+         "50",
+         "50.0",
+         "2-4",
+         "44",
+         "4-4",
+         "10"
+        ]
+       },
+       {
+        "eventId": "401872960",
+        "stats": [
+         "0-0",
+         "2-2",
+         "1-1",
+         "0-0",
+         "0-1",
+         "38",
+         "75.0",
+         "3-4",
+         "30",
+         "2-2",
+         "11"
+        ]
+       },
+       {
+        "eventId": "401872944",
+        "stats": [
+         "0-0",
+         "1-1",
+         "0-0",
+         "1-1",
+         "1-1",
+         "60",
+         "100.0",
+         "3-3",
+         "43",
+         "4-4",
+         "13"
+        ]
+       },
+       {
+        "eventId": "401872930",
+        "stats": [
+         "0-0",
+         "0-0",
+         "0-0",
+         "0-0",
+         "0-0",
+         "0",
+         "0.0",
+         "0-0",
+         "-",
+         "2-3",
+         "2"
+        ]
+       }
+      ],
+      "totals": [
+       "0-0",
+       "3-3",
+       "2-2",
+       "2-2",
+       "2-5",
+       "60",
+       "75.0",
+       "9-12",
+       "-",
+       "14-15",
+       "41"
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ "4362628": {
+  "names": [
+   "receptions",
+   "receivingTargets",
+   "receivingYards",
+   "yardsPerReception",
+   "receivingTouchdowns",
+   "longReception",
+   "rushingAttempts",
+   "rushingYards",
+   "yardsPerRushAttempt",
+   "longRushing",
+   "rushingTouchdowns",
+   "fumbles",
+   "fumblesLost",
+   "fumblesForced",
+   "kicksBlocked"
+  ],
+  "labels": [
+   "REC",
+   "TGTS",
+   "YDS",
+   "AVG",
+   "TD",
+   "LNG",
+   "CAR",
+   "YDS",
+   "AVG",
+   "LNG",
+   "TD",
+   "FUM",
+   "LST",
+   "FF",
+   "KB"
+  ],
+  "events": {
+   "401872925": {
+    "id": "401872925",
+    "week": 1,
+    "atVs": "vs",
+    "gameDate": "2026-09-13T17:00:00.000+00:00",
+    "score": "33-27",
+    "homeTeamId": "4",
+    "awayTeamId": "27",
+    "homeTeamScore": "33",
+    "awayTeamScore": "27",
+    "gameResult": "W",
+    "opponent": {
+     "id": "27",
+     "abbreviation": "TB",
+     "displayName": "Tampa Bay Buccaneers"
+    },
+    "team": {
+     "id": "4",
+     "abbreviation": "CIN"
+    }
+   },
+   "401872934": {
+    "id": "401872934",
+    "week": 2,
+    "atVs": "@",
+    "gameDate": "2026-09-20T17:00:00.000+00:00",
+    "score": "20-6",
+    "homeTeamId": "34",
+    "awayTeamId": "4",
+    "homeTeamScore": "6",
+    "awayTeamScore": "20",
+    "gameResult": "W",
+    "opponent": {
+     "id": "34",
+     "abbreviation": "HOU",
+     "displayName": "Houston Texans"
+    },
+    "team": {
+     "id": "4",
+     "abbreviation": "CIN"
+    }
+   },
+   "401872950": {
+    "id": "401872950",
+    "week": 3,
+    "atVs": "@",
+    "gameDate": "2026-09-27T17:00:00.000+00:00",
+    "score": "30-27",
+    "homeTeamId": "23",
+    "awayTeamId": "4",
+    "homeTeamScore": "30",
+    "awayTeamScore": "27",
+    "gameResult": "L",
+    "opponent": {
+     "id": "23",
+     "abbreviation": "PIT",
+     "displayName": "Pittsburgh Steelers"
+    },
+    "team": {
+     "id": "4",
+     "abbreviation": "CIN"
+    }
+   },
+   "401872969": {
+    "id": "401872969",
+    "week": 4,
+    "atVs": "vs",
+    "gameDate": "2026-10-04T17:00:00.000+00:00",
+    "score": "22-17",
+    "homeTeamId": "4",
+    "awayTeamId": "30",
+    "homeTeamScore": "17",
+    "awayTeamScore": "22",
+    "gameResult": "L",
+    "opponent": {
+     "id": "30",
+     "abbreviation": "JAX",
+     "displayName": "Jacksonville Jaguars"
+    },
+    "team": {
+     "id": "4",
+     "abbreviation": "CIN"
+    }
+   },
+   "401872982": {
+    "id": "401872982",
+    "week": 5,
+    "atVs": "@",
+    "gameDate": "2026-10-11T17:00:00.000+00:00",
+    "score": "31-24",
+    "homeTeamId": "15",
+    "awayTeamId": "4",
+    "homeTeamScore": "24",
+    "awayTeamScore": "31",
+    "gameResult": "W",
+    "opponent": {
+     "id": "15",
+     "abbreviation": "MIA",
+     "displayName": "Miami Dolphins"
+    },
+    "team": {
+     "id": "4",
+     "abbreviation": "CIN"
+    }
+   }
+  },
+  "seasonTypes": [
+   {
+    "displayName": "2026 Regular Season",
+    "categories": [
+     {
+      "displayName": "Regular Season Stats",
+      "type": "event",
+      "splitType": "2",
+      "events": [
+       {
+        "eventId": "401872982",
+        "stats": [
+         "6",
+         "10",
+         "77",
+         "12.8",
+         "1",
+         "45",
+         "0",
+         "0",
+         "0.0",
+         "0",
+         "0",
+         "0",
+         "0",
+         "1",
+         "0"
+        ]
+       },
+       {
+        "eventId": "401872969",
+        "stats": [
+         "3",
+         "3",
+         "27",
+         "9.0",
+         "0",
+         "17",
+         "0",
+         "0",
+         "0.0",
+         "0",
+         "0",
+         "0",
+         "0",
+         "-",
+         "-"
+        ]
+       },
+       {
+        "eventId": "401872950",
+        "stats": [
+         "9",
+         "12",
+         "98",
+         "10.9",
+         "1",
+         "21",
+         "0",
+         "0",
+         "0.0",
+         "0",
+         "0",
+         "0",
+         "0",
+         "-",
+         "-"
+        ]
+       },
+       {
+        "eventId": "401872934",
+        "stats": [
+         "7",
+         "9",
+         "75",
+         "10.7",
+         "2",
+         "32",
+         "0",
+         "0",
+         "0.0",
+         "0",
+         "0",
+         "0",
+         "0",
+         "-",
+         "-"
+        ]
+       },
+       {
+        "eventId": "401872925",
+        "stats": [
+         "2",
+         "4",
+         "12",
+         "6.0",
+         "0",
+         "16",
+         "0",
+         "0",
+         "0.0",
+         "0",
+         "0",
+         "0",
+         "0",
+         "-",
+         "-"
+        ]
+       }
+      ],
+      "totals": [
+       "27",
+       "38",
+       "289",
+       "10.7",
+       "4",
+       "45",
+       "0",
+       "0",
+       "0.0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "2",
+       "0"
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ "4430807": {
+  "names": [
+   "rushingAttempts",
+   "rushingYards",
+   "yardsPerRushAttempt",
+   "rushingTouchdowns",
+   "longRushing",
+   "receptions",
+   "receivingTargets",
+   "receivingYards",
+   "yardsPerReception",
+   "receivingTouchdowns",
+   "longReception",
+   "fumbles",
+   "fumblesLost",
+   "fumblesForced",
+   "kicksBlocked"
+  ],
+  "labels": [
+   "CAR",
+   "YDS",
+   "AVG",
+   "TD",
+   "LNG",
+   "REC",
+   "TGTS",
+   "YDS",
+   "AVG",
+   "TD",
+   "LNG",
+   "FUM",
+   "LST",
+   "FF",
+   "KB"
+  ],
+  "events": {
+   "401872658": {
+    "id": "401872658",
+    "week": 1,
+    "atVs": "@",
+    "gameDate": "2026-09-13T17:00:00.000+00:00",
+    "score": "20-13",
+    "homeTeamId": "23",
+    "awayTeamId": "1",
+    "homeTeamScore": "20",
+    "awayTeamScore": "13",
+    "gameResult": "L",
+    "opponent": {
+     "id": "23",
+     "abbreviation": "PIT",
+     "displayName": "Pittsburgh Steelers"
+    },
+    "team": {
+     "id": "1",
+     "abbreviation": "ATL"
+    }
+   },
+   "401872933": {
+    "id": "401872933",
+    "week": 2,
+    "atVs": "vs",
+    "gameDate": "2026-09-20T17:00:00.000+00:00",
+    "score": "34-3",
+    "homeTeamId": "1",
+    "awayTeamId": "29",
+    "homeTeamScore": "3",
+    "awayTeamScore": "34",
+    "gameResult": "L",
+    "opponent": {
+     "id": "29",
+     "abbreviation": "CAR",
+     "displayName": "Carolina Panthers"
+    },
+    "team": {
+     "id": "1",
+     "abbreviation": "ATL"
+    }
+   },
+   "401872948": {
+    "id": "401872948",
+    "week": 3,
+    "atVs": "@",
+    "gameDate": "2026-09-25T00:15:00.000+00:00",
+    "score": "35-14",
+    "homeTeamId": "9",
+    "awayTeamId": "1",
+    "homeTeamScore": "14",
+    "awayTeamScore": "35",
+    "gameResult": "W",
+    "opponent": {
+     "id": "9",
+     "abbreviation": "GB",
+     "displayName": "Green Bay Packers"
+    },
+    "team": {
+     "id": "1",
+     "abbreviation": "ATL"
+    }
+   },
+   "401872979": {
+    "id": "401872979",
+    "week": 4,
+    "atVs": "@",
+    "gameDate": "2026-10-06T00:15:00.000+00:00",
+    "score": "45-24",
+    "homeTeamId": "18",
+    "awayTeamId": "1",
+    "homeTeamScore": "24",
+    "awayTeamScore": "45",
+    "gameResult": "W",
+    "opponent": {
+     "id": "18",
+     "abbreviation": "NO",
+     "displayName": "New Orleans Saints"
+    },
+    "team": {
+     "id": "1",
+     "abbreviation": "ATL"
+    }
+   },
+   "401872993": {
+    "id": "401872993",
+    "week": 5,
+    "atVs": "vs",
+    "gameDate": "2026-10-12T00:20:00.000+00:00",
+    "score": "30-23 OT",
+    "homeTeamId": "1",
+    "awayTeamId": "33",
+    "homeTeamScore": "23",
+    "awayTeamScore": "30",
+    "gameResult": "L",
+    "opponent": {
+     "id": "33",
+     "abbreviation": "BAL",
+     "displayName": "Baltimore Ravens"
+    },
+    "team": {
+     "id": "1",
+     "abbreviation": "ATL"
+    }
+   },
+   "401872999": {
+    "id": "401872999",
+    "week": 6,
+    "atVs": "vs",
+    "gameDate": "2026-10-18T17:00:00.000+00:00",
+    "score": "31-23",
+    "homeTeamId": "1",
+    "awayTeamId": "3",
+    "homeTeamScore": "23",
+    "awayTeamScore": "31",
+    "gameResult": "L",
+    "opponent": {
+     "id": "3",
+     "abbreviation": "CHI",
+     "displayName": "Chicago Bears"
+    },
+    "team": {
+     "id": "1",
+     "abbreviation": "ATL"
+    }
+   }
+  },
+  "seasonTypes": [
+   {
+    "displayName": "2026 Regular Season",
+    "categories": [
+     {
+      "displayName": "Regular Season Stats",
+      "type": "event",
+      "splitType": "2",
+      "events": [
+       {
+        "eventId": "401872999",
+        "stats": [
+         "9",
+         "61",
+         "6.8",
+         "0",
+         "23",
+         "2",
+         "2",
+         "-8",
+         "-4.0",
+         "0",
+         "-3",
+         "0",
+         "0",
+         "-",
+         "-"
+        ]
+       },
+       {
+        "eventId": "401872993",
+        "stats": [
+         "17",
+         "86",
+         "5.1",
+         "0",
+         "38",
+         "4",
+         "7",
+         "32",
+         "8.0",
+         "0",
+         "14",
+         "0",
+         "0",
+         "-",
+         "-"
+        ]
+       },
+       {
+        "eventId": "401872979",
+        "stats": [
+         "19",
+         "145",
+         "7.6",
+         "2",
+         "59",
+         "1",
+         "2",
+         "2",
+         "2.0",
+         "0",
+         "2",
+         "0",
+         "0",
+         "-",
+         "-"
+        ]
+       },
+       {
+        "eventId": "401872948",
+        "stats": [
+         "29",
+         "194",
+         "6.7",
+         "2",
+         "55",
+         "2",
+         "2",
+         "19",
+         "9.5",
+         "0",
+         "17",
+         "0",
+         "0",
+         "-",
+         "-"
+        ]
+       },
+       {
+        "eventId": "401872933",
+        "stats": [
+         "16",
+         "72",
+         "4.5",
+         "0",
+         "11",
+         "3",
+         "4",
+         "9",
+         "3.0",
+         "0",
+         "4",
+         "0",
+         "0",
+         "-",
+         "-"
+        ]
+       },
+       {
+        "eventId": "401872658",
+        "stats": [
+         "21",
+         "83",
+         "4.0",
+         "0",
+         "20",
+         "8",
+         "10",
+         "90",
+         "11.3",
+         "1",
+         "24",
+         "2",
+         "0",
+         "0",
+         "0"
+        ]
+       }
+      ],
+      "totals": [
+       "111",
+       "641",
+       "5.8",
+       "4",
+       "59",
+       "20",
+       "28",
+       "144",
+       "7.2",
+       "1",
+       "24",
+       "2",
+       "0",
+       "0",
+       "0"
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ "4870808": {
+  "names": [
+   "rushingAttempts",
+   "rushingYards",
+   "yardsPerRushAttempt",
+   "rushingTouchdowns",
+   "longRushing",
+   "receptions",
+   "receivingTargets",
+   "receivingYards",
+   "yardsPerReception",
+   "receivingTouchdowns",
+   "longReception",
+   "fumbles",
+   "fumblesLost",
+   "fumblesForced",
+   "kicksBlocked"
+  ],
+  "labels": [
+   "CAR",
+   "YDS",
+   "AVG",
+   "TD",
+   "LNG",
+   "REC",
+   "TGTS",
+   "YDS",
+   "AVG",
+   "TD",
+   "LNG",
+   "FUM",
+   "LST",
+   "FF",
+   "KB"
+  ],
+  "events": {
+   "401872926": {
+    "id": "401872926",
+    "week": 1,
+    "atVs": "@",
+    "gameDate": "2026-09-13T20:25:00.000+00:00",
+    "score": "26-14",
+    "homeTeamId": "24",
+    "awayTeamId": "22",
+    "homeTeamScore": "14",
+    "awayTeamScore": "26",
+    "gameResult": "W",
+    "opponent": {
+     "id": "24",
+     "abbreviation": "LAC",
+     "displayName": "Los Angeles Chargers"
+    },
+    "team": {
+     "id": "22",
+     "abbreviation": "ARI"
+    }
+   },
+   "401872943": {
+    "id": "401872943",
+    "week": 2,
+    "atVs": "vs",
+    "gameDate": "2026-09-20T20:25:00.000+00:00",
+    "score": "31-7",
+    "homeTeamId": "22",
+    "awayTeamId": "26",
+    "homeTeamScore": "7",
+    "awayTeamScore": "31",
+    "gameResult": "L",
+    "opponent": {
+     "id": "26",
+     "abbreviation": "SEA",
+     "displayName": "Seattle Seahawks"
+    },
+    "team": {
+     "id": "22",
+     "abbreviation": "ARI"
+    }
+   },
+   "401872958": {
+    "id": "401872958",
+    "week": 3,
+    "atVs": "@",
+    "gameDate": "2026-09-27T20:05:00.000+00:00",
+    "score": "36-30",
+    "homeTeamId": "25",
+    "awayTeamId": "22",
+    "homeTeamScore": "36",
+    "awayTeamScore": "30",
+    "gameResult": "L",
+    "opponent": {
+     "id": "25",
+     "abbreviation": "SF",
+     "displayName": "San Francisco 49ers"
+    },
+    "team": {
+     "id": "22",
+     "abbreviation": "ARI"
+    }
+   },
+   "401872966": {
+    "id": "401872966",
+    "week": 4,
+    "atVs": "@",
+    "gameDate": "2026-10-04T17:00:00.000+00:00",
+    "score": "36-24",
+    "homeTeamId": "19",
+    "awayTeamId": "22",
+    "homeTeamScore": "36",
+    "awayTeamScore": "24",
+    "gameResult": "L",
+    "opponent": {
+     "id": "19",
+     "abbreviation": "NYG",
+     "displayName": "New York Giants"
+    },
+    "team": {
+     "id": "22",
+     "abbreviation": "ARI"
+    }
+   },
+   "401872991": {
+    "id": "401872991",
+    "week": 5,
+    "atVs": "vs",
+    "gameDate": "2026-10-11T20:25:00.000+00:00",
+    "score": "45-21",
+    "homeTeamId": "22",
+    "awayTeamId": "8",
+    "homeTeamScore": "21",
+    "awayTeamScore": "45",
+    "gameResult": "L",
+    "opponent": {
+     "id": "8",
+     "abbreviation": "DET",
+     "displayName": "Detroit Lions"
+    },
+    "team": {
+     "id": "22",
+     "abbreviation": "ARI"
+    }
+   }
+  },
+  "seasonTypes": [
+   {
+    "displayName": "2026 Regular Season",
+    "categories": [
+     {
+      "displayName": "Regular Season Stats",
+      "type": "event",
+      "splitType": "2",
+      "events": [
+       {
+        "eventId": "401872991",
+        "stats": [
+         "12",
+         "22",
+         "1.8",
+         "0",
+         "8",
+         "0",
+         "1",
+         "0",
+         "0.0",
+         "0",
+         "0",
+         "0",
+         "0",
+         "-",
+         "-"
+        ]
+       },
+       {
+        "eventId": "401872966",
+        "stats": [
+         "14",
+         "63",
+         "4.5",
+         "0",
+         "16",
+         "1",
+         "1",
+         "-8",
+         "-8.0",
+         "0",
+         "-8",
+         "0",
+         "0",
+         "-",
+         "-"
+        ]
+       },
+       {
+        "eventId": "401872958",
+        "stats": [
+         "21",
+         "90",
+         "4.3",
+         "0",
+         "8",
+         "5",
+         "5",
+         "19",
+         "3.8",
+         "1",
+         "8",
+         "0",
+         "0",
+         "-",
+         "-"
+        ]
+       },
+       {
+        "eventId": "401872943",
+        "stats": [
+         "9",
+         "29",
+         "3.2",
+         "0",
+         "9",
+         "3",
+         "3",
+         "16",
+         "5.3",
+         "0",
+         "9",
+         "0",
+         "0",
+         "-",
+         "-"
+        ]
+       },
+       {
+        "eventId": "401872926",
+        "stats": [
+         "11",
+         "41",
+         "3.7",
+         "1",
+         "18",
+         "2",
+         "4",
+         "9",
+         "4.5",
+         "0",
+         "5",
+         "0",
+         "0",
+         "-",
+         "-"
+        ]
+       }
+      ],
+      "totals": [
+       "67",
+       "245",
+       "3.7",
+       "1",
+       "18",
+       "11",
+       "15",
+       "36",
+       "3.3",
+       "1",
+       "9",
+       "0",
+       "0",
+       "-",
+       "-"
+      ]
+     }
+    ]
+   }
+  ]
+ }
+}

@@ -1,7 +1,7 @@
 "use client";
 
 import { useLayoutEffect, useRef, type RefObject } from "react";
-import { Flip, MOTION } from "@/lib/motion/gsap";
+import { Flip, MOTION, prefersReducedMotion } from "@/lib/motion/gsap";
 
 /**
  * Smoothly moves list items to their new places when the order changes (rankings,
@@ -15,7 +15,7 @@ export function useFlipList(scope: RefObject<HTMLElement | null>) {
   const state = useRef<Flip.FlipState | null>(null);
 
   const capture = () => {
-    if (!scope.current || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (!scope.current || prefersReducedMotion()) return;
     state.current = Flip.getState(scope.current.querySelectorAll("[data-flip-id]"));
   };
 

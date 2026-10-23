@@ -14,7 +14,7 @@ import { visibleTeamColor } from "@/lib/color";
 import { periodLabel } from "@/lib/format";
 import { statLineSummary } from "@/lib/live/statline";
 import type { FeedItem, PlayerLive, TeamLite } from "@/lib/live/types";
-import { gsap, MOTION, useGSAP } from "@/lib/motion/gsap";
+import { gsap, MOTION, prefersReducedMotion, useGSAP } from "@/lib/motion/gsap";
 import type { NewsItem } from "@/lib/providers/types";
 import { formatBreakdown, type ScoringFormat } from "@/lib/scoring";
 
@@ -37,7 +37,7 @@ function WeekBars({ weeks }: { weeks: { week: number; points: number }[] }) {
   const root = useRef<HTMLDivElement>(null);
   useGSAP(
     () => {
-      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      if (prefersReducedMotion()) return;
       gsap.from("[data-bar]", { scaleY: 0, transformOrigin: "bottom", duration: MOTION.slow, stagger: 0.03, ease: "power3.out" });
     },
     { scope: root },

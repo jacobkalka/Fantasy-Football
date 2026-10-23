@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useId, useRef } from "react";
-import { gsap, MOTION } from "@/lib/motion/gsap";
+import { gsap, MOTION, prefersReducedMotion } from "@/lib/motion/gsap";
 import { Icon } from "./Icon";
 
 /**
@@ -38,7 +38,7 @@ export function Sheet({
   const descriptionId = useId();
 
   const isPhone = () => window.matchMedia("(max-width: 639px)").matches;
-  const reduce = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const reduce = () => prefersReducedMotion();
 
   const animateClose = useCallback(() => {
     const dialog = dialogRef.current;

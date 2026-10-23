@@ -79,7 +79,7 @@ export function PlayerPicker({
       </div>
       <ul
         ref={list}
-        className="no-scrollbar -mx-5 flex snap-x scroll-px-5 gap-2 overflow-x-auto px-5 pt-2 pb-1"
+        className="no-scrollbar -mx-5 flex snap-x scroll-px-5 gap-2 overflow-x-auto px-5 pt-2 pb-1 lg:mx-0 lg:flex-wrap lg:overflow-visible lg:px-0"
         aria-label="Players to compare"
       >
         {chips.map((p) => {

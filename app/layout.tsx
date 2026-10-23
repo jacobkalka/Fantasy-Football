@@ -3,36 +3,41 @@ import { Inter } from "next/font/google";
 import { Suspense } from "react";
 import { RosterSync } from "@/components/auth/RosterSync";
 import { HydrationMarker } from "@/components/motion/hydration";
+import { MotionPreferenceSync } from "@/components/motion/MotionPreferenceSync";
 import { MotionProvider } from "@/components/motion/MotionProvider";
+import { PwaRoot } from "@/components/pwa";
 import { BottomBar, BottomBarFrame, BottomBarLinks } from "@/components/shell/BottomBar";
 import { Sidebar, SidebarFrame, SidebarNav } from "@/components/shell/Sidebar";
 import { TopBar } from "@/components/shell/TopBar";
 import { APP_DESCRIPTION, APP_NAME } from "@/lib/config";
+import { MOTION_BOOT_SCRIPT } from "@/lib/motion/preference";
+import { pwaMetadata, pwaViewport } from "@/lib/pwa/metadata";
 import "./globals.css";
 
 // One typeface (DECISIONS.md, "Design"): Inter, with tabular figures for numbers.
 const inter = Inter({ variable: "--font-inter", subsets: ["latin"] });
 
+// Installable-app head tags (icons, iPhone launch screens, status bar) come from lib/pwa/metadata.ts.
 export const metadata: Metadata = {
+  ...pwaMetadata,
   title: { default: APP_NAME, template: `%s · ${APP_NAME}` },
   description: APP_DESCRIPTION,
-  applicationName: APP_NAME,
-  appleWebApp: { capable: true, title: APP_NAME, statusBarStyle: "black-translucent" },
-  formatDetection: { telephone: false },
 };
 
-export const viewport: Viewport = {
-  themeColor: "#000000",
-  colorScheme: "dark",
-  viewportFit: "cover",
-};
+export const viewport: Viewport = { ...pwaViewport };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${inter.variable} h-full antialiased`}>
+    // data-motion is set by the head script before React starts, hence suppressHydrationWarning.
+    <html lang="en" className={`${inter.variable} h-full antialiased`} suppressHydrationWarning>
+      <head>
+        {/* Decide full or reduced animations before anything paints (lib/motion/preference.ts). */}
+        <script dangerouslySetInnerHTML={{ __html: MOTION_BOOT_SCRIPT }} />
+      </head>
       <body className="min-h-full">
         <MotionProvider>
           <HydrationMarker />
+          <MotionPreferenceSync />
           <a
             href="#main"
             className="sr-only z-50 rounded-full bg-ink px-4 py-2 text-black focus:not-sr-only focus:fixed focus:top-3 focus:left-3"
@@ -66,6 +71,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           </BottomBarFrame>
           {/* Keeps your team saved to your account while you're signed in (mounted once). */}
           <RosterSync />
+          {/* Service worker, "Update ready" prompt and offline indicator. */}
+          <PwaRoot />
         </MotionProvider>
       </body>
     </html>

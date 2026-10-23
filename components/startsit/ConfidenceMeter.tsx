@@ -1,8 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { isHydrated } from "@/components/motion/hydration";
-import { gsap, useGSAP } from "@/lib/motion/gsap";
+import { gsap, prefersReducedMotion, useGSAP } from "@/lib/motion/gsap";
 import type { Confidence } from "@/lib/startsit/types";
 
 const LEVELS: Confidence[] = ["Lean", "Solid", "Strong"];
@@ -20,7 +19,7 @@ export function ConfidenceMeter({ confidence }: { confidence: Confidence }) {
 
   useGSAP(
     () => {
-      if (!isHydrated() || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      if (prefersReducedMotion()) return;
       gsap.from("[data-fill]", { scaleX: 0, duration: 0.3, stagger: 0.12, ease: "power2.out", transformOrigin: "left" });
     },
     { scope: root, dependencies: [confidence] },

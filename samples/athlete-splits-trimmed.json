@@ -1,0 +1,833 @@
+{
+ "3139477": {
+  "filters": [
+   {
+    "displayName": "League",
+    "name": "league",
+    "value": "nfl",
+    "options": [
+     {
+      "value": "college-football",
+      "displayValue": "NCAA - Football",
+      "shortDisplayName": "NCAAF"
+     },
+     {
+      "value": "nfl",
+      "displayValue": "National Football League",
+      "shortDisplayName": "NFL"
+     }
+    ]
+   },
+   {
+    "displayName": "Season",
+    "name": "season",
+    "value": "2026",
+    "options": [
+     {
+      "value": "2026",
+      "displayValue": "2026"
+     },
+     {
+      "value": "2025",
+      "displayValue": "2025"
+     },
+     {
+      "value": "2024",
+      "displayValue": "2024"
+     },
+     {
+      "value": "2023",
+      "displayValue": "2023"
+     },
+     {
+      "value": "2022",
+      "displayValue": "2022"
+     },
+     {
+      "value": "2021",
+      "displayValue": "2021"
+     },
+     {
+      "value": "2020",
+      "displayValue": "2020"
+     },
+     {
+      "value": "2019",
+      "displayValue": "2019"
+     },
+     {
+      "value": "2018",
+      "displayValue": "2018"
+     },
+     {
+      "value": "2017",
+      "displayValue": "2017"
+     }
+    ]
+   }
+  ],
+  "displayName": "2026 Splits",
+  "names": [
+   "completions",
+   "passingAttempts",
+   "passingYards",
+   "completionPct",
+   "yardsPerPassAttempt",
+   "passingTouchdowns",
+   "interceptions",
+   "longPassing",
+   "sacks",
+   "QBRating",
+   "rushingAttempts",
+   "rushingYards",
+   "yardsPerRushAttempt",
+   "rushingTouchdowns",
+   "longRushing"
+  ],
+  "splitCategories": [
+   {
+    "name": "split",
+    "displayName": "split",
+    "splits": [
+     {
+      "displayName": "All Splits",
+      "stats": [
+       "105",
+       "158",
+       "1,309",
+       "66.5",
+       "8.3",
+       "9",
+       "3",
+       "59",
+       "6",
+       "103.1",
+       "17",
+       "57",
+       "3.4",
+       "1",
+       "15"
+      ],
+      "abbreviation": "Any"
+     },
+     {
+      "displayName": "Home",
+      "stats": [
+       "70",
+       "104",
+       "838",
+       "67.3",
+       "8.1",
+       "5",
+       "2",
+       "59",
+       "4",
+       "99.8",
+       "14",
+       "56",
+       "4.0",
+       "1",
+       "15"
+      ],
+      "abbreviation": "Home"
+     },
+     {
+      "displayName": "Away",
+      "stats": [
+       "35",
+       "54",
+       "471",
+       "64.8",
+       "8.7",
+       "4",
+       "1",
+       "55",
+       "2",
+       "109.4",
+       "3",
+       "1",
+       "0.3",
+       "0",
+       "1"
+      ],
+      "abbreviation": "Away"
+     }
+    ]
+   },
+   {
+    "name": "byFieldPosition",
+    "displayName": "Field Position",
+    "splits": [
+     {
+      "displayName": "Own 1-20",
+      "stats": [
+       "8",
+       "14",
+       "70",
+       "57.1",
+       "5.0",
+       "0",
+       "1",
+       "19",
+       "0",
+       "40.8",
+       "3",
+       "-2",
+       "-0.7",
+       "0",
+       "1"
+      ],
+      "abbreviation": "Own 1-20"
+     },
+     {
+      "displayName": "Own 21-50",
+      "stats": [
+       "45",
+       "69",
+       "666",
+       "65.2",
+       "9.7",
+       "0",
+       "1",
+       "59",
+       "4",
+       "90.6",
+       "7",
+       "26",
+       "3.7",
+       "0",
+       "10"
+      ],
+      "abbreviation": "Own 21-50"
+     },
+     {
+      "displayName": "Opp 49-20",
+      "stats": [
+       "32",
+       "45",
+       "475",
+       "71.1",
+       "10.6",
+       "0",
+       "0",
+       "45",
+       "0",
+       "105.3",
+       "2",
+       "21",
+       "10.5",
+       "0",
+       "13"
+      ],
+      "abbreviation": "Opp 49-20"
+     },
+     {
+      "displayName": "Opp 19-Goal",
+      "stats": [
+       "20",
+       "30",
+       "98",
+       "66.7",
+       "3.3",
+       "9",
+       "1",
+       "13",
+       "2",
+       "96.9",
+       "5",
+       "12",
+       "2.4",
+       "1",
+       "15"
+      ],
+      "abbreviation": "Opp 19-1"
+     }
+    ]
+   }
+  ]
+ },
+ "3953687": {
+  "filters": [
+   {
+    "displayName": "League",
+    "name": "league",
+    "value": "nfl",
+    "options": [
+     {
+      "value": "nfl",
+      "displayValue": "National Football League",
+      "shortDisplayName": "NFL"
+     }
+    ]
+   },
+   {
+    "displayName": "Season",
+    "name": "season",
+    "value": "2026",
+    "options": [
+     {
+      "value": "2026",
+      "displayValue": "2026"
+     },
+     {
+      "value": "2025",
+      "displayValue": "2025"
+     },
+     {
+      "value": "2024",
+      "displayValue": "2024"
+     },
+     {
+      "value": "2023",
+      "displayValue": "2023"
+     }
+    ]
+   }
+  ],
+  "displayName": "2026 Splits",
+  "names": [
+   "fieldGoalsMade1_19-fieldGoalAttempts1_19",
+   "fieldGoalsMade20_29-fieldGoalAttempts20_29",
+   "fieldGoalsMade30_39-fieldGoalAttempts30_39",
+   "fieldGoalsMade40_49-fieldGoalAttempts40_49",
+   "fieldGoalsMade50-fieldGoalAttempts50",
+   "fieldGoalsMade-fieldGoalAttempts",
+   "fieldGoalPct",
+   "longFieldGoalMade",
+   "extraPointsMade-extraPointAttempts",
+   "totalKickingPoints"
+  ],
+  "splitCategories": [
+   {
+    "name": "split",
+    "displayName": "split",
+    "splits": [
+     {
+      "displayName": "All Splits",
+      "stats": [
+       "0-0",
+       "3-3",
+       "2-2",
+       "2-2",
+       "2-5",
+       "9-12",
+       "75.0",
+       "60",
+       "14-15",
+       "41"
+      ],
+      "abbreviation": "Any"
+     },
+     {
+      "displayName": "Home",
+      "stats": [
+       "0-0",
+       "3-3",
+       "1-1",
+       "2-2",
+       "1-2",
+       "7-8",
+       "87.5",
+       "60",
+       "7-7",
+       "28"
+      ],
+      "abbreviation": "Home"
+     },
+     {
+      "displayName": "Away",
+      "stats": [
+       "0-0",
+       "0-0",
+       "1-1",
+       "0-0",
+       "1-3",
+       "2-4",
+       "50.0",
+       "50",
+       "7-8",
+       "13"
+      ],
+      "abbreviation": "Away"
+     }
+    ]
+   },
+   {
+    "name": "byFieldPosition",
+    "displayName": "Field Position",
+    "splits": [
+     {
+      "displayName": "Own 21-50",
+      "stats": [
+       "0-0",
+       "0-0",
+       "0-0",
+       "0-0",
+       "0-0",
+       "0-0",
+       "0.0",
+       "0",
+       "0-0",
+       "0"
+      ],
+      "abbreviation": "Own 21-50"
+     },
+     {
+      "displayName": "Opp 49-20",
+      "stats": [
+       "0-0",
+       "0-0",
+       "2-2",
+       "2-2",
+       "2-5",
+       "6-9",
+       "66.7",
+       "60",
+       "0-1",
+       "18"
+      ],
+      "abbreviation": "Opp 49-20"
+     },
+     {
+      "displayName": "Opp 19-Goal",
+      "stats": [
+       "0-0",
+       "3-3",
+       "0-0",
+       "0-0",
+       "0-0",
+       "3-3",
+       "100.0",
+       "28",
+       "14-14",
+       "23"
+      ],
+      "abbreviation": "Opp 19-1"
+     },
+     {
+      "displayName": "Opp 10-Goal",
+      "stats": [
+       "0-0",
+       "2-2",
+       "0-0",
+       "0-0",
+       "0-0",
+       "2-2",
+       "100.0",
+       "25",
+       "0-0",
+       "6"
+      ],
+      "abbreviation": "Opp 10-1"
+     }
+    ]
+   }
+  ]
+ },
+ "4362628": {
+  "filters": [
+   {
+    "displayName": "League",
+    "name": "league",
+    "value": "nfl",
+    "options": [
+     {
+      "value": "college-football",
+      "displayValue": "NCAA - Football",
+      "shortDisplayName": "NCAAF"
+     },
+     {
+      "value": "nfl",
+      "displayValue": "National Football League",
+      "shortDisplayName": "NFL"
+     }
+    ]
+   },
+   {
+    "displayName": "Season",
+    "name": "season",
+    "value": "2026",
+    "options": [
+     {
+      "value": "2026",
+      "displayValue": "2026"
+     },
+     {
+      "value": "2025",
+      "displayValue": "2025"
+     },
+     {
+      "value": "2024",
+      "displayValue": "2024"
+     },
+     {
+      "value": "2023",
+      "displayValue": "2023"
+     },
+     {
+      "value": "2022",
+      "displayValue": "2022"
+     },
+     {
+      "value": "2021",
+      "displayValue": "2021"
+     }
+    ]
+   }
+  ],
+  "displayName": "2026 Splits",
+  "names": [
+   "receptions",
+   "receivingYards",
+   "yardsPerReception",
+   "receivingTouchdowns",
+   "longReception",
+   "rushingAttempts",
+   "rushingYards",
+   "yardsPerRushAttempt",
+   "rushingTouchdowns",
+   "longRushing",
+   "fumbles",
+   "fumblesLost"
+  ],
+  "splitCategories": [
+   {
+    "name": "split",
+    "displayName": "split",
+    "splits": [
+     {
+      "displayName": "All Splits",
+      "stats": [
+       "27",
+       "289",
+       "10.7",
+       "4",
+       "45",
+       "0",
+       "0",
+       "0.0",
+       "0",
+       "0",
+       "0",
+       "0"
+      ],
+      "abbreviation": "Any"
+     },
+     {
+      "displayName": "Home",
+      "stats": [
+       "5",
+       "39",
+       "7.8",
+       "0",
+       "17",
+       "0",
+       "0",
+       "0.0",
+       "0",
+       "0",
+       "0",
+       "0"
+      ],
+      "abbreviation": "Home"
+     },
+     {
+      "displayName": "Away",
+      "stats": [
+       "22",
+       "250",
+       "11.4",
+       "4",
+       "45",
+       "0",
+       "0",
+       "0.0",
+       "0",
+       "0",
+       "0",
+       "0"
+      ],
+      "abbreviation": "Away"
+     }
+    ]
+   },
+   {
+    "name": "byFieldPosition",
+    "displayName": "Field Position",
+    "splits": [
+     {
+      "displayName": "Own 1-20",
+      "stats": [
+       "1",
+       "5",
+       "5.0",
+       "0",
+       "5",
+       "0",
+       "0",
+       "0.0",
+       "0",
+       "0",
+       "0",
+       "0"
+      ],
+      "abbreviation": "Own 1-20"
+     },
+     {
+      "displayName": "Own 21-50",
+      "stats": [
+       "13",
+       "107",
+       "8.2",
+       "0",
+       "17",
+       "0",
+       "0",
+       "0.0",
+       "0",
+       "0",
+       "0",
+       "0"
+      ],
+      "abbreviation": "Own 21-50"
+     },
+     {
+      "displayName": "Opp 49-20",
+      "stats": [
+       "8",
+       "137",
+       "17.1",
+       "2",
+       "45",
+       "0",
+       "0",
+       "0.0",
+       "0",
+       "0",
+       "0",
+       "0"
+      ],
+      "abbreviation": "Opp 49-20"
+     },
+     {
+      "displayName": "Opp 19-Goal",
+      "stats": [
+       "5",
+       "40",
+       "8.0",
+       "2",
+       "18",
+       "0",
+       "0",
+       "0.0",
+       "0",
+       "0",
+       "0",
+       "0"
+      ],
+      "abbreviation": "Opp 19-1"
+     }
+    ]
+   }
+  ]
+ },
+ "4430807": {
+  "filters": [
+   {
+    "displayName": "League",
+    "name": "league",
+    "value": "nfl",
+    "options": [
+     {
+      "value": "college-football",
+      "displayValue": "NCAA - Football",
+      "shortDisplayName": "NCAAF"
+     },
+     {
+      "value": "nfl",
+      "displayValue": "National Football League",
+      "shortDisplayName": "NFL"
+     }
+    ]
+   },
+   {
+    "displayName": "Season",
+    "name": "season",
+    "value": "2026",
+    "options": [
+     {
+      "value": "2026",
+      "displayValue": "2026"
+     },
+     {
+      "value": "2025",
+      "displayValue": "2025"
+     },
+     {
+      "value": "2024",
+      "displayValue": "2024"
+     },
+     {
+      "value": "2023",
+      "displayValue": "2023"
+     }
+    ]
+   }
+  ],
+  "displayName": "2026 Splits",
+  "names": [
+   "rushingAttempts",
+   "rushingYards",
+   "yardsPerRushAttempt",
+   "rushingTouchdowns",
+   "longRushing",
+   "receptions",
+   "receivingYards",
+   "yardsPerReception",
+   "receivingTouchdowns",
+   "longReception",
+   "fumbles",
+   "fumblesLost"
+  ],
+  "splitCategories": [
+   {
+    "name": "split",
+    "displayName": "split",
+    "splits": [
+     {
+      "displayName": "All Splits",
+      "stats": [
+       "111",
+       "641",
+       "5.8",
+       "4",
+       "59",
+       "20",
+       "144",
+       "7.2",
+       "1",
+       "24",
+       "2",
+       "0"
+      ],
+      "abbreviation": "Any"
+     },
+     {
+      "displayName": "Home",
+      "stats": [
+       "42",
+       "219",
+       "5.2",
+       "0",
+       "38",
+       "9",
+       "33",
+       "3.7",
+       "0",
+       "14",
+       "0",
+       "0"
+      ],
+      "abbreviation": "Home"
+     },
+     {
+      "displayName": "Away",
+      "stats": [
+       "69",
+       "422",
+       "6.1",
+       "4",
+       "59",
+       "11",
+       "111",
+       "10.1",
+       "1",
+       "24",
+       "2",
+       "0"
+      ],
+      "abbreviation": "Away"
+     }
+    ]
+   },
+   {
+    "name": "byFieldPosition",
+    "displayName": "Field Position",
+    "splits": [
+     {
+      "displayName": "Own 1-20",
+      "stats": [
+       "19",
+       "123",
+       "6.5",
+       "0",
+       "31",
+       "1",
+       "4",
+       "4.0",
+       "0",
+       "4",
+       "0",
+       "0"
+      ],
+      "abbreviation": "Own 1-20"
+     },
+     {
+      "displayName": "Own 21-50",
+      "stats": [
+       "36",
+       "297",
+       "8.3",
+       "1",
+       "59",
+       "11",
+       "93",
+       "8.5",
+       "0",
+       "24",
+       "1",
+       "0"
+      ],
+      "abbreviation": "Own 21-50"
+     },
+     {
+      "displayName": "Opp 49-20",
+      "stats": [
+       "36",
+       "164",
+       "4.6",
+       "0",
+       "38",
+       "7",
+       "43",
+       "6.1",
+       "1",
+       "23",
+       "1",
+       "0"
+      ],
+      "abbreviation": "Opp 49-20"
+     },
+     {
+      "displayName": "Opp 19-Goal",
+      "stats": [
+       "20",
+       "57",
+       "2.9",
+       "3",
+       "10",
+       "1",
+       "4",
+       "4.0",
+       "0",
+       "4",
+       "0",
+       "0"
+      ],
+      "abbreviation": "Opp 19-1"
+     }
+    ]
+   }
+  ]
+ }
+}

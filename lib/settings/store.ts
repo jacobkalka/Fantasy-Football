@@ -8,6 +8,9 @@
  * - players you've marked as already taken in your league (so pickups skip them).
  * The scoring format lives with the roster (it belongs to the team).
  */
+import { applyMotionPreference, type MotionPreference } from "@/lib/motion/preference";
+
+export type { MotionPreference };
 import { createPersistedStore } from "@/lib/storage/persisted";
 
 export const LEAGUE_SIZES = [8, 10, 12, 14, 16] as const;
@@ -17,12 +20,15 @@ export interface AppSettings {
   version: 1;
   leagueSize: LeagueSize;
   glass: "auto" | "off";
+  /** Animations: follow the device's Reduce Motion setting, or always full / always reduced. */
+  motion: MotionPreference;
   watchlist: string[];
   taken: string[];
 }
 
+
 export function defaultSettings(): AppSettings {
-  return { version: 1, leagueSize: 12, glass: "auto", watchlist: [], taken: [] };
+  return { version: 1, leagueSize: 12, glass: "auto", motion: "device", watchlist: [], taken: [] };
 }
 
 const ids = (value: unknown, max: number) =>
@@ -38,6 +44,7 @@ export function migrateSettings(raw: unknown): AppSettings | null {
     version: 1,
     leagueSize: LEAGUE_SIZES.includes(r.leagueSize as LeagueSize) ? (r.leagueSize as LeagueSize) : base.leagueSize,
     glass: r.glass === "off" ? "off" : "auto",
+    motion: r.motion === "full" || r.motion === "reduced" ? r.motion : "device",
     watchlist: ids(r.watchlist, 100),
     taken: ids(r.taken, 400),
   };
@@ -61,6 +68,10 @@ export const settingsActions = {
   },
   setGlass(glass: "auto" | "off") {
     settingsStore.set((s) => ({ ...s, glass }));
+  },
+  setMotion(motion: MotionPreference) {
+    settingsStore.set((s) => ({ ...s, motion }));
+    applyMotionPreference(motion);
   },
   toggleWatch(playerId: string) {
     settingsStore.set((s) => ({ ...s, watchlist: toggle(s.watchlist, playerId) }));

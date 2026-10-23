@@ -2,12 +2,11 @@
 
 import { useRef } from "react";
 import { AnimatedNumber } from "@/components/motion/AnimatedNumber";
-import { isHydrated } from "@/components/motion/hydration";
 import { LiveDot } from "@/components/ui/bits";
 import { PlayerAvatar } from "@/components/ui/PlayerAvatar";
 import { visibleTeamColor } from "@/lib/color";
 import type { PlayerLive, TeamLite } from "@/lib/live/types";
-import { gsap, MOTION, useGSAP } from "@/lib/motion/gsap";
+import { gsap, MOTION, prefersReducedMotion, useGSAP } from "@/lib/motion/gsap";
 import type { RosterPlayer, Slot } from "@/lib/roster/lineup";
 
 /** Where each lineup slot stands on the field, in % of the field box (top = downfield). */
@@ -105,7 +104,7 @@ export function LineupField({
   // The players take the field one after another when the view opens (not on first page load).
   useGSAP(
     () => {
-      if (!isHydrated() || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      if (prefersReducedMotion()) return;
       gsap.from("[data-token]", {
         autoAlpha: 0,
         y: 10,

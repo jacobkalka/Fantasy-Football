@@ -1,7 +1,7 @@
 "use client";
 
 import { useLayoutEffect, useRef } from "react";
-import { gsap, MOTION } from "@/lib/motion/gsap";
+import { gsap, MOTION, prefersReducedMotion } from "@/lib/motion/gsap";
 
 /**
  * A player's likely range this week: a bar from floor (a bad week) to ceiling (a great
@@ -16,7 +16,7 @@ export function RangeBar({ floor, ceiling, score, max }: { floor: number; ceilin
 
   useLayoutEffect(() => {
     const to = { band: { left: `${at(floor)}%`, width: `${at(ceiling) - at(floor)}%` }, tick: { left: `${at(score)}%` } };
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reduce = prefersReducedMotion();
     if (first.current || reduce) {
       gsap.set(band.current, to.band);
       gsap.set(tick.current, to.tick);

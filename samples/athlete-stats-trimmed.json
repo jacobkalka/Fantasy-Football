@@ -1,0 +1,6600 @@
+{
+ "8439": {
+  "categories": [
+   {
+    "name": "passing",
+    "names": [
+     "gamesPlayed",
+     "completions",
+     "passingAttempts",
+     "completionPct",
+     "passingYards",
+     "yardsPerPassAttempt",
+     "passingTouchdowns",
+     "interceptions",
+     "longPassing",
+     "sacks",
+     "QBRating",
+     "adjQBR"
+    ],
+    "statistics": [
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2005,
+       "displayName": "2005"
+      },
+      "stats": [
+       "3",
+       "9",
+       "16",
+       "56.3",
+       "65",
+       "4.1",
+       "0",
+       "1",
+       "16",
+       "3",
+       "39.8",
+       "-"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2006,
+       "displayName": "2006"
+      },
+      "stats": [
+       "2",
+       "6",
+       "15",
+       "40.0",
+       "46",
+       "3.1",
+       "0",
+       "0",
+       "16",
+       "3",
+       "48.2",
+       "7.9"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2007,
+       "displayName": "2007"
+      },
+      "stats": [
+       "2",
+       "20",
+       "28",
+       "71.4",
+       "218",
+       "7.8",
+       "1",
+       "0",
+       "43",
+       "3",
+       "106.0",
+       "78.8"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2008,
+       "displayName": "2008"
+      },
+      "stats": [
+       "16",
+       "341",
+       "536",
+       "63.6",
+       "4,038",
+       "7.5",
+       "28",
+       "13",
+       "71",
+       "34",
+       "93.8",
+       "62.9"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2009,
+       "displayName": "2009"
+      },
+      "stats": [
+       "16",
+       "350",
+       "541",
+       "64.7",
+       "4,434",
+       "8.2",
+       "30",
+       "7",
+       "83",
+       "50",
+       "103.2",
+       "69.1"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2010,
+       "displayName": "2010"
+      },
+      "stats": [
+       "15",
+       "312",
+       "475",
+       "65.7",
+       "3,922",
+       "8.3",
+       "28",
+       "11",
+       "86",
+       "31",
+       "101.2",
+       "69.6"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2011,
+       "displayName": "2011"
+      },
+      "stats": [
+       "15",
+       "343",
+       "502",
+       "68.3",
+       "4,643",
+       "9.2",
+       "45",
+       "6",
+       "93",
+       "36",
+       "122.5",
+       "83.8"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2012,
+       "displayName": "2012"
+      },
+      "stats": [
+       "16",
+       "371",
+       "552",
+       "67.2",
+       "4,295",
+       "7.8",
+       "39",
+       "8",
+       "73",
+       "51",
+       "108.0",
+       "71.3"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2013,
+       "displayName": "2013"
+      },
+      "stats": [
+       "9",
+       "193",
+       "290",
+       "66.6",
+       "2,536",
+       "8.7",
+       "17",
+       "6",
+       "83",
+       "21",
+       "104.9",
+       "61.6"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2014,
+       "displayName": "2014"
+      },
+      "stats": [
+       "16",
+       "341",
+       "520",
+       "65.6",
+       "4,381",
+       "8.4",
+       "38",
+       "5",
+       "80",
+       "28",
+       "112.2",
+       "77.8"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2015,
+       "displayName": "2015"
+      },
+      "stats": [
+       "16",
+       "347",
+       "572",
+       "60.7",
+       "3,821",
+       "6.7",
+       "31",
+       "8",
+       "65",
+       "46",
+       "92.7",
+       "60.0"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2016,
+       "displayName": "2016"
+      },
+      "stats": [
+       "16",
+       "401",
+       "610",
+       "65.7",
+       "4,428",
+       "7.3",
+       "40",
+       "7",
+       "66",
+       "35",
+       "104.2",
+       "72.4"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2017,
+       "displayName": "2017"
+      },
+      "stats": [
+       "7",
+       "154",
+       "238",
+       "64.7",
+       "1,675",
+       "7.0",
+       "16",
+       "6",
+       "72",
+       "22",
+       "97.2",
+       "66.6"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2018,
+       "displayName": "2018"
+      },
+      "stats": [
+       "16",
+       "372",
+       "597",
+       "62.3",
+       "4,442",
+       "7.4",
+       "25",
+       "2",
+       "75",
+       "49",
+       "97.6",
+       "58.0"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2019,
+       "displayName": "2019"
+      },
+      "stats": [
+       "16",
+       "353",
+       "569",
+       "62.0",
+       "4,002",
+       "7.0",
+       "26",
+       "4",
+       "74",
+       "36",
+       "95.4",
+       "52.5"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2020,
+       "displayName": "2020"
+      },
+      "stats": [
+       "16",
+       "372",
+       "526",
+       "70.7",
+       "4,299",
+       "8.2",
+       "48",
+       "5",
+       "78",
+       "20",
+       "121.5",
+       "79.8"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2021,
+       "displayName": "2021"
+      },
+      "stats": [
+       "16",
+       "366",
+       "531",
+       "68.9",
+       "4,115",
+       "7.8",
+       "37",
+       "4",
+       "75",
+       "30",
+       "111.9",
+       "74.1"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2022,
+       "displayName": "2022"
+      },
+      "stats": [
+       "17",
+       "350",
+       "542",
+       "64.6",
+       "3,695",
+       "6.8",
+       "26",
+       "12",
+       "58",
+       "32",
+       "91.1",
+       "41.3"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "20",
+      "teamSlug": "new-york-jets",
+      "season": {
+       "year": 2023,
+       "displayName": "2023"
+      },
+      "stats": [
+       "1",
+       "0",
+       "1",
+       "0.0",
+       "0",
+       "0.0",
+       "0",
+       "0",
+       "0",
+       "1",
+       "39.6",
+       "2.6"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "20",
+      "teamSlug": "new-york-jets",
+      "season": {
+       "year": 2024,
+       "displayName": "2024"
+      },
+      "stats": [
+       "17",
+       "368",
+       "584",
+       "63.0",
+       "3,897",
+       "6.7",
+       "28",
+       "11",
+       "71",
+       "40",
+       "90.5",
+       "44.7"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "23",
+      "teamSlug": "pittsburgh-steelers",
+      "season": {
+       "year": 2025,
+       "displayName": "2025"
+      },
+      "stats": [
+       "16",
+       "327",
+       "498",
+       "65.7",
+       "3,322",
+       "6.7",
+       "24",
+       "7",
+       "80",
+       "29",
+       "94.8",
+       "44.4"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "23",
+      "teamSlug": "pittsburgh-steelers",
+      "season": {
+       "year": 2026,
+       "displayName": "2026"
+      },
+      "stats": [
+       "6",
+       "143",
+       "233",
+       "61.4",
+       "1,487",
+       "6.4",
+       "12",
+       "5",
+       "80",
+       "19",
+       "88.0",
+       "47.0"
+      ],
+      "position": "QB"
+     }
+    ],
+    "totals": [
+     "270",
+     "5839",
+     "8976",
+     "65.1",
+     "67,761",
+     "7.5",
+     "539",
+     "128",
+     "93",
+     "619",
+     "101.8",
+     "-"
+    ]
+   },
+   {
+    "name": "rushing",
+    "names": [
+     "gamesPlayed",
+     "rushingAttempts",
+     "rushingYards",
+     "yardsPerRushAttempt",
+     "rushingTouchdowns",
+     "longRushing",
+     "rushingFirstDowns",
+     "rushingFumbles",
+     "rushingFumblesLost"
+    ],
+    "statistics": [
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2005,
+       "displayName": "2005"
+      },
+      "stats": [
+       "3",
+       "2",
+       "7",
+       "3.5",
+       "0",
+       "8",
+       "1",
+       "0",
+       "0"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2006,
+       "displayName": "2006"
+      },
+      "stats": [
+       "2",
+       "2",
+       "11",
+       "5.5",
+       "0",
+       "6",
+       "1",
+       "0",
+       "0"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2007,
+       "displayName": "2007"
+      },
+      "stats": [
+       "2",
+       "7",
+       "29",
+       "4.1",
+       "0",
+       "13",
+       "3",
+       "0",
+       "0"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2008,
+       "displayName": "2008"
+      },
+      "stats": [
+       "16",
+       "56",
+       "207",
+       "3.7",
+       "4",
+       "21",
+       "21",
+       "4",
+       "0"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2009,
+       "displayName": "2009"
+      },
+      "stats": [
+       "16",
+       "58",
+       "316",
+       "5.4",
+       "5",
+       "35",
+       "25",
+       "2",
+       "0"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2010,
+       "displayName": "2010"
+      },
+      "stats": [
+       "15",
+       "64",
+       "356",
+       "5.6",
+       "4",
+       "27",
+       "22",
+       "2",
+       "1"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2011,
+       "displayName": "2011"
+      },
+      "stats": [
+       "15",
+       "60",
+       "257",
+       "4.3",
+       "3",
+       "25",
+       "18",
+       "0",
+       "0"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2012,
+       "displayName": "2012"
+      },
+      "stats": [
+       "16",
+       "54",
+       "259",
+       "4.8",
+       "2",
+       "27",
+       "20",
+       "0",
+       "0"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2013,
+       "displayName": "2013"
+      },
+      "stats": [
+       "9",
+       "30",
+       "120",
+       "4.0",
+       "0",
+       "18",
+       "9",
+       "1",
+       "0"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2014,
+       "displayName": "2014"
+      },
+      "stats": [
+       "16",
+       "43",
+       "269",
+       "6.3",
+       "2",
+       "19",
+       "20",
+       "3",
+       "1"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2015,
+       "displayName": "2015"
+      },
+      "stats": [
+       "16",
+       "58",
+       "344",
+       "5.9",
+       "1",
+       "18",
+       "20",
+       "0",
+       "0"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2016,
+       "displayName": "2016"
+      },
+      "stats": [
+       "16",
+       "67",
+       "369",
+       "5.5",
+       "4",
+       "23",
+       "25",
+       "3",
+       "2"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2017,
+       "displayName": "2017"
+      },
+      "stats": [
+       "7",
+       "24",
+       "126",
+       "5.3",
+       "0",
+       "18",
+       "10",
+       "0",
+       "0"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2018,
+       "displayName": "2018"
+      },
+      "stats": [
+       "16",
+       "43",
+       "269",
+       "6.3",
+       "2",
+       "23",
+       "20",
+       "2",
+       "0"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2019,
+       "displayName": "2019"
+      },
+      "stats": [
+       "16",
+       "46",
+       "183",
+       "4.0",
+       "1",
+       "17",
+       "9",
+       "1",
+       "1"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2020,
+       "displayName": "2020"
+      },
+      "stats": [
+       "16",
+       "38",
+       "149",
+       "3.9",
+       "3",
+       "14",
+       "15",
+       "3",
+       "1"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2021,
+       "displayName": "2021"
+      },
+      "stats": [
+       "16",
+       "33",
+       "101",
+       "3.1",
+       "3",
+       "18",
+       "10",
+       "2",
+       "0"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2022,
+       "displayName": "2022"
+      },
+      "stats": [
+       "17",
+       "34",
+       "94",
+       "2.8",
+       "1",
+       "18",
+       "9",
+       "3",
+       "2"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "20",
+      "teamSlug": "new-york-jets",
+      "season": {
+       "year": 2024,
+       "displayName": "2024"
+      },
+      "stats": [
+       "17",
+       "22",
+       "107",
+       "4.9",
+       "0",
+       "18",
+       "7",
+       "0",
+       "0"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "23",
+      "teamSlug": "pittsburgh-steelers",
+      "season": {
+       "year": 2025,
+       "displayName": "2025"
+      },
+      "stats": [
+       "16",
+       "21",
+       "61",
+       "2.9",
+       "1",
+       "20",
+       "4",
+       "1",
+       "0"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "23",
+      "teamSlug": "pittsburgh-steelers",
+      "season": {
+       "year": 2026,
+       "displayName": "2026"
+      },
+      "stats": [
+       "6",
+       "9",
+       "17",
+       "1.9",
+       "0",
+       "12",
+       "1",
+       "0",
+       "0"
+      ],
+      "position": "QB"
+     }
+    ],
+    "totals": [
+     "270",
+     "771",
+     "3,651",
+     "4.7",
+     "36",
+     "35",
+     "270",
+     "27",
+     "8"
+    ]
+   },
+   {
+    "name": "receiving",
+    "names": [
+     "gamesPlayed",
+     "receptions",
+     "receivingTargets",
+     "receivingYards",
+     "yardsPerReception",
+     "receivingTouchdowns",
+     "longReception",
+     "receivingFirstDowns",
+     "receivingFumbles",
+     "receivingFumblesLost"
+    ],
+    "statistics": [
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2012,
+       "displayName": "2012"
+      },
+      "stats": [
+       "16",
+       "1",
+       "1",
+       "-1",
+       "-1.0",
+       "0",
+       "-1",
+       "0",
+       "0",
+       "0"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2020,
+       "displayName": "2020"
+      },
+      "stats": [
+       "16",
+       "1",
+       "1",
+       "-6",
+       "-6.0",
+       "0",
+       "-6",
+       "0",
+       "0",
+       "0"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2021,
+       "displayName": "2021"
+      },
+      "stats": [
+       "16",
+       "1",
+       "1",
+       "-4",
+       "-4.0",
+       "0",
+       "-4",
+       "0",
+       "0",
+       "0"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2022,
+       "displayName": "2022"
+      },
+      "stats": [
+       "17",
+       "0",
+       "0",
+       "0",
+       "0.0",
+       "0",
+       "0",
+       "0",
+       "1",
+       "0"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "23",
+      "teamSlug": "pittsburgh-steelers",
+      "season": {
+       "year": 2025,
+       "displayName": "2025"
+      },
+      "stats": [
+       "16",
+       "1",
+       "1",
+       "-9",
+       "-9.0",
+       "0",
+       "-9",
+       "0",
+       "0",
+       "0"
+      ],
+      "position": "QB"
+     }
+    ],
+    "totals": [
+     "270",
+     "4",
+     "4",
+     "-20",
+     "-5.0",
+     "0",
+     "0",
+     "0",
+     "1",
+     "0"
+    ]
+   },
+   {
+    "name": "scoring",
+    "names": [
+     "gamesPlayed",
+     "passingTouchdowns",
+     "rushingTouchdowns",
+     "receivingTouchdowns",
+     "returnTouchdowns",
+     "totalTouchdowns",
+     "totalTwoPointConvs",
+     "kickExtraPoints",
+     "fieldGoals",
+     "totalPoints"
+    ],
+    "statistics": [
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2007,
+       "displayName": "2007"
+      },
+      "stats": [
+       "2",
+       "1",
+       "0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "0"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2008,
+       "displayName": "2008"
+      },
+      "stats": [
+       "16",
+       "28",
+       "4",
+       "0",
+       "0",
+       "4",
+       "0",
+       "0",
+       "0",
+       "24"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2009,
+       "displayName": "2009"
+      },
+      "stats": [
+       "16",
+       "30",
+       "5",
+       "0",
+       "0",
+       "5",
+       "0",
+       "0",
+       "0",
+       "30"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2010,
+       "displayName": "2010"
+      },
+      "stats": [
+       "15",
+       "28",
+       "4",
+       "0",
+       "0",
+       "4",
+       "0",
+       "0",
+       "0",
+       "24"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2011,
+       "displayName": "2011"
+      },
+      "stats": [
+       "15",
+       "45",
+       "3",
+       "0",
+       "0",
+       "3",
+       "0",
+       "0",
+       "0",
+       "18"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2012,
+       "displayName": "2012"
+      },
+      "stats": [
+       "16",
+       "39",
+       "2",
+       "0",
+       "0",
+       "2",
+       "0",
+       "0",
+       "0",
+       "12"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2013,
+       "displayName": "2013"
+      },
+      "stats": [
+       "9",
+       "17",
+       "0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "0"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2014,
+       "displayName": "2014"
+      },
+      "stats": [
+       "16",
+       "38",
+       "2",
+       "0",
+       "0",
+       "2",
+       "0",
+       "0",
+       "0",
+       "12"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2015,
+       "displayName": "2015"
+      },
+      "stats": [
+       "16",
+       "31",
+       "1",
+       "0",
+       "0",
+       "1",
+       "0",
+       "0",
+       "0",
+       "6"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2016,
+       "displayName": "2016"
+      },
+      "stats": [
+       "16",
+       "40",
+       "4",
+       "0",
+       "0",
+       "4",
+       "1",
+       "0",
+       "0",
+       "26"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2017,
+       "displayName": "2017"
+      },
+      "stats": [
+       "7",
+       "16",
+       "0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "0"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2018,
+       "displayName": "2018"
+      },
+      "stats": [
+       "16",
+       "25",
+       "2",
+       "0",
+       "0",
+       "2",
+       "1",
+       "0",
+       "0",
+       "14"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2019,
+       "displayName": "2019"
+      },
+      "stats": [
+       "16",
+       "26",
+       "1",
+       "0",
+       "0",
+       "1",
+       "1",
+       "0",
+       "0",
+       "8"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2020,
+       "displayName": "2020"
+      },
+      "stats": [
+       "16",
+       "48",
+       "3",
+       "0",
+       "0",
+       "3",
+       "0",
+       "0",
+       "0",
+       "18"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2021,
+       "displayName": "2021"
+      },
+      "stats": [
+       "16",
+       "37",
+       "3",
+       "0",
+       "0",
+       "3",
+       "0",
+       "0",
+       "0",
+       "18"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2022,
+       "displayName": "2022"
+      },
+      "stats": [
+       "17",
+       "26",
+       "1",
+       "0",
+       "0",
+       "1",
+       "0",
+       "0",
+       "0",
+       "6"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "20",
+      "teamSlug": "new-york-jets",
+      "season": {
+       "year": 2024,
+       "displayName": "2024"
+      },
+      "stats": [
+       "17",
+       "28",
+       "0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "0"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "23",
+      "teamSlug": "pittsburgh-steelers",
+      "season": {
+       "year": 2025,
+       "displayName": "2025"
+      },
+      "stats": [
+       "16",
+       "24",
+       "1",
+       "0",
+       "0",
+       "1",
+       "0",
+       "0",
+       "0",
+       "6"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "23",
+      "teamSlug": "pittsburgh-steelers",
+      "season": {
+       "year": 2026,
+       "displayName": "2026"
+      },
+      "stats": [
+       "6",
+       "12",
+       "0",
+       "0",
+       "0",
+       "0",
+       "1",
+       "0",
+       "0",
+       "2"
+      ],
+      "position": "QB"
+     }
+    ],
+    "totals": [
+     "270",
+     "539",
+     "36",
+     "0",
+     "0",
+     "36",
+     "4",
+     "0",
+     "0",
+     "224"
+    ]
+   },
+   {
+    "name": "kicking",
+    "names": [
+     "gamesPlayed",
+     "fieldGoalsMade-fieldGoalAttempts",
+     "fieldGoalPct",
+     "fieldGoalsMade1_19-fieldGoalAttempts1_19",
+     "fieldGoalsMade20_29-fieldGoalAttempts20_29",
+     "fieldGoalsMade30_39-fieldGoalAttempts30_39",
+     "fieldGoalsMade40_49-fieldGoalAttempts40_49",
+     "fieldGoalsMade50-fieldGoalAttempts50",
+     "longFieldGoalMade",
+     "extraPointsMade",
+     "extraPointAttempts",
+     "totalKickingPoints"
+    ],
+    "statistics": [
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2022,
+       "displayName": "2022"
+      },
+      "stats": [
+       "17",
+       "0-0",
+       "0.0",
+       "0-0",
+       "0-0",
+       "0-0",
+       "0-0",
+       "0-0",
+       "0",
+       "0",
+       "0",
+       "0"
+      ],
+      "position": "QB"
+     }
+    ],
+    "totals": [
+     "270",
+     "0-0",
+     "0.0",
+     "0-0",
+     "0-0",
+     "0-0",
+     "0-0",
+     "0-0",
+     "0",
+     "0",
+     "0",
+     "0"
+    ]
+   }
+  ],
+  "teams": {
+   "new-york-jets": {
+    "id": "20",
+    "abbreviation": "NYJ",
+    "displayName": "New York Jets"
+   },
+   "green-bay-packers": {
+    "id": "9",
+    "abbreviation": "GB",
+    "displayName": "Green Bay Packers"
+   },
+   "pittsburgh-steelers": {
+    "id": "23",
+    "abbreviation": "PIT",
+    "displayName": "Pittsburgh Steelers"
+   }
+  }
+ },
+ "15847": {
+  "categories": [
+   {
+    "name": "receiving",
+    "names": [
+     "gamesPlayed",
+     "receptions",
+     "receivingTargets",
+     "receivingYards",
+     "yardsPerReception",
+     "receivingTouchdowns",
+     "longReception",
+     "receivingFirstDowns",
+     "receivingFumbles",
+     "receivingFumblesLost"
+    ],
+    "statistics": [
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2014,
+       "displayName": "2014"
+      },
+      "stats": [
+       "16",
+       "67",
+       "87",
+       "862",
+       "12.9",
+       "5",
+       "34",
+       "45",
+       "4",
+       "3"
+      ],
+      "position": "TE"
+     },
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2015,
+       "displayName": "2015"
+      },
+      "stats": [
+       "16",
+       "72",
+       "100",
+       "875",
+       "12.2",
+       "5",
+       "42",
+       "40",
+       "2",
+       "2"
+      ],
+      "position": "TE"
+     },
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2016,
+       "displayName": "2016"
+      },
+      "stats": [
+       "16",
+       "85",
+       "117",
+       "1,125",
+       "13.2",
+       "4",
+       "80",
+       "55",
+       "0",
+       "0"
+      ],
+      "position": "TE"
+     },
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2017,
+       "displayName": "2017"
+      },
+      "stats": [
+       "15",
+       "83",
+       "123",
+       "1,038",
+       "12.5",
+       "8",
+       "44",
+       "55",
+       "0",
+       "0"
+      ],
+      "position": "TE"
+     },
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2018,
+       "displayName": "2018"
+      },
+      "stats": [
+       "16",
+       "103",
+       "150",
+       "1,336",
+       "13.0",
+       "10",
+       "43",
+       "68",
+       "2",
+       "1"
+      ],
+      "position": "TE"
+     },
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2019,
+       "displayName": "2019"
+      },
+      "stats": [
+       "16",
+       "97",
+       "136",
+       "1,229",
+       "12.7",
+       "5",
+       "47",
+       "65",
+       "1",
+       "1"
+      ],
+      "position": "TE"
+     },
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2020,
+       "displayName": "2020"
+      },
+      "stats": [
+       "15",
+       "105",
+       "145",
+       "1,416",
+       "13.5",
+       "11",
+       "45",
+       "79",
+       "1",
+       "1"
+      ],
+      "position": "TE"
+     },
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2021,
+       "displayName": "2021"
+      },
+      "stats": [
+       "16",
+       "92",
+       "134",
+       "1,125",
+       "12.2",
+       "9",
+       "69",
+       "63",
+       "1",
+       "1"
+      ],
+      "position": "TE"
+     },
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2022,
+       "displayName": "2022"
+      },
+      "stats": [
+       "17",
+       "110",
+       "152",
+       "1,338",
+       "12.2",
+       "12",
+       "52",
+       "78",
+       "1",
+       "1"
+      ],
+      "position": "TE"
+     },
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2023,
+       "displayName": "2023"
+      },
+      "stats": [
+       "15",
+       "93",
+       "121",
+       "984",
+       "10.6",
+       "5",
+       "53",
+       "50",
+       "1",
+       "1"
+      ],
+      "position": "TE"
+     },
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2024,
+       "displayName": "2024"
+      },
+      "stats": [
+       "16",
+       "97",
+       "133",
+       "823",
+       "8.5",
+       "3",
+       "38",
+       "46",
+       "2",
+       "1"
+      ],
+      "position": "TE"
+     },
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2025,
+       "displayName": "2025"
+      },
+      "stats": [
+       "17",
+       "76",
+       "108",
+       "851",
+       "11.2",
+       "5",
+       "44",
+       "46",
+       "1",
+       "0"
+      ],
+      "position": "TE"
+     },
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2026,
+       "displayName": "2026"
+      },
+      "stats": [
+       "5",
+       "20",
+       "28",
+       "299",
+       "14.9",
+       "2",
+       "59",
+       "15",
+       "0",
+       "0"
+      ],
+      "position": "TE"
+     }
+    ],
+    "totals": [
+     "196",
+     "1100",
+     "1534",
+     "13,301",
+     "12.1",
+     "84",
+     "80",
+     "705",
+     "16",
+     "12"
+    ]
+   },
+   {
+    "name": "rushing",
+    "names": [
+     "gamesPlayed",
+     "rushingAttempts",
+     "rushingYards",
+     "yardsPerRushAttempt",
+     "rushingTouchdowns",
+     "longRushing",
+     "rushingFirstDowns",
+     "rushingFumbles",
+     "rushingFumblesLost"
+    ],
+    "statistics": [
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2016,
+       "displayName": "2016"
+      },
+      "stats": [
+       "16",
+       "1",
+       "-5",
+       "-5.0",
+       "0",
+       "-5",
+       "0",
+       "0",
+       "0"
+      ],
+      "position": "TE"
+     },
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2017,
+       "displayName": "2017"
+      },
+      "stats": [
+       "15",
+       "2",
+       "7",
+       "3.5",
+       "0",
+       "4",
+       "2",
+       "0",
+       "0"
+      ],
+      "position": "TE"
+     },
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2019,
+       "displayName": "2019"
+      },
+      "stats": [
+       "16",
+       "1",
+       "4",
+       "4.0",
+       "1",
+       "4",
+       "1",
+       "0",
+       "0"
+      ],
+      "position": "TE"
+     },
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2021,
+       "displayName": "2021"
+      },
+      "stats": [
+       "16",
+       "2",
+       "3",
+       "1.5",
+       "1",
+       "4",
+       "1",
+       "0",
+       "0"
+      ],
+      "position": "TE"
+     },
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2022,
+       "displayName": "2022"
+      },
+      "stats": [
+       "17",
+       "2",
+       "5",
+       "2.5",
+       "0",
+       "4",
+       "1",
+       "0",
+       "0"
+      ],
+      "position": "TE"
+     },
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2024,
+       "displayName": "2024"
+      },
+      "stats": [
+       "16",
+       "1",
+       "1",
+       "1.0",
+       "0",
+       "1",
+       "0",
+       "0",
+       "0"
+      ],
+      "position": "TE"
+     },
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2025,
+       "displayName": "2025"
+      },
+      "stats": [
+       "17",
+       "1",
+       "1",
+       "1.0",
+       "0",
+       "1",
+       "0",
+       "0",
+       "0"
+      ],
+      "position": "TE"
+     }
+    ],
+    "totals": [
+     "196",
+     "10",
+     "16",
+     "1.6",
+     "2",
+     "4",
+     "5",
+     "0",
+     "0"
+    ]
+   },
+   {
+    "name": "passing",
+    "names": [
+     "gamesPlayed",
+     "completions",
+     "passingAttempts",
+     "completionPct",
+     "passingYards",
+     "yardsPerPassAttempt",
+     "passingTouchdowns",
+     "interceptions",
+     "longPassing",
+     "sacks",
+     "QBRating",
+     "adjQBR"
+    ],
+    "statistics": [
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2014,
+       "displayName": "2014"
+      },
+      "stats": [
+       "16",
+       "0",
+       "0",
+       "0.0",
+       "0",
+       "0.0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "39.6",
+       "-"
+      ],
+      "position": "TE"
+     },
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2015,
+       "displayName": "2015"
+      },
+      "stats": [
+       "16",
+       "0",
+       "0",
+       "0.0",
+       "0",
+       "0.0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "39.6",
+       "-"
+      ],
+      "position": "TE"
+     },
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2016,
+       "displayName": "2016"
+      },
+      "stats": [
+       "16",
+       "0",
+       "0",
+       "0.0",
+       "0",
+       "0.0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "39.6",
+       "-"
+      ],
+      "position": "TE"
+     },
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2017,
+       "displayName": "2017"
+      },
+      "stats": [
+       "15",
+       "0",
+       "1",
+       "0.0",
+       "0",
+       "0.0",
+       "0",
+       "1",
+       "0",
+       "0",
+       "0.0",
+       "1.7"
+      ],
+      "position": "TE"
+     },
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2018,
+       "displayName": "2018"
+      },
+      "stats": [
+       "16",
+       "0",
+       "0",
+       "0.0",
+       "0",
+       "0.0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "39.6",
+       "-"
+      ],
+      "position": "TE"
+     },
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2019,
+       "displayName": "2019"
+      },
+      "stats": [
+       "16",
+       "0",
+       "0",
+       "0.0",
+       "0",
+       "0.0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "39.6",
+       "100.0"
+      ],
+      "position": "TE"
+     },
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2020,
+       "displayName": "2020"
+      },
+      "stats": [
+       "15",
+       "1",
+       "2",
+       "50.0",
+       "4",
+       "2.0",
+       "0",
+       "0",
+       "4",
+       "0",
+       "56.2",
+       "55.2"
+      ],
+      "position": "TE"
+     },
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2021,
+       "displayName": "2021"
+      },
+      "stats": [
+       "16",
+       "0",
+       "0",
+       "0.0",
+       "0",
+       "0.0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "39.6",
+       "29.0"
+      ],
+      "position": "TE"
+     },
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2022,
+       "displayName": "2022"
+      },
+      "stats": [
+       "17",
+       "0",
+       "0",
+       "0.0",
+       "0",
+       "0.0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "39.6",
+       "28.1"
+      ],
+      "position": "TE"
+     },
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2023,
+       "displayName": "2023"
+      },
+      "stats": [
+       "15",
+       "0",
+       "0",
+       "0.0",
+       "0",
+       "0.0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "39.6",
+       "-"
+      ],
+      "position": "TE"
+     },
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2024,
+       "displayName": "2024"
+      },
+      "stats": [
+       "16",
+       "0",
+       "0",
+       "0.0",
+       "0",
+       "0.0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "39.6",
+       "-"
+      ],
+      "position": "TE"
+     },
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2025,
+       "displayName": "2025"
+      },
+      "stats": [
+       "17",
+       "0",
+       "0",
+       "0.0",
+       "0",
+       "0.0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "39.6",
+       "0.9"
+      ],
+      "position": "TE"
+     },
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2026,
+       "displayName": "2026"
+      },
+      "stats": [
+       "5",
+       "0",
+       "0",
+       "0.0",
+       "0",
+       "0.0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "39.6",
+       "-"
+      ],
+      "position": "TE"
+     }
+    ],
+    "totals": [
+     "196",
+     "1",
+     "3",
+     "33.3",
+     "4",
+     "1.3",
+     "0",
+     "1",
+     "4",
+     "0",
+     "2.8",
+     "-"
+    ]
+   },
+   {
+    "name": "scoring",
+    "names": [
+     "gamesPlayed",
+     "passingTouchdowns",
+     "rushingTouchdowns",
+     "receivingTouchdowns",
+     "returnTouchdowns",
+     "totalTouchdowns",
+     "totalTwoPointConvs",
+     "kickExtraPoints",
+     "fieldGoals",
+     "totalPoints"
+    ],
+    "statistics": [
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2014,
+       "displayName": "2014"
+      },
+      "stats": [
+       "16",
+       "0",
+       "0",
+       "5",
+       "1",
+       "6",
+       "0",
+       "0",
+       "0",
+       "36"
+      ],
+      "position": "TE"
+     },
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2015,
+       "displayName": "2015"
+      },
+      "stats": [
+       "16",
+       "0",
+       "0",
+       "5",
+       "0",
+       "5",
+       "2",
+       "0",
+       "0",
+       "34"
+      ],
+      "position": "TE"
+     },
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2016,
+       "displayName": "2016"
+      },
+      "stats": [
+       "16",
+       "0",
+       "0",
+       "4",
+       "0",
+       "4",
+       "1",
+       "0",
+       "0",
+       "26"
+      ],
+      "position": "TE"
+     },
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2017,
+       "displayName": "2017"
+      },
+      "stats": [
+       "15",
+       "0",
+       "0",
+       "8",
+       "0",
+       "8",
+       "0",
+       "0",
+       "0",
+       "48"
+      ],
+      "position": "TE"
+     },
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2018,
+       "displayName": "2018"
+      },
+      "stats": [
+       "16",
+       "0",
+       "0",
+       "10",
+       "0",
+       "10",
+       "0",
+       "0",
+       "0",
+       "60"
+      ],
+      "position": "TE"
+     },
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2019,
+       "displayName": "2019"
+      },
+      "stats": [
+       "16",
+       "0",
+       "1",
+       "5",
+       "0",
+       "6",
+       "0",
+       "0",
+       "0",
+       "36"
+      ],
+      "position": "TE"
+     },
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2020,
+       "displayName": "2020"
+      },
+      "stats": [
+       "15",
+       "0",
+       "0",
+       "11",
+       "0",
+       "11",
+       "1",
+       "0",
+       "0",
+       "68"
+      ],
+      "position": "TE"
+     },
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2021,
+       "displayName": "2021"
+      },
+      "stats": [
+       "16",
+       "0",
+       "1",
+       "9",
+       "0",
+       "10",
+       "0",
+       "0",
+       "0",
+       "60"
+      ],
+      "position": "TE"
+     },
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2022,
+       "displayName": "2022"
+      },
+      "stats": [
+       "17",
+       "0",
+       "0",
+       "12",
+       "0",
+       "12",
+       "1",
+       "0",
+       "0",
+       "74"
+      ],
+      "position": "TE"
+     },
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2023,
+       "displayName": "2023"
+      },
+      "stats": [
+       "15",
+       "0",
+       "0",
+       "5",
+       "0",
+       "5",
+       "0",
+       "0",
+       "0",
+       "30"
+      ],
+      "position": "TE"
+     },
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2024,
+       "displayName": "2024"
+      },
+      "stats": [
+       "16",
+       "0",
+       "0",
+       "3",
+       "0",
+       "3",
+       "0",
+       "0",
+       "0",
+       "18"
+      ],
+      "position": "TE"
+     },
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2025,
+       "displayName": "2025"
+      },
+      "stats": [
+       "17",
+       "0",
+       "0",
+       "5",
+       "0",
+       "5",
+       "1",
+       "0",
+       "0",
+       "32"
+      ],
+      "position": "TE"
+     },
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2026,
+       "displayName": "2026"
+      },
+      "stats": [
+       "5",
+       "0",
+       "0",
+       "2",
+       "0",
+       "2",
+       "0",
+       "0",
+       "0",
+       "12"
+      ],
+      "position": "TE"
+     }
+    ],
+    "totals": [
+     "196",
+     "0",
+     "2",
+     "84",
+     "1",
+     "87",
+     "6",
+     "0",
+     "0",
+     "534"
+    ]
+   }
+  ],
+  "teams": {
+   "kansas-city-chiefs": {
+    "id": "12",
+    "abbreviation": "KC",
+    "displayName": "Kansas City Chiefs"
+   }
+  }
+ },
+ "16800": {
+  "categories": [
+   {
+    "name": "receiving",
+    "names": [
+     "gamesPlayed",
+     "receptions",
+     "receivingTargets",
+     "receivingYards",
+     "yardsPerReception",
+     "receivingTouchdowns",
+     "longReception",
+     "receivingFirstDowns",
+     "receivingFumbles",
+     "receivingFumblesLost"
+    ],
+    "statistics": [
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2014,
+       "displayName": "2014"
+      },
+      "stats": [
+       "16",
+       "38",
+       "66",
+       "446",
+       "11.7",
+       "3",
+       "45",
+       "23",
+       "0",
+       "0"
+      ],
+      "position": "WR"
+     },
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2015,
+       "displayName": "2015"
+      },
+      "stats": [
+       "13",
+       "50",
+       "93",
+       "483",
+       "9.7",
+       "1",
+       "40",
+       "20",
+       "0",
+       "0"
+      ],
+      "position": "WR"
+     },
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2016,
+       "displayName": "2016"
+      },
+      "stats": [
+       "16",
+       "75",
+       "121",
+       "997",
+       "13.3",
+       "12",
+       "66",
+       "45",
+       "2",
+       "1"
+      ],
+      "position": "WR"
+     },
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2017,
+       "displayName": "2017"
+      },
+      "stats": [
+       "14",
+       "74",
+       "117",
+       "885",
+       "12.0",
+       "10",
+       "55",
+       "45",
+       "0",
+       "0"
+      ],
+      "position": "WR"
+     },
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2018,
+       "displayName": "2018"
+      },
+      "stats": [
+       "15",
+       "111",
+       "169",
+       "1,386",
+       "12.5",
+       "13",
+       "57",
+       "64",
+       "0",
+       "0"
+      ],
+      "position": "WR"
+     },
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2019,
+       "displayName": "2019"
+      },
+      "stats": [
+       "12",
+       "83",
+       "127",
+       "997",
+       "12.0",
+       "5",
+       "58",
+       "54",
+       "2",
+       "1"
+      ],
+      "position": "WR"
+     },
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2020,
+       "displayName": "2020"
+      },
+      "stats": [
+       "14",
+       "115",
+       "149",
+       "1,374",
+       "11.9",
+       "18",
+       "56",
+       "73",
+       "1",
+       "1"
+      ],
+      "position": "WR"
+     },
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2021,
+       "displayName": "2021"
+      },
+      "stats": [
+       "16",
+       "123",
+       "169",
+       "1,553",
+       "12.6",
+       "11",
+       "59",
+       "84",
+       "0",
+       "0"
+      ],
+      "position": "WR"
+     },
+     {
+      "teamId": "13",
+      "teamSlug": "las-vegas-raiders",
+      "season": {
+       "year": 2022,
+       "displayName": "2022"
+      },
+      "stats": [
+       "17",
+       "100",
+       "180",
+       "1,516",
+       "15.2",
+       "14",
+       "60",
+       "65",
+       "1",
+       "0"
+      ],
+      "position": "WR"
+     },
+     {
+      "teamId": "13",
+      "teamSlug": "las-vegas-raiders",
+      "season": {
+       "year": 2023,
+       "displayName": "2023"
+      },
+      "stats": [
+       "17",
+       "103",
+       "175",
+       "1,144",
+       "11.1",
+       "8",
+       "46",
+       "59",
+       "0",
+       "0"
+      ],
+      "position": "WR"
+     },
+     {
+      "teamId": "13",
+      "teamSlug": "las-vegas-raiders",
+      "season": {
+       "year": 2024,
+       "displayName": "2024"
+      },
+      "stats": [
+       "3",
+       "18",
+       "27",
+       "209",
+       "11.6",
+       "1",
+       "30",
+       "10",
+       "0",
+       "0"
+      ],
+      "position": "WR"
+     },
+     {
+      "teamId": "20",
+      "teamSlug": "new-york-jets",
+      "season": {
+       "year": 2024,
+       "displayName": "2024"
+      },
+      "stats": [
+       "11",
+       "67",
+       "114",
+       "854",
+       "12.7",
+       "7",
+       "71",
+       "39",
+       "0",
+       "0"
+      ],
+      "position": "WR"
+     },
+     {
+      "displayName": "2024  Totals",
+      "teamSlug": "2024 Totals",
+      "season": {
+       "year": 2024,
+       "displayName": "2024"
+      },
+      "stats": [
+       "14",
+       "85",
+       "141",
+       "1,063",
+       "12.5",
+       "8",
+       "71",
+       "49",
+       "0",
+       "0"
+      ],
+      "position": "WR"
+     },
+     {
+      "teamId": "14",
+      "teamSlug": "los-angeles-rams",
+      "season": {
+       "year": 2025,
+       "displayName": "2025"
+      },
+      "stats": [
+       "14",
+       "60",
+       "114",
+       "789",
+       "13.1",
+       "14",
+       "44",
+       "51",
+       "0",
+       "0"
+      ],
+      "position": "WR"
+     },
+     {
+      "teamId": "14",
+      "teamSlug": "los-angeles-rams",
+      "season": {
+       "year": 2026,
+       "displayName": "2026"
+      },
+      "stats": [
+       "6",
+       "30",
+       "49",
+       "480",
+       "16.0",
+       "4",
+       "64",
+       "21",
+       "0",
+       "0"
+      ],
+      "position": "WR"
+     }
+    ],
+    "totals": [
+     "184",
+     "1047",
+     "1670",
+     "13,113",
+     "12.5",
+     "121",
+     "71",
+     "653",
+     "6",
+     "3"
+    ]
+   },
+   {
+    "name": "rushing",
+    "names": [
+     "gamesPlayed",
+     "rushingAttempts",
+     "rushingYards",
+     "yardsPerRushAttempt",
+     "rushingTouchdowns",
+     "longRushing",
+     "rushingFirstDowns",
+     "rushingFumbles",
+     "rushingFumblesLost"
+    ],
+    "statistics": [
+     {
+      "teamId": "13",
+      "teamSlug": "las-vegas-raiders",
+      "season": {
+       "year": 2022,
+       "displayName": "2022"
+      },
+      "stats": [
+       "17",
+       "3",
+       "-1",
+       "-0.3",
+       "0",
+       "4",
+       "0",
+       "0",
+       "0"
+      ],
+      "position": "WR"
+     }
+    ],
+    "totals": [
+     "184",
+     "3",
+     "-1",
+     "-0.3",
+     "0",
+     "4",
+     "0",
+     "0",
+     "0"
+    ]
+   },
+   {
+    "name": "passing",
+    "names": [
+     "gamesPlayed",
+     "completions",
+     "passingAttempts",
+     "completionPct",
+     "passingYards",
+     "yardsPerPassAttempt",
+     "passingTouchdowns",
+     "interceptions",
+     "longPassing",
+     "sacks",
+     "QBRating",
+     "adjQBR"
+    ],
+    "statistics": [
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2014,
+       "displayName": "2014"
+      },
+      "stats": [
+       "16",
+       "0",
+       "0",
+       "0.0",
+       "0",
+       "0.0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "39.6",
+       "-"
+      ],
+      "position": "WR"
+     },
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2015,
+       "displayName": "2015"
+      },
+      "stats": [
+       "13",
+       "0",
+       "0",
+       "0.0",
+       "0",
+       "0.0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "39.6",
+       "-"
+      ],
+      "position": "WR"
+     },
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2016,
+       "displayName": "2016"
+      },
+      "stats": [
+       "16",
+       "0",
+       "0",
+       "0.0",
+       "0",
+       "0.0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "39.6",
+       "-"
+      ],
+      "position": "WR"
+     },
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2017,
+       "displayName": "2017"
+      },
+      "stats": [
+       "14",
+       "0",
+       "0",
+       "0.0",
+       "0",
+       "0.0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "39.6",
+       "-"
+      ],
+      "position": "WR"
+     },
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2018,
+       "displayName": "2018"
+      },
+      "stats": [
+       "15",
+       "0",
+       "0",
+       "0.0",
+       "0",
+       "0.0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "39.6",
+       "-"
+      ],
+      "position": "WR"
+     },
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2019,
+       "displayName": "2019"
+      },
+      "stats": [
+       "12",
+       "0",
+       "0",
+       "0.0",
+       "0",
+       "0.0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "39.6",
+       "-"
+      ],
+      "position": "WR"
+     },
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2020,
+       "displayName": "2020"
+      },
+      "stats": [
+       "14",
+       "0",
+       "0",
+       "0.0",
+       "0",
+       "0.0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "39.6",
+       "-"
+      ],
+      "position": "WR"
+     },
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2021,
+       "displayName": "2021"
+      },
+      "stats": [
+       "16",
+       "0",
+       "0",
+       "0.0",
+       "0",
+       "0.0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "39.6",
+       "-"
+      ],
+      "position": "WR"
+     },
+     {
+      "teamId": "13",
+      "teamSlug": "las-vegas-raiders",
+      "season": {
+       "year": 2022,
+       "displayName": "2022"
+      },
+      "stats": [
+       "17",
+       "0",
+       "0",
+       "0.0",
+       "0",
+       "0.0",
+       "0",
+       "0",
+       "0",
+       "1",
+       "39.6",
+       "0.0"
+      ],
+      "position": "WR"
+     },
+     {
+      "teamId": "13",
+      "teamSlug": "las-vegas-raiders",
+      "season": {
+       "year": 2023,
+       "displayName": "2023"
+      },
+      "stats": [
+       "17",
+       "0",
+       "0",
+       "0.0",
+       "0",
+       "0.0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "39.6",
+       "-"
+      ],
+      "position": "WR"
+     },
+     {
+      "teamId": "13",
+      "teamSlug": "las-vegas-raiders",
+      "season": {
+       "year": 2024,
+       "displayName": "2024"
+      },
+      "stats": [
+       "3",
+       "0",
+       "0",
+       "0.0",
+       "0",
+       "0.0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "39.6",
+       "-"
+      ],
+      "position": "WR"
+     },
+     {
+      "teamId": "20",
+      "teamSlug": "new-york-jets",
+      "season": {
+       "year": 2024,
+       "displayName": "2024"
+      },
+      "stats": [
+       "11",
+       "0",
+       "0",
+       "0.0",
+       "0",
+       "0.0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "39.6",
+       "-"
+      ],
+      "position": "WR"
+     },
+     {
+      "displayName": "2024  Totals",
+      "teamSlug": "2024 Totals",
+      "season": {
+       "year": 2024,
+       "displayName": "2024"
+      },
+      "stats": [
+       "14",
+       "0",
+       "0",
+       "0.0",
+       "0",
+       "0.0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "39.6",
+       "-"
+      ],
+      "position": "WR"
+     },
+     {
+      "teamId": "14",
+      "teamSlug": "los-angeles-rams",
+      "season": {
+       "year": 2025,
+       "displayName": "2025"
+      },
+      "stats": [
+       "14",
+       "0",
+       "0",
+       "0.0",
+       "0",
+       "0.0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "39.6",
+       "-"
+      ],
+      "position": "WR"
+     },
+     {
+      "teamId": "14",
+      "teamSlug": "los-angeles-rams",
+      "season": {
+       "year": 2026,
+       "displayName": "2026"
+      },
+      "stats": [
+       "6",
+       "0",
+       "0",
+       "0.0",
+       "0",
+       "0.0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "39.6",
+       "-"
+      ],
+      "position": "WR"
+     }
+    ],
+    "totals": [
+     "184",
+     "0",
+     "0",
+     "0.0",
+     "0",
+     "0.0",
+     "0",
+     "0",
+     "0",
+     "1",
+     "0.0",
+     "-"
+    ]
+   },
+   {
+    "name": "scoring",
+    "names": [
+     "gamesPlayed",
+     "passingTouchdowns",
+     "rushingTouchdowns",
+     "receivingTouchdowns",
+     "returnTouchdowns",
+     "totalTouchdowns",
+     "totalTwoPointConvs",
+     "kickExtraPoints",
+     "fieldGoals",
+     "totalPoints"
+    ],
+    "statistics": [
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2014,
+       "displayName": "2014"
+      },
+      "stats": [
+       "16",
+       "0",
+       "0",
+       "3",
+       "0",
+       "3",
+       "0",
+       "0",
+       "0",
+       "18"
+      ],
+      "position": "WR"
+     },
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2015,
+       "displayName": "2015"
+      },
+      "stats": [
+       "13",
+       "0",
+       "0",
+       "1",
+       "0",
+       "1",
+       "1",
+       "0",
+       "0",
+       "8"
+      ],
+      "position": "WR"
+     },
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2016,
+       "displayName": "2016"
+      },
+      "stats": [
+       "16",
+       "0",
+       "0",
+       "12",
+       "0",
+       "12",
+       "1",
+       "0",
+       "0",
+       "74"
+      ],
+      "position": "WR"
+     },
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2017,
+       "displayName": "2017"
+      },
+      "stats": [
+       "14",
+       "0",
+       "0",
+       "10",
+       "0",
+       "10",
+       "0",
+       "0",
+       "0",
+       "60"
+      ],
+      "position": "WR"
+     },
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2018,
+       "displayName": "2018"
+      },
+      "stats": [
+       "15",
+       "0",
+       "0",
+       "13",
+       "0",
+       "13",
+       "1",
+       "0",
+       "0",
+       "80"
+      ],
+      "position": "WR"
+     },
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2019,
+       "displayName": "2019"
+      },
+      "stats": [
+       "12",
+       "0",
+       "0",
+       "5",
+       "0",
+       "5",
+       "1",
+       "0",
+       "0",
+       "32"
+      ],
+      "position": "WR"
+     },
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2020,
+       "displayName": "2020"
+      },
+      "stats": [
+       "14",
+       "0",
+       "0",
+       "18",
+       "0",
+       "18",
+       "0",
+       "0",
+       "0",
+       "108"
+      ],
+      "position": "WR"
+     },
+     {
+      "teamId": "9",
+      "teamSlug": "green-bay-packers",
+      "season": {
+       "year": 2021,
+       "displayName": "2021"
+      },
+      "stats": [
+       "16",
+       "0",
+       "0",
+       "11",
+       "0",
+       "11",
+       "0",
+       "0",
+       "0",
+       "66"
+      ],
+      "position": "WR"
+     },
+     {
+      "teamId": "13",
+      "teamSlug": "las-vegas-raiders",
+      "season": {
+       "year": 2022,
+       "displayName": "2022"
+      },
+      "stats": [
+       "17",
+       "0",
+       "0",
+       "14",
+       "0",
+       "14",
+       "0",
+       "0",
+       "0",
+       "84"
+      ],
+      "position": "WR"
+     },
+     {
+      "teamId": "13",
+      "teamSlug": "las-vegas-raiders",
+      "season": {
+       "year": 2023,
+       "displayName": "2023"
+      },
+      "stats": [
+       "17",
+       "0",
+       "0",
+       "8",
+       "0",
+       "8",
+       "0",
+       "0",
+       "0",
+       "48"
+      ],
+      "position": "WR"
+     },
+     {
+      "teamId": "13",
+      "teamSlug": "las-vegas-raiders",
+      "season": {
+       "year": 2024,
+       "displayName": "2024"
+      },
+      "stats": [
+       "3",
+       "0",
+       "0",
+       "1",
+       "0",
+       "1",
+       "0",
+       "0",
+       "0",
+       "6"
+      ],
+      "position": "WR"
+     },
+     {
+      "teamId": "20",
+      "teamSlug": "new-york-jets",
+      "season": {
+       "year": 2024,
+       "displayName": "2024"
+      },
+      "stats": [
+       "11",
+       "0",
+       "0",
+       "7",
+       "0",
+       "7",
+       "1",
+       "0",
+       "0",
+       "44"
+      ],
+      "position": "WR"
+     },
+     {
+      "displayName": "2024  Totals",
+      "teamSlug": "2024 Totals",
+      "season": {
+       "year": 2024,
+       "displayName": "2024"
+      },
+      "stats": [
+       "14",
+       "0",
+       "0",
+       "8",
+       "0",
+       "8",
+       "1",
+       "0",
+       "0",
+       "50"
+      ],
+      "position": "WR"
+     },
+     {
+      "teamId": "14",
+      "teamSlug": "los-angeles-rams",
+      "season": {
+       "year": 2025,
+       "displayName": "2025"
+      },
+      "stats": [
+       "14",
+       "0",
+       "0",
+       "14",
+       "0",
+       "14",
+       "0",
+       "0",
+       "0",
+       "84"
+      ],
+      "position": "WR"
+     },
+     {
+      "teamId": "14",
+      "teamSlug": "los-angeles-rams",
+      "season": {
+       "year": 2026,
+       "displayName": "2026"
+      },
+      "stats": [
+       "6",
+       "0",
+       "0",
+       "4",
+       "0",
+       "4",
+       "0",
+       "0",
+       "0",
+       "24"
+      ],
+      "position": "WR"
+     }
+    ],
+    "totals": [
+     "184",
+     "0",
+     "0",
+     "121",
+     "0",
+     "121",
+     "5",
+     "0",
+     "0",
+     "736"
+    ]
+   },
+   {
+    "name": "kicking",
+    "names": [
+     "gamesPlayed",
+     "fieldGoalsMade-fieldGoalAttempts",
+     "fieldGoalPct",
+     "fieldGoalsMade1_19-fieldGoalAttempts1_19",
+     "fieldGoalsMade20_29-fieldGoalAttempts20_29",
+     "fieldGoalsMade30_39-fieldGoalAttempts30_39",
+     "fieldGoalsMade40_49-fieldGoalAttempts40_49",
+     "fieldGoalsMade50-fieldGoalAttempts50",
+     "longFieldGoalMade",
+     "extraPointsMade",
+     "extraPointAttempts",
+     "totalKickingPoints"
+    ],
+    "statistics": [
+     {
+      "teamId": "13",
+      "teamSlug": "las-vegas-raiders",
+      "season": {
+       "year": 2022,
+       "displayName": "2022"
+      },
+      "stats": [
+       "17",
+       "0-0",
+       "0.0",
+       "0-0",
+       "0-0",
+       "0-0",
+       "0-0",
+       "0-0",
+       "0",
+       "0",
+       "0",
+       "0"
+      ],
+      "position": "WR"
+     }
+    ],
+    "totals": [
+     "184",
+     "0-0",
+     "0.0",
+     "0-0",
+     "0-0",
+     "0-0",
+     "0-0",
+     "0-0",
+     "0",
+     "0",
+     "0",
+     "0"
+    ]
+   }
+  ],
+  "teams": {
+   "new-york-jets": {
+    "id": "20",
+    "abbreviation": "NYJ",
+    "displayName": "New York Jets"
+   },
+   "green-bay-packers": {
+    "id": "9",
+    "abbreviation": "GB",
+    "displayName": "Green Bay Packers"
+   },
+   "los-angeles-rams": {
+    "id": "14",
+    "abbreviation": "LAR",
+    "displayName": "Los Angeles Rams"
+   },
+   "las-vegas-raiders": {
+    "id": "13",
+    "abbreviation": "LV",
+    "displayName": "Las Vegas Raiders"
+   }
+  }
+ },
+ "3139477": {
+  "categories": [
+   {
+    "name": "passing",
+    "names": [
+     "gamesPlayed",
+     "completions",
+     "passingAttempts",
+     "completionPct",
+     "passingYards",
+     "yardsPerPassAttempt",
+     "passingTouchdowns",
+     "interceptions",
+     "longPassing",
+     "sacks",
+     "QBRating",
+     "adjQBR"
+    ],
+    "statistics": [
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2017,
+       "displayName": "2017"
+      },
+      "stats": [
+       "1",
+       "22",
+       "35",
+       "62.9",
+       "284",
+       "8.1",
+       "0",
+       "1",
+       "51",
+       "2",
+       "76.4",
+       "66.8"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2018,
+       "displayName": "2018"
+      },
+      "stats": [
+       "16",
+       "383",
+       "580",
+       "66.0",
+       "5,097",
+       "8.8",
+       "50",
+       "12",
+       "89",
+       "26",
+       "113.8",
+       "80.3"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2019,
+       "displayName": "2019"
+      },
+      "stats": [
+       "14",
+       "319",
+       "484",
+       "65.9",
+       "4,031",
+       "8.3",
+       "26",
+       "5",
+       "83",
+       "17",
+       "105.3",
+       "77.7"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2020,
+       "displayName": "2020"
+      },
+      "stats": [
+       "15",
+       "390",
+       "588",
+       "66.3",
+       "4,740",
+       "8.1",
+       "38",
+       "6",
+       "75",
+       "22",
+       "108.2",
+       "78.1"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2021,
+       "displayName": "2021"
+      },
+      "stats": [
+       "17",
+       "436",
+       "658",
+       "66.3",
+       "4,839",
+       "7.4",
+       "37",
+       "13",
+       "75",
+       "28",
+       "98.5",
+       "67.7"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2022,
+       "displayName": "2022"
+      },
+      "stats": [
+       "17",
+       "435",
+       "648",
+       "67.1",
+       "5,250",
+       "8.1",
+       "41",
+       "12",
+       "67",
+       "26",
+       "105.2",
+       "79.0"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2023,
+       "displayName": "2023"
+      },
+      "stats": [
+       "16",
+       "401",
+       "597",
+       "67.2",
+       "4,183",
+       "7.0",
+       "27",
+       "14",
+       "67",
+       "27",
+       "92.6",
+       "63.9"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2024,
+       "displayName": "2024"
+      },
+      "stats": [
+       "16",
+       "392",
+       "581",
+       "67.5",
+       "3,928",
+       "6.8",
+       "26",
+       "11",
+       "54",
+       "36",
+       "93.5",
+       "64.6"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2025,
+       "displayName": "2025"
+      },
+      "stats": [
+       "14",
+       "315",
+       "502",
+       "62.7",
+       "3,587",
+       "7.1",
+       "22",
+       "11",
+       "61",
+       "34",
+       "89.6",
+       "68.5"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2026,
+       "displayName": "2026"
+      },
+      "stats": [
+       "5",
+       "105",
+       "158",
+       "66.5",
+       "1,309",
+       "8.3",
+       "9",
+       "3",
+       "59",
+       "6",
+       "103.1",
+       "68.2"
+      ],
+      "position": "QB"
+     }
+    ],
+    "totals": [
+     "131",
+     "3198",
+     "4831",
+     "66.2",
+     "37,248",
+     "7.7",
+     "276",
+     "88",
+     "89",
+     "224",
+     "100.8",
+     "-"
+    ]
+   },
+   {
+    "name": "rushing",
+    "names": [
+     "gamesPlayed",
+     "rushingAttempts",
+     "rushingYards",
+     "yardsPerRushAttempt",
+     "rushingTouchdowns",
+     "longRushing",
+     "rushingFirstDowns",
+     "rushingFumbles",
+     "rushingFumblesLost"
+    ],
+    "statistics": [
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2017,
+       "displayName": "2017"
+      },
+      "stats": [
+       "1",
+       "7",
+       "10",
+       "1.4",
+       "0",
+       "5",
+       "0",
+       "0",
+       "0"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2018,
+       "displayName": "2018"
+      },
+      "stats": [
+       "16",
+       "60",
+       "272",
+       "4.5",
+       "2",
+       "28",
+       "18",
+       "2",
+       "0"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2019,
+       "displayName": "2019"
+      },
+      "stats": [
+       "14",
+       "43",
+       "218",
+       "5.1",
+       "2",
+       "25",
+       "15",
+       "1",
+       "0"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2020,
+       "displayName": "2020"
+      },
+      "stats": [
+       "15",
+       "62",
+       "308",
+       "5.0",
+       "2",
+       "24",
+       "21",
+       "2",
+       "0"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2021,
+       "displayName": "2021"
+      },
+      "stats": [
+       "17",
+       "66",
+       "381",
+       "5.8",
+       "2",
+       "32",
+       "25",
+       "4",
+       "2"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2022,
+       "displayName": "2022"
+      },
+      "stats": [
+       "17",
+       "61",
+       "358",
+       "5.9",
+       "4",
+       "20",
+       "25",
+       "5",
+       "0"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2023,
+       "displayName": "2023"
+      },
+      "stats": [
+       "16",
+       "75",
+       "389",
+       "5.2",
+       "0",
+       "25",
+       "27",
+       "1",
+       "0"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2024,
+       "displayName": "2024"
+      },
+      "stats": [
+       "16",
+       "58",
+       "307",
+       "5.3",
+       "2",
+       "33",
+       "22",
+       "1",
+       "0"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2025,
+       "displayName": "2025"
+      },
+      "stats": [
+       "14",
+       "64",
+       "422",
+       "6.6",
+       "5",
+       "22",
+       "27",
+       "0",
+       "0"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2026,
+       "displayName": "2026"
+      },
+      "stats": [
+       "5",
+       "17",
+       "57",
+       "3.4",
+       "1",
+       "15",
+       "5",
+       "0",
+       "0"
+      ],
+      "position": "QB"
+     }
+    ],
+    "totals": [
+     "131",
+     "513",
+     "2,722",
+     "5.3",
+     "20",
+     "33",
+     "185",
+     "16",
+     "2"
+    ]
+   },
+   {
+    "name": "receiving",
+    "names": [
+     "gamesPlayed",
+     "receptions",
+     "receivingTargets",
+     "receivingYards",
+     "yardsPerReception",
+     "receivingTouchdowns",
+     "longReception",
+     "receivingFirstDowns",
+     "receivingFumbles",
+     "receivingFumblesLost"
+    ],
+    "statistics": [
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2020,
+       "displayName": "2020"
+      },
+      "stats": [
+       "15",
+       "0",
+       "2",
+       "0",
+       "0.0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "0"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2022,
+       "displayName": "2022"
+      },
+      "stats": [
+       "17",
+       "1",
+       "1",
+       "6",
+       "6.0",
+       "0",
+       "6",
+       "0",
+       "0",
+       "0"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2024,
+       "displayName": "2024"
+      },
+      "stats": [
+       "16",
+       "1",
+       "1",
+       "2",
+       "2.0",
+       "0",
+       "2",
+       "0",
+       "0",
+       "0"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2025,
+       "displayName": "2025"
+      },
+      "stats": [
+       "14",
+       "1",
+       "1",
+       "-10",
+       "-10.0",
+       "0",
+       "-10",
+       "0",
+       "0",
+       "0"
+      ],
+      "position": "QB"
+     }
+    ],
+    "totals": [
+     "131",
+     "3",
+     "5",
+     "-2",
+     "-0.7",
+     "0",
+     "6",
+     "0",
+     "0",
+     "0"
+    ]
+   },
+   {
+    "name": "scoring",
+    "names": [
+     "gamesPlayed",
+     "passingTouchdowns",
+     "rushingTouchdowns",
+     "receivingTouchdowns",
+     "returnTouchdowns",
+     "totalTouchdowns",
+     "totalTwoPointConvs",
+     "kickExtraPoints",
+     "fieldGoals",
+     "totalPoints"
+    ],
+    "statistics": [
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2018,
+       "displayName": "2018"
+      },
+      "stats": [
+       "16",
+       "50",
+       "2",
+       "0",
+       "0",
+       "2",
+       "1",
+       "0",
+       "0",
+       "14"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2019,
+       "displayName": "2019"
+      },
+      "stats": [
+       "14",
+       "26",
+       "2",
+       "0",
+       "0",
+       "2",
+       "0",
+       "0",
+       "0",
+       "12"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2020,
+       "displayName": "2020"
+      },
+      "stats": [
+       "15",
+       "39",
+       "2",
+       "0",
+       "0",
+       "2",
+       "0",
+       "0",
+       "0",
+       "12"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2021,
+       "displayName": "2021"
+      },
+      "stats": [
+       "17",
+       "37",
+       "2",
+       "0",
+       "0",
+       "2",
+       "1",
+       "0",
+       "0",
+       "14"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2022,
+       "displayName": "2022"
+      },
+      "stats": [
+       "17",
+       "41",
+       "4",
+       "0",
+       "0",
+       "4",
+       "1",
+       "0",
+       "0",
+       "26"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2023,
+       "displayName": "2023"
+      },
+      "stats": [
+       "16",
+       "27",
+       "0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "0"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2024,
+       "displayName": "2024"
+      },
+      "stats": [
+       "16",
+       "26",
+       "2",
+       "0",
+       "0",
+       "2",
+       "0",
+       "0",
+       "0",
+       "12"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2025,
+       "displayName": "2025"
+      },
+      "stats": [
+       "14",
+       "22",
+       "5",
+       "0",
+       "0",
+       "5",
+       "0",
+       "0",
+       "0",
+       "30"
+      ],
+      "position": "QB"
+     },
+     {
+      "teamId": "12",
+      "teamSlug": "kansas-city-chiefs",
+      "season": {
+       "year": 2026,
+       "displayName": "2026"
+      },
+      "stats": [
+       "5",
+       "9",
+       "1",
+       "0",
+       "0",
+       "1",
+       "0",
+       "0",
+       "0",
+       "6"
+      ],
+      "position": "QB"
+     }
+    ],
+    "totals": [
+     "131",
+     "277",
+     "20",
+     "0",
+     "0",
+     "20",
+     "3",
+     "0",
+     "0",
+     "126"
+    ]
+   }
+  ],
+  "teams": {
+   "kansas-city-chiefs": {
+    "id": "12",
+    "abbreviation": "KC",
+    "displayName": "Kansas City Chiefs"
+   }
+  }
+ },
+ "3953687": {
+  "categories": [
+   {
+    "name": "kicking",
+    "names": [
+     "gamesPlayed",
+     "fieldGoalsMade-fieldGoalAttempts",
+     "fieldGoalPct",
+     "fieldGoalsMade1_19-fieldGoalAttempts1_19",
+     "fieldGoalsMade20_29-fieldGoalAttempts20_29",
+     "fieldGoalsMade30_39-fieldGoalAttempts30_39",
+     "fieldGoalsMade40_49-fieldGoalAttempts40_49",
+     "fieldGoalsMade50-fieldGoalAttempts50",
+     "longFieldGoalMade",
+     "extraPointsMade",
+     "extraPointAttempts",
+     "totalKickingPoints"
+    ],
+    "statistics": [
+     {
+      "teamId": "6",
+      "teamSlug": "dallas-cowboys",
+      "season": {
+       "year": 2023,
+       "displayName": "2023"
+      },
+      "stats": [
+       "17",
+       "36-38",
+       "94.7",
+       "0-0",
+       "9-9",
+       "13-15",
+       "4-4",
+       "10-10",
+       "60",
+       "49",
+       "52",
+       "157"
+      ],
+      "position": "PK"
+     },
+     {
+      "teamId": "6",
+      "teamSlug": "dallas-cowboys",
+      "season": {
+       "year": 2024,
+       "displayName": "2024"
+      },
+      "stats": [
+       "17",
+       "40-47",
+       "85.1",
+       "0-0",
+       "4-4",
+       "8-10",
+       "14-16",
+       "14-17",
+       "65",
+       "30",
+       "30",
+       "150"
+      ],
+      "position": "PK"
+     },
+     {
+      "teamId": "6",
+      "teamSlug": "dallas-cowboys",
+      "season": {
+       "year": 2025,
+       "displayName": "2025"
+      },
+      "stats": [
+       "17",
+       "36-42",
+       "85.7",
+       "0-0",
+       "10-10",
+       "5-5",
+       "10-10",
+       "11-17",
+       "64",
+       "47",
+       "48",
+       "155"
+      ],
+      "position": "PK"
+     },
+     {
+      "teamId": "6",
+      "teamSlug": "dallas-cowboys",
+      "season": {
+       "year": 2026,
+       "displayName": "2026"
+      },
+      "stats": [
+       "6",
+       "9-12",
+       "75.0",
+       "0-0",
+       "3-3",
+       "2-2",
+       "2-2",
+       "2-5",
+       "60",
+       "14",
+       "15",
+       "41"
+      ],
+      "position": "PK"
+     }
+    ],
+    "totals": [
+     "57",
+     "121-139",
+     "87.1",
+     "0-0",
+     "26-26",
+     "28-32",
+     "30-32",
+     "37-49",
+     "65",
+     "140",
+     "145",
+     "503"
+    ]
+   },
+   {
+    "name": "passing",
+    "names": [
+     "gamesPlayed",
+     "completions",
+     "passingAttempts",
+     "completionPct",
+     "passingYards",
+     "yardsPerPassAttempt",
+     "passingTouchdowns",
+     "interceptions",
+     "longPassing",
+     "sacks",
+     "QBRating",
+     "adjQBR"
+    ],
+    "statistics": [
+     {
+      "teamId": "6",
+      "teamSlug": "dallas-cowboys",
+      "season": {
+       "year": 2023,
+       "displayName": "2023"
+      },
+      "stats": [
+       "17",
+       "0",
+       "0",
+       "0.0",
+       "0",
+       "0.0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "39.6",
+       "-"
+      ],
+      "position": "PK"
+     },
+     {
+      "teamId": "6",
+      "teamSlug": "dallas-cowboys",
+      "season": {
+       "year": 2024,
+       "displayName": "2024"
+      },
+      "stats": [
+       "17",
+       "0",
+       "0",
+       "0.0",
+       "0",
+       "0.0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "39.6",
+       "-"
+      ],
+      "position": "PK"
+     },
+     {
+      "teamId": "6",
+      "teamSlug": "dallas-cowboys",
+      "season": {
+       "year": 2025,
+       "displayName": "2025"
+      },
+      "stats": [
+       "17",
+       "0",
+       "0",
+       "0.0",
+       "0",
+       "0.0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "39.6",
+       "-"
+      ],
+      "position": "PK"
+     },
+     {
+      "teamId": "6",
+      "teamSlug": "dallas-cowboys",
+      "season": {
+       "year": 2026,
+       "displayName": "2026"
+      },
+      "stats": [
+       "6",
+       "0",
+       "0",
+       "0.0",
+       "0",
+       "0.0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "39.6",
+       "-"
+      ],
+      "position": "PK"
+     }
+    ],
+    "totals": [
+     "57",
+     "0",
+     "0",
+     "0.0",
+     "0",
+     "0.0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0.0",
+     "-"
+    ]
+   },
+   {
+    "name": "rushing",
+    "names": [
+     "gamesPlayed",
+     "rushingAttempts",
+     "rushingYards",
+     "yardsPerRushAttempt",
+     "rushingTouchdowns",
+     "longRushing",
+     "rushingFirstDowns",
+     "rushingFumbles",
+     "rushingFumblesLost"
+    ],
+    "statistics": [
+     {
+      "teamId": "6",
+      "teamSlug": "dallas-cowboys",
+      "season": {
+       "year": 2025,
+       "displayName": "2025"
+      },
+      "stats": [
+       "17",
+       "1",
+       "6",
+       "6.0",
+       "0",
+       "6",
+       "1",
+       "0",
+       "0"
+      ],
+      "position": "PK"
+     }
+    ],
+    "totals": [
+     "57",
+     "1",
+     "6",
+     "6.0",
+     "0",
+     "6",
+     "1",
+     "0",
+     "0"
+    ]
+   },
+   {
+    "name": "scoring",
+    "names": [
+     "gamesPlayed",
+     "passingTouchdowns",
+     "rushingTouchdowns",
+     "receivingTouchdowns",
+     "returnTouchdowns",
+     "totalTouchdowns",
+     "totalTwoPointConvs",
+     "kickExtraPoints",
+     "fieldGoals",
+     "totalPoints"
+    ],
+    "statistics": [
+     {
+      "teamId": "6",
+      "teamSlug": "dallas-cowboys",
+      "season": {
+       "year": 2023,
+       "displayName": "2023"
+      },
+      "stats": [
+       "17",
+       "0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "49",
+       "36",
+       "157"
+      ],
+      "position": "PK"
+     },
+     {
+      "teamId": "6",
+      "teamSlug": "dallas-cowboys",
+      "season": {
+       "year": 2024,
+       "displayName": "2024"
+      },
+      "stats": [
+       "17",
+       "0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "30",
+       "40",
+       "150"
+      ],
+      "position": "PK"
+     },
+     {
+      "teamId": "6",
+      "teamSlug": "dallas-cowboys",
+      "season": {
+       "year": 2025,
+       "displayName": "2025"
+      },
+      "stats": [
+       "17",
+       "0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "47",
+       "36",
+       "155"
+      ],
+      "position": "PK"
+     },
+     {
+      "teamId": "6",
+      "teamSlug": "dallas-cowboys",
+      "season": {
+       "year": 2026,
+       "displayName": "2026"
+      },
+      "stats": [
+       "6",
+       "0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "14",
+       "9",
+       "41"
+      ],
+      "position": "PK"
+     }
+    ],
+    "totals": [
+     "57",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "140",
+     "121",
+     "503"
+    ]
+   }
+  ],
+  "teams": {
+   "dallas-cowboys": {
+    "id": "6",
+    "abbreviation": "DAL",
+    "displayName": "Dallas Cowboys"
+   }
+  }
+ },
+ "4362628": {
+  "categories": [
+   {
+    "name": "receiving",
+    "names": [
+     "gamesPlayed",
+     "receptions",
+     "receivingTargets",
+     "receivingYards",
+     "yardsPerReception",
+     "receivingTouchdowns",
+     "longReception",
+     "receivingFirstDowns",
+     "receivingFumbles",
+     "receivingFumblesLost"
+    ],
+    "statistics": [
+     {
+      "teamId": "4",
+      "teamSlug": "cincinnati-bengals",
+      "season": {
+       "year": 2021,
+       "displayName": "2021"
+      },
+      "stats": [
+       "17",
+       "81",
+       "128",
+       "1,455",
+       "18.0",
+       "13",
+       "82",
+       "56",
+       "2",
+       "1"
+      ],
+      "position": "WR"
+     },
+     {
+      "teamId": "4",
+      "teamSlug": "cincinnati-bengals",
+      "season": {
+       "year": 2022,
+       "displayName": "2022"
+      },
+      "stats": [
+       "12",
+       "87",
+       "134",
+       "1,046",
+       "12.0",
+       "9",
+       "60",
+       "58",
+       "2",
+       "2"
+      ],
+      "position": "WR"
+     },
+     {
+      "teamId": "4",
+      "teamSlug": "cincinnati-bengals",
+      "season": {
+       "year": 2023,
+       "displayName": "2023"
+      },
+      "stats": [
+       "16",
+       "100",
+       "145",
+       "1,216",
+       "12.2",
+       "7",
+       "76",
+       "63",
+       "1",
+       "0"
+      ],
+      "position": "WR"
+     },
+     {
+      "teamId": "4",
+      "teamSlug": "cincinnati-bengals",
+      "season": {
+       "year": 2024,
+       "displayName": "2024"
+      },
+      "stats": [
+       "17",
+       "127",
+       "175",
+       "1,708",
+       "13.4",
+       "17",
+       "70",
+       "75",
+       "0",
+       "0"
+      ],
+      "position": "WR"
+     },
+     {
+      "teamId": "4",
+      "teamSlug": "cincinnati-bengals",
+      "season": {
+       "year": 2025,
+       "displayName": "2025"
+      },
+      "stats": [
+       "16",
+       "125",
+       "185",
+       "1,412",
+       "11.3",
+       "8",
+       "64",
+       "73",
+       "1",
+       "1"
+      ],
+      "position": "WR"
+     },
+     {
+      "teamId": "4",
+      "teamSlug": "cincinnati-bengals",
+      "season": {
+       "year": 2026,
+       "displayName": "2026"
+      },
+      "stats": [
+       "5",
+       "27",
+       "38",
+       "289",
+       "10.7",
+       "4",
+       "45",
+       "14",
+       "0",
+       "0"
+      ],
+      "position": "WR"
+     }
+    ],
+    "totals": [
+     "83",
+     "547",
+     "805",
+     "7,126",
+     "13.0",
+     "58",
+     "82",
+     "339",
+     "6",
+     "4"
+    ]
+   },
+   {
+    "name": "rushing",
+    "names": [
+     "gamesPlayed",
+     "rushingAttempts",
+     "rushingYards",
+     "yardsPerRushAttempt",
+     "rushingTouchdowns",
+     "longRushing",
+     "rushingFirstDowns",
+     "rushingFumbles",
+     "rushingFumblesLost"
+    ],
+    "statistics": [
+     {
+      "teamId": "4",
+      "teamSlug": "cincinnati-bengals",
+      "season": {
+       "year": 2021,
+       "displayName": "2021"
+      },
+      "stats": [
+       "17",
+       "7",
+       "21",
+       "3.0",
+       "0",
+       "10",
+       "2",
+       "0",
+       "0"
+      ],
+      "position": "WR"
+     },
+     {
+      "teamId": "4",
+      "teamSlug": "cincinnati-bengals",
+      "season": {
+       "year": 2022,
+       "displayName": "2022"
+      },
+      "stats": [
+       "12",
+       "5",
+       "8",
+       "1.6",
+       "0",
+       "6",
+       "0",
+       "0",
+       "0"
+      ],
+      "position": "WR"
+     },
+     {
+      "teamId": "4",
+      "teamSlug": "cincinnati-bengals",
+      "season": {
+       "year": 2023,
+       "displayName": "2023"
+      },
+      "stats": [
+       "16",
+       "3",
+       "-6",
+       "-2.0",
+       "0",
+       "2",
+       "0",
+       "0",
+       "0"
+      ],
+      "position": "WR"
+     },
+     {
+      "teamId": "4",
+      "teamSlug": "cincinnati-bengals",
+      "season": {
+       "year": 2024,
+       "displayName": "2024"
+      },
+      "stats": [
+       "17",
+       "3",
+       "32",
+       "10.7",
+       "0",
+       "14",
+       "2",
+       "0",
+       "0"
+      ],
+      "position": "WR"
+     },
+     {
+      "teamId": "4",
+      "teamSlug": "cincinnati-bengals",
+      "season": {
+       "year": 2025,
+       "displayName": "2025"
+      },
+      "stats": [
+       "16",
+       "3",
+       "14",
+       "4.7",
+       "0",
+       "9",
+       "0",
+       "0",
+       "0"
+      ],
+      "position": "WR"
+     }
+    ],
+    "totals": [
+     "83",
+     "21",
+     "69",
+     "3.3",
+     "0",
+     "14",
+     "4",
+     "0",
+     "0"
+    ]
+   },
+   {
+    "name": "passing",
+    "names": [
+     "gamesPlayed",
+     "completions",
+     "passingAttempts",
+     "completionPct",
+     "passingYards",
+     "yardsPerPassAttempt",
+     "passingTouchdowns",
+     "interceptions",
+     "longPassing",
+     "sacks",
+     "QBRating",
+     "adjQBR"
+    ],
+    "statistics": [
+     {
+      "teamId": "4",
+      "teamSlug": "cincinnati-bengals",
+      "season": {
+       "year": 2021,
+       "displayName": "2021"
+      },
+      "stats": [
+       "17",
+       "0",
+       "0",
+       "0.0",
+       "0",
+       "0.0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "39.6",
+       "-"
+      ],
+      "position": "WR"
+     },
+     {
+      "teamId": "4",
+      "teamSlug": "cincinnati-bengals",
+      "season": {
+       "year": 2022,
+       "displayName": "2022"
+      },
+      "stats": [
+       "12",
+       "0",
+       "0",
+       "0.0",
+       "0",
+       "0.0",
+       "0",
+       "0",
+       "0",
+       "1",
+       "39.6",
+       "0.0"
+      ],
+      "position": "WR"
+     },
+     {
+      "teamId": "4",
+      "teamSlug": "cincinnati-bengals",
+      "season": {
+       "year": 2023,
+       "displayName": "2023"
+      },
+      "stats": [
+       "16",
+       "1",
+       "1",
+       "100.0",
+       "-7",
+       "-7.0",
+       "0",
+       "0",
+       "-7",
+       "0",
+       "79.2",
+       "1.9"
+      ],
+      "position": "WR"
+     },
+     {
+      "teamId": "4",
+      "teamSlug": "cincinnati-bengals",
+      "season": {
+       "year": 2024,
+       "displayName": "2024"
+      },
+      "stats": [
+       "17",
+       "0",
+       "0",
+       "0.0",
+       "0",
+       "0.0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "39.6",
+       "-"
+      ],
+      "position": "WR"
+     },
+     {
+      "teamId": "4",
+      "teamSlug": "cincinnati-bengals",
+      "season": {
+       "year": 2025,
+       "displayName": "2025"
+      },
+      "stats": [
+       "16",
+       "0",
+       "0",
+       "0.0",
+       "0",
+       "0.0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "39.6",
+       "-"
+      ],
+      "position": "WR"
+     },
+     {
+      "teamId": "4",
+      "teamSlug": "cincinnati-bengals",
+      "season": {
+       "year": 2026,
+       "displayName": "2026"
+      },
+      "stats": [
+       "5",
+       "0",
+       "0",
+       "0.0",
+       "0",
+       "0.0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "39.6",
+       "-"
+      ],
+      "position": "WR"
+     }
+    ],
+    "totals": [
+     "83",
+     "1",
+     "1",
+     "100.0",
+     "-7",
+     "-7.0",
+     "0",
+     "0",
+     "0",
+     "1",
+     "79.2",
+     "-"
+    ]
+   },
+   {
+    "name": "scoring",
+    "names": [
+     "gamesPlayed",
+     "passingTouchdowns",
+     "rushingTouchdowns",
+     "receivingTouchdowns",
+     "returnTouchdowns",
+     "totalTouchdowns",
+     "totalTwoPointConvs",
+     "kickExtraPoints",
+     "fieldGoals",
+     "totalPoints"
+    ],
+    "statistics": [
+     {
+      "teamId": "4",
+      "teamSlug": "cincinnati-bengals",
+      "season": {
+       "year": 2021,
+       "displayName": "2021"
+      },
+      "stats": [
+       "17",
+       "0",
+       "0",
+       "13",
+       "0",
+       "13",
+       "0",
+       "0",
+       "0",
+       "78"
+      ],
+      "position": "WR"
+     },
+     {
+      "teamId": "4",
+      "teamSlug": "cincinnati-bengals",
+      "season": {
+       "year": 2022,
+       "displayName": "2022"
+      },
+      "stats": [
+       "12",
+       "0",
+       "0",
+       "9",
+       "0",
+       "9",
+       "0",
+       "0",
+       "0",
+       "54"
+      ],
+      "position": "WR"
+     },
+     {
+      "teamId": "4",
+      "teamSlug": "cincinnati-bengals",
+      "season": {
+       "year": 2023,
+       "displayName": "2023"
+      },
+      "stats": [
+       "16",
+       "0",
+       "0",
+       "7",
+       "0",
+       "7",
+       "0",
+       "0",
+       "0",
+       "42"
+      ],
+      "position": "WR"
+     },
+     {
+      "teamId": "4",
+      "teamSlug": "cincinnati-bengals",
+      "season": {
+       "year": 2024,
+       "displayName": "2024"
+      },
+      "stats": [
+       "17",
+       "0",
+       "0",
+       "17",
+       "0",
+       "17",
+       "0",
+       "0",
+       "0",
+       "102"
+      ],
+      "position": "WR"
+     },
+     {
+      "teamId": "4",
+      "teamSlug": "cincinnati-bengals",
+      "season": {
+       "year": 2025,
+       "displayName": "2025"
+      },
+      "stats": [
+       "16",
+       "0",
+       "0",
+       "8",
+       "0",
+       "8",
+       "0",
+       "0",
+       "0",
+       "48"
+      ],
+      "position": "WR"
+     },
+     {
+      "teamId": "4",
+      "teamSlug": "cincinnati-bengals",
+      "season": {
+       "year": 2026,
+       "displayName": "2026"
+      },
+      "stats": [
+       "5",
+       "0",
+       "0",
+       "4",
+       "0",
+       "4",
+       "0",
+       "0",
+       "0",
+       "24"
+      ],
+      "position": "WR"
+     }
+    ],
+    "totals": [
+     "83",
+     "0",
+     "0",
+     "58",
+     "0",
+     "58",
+     "0",
+     "0",
+     "0",
+     "348"
+    ]
+   },
+   {
+    "name": "kicking",
+    "names": [
+     "gamesPlayed",
+     "fieldGoalsMade-fieldGoalAttempts",
+     "fieldGoalPct",
+     "fieldGoalsMade1_19-fieldGoalAttempts1_19",
+     "fieldGoalsMade20_29-fieldGoalAttempts20_29",
+     "fieldGoalsMade30_39-fieldGoalAttempts30_39",
+     "fieldGoalsMade40_49-fieldGoalAttempts40_49",
+     "fieldGoalsMade50-fieldGoalAttempts50",
+     "longFieldGoalMade",
+     "extraPointsMade",
+     "extraPointAttempts",
+     "totalKickingPoints"
+    ],
+    "statistics": [
+     {
+      "teamId": "4",
+      "teamSlug": "cincinnati-bengals",
+      "season": {
+       "year": 2021,
+       "displayName": "2021"
+      },
+      "stats": [
+       "17",
+       "0-0",
+       "0.0",
+       "0-0",
+       "0-0",
+       "0-0",
+       "0-0",
+       "0-0",
+       "0",
+       "0",
+       "0",
+       "0"
+      ],
+      "position": "WR"
+     }
+    ],
+    "totals": [
+     "83",
+     "0-0",
+     "0.0",
+     "0-0",
+     "0-0",
+     "0-0",
+     "0-0",
+     "0-0",
+     "0",
+     "0",
+     "0",
+     "0"
+    ]
+   }
+  ],
+  "teams": {
+   "cincinnati-bengals": {
+    "id": "4",
+    "abbreviation": "CIN",
+    "displayName": "Cincinnati Bengals"
+   }
+  }
+ },
+ "4430807": {
+  "categories": [
+   {
+    "name": "rushing",
+    "names": [
+     "gamesPlayed",
+     "rushingAttempts",
+     "rushingYards",
+     "yardsPerRushAttempt",
+     "rushingTouchdowns",
+     "longRushing",
+     "rushingFirstDowns",
+     "rushingFumbles",
+     "rushingFumblesLost"
+    ],
+    "statistics": [
+     {
+      "teamId": "1",
+      "teamSlug": "atlanta-falcons",
+      "season": {
+       "year": 2023,
+       "displayName": "2023"
+      },
+      "stats": [
+       "17",
+       "214",
+       "976",
+       "4.6",
+       "4",
+       "38",
+       "50",
+       "4",
+       "3"
+      ],
+      "position": "RB"
+     },
+     {
+      "teamId": "1",
+      "teamSlug": "atlanta-falcons",
+      "season": {
+       "year": 2024,
+       "displayName": "2024"
+      },
+      "stats": [
+       "17",
+       "304",
+       "1,456",
+       "4.8",
+       "14",
+       "37",
+       "82",
+       "1",
+       "0"
+      ],
+      "position": "RB"
+     },
+     {
+      "teamId": "1",
+      "teamSlug": "atlanta-falcons",
+      "season": {
+       "year": 2025,
+       "displayName": "2025"
+      },
+      "stats": [
+       "17",
+       "287",
+       "1,478",
+       "5.2",
+       "7",
+       "93",
+       "63",
+       "3",
+       "2"
+      ],
+      "position": "RB"
+     },
+     {
+      "teamId": "1",
+      "teamSlug": "atlanta-falcons",
+      "season": {
+       "year": 2026,
+       "displayName": "2026"
+      },
+      "stats": [
+       "6",
+       "111",
+       "641",
+       "5.8",
+       "4",
+       "59",
+       "30",
+       "1",
+       "0"
+      ],
+      "position": "RB"
+     }
+    ],
+    "totals": [
+     "57",
+     "916",
+     "4,551",
+     "5.0",
+     "29",
+     "93",
+     "225",
+     "9",
+     "5"
+    ]
+   },
+   {
+    "name": "receiving",
+    "names": [
+     "gamesPlayed",
+     "receptions",
+     "receivingTargets",
+     "receivingYards",
+     "yardsPerReception",
+     "receivingTouchdowns",
+     "longReception",
+     "receivingFirstDowns",
+     "receivingFumbles",
+     "receivingFumblesLost"
+    ],
+    "statistics": [
+     {
+      "teamId": "1",
+      "teamSlug": "atlanta-falcons",
+      "season": {
+       "year": 2023,
+       "displayName": "2023"
+      },
+      "stats": [
+       "17",
+       "58",
+       "86",
+       "487",
+       "8.4",
+       "4",
+       "71",
+       "24",
+       "0",
+       "0"
+      ],
+      "position": "RB"
+     },
+     {
+      "teamId": "1",
+      "teamSlug": "atlanta-falcons",
+      "season": {
+       "year": 2024,
+       "displayName": "2024"
+      },
+      "stats": [
+       "17",
+       "61",
+       "72",
+       "431",
+       "7.1",
+       "1",
+       "29",
+       "20",
+       "0",
+       "0"
+      ],
+      "position": "RB"
+     },
+     {
+      "teamId": "1",
+      "teamSlug": "atlanta-falcons",
+      "season": {
+       "year": 2025,
+       "displayName": "2025"
+      },
+      "stats": [
+       "17",
+       "79",
+       "103",
+       "820",
+       "10.4",
+       "4",
+       "69",
+       "34",
+       "1",
+       "1"
+      ],
+      "position": "RB"
+     },
+     {
+      "teamId": "1",
+      "teamSlug": "atlanta-falcons",
+      "season": {
+       "year": 2026,
+       "displayName": "2026"
+      },
+      "stats": [
+       "6",
+       "20",
+       "28",
+       "144",
+       "7.2",
+       "1",
+       "24",
+       "4",
+       "1",
+       "0"
+      ],
+      "position": "RB"
+     }
+    ],
+    "totals": [
+     "57",
+     "218",
+     "289",
+     "1,882",
+     "8.6",
+     "10",
+     "71",
+     "82",
+     "2",
+     "1"
+    ]
+   },
+   {
+    "name": "returning",
+    "names": [
+     "gamesPlayed",
+     "puntReturns",
+     "puntReturnYards",
+     "puntReturnTouchdowns",
+     "puntReturnFairCatches",
+     "longPuntReturn",
+     "kickReturns",
+     "kickReturnYards",
+     "kickReturnTouchdowns",
+     "kickReturnFairCatches",
+     "longKickReturn"
+    ],
+    "statistics": [
+     {
+      "teamId": "1",
+      "teamSlug": "atlanta-falcons",
+      "season": {
+       "year": 2023,
+       "displayName": "2023"
+      },
+      "stats": [
+       "17",
+       "1",
+       "8",
+       "0",
+       "0",
+       "8",
+       "0",
+       "0",
+       "0",
+       "0",
+       "0"
+      ],
+      "position": "RB"
+     }
+    ],
+    "totals": [
+     "57",
+     "1",
+     "8",
+     "0",
+     "0",
+     "8",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0"
+    ]
+   },
+   {
+    "name": "passing",
+    "names": [
+     "gamesPlayed",
+     "completions",
+     "passingAttempts",
+     "completionPct",
+     "passingYards",
+     "yardsPerPassAttempt",
+     "passingTouchdowns",
+     "interceptions",
+     "longPassing",
+     "sacks",
+     "QBRating",
+     "adjQBR"
+    ],
+    "statistics": [
+     {
+      "teamId": "1",
+      "teamSlug": "atlanta-falcons",
+      "season": {
+       "year": 2023,
+       "displayName": "2023"
+      },
+      "stats": [
+       "17",
+       "0",
+       "0",
+       "0.0",
+       "0",
+       "0.0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "39.6",
+       "0.0"
+      ],
+      "position": "RB"
+     },
+     {
+      "teamId": "1",
+      "teamSlug": "atlanta-falcons",
+      "season": {
+       "year": 2024,
+       "displayName": "2024"
+      },
+      "stats": [
+       "17",
+       "0",
+       "0",
+       "0.0",
+       "0",
+       "0.0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "39.6",
+       "28.3"
+      ],
+      "position": "RB"
+     },
+     {
+      "teamId": "1",
+      "teamSlug": "atlanta-falcons",
+      "season": {
+       "year": 2025,
+       "displayName": "2025"
+      },
+      "stats": [
+       "17",
+       "0",
+       "0",
+       "0.0",
+       "0",
+       "0.0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "39.6",
+       "-"
+      ],
+      "position": "RB"
+     },
+     {
+      "teamId": "1",
+      "teamSlug": "atlanta-falcons",
+      "season": {
+       "year": 2026,
+       "displayName": "2026"
+      },
+      "stats": [
+       "6",
+       "0",
+       "0",
+       "0.0",
+       "0",
+       "0.0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "39.6",
+       "-"
+      ],
+      "position": "RB"
+     }
+    ],
+    "totals": [
+     "57",
+     "0",
+     "0",
+     "0.0",
+     "0",
+     "0.0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0.0",
+     "-"
+    ]
+   },
+   {
+    "name": "scoring",
+    "names": [
+     "gamesPlayed",
+     "passingTouchdowns",
+     "rushingTouchdowns",
+     "receivingTouchdowns",
+     "returnTouchdowns",
+     "totalTouchdowns",
+     "totalTwoPointConvs",
+     "kickExtraPoints",
+     "fieldGoals",
+     "totalPoints"
+    ],
+    "statistics": [
+     {
+      "teamId": "1",
+      "teamSlug": "atlanta-falcons",
+      "season": {
+       "year": 2023,
+       "displayName": "2023"
+      },
+      "stats": [
+       "17",
+       "0",
+       "4",
+       "4",
+       "0",
+       "8",
+       "0",
+       "0",
+       "0",
+       "48"
+      ],
+      "position": "RB"
+     },
+     {
+      "teamId": "1",
+      "teamSlug": "atlanta-falcons",
+      "season": {
+       "year": 2024,
+       "displayName": "2024"
+      },
+      "stats": [
+       "17",
+       "0",
+       "14",
+       "1",
+       "0",
+       "15",
+       "1",
+       "0",
+       "0",
+       "92"
+      ],
+      "position": "RB"
+     },
+     {
+      "teamId": "1",
+      "teamSlug": "atlanta-falcons",
+      "season": {
+       "year": 2025,
+       "displayName": "2025"
+      },
+      "stats": [
+       "17",
+       "0",
+       "7",
+       "4",
+       "0",
+       "11",
+       "1",
+       "0",
+       "0",
+       "68"
+      ],
+      "position": "RB"
+     },
+     {
+      "teamId": "1",
+      "teamSlug": "atlanta-falcons",
+      "season": {
+       "year": 2026,
+       "displayName": "2026"
+      },
+      "stats": [
+       "6",
+       "0",
+       "4",
+       "1",
+       "0",
+       "5",
+       "0",
+       "0",
+       "0",
+       "30"
+      ],
+      "position": "RB"
+     }
+    ],
+    "totals": [
+     "57",
+     "0",
+     "29",
+     "10",
+     "0",
+     "39",
+     "2",
+     "0",
+     "0",
+     "238"
+    ]
+   }
+  ],
+  "teams": {
+   "atlanta-falcons": {
+    "id": "1",
+    "abbreviation": "ATL",
+    "displayName": "Atlanta Falcons"
+   }
+  }
+ },
+ "4870808": {
+  "categories": [
+   {
+    "name": "rushing",
+    "names": [
+     "gamesPlayed",
+     "rushingAttempts",
+     "rushingYards",
+     "yardsPerRushAttempt",
+     "rushingTouchdowns",
+     "longRushing",
+     "rushingFirstDowns",
+     "rushingFumbles",
+     "rushingFumblesLost"
+    ],
+    "statistics": [
+     {
+      "teamId": "22",
+      "teamSlug": "arizona-cardinals",
+      "season": {
+       "year": 2026,
+       "displayName": "2026"
+      },
+      "stats": [
+       "5",
+       "67",
+       "245",
+       "3.7",
+       "1",
+       "18",
+       "9",
+       "0",
+       "0"
+      ],
+      "position": "RB"
+     }
+    ],
+    "totals": [
+     "5",
+     "67",
+     "245",
+     "3.7",
+     "1",
+     "18",
+     "9",
+     "0",
+     "0"
+    ]
+   },
+   {
+    "name": "receiving",
+    "names": [
+     "gamesPlayed",
+     "receptions",
+     "receivingTargets",
+     "receivingYards",
+     "yardsPerReception",
+     "receivingTouchdowns",
+     "longReception",
+     "receivingFirstDowns",
+     "receivingFumbles",
+     "receivingFumblesLost"
+    ],
+    "statistics": [
+     {
+      "teamId": "22",
+      "teamSlug": "arizona-cardinals",
+      "season": {
+       "year": 2026,
+       "displayName": "2026"
+      },
+      "stats": [
+       "5",
+       "11",
+       "15",
+       "36",
+       "3.3",
+       "1",
+       "9",
+       "2",
+       "0",
+       "0"
+      ],
+      "position": "RB"
+     }
+    ],
+    "totals": [
+     "5",
+     "11",
+     "15",
+     "36",
+     "3.3",
+     "1",
+     "9",
+     "2",
+     "0",
+     "0"
+    ]
+   },
+   {
+    "name": "passing",
+    "names": [
+     "gamesPlayed",
+     "completions",
+     "passingAttempts",
+     "completionPct",
+     "passingYards",
+     "yardsPerPassAttempt",
+     "passingTouchdowns",
+     "interceptions",
+     "longPassing",
+     "sacks",
+     "QBRating",
+     "adjQBR"
+    ],
+    "statistics": [
+     {
+      "teamId": "22",
+      "teamSlug": "arizona-cardinals",
+      "season": {
+       "year": 2026,
+       "displayName": "2026"
+      },
+      "stats": [
+       "5",
+       "0",
+       "0",
+       "0.0",
+       "0",
+       "0.0",
+       "0",
+       "0",
+       "0",
+       "0",
+       "39.6",
+       "-"
+      ],
+      "position": "RB"
+     }
+    ],
+    "totals": [
+     "5",
+     "0",
+     "0",
+     "0.0",
+     "0",
+     "0.0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0.0",
+     "-"
+    ]
+   },
+   {
+    "name": "scoring",
+    "names": [
+     "gamesPlayed",
+     "passingTouchdowns",
+     "rushingTouchdowns",
+     "receivingTouchdowns",
+     "returnTouchdowns",
+     "totalTouchdowns",
+     "totalTwoPointConvs",
+     "kickExtraPoints",
+     "fieldGoals",
+     "totalPoints"
+    ],
+    "statistics": [
+     {
+      "teamId": "22",
+      "teamSlug": "arizona-cardinals",
+      "season": {
+       "year": 2026,
+       "displayName": "2026"
+      },
+      "stats": [
+       "5",
+       "0",
+       "1",
+       "1",
+       "0",
+       "2",
+       "0",
+       "0",
+       "0",
+       "12"
+      ],
+      "position": "RB"
+     }
+    ],
+    "totals": [
+     "5",
+     "0",
+     "1",
+     "1",
+     "0",
+     "2",
+     "0",
+     "0",
+     "0",
+     "12"
+    ]
+   }
+  ],
+  "teams": {
+   "arizona-cardinals": {
+    "id": "22",
+    "abbreviation": "ARI",
+    "displayName": "Arizona Cardinals"
+   }
+  }
+ }
+}

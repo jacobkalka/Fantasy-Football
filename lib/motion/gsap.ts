@@ -30,8 +30,8 @@ export const MOTION = {
   stagger: 0.04,
 } as const;
 
-/** True when the person asked their device for less motion. Safe to call during render on the server. */
-export function prefersReducedMotion(): boolean {
-  if (typeof window === "undefined") return false;
-  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-}
+/**
+ * True when animations should be reduced: the device asks for it (and the app follows the
+ * device), or Settings → Animations is Reduced. Settings → Full always animates.
+ */
+export { motionReduced as prefersReducedMotion } from "./preference";

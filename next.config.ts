@@ -1,5 +1,10 @@
 import type { NextConfig } from "next";
 
+// One id per production build. The app registers /sw.js?v=<id>, so every deployment installs a
+// new service worker (components/pwa/service-worker.ts). Kept in process.env so that every
+// process of one build agrees on it; set PWA_BUILD_ID yourself only to pin it.
+const pwaBuildId = (process.env.PWA_BUILD_ID ||= String(Date.now()));
+
 const nextConfig: NextConfig = {
   cacheComponents: true,
   partialPrefetching: true,
@@ -18,6 +23,28 @@ const nextConfig: NextConfig = {
     // Images are resized by ESPN's CDN (see lib/espn-image-loader.ts), not by Vercel.
     loader: "custom",
     loaderFile: "./lib/espn-image-loader.ts",
+  },
+  env: {
+    PWA_BUILD_ID: pwaBuildId,
+  },
+  async headers() {
+    return [
+      {
+        // The offline-support service worker (public/sw.js). Never cached, so phones see a new
+        // version right away; its own security policy only lets it reach this site and ESPN's
+        // image CDN (player photos and team logos).
+        source: "/sw.js",
+        headers: [
+          { key: "Content-Type", value: "application/javascript; charset=utf-8" },
+          { key: "Cache-Control", value: "no-cache, no-store, must-revalidate" },
+          { key: "X-Content-Type-Options", value: "nosniff" },
+          {
+            key: "Content-Security-Policy",
+            value: "default-src 'self'; connect-src 'self' https://a.espncdn.com; script-src 'self'",
+          },
+        ],
+      },
+    ];
   },
   turbopack: {
     rules: {

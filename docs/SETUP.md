@@ -109,14 +109,57 @@ Supabase stores accounts, rosters and chat, and pushes live updates to everyone'
      This one is a master key: it goes only into Vercel/Railway settings, nowhere else.
 6. Add all three to Vercel as described in [part 3](#3-environment-variables-in-plain-english).
 7. Set up the tables: open **SQL Editor** in Supabase, paste each file from
-   `supabase/migrations/` in order (oldest first), and click **Run**. Claude will walk you through
-   this when we get there. Details are in `supabase/README.md`.
+   `supabase/migrations/` in order (oldest first), and click **Run**. Details are in
+   `supabase/README.md`.
+8. **Sign-in settings** (Authentication in the left menu):
+   - **URL Configuration** → **Site URL**: your Vercel address (e.g.
+     `https://fantasy-football-xi-ecru.vercel.app`). **Redirect URLs**: add
+     `http://localhost:3000/**`, `https://<your-app>.vercel.app/**`, and for preview
+     deployments `https://*-<your-vercel-team>.vercel.app/**`.
+   - **Email**: Supabase's built-in email sender only delivers to members of your Supabase
+     project, and only a few per hour. For friends to sign in, set up an email service under
+     **Authentication → SMTP Settings** (Resend has a free plan), or add their emails as project
+     members while testing.
+   - Optional but recommended, **Email Templates**: add `{{ .Token }}` to the "Magic Link" and
+     "Confirm signup" emails so the 6-digit code works when the email opens in a different app.
+   - Optional, **Google sign-in**: in Google Cloud Console create an OAuth client (Web
+     application) with redirect URI `https://<project-ref>.supabase.co/auth/v1/callback`, then
+     paste its ID and secret under **Authentication → Sign In / Providers → Google**. The Google
+     button appears in FantasyLab by itself once this is on.
+9. **Realtime**: the migration already turns it on for chat. Check under **Database →
+   Publications** that `messages` and `message_reactions` are listed.
+10. Make yourself the chat moderator: in **SQL Editor** run
+    `update public.profiles set is_admin = true where username = 'your-username';`
 
 ## 5. The live-data worker (Railway)
 
-*Needed from Phase 3. Skip for now.*
+*Optional: the app works without it (each phone asks for fresh scores itself). Set it up after
+the database (part 4).*
 
-Vercel runs code only when someone loads a page, so it can't watch games all Sunday. A small
-"worker" program will run nonstop on Railway, check ESPN every few seconds during games, and
-save new plays to Supabase. One worker serves every user. Claude will add step-by-step
-instructions here when the worker is built.
+Vercel runs code only when someone loads a page, so it can't watch games all Sunday. The worker
+(`worker/`) runs nonstop on Railway, checks ESPN every few seconds during games, and saves new
+plays, points and injury changes to Supabase. One worker serves every user.
+
+1. Make sure the database tables exist (part 4, step 7).
+2. Go to **railway.com** and sign in with GitHub.
+3. **New Project** → **Deploy from GitHub repo** → pick this repository. If it isn't listed,
+   click **Configure GitHub App** and give Railway access to it.
+4. The first automatic deploy may fail; that's expected. Click the service, then **Settings**:
+   - **Root Directory**: leave empty (the worker uses the shared `lib/` folder).
+   - **Custom Build Command**: `npm ci --prefix worker`
+   - **Custom Start Command**: `node worker/start.mjs` (not `npm start`: npm doesn't pass on
+     the stop signal, so the worker couldn't shut down cleanly)
+   - **Healthcheck Path**: `/health`
+   - **Restart Policy**: On Failure · **Replicas**: 1
+   - **Watch Paths** (optional): `/worker/**` and `/lib/**`
+5. In Supabase click **Connect** → **Connection String** → type **URI**, method **Session
+   pooler**, and copy it. Replace `[YOUR-PASSWORD]` with the database password (if you lost it,
+   reset it under Project Settings → Database; avoid `@`, `#` and `/` in it).
+6. In Railway open **Variables** → **New Variable**: name `DATABASE_URL`, value the string from
+   step 5. Don't add `PORT` (Railway sets it). Railway redeploys by itself.
+
+**Is it working?** In Railway's **Deploy Logs** you should see `database connected`,
+`worker starting…`, and a `tick` line every few minutes (every few seconds during games). In
+Supabase's **Table Editor**, `teams` has 32 rows, `games` has this week's games and `players`
+about 1,050. Under **Settings → Networking → Generate Domain**, visiting `/health` shows `ok`.
+Optional tuning variables are listed in `.env.example` and `worker/README.md`.

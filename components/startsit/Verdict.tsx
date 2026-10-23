@@ -1,10 +1,9 @@
 "use client";
 
 import { useRef } from "react";
-import { isHydrated } from "@/components/motion/hydration";
 import { Card } from "@/components/ui/Card";
 import { Skeleton } from "@/components/ui/States";
-import { gsap, useGSAP } from "@/lib/motion/gsap";
+import { gsap, prefersReducedMotion, useGSAP } from "@/lib/motion/gsap";
 import { shortName } from "@/lib/startsit/model";
 import type { StartSitResult } from "@/lib/startsit/types";
 import { ConfidenceMeter } from "./ConfidenceMeter";
@@ -41,7 +40,7 @@ export function Verdict({
   // A new pick slides in; the reasons follow one after another.
   useGSAP(
     () => {
-      if (!isHydrated() || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      if (prefersReducedMotion()) return;
       gsap.from("[data-answer]", { autoAlpha: 0, y: 12, duration: 0.3, clearProps: "all" });
       gsap.from("[data-reason]", { autoAlpha: 0, y: 8, duration: 0.24, stagger: 0.05, delay: 0.1, clearProps: "all" });
     },

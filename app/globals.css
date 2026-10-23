@@ -205,9 +205,32 @@ body {
   animation: live-pulse 1.8s ease-out infinite;
 }
 
-/* Loading: flat grey bars at the real size of what they stand in for. No shimmer. */
+/* Loading: flat grey bars at the real size of what they stand in for, breathing gently. */
+@keyframes skeleton-pulse {
+  50% {
+    opacity: 0.5;
+  }
+}
+
 .skeleton {
   background: var(--color-raised);
+  animation: skeleton-pulse 1.4s ease-in-out infinite;
+}
+
+/*
+  First paint with animations on: the screen waits hidden until GSAP brings it in
+  (components/motion/PageEnter.tsx), so nothing flashes and then jumps. If scripts never
+  run, it appears anyway after 1.5 s.
+*/
+@keyframes page-fallback {
+  to {
+    opacity: 1;
+  }
+}
+
+html[data-motion="full"] [data-page]:not([data-entered]) {
+  opacity: 0;
+  animation: page-fallback 0.01s 1.5s forwards;
 }
 
 /* A short tint across a feed item when it arrives. */
@@ -239,15 +262,18 @@ body {
 
 /* ── Reduced motion ────────────────────────────────────────────────────────── */
 
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
+/*
+  html[data-motion] is set before first paint by the script in app/layout.tsx: "reduced" when
+  the device asks for less motion (and Settings → Animations follows the device) or when the
+  setting is Reduced. Settings → Full always animates.
+*/
+html[data-motion="reduced"] *,
+html[data-motion="reduced"] *::before,
+html[data-motion="reduced"] *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
 }
 
 /* People who ask for less transparency get solid floating chrome. */

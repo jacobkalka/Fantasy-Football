@@ -83,3 +83,56 @@ export async function getDefenseVsPosition(season: number, throughWeek: number) 
   cacheLife("outlook");
   return sports.getDefenseVsPosition(season, throughWeek);
 }
+
+/**
+ * The ~650 most-rostered players with projections and weekly results, for team ratings,
+ * trades and pickups. One shared copy for every visitor; injuries and % rostered move slowly.
+ */
+export async function getPlayerUniverse(season: number, week: number) {
+  "use cache: remote";
+  cacheLife("outlook");
+  cacheTag("universe");
+  return stamp(await sports.getPlayerUniverse(season, week));
+}
+
+// --- Player research (profile pages). Assembled in lib/players/service.ts. ---
+
+/** Who a player is. Bio facts barely change; injury notes and trades are picked up within the hour. */
+export async function getPlayerBio(playerId: string) {
+  "use cache: remote";
+  cacheLife("hours");
+  cacheTag(`player-${playerId}`);
+  return sports.getPlayerBio(playerId);
+}
+
+/** Season-by-season career stats. Only the current season's row moves, once per game. */
+export async function getPlayerCareer(playerId: string) {
+  "use cache: remote";
+  cacheLife("hours");
+  cacheTag(`player-${playerId}`);
+  return sports.getPlayerCareer(playerId);
+}
+
+/** This season game by game. Changes after each game (and when projections/injuries update). */
+export async function getPlayerSeason(playerId: string, season: number, week: number) {
+  "use cache: remote";
+  cacheLife("final");
+  cacheTag(`player-${playerId}`);
+  return stamp(await sports.getPlayerSeason(playerId, season, week));
+}
+
+/** One team's schedule and results, shared by every player on that team. */
+export async function getTeamSchedule(teamId: string, season: number) {
+  "use cache: remote";
+  cacheLife("final");
+  cacheTag(`schedule-${teamId}`);
+  return sports.getTeamSchedule(teamId, season);
+}
+
+/** One team's depth chart, shared by every player on that team. Teams update it during the week. */
+export async function getDepthChart(teamId: string, season: number) {
+  "use cache: remote";
+  cacheLife("hours");
+  cacheTag(`depth-${teamId}`);
+  return sports.getDepthChart(teamId, season);
+}

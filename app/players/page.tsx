@@ -1,8 +1,16 @@
 import type { Metadata } from "next";
-import { ComingSoon } from "@/components/shell/ComingSoon";
+import { PlayerBrowser } from "@/components/players/PlayerBrowser";
+import { SectionTabs } from "@/components/shell/SectionTabs";
+import { PageTitle } from "@/components/ui/bits";
 
 export const metadata: Metadata = { title: "Players" };
 
-export default function Page() {
-  return <ComingSoon section="/players" current="/players" title="Players" what="Search any NFL player and open a full profile: role, recent form, consistency, and whether he'd help your team." />;
+export default function PlayersPage() {
+  return (
+    <>
+      <SectionTabs section="/players" current="/players" />
+      <PageTitle sub="Every NFL player: search, browse, and open a profile">Players</PageTitle>
+      <PlayerBrowser />
+    </>
+  );
 }

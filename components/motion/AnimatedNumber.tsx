@@ -1,14 +1,14 @@
 "use client";
 
 import { useLayoutEffect, useRef } from "react";
-import { gsap, MOTION } from "@/lib/motion/gsap";
+import { gsap, MOTION, prefersReducedMotion } from "@/lib/motion/gsap";
 
 const DIGITS = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
 
 /**
- * A number whose digits roll like an odometer when it changes ("104.6" → "113.0"),
- * used for live points. Screen readers get the plain value. The first value is drawn
- * in place (no roll on load); with "reduce motion" digits change without rolling.
+ * A number whose digits roll like an odometer: up from zero when it first appears, and
+ * from the old value to the new one when it changes ("104.6" → "113.0"). Screen readers
+ * get the plain value; with animations reduced, digits simply change.
  */
 export function AnimatedNumber({
   value,
@@ -27,11 +27,14 @@ export function AnimatedNumber({
   useLayoutEffect(() => {
     const columns = root.current?.querySelectorAll<HTMLElement>("[data-digit]");
     if (!columns) return;
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    columns.forEach((column) => {
+    const reduce = prefersReducedMotion();
+    columns.forEach((column, i) => {
       const y = `${-Number(column.dataset.digit)}em`;
-      if (first.current || reduce) gsap.set(column, { y });
-      else gsap.to(column, { y, duration: MOTION.slow, ease: "power3.out" });
+      if (reduce) gsap.set(column, { y });
+      else if (first.current) {
+        // Spin up from zero, the left digits settling last like a slot machine.
+        gsap.fromTo(column, { y: 0 }, { y, duration: 0.9 + (columns.length - i) * 0.08, ease: "power3.out", delay: 0.15 });
+      } else gsap.to(column, { y, duration: MOTION.slow, ease: "power3.out" });
     });
     first.current = false;
   }, [text]);

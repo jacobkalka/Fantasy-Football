@@ -112,6 +112,23 @@ pointer to what replaced them.
 | 2026-10-22 | Deleting a chat message wipes its text (a moderator copy is kept on reports); `messages.deleted_by` references `auth.users`; rooms are created through `ensure_game_room` / `ensure_league_room`; admins can read every room; blocking is enforced in the database; roster player ids are plain text (no foreign key) because a player may be added before the worker stores him. | Privacy for deleted text; unambiguous joins; rooms can't be spammed; moderation works; no ordering problems. |
 | 2026-10-22 | The owner becomes admin once, in the Supabase SQL Editor: `update public.profiles set is_admin = true where username = '…';` | `is_admin` can't be self-granted from the app. |
 
+## Accounts, roster sync and chat (`lib/supabase`, `lib/chat`)
+
+| Date | Decision | Why |
+|------|----------|-----|
+| 2026-10-22 | Sign in with an email link or a 6-digit code (no passwords), plus Google only when Supabase reports it enabled. Auth state lives in the browser; no `proxy.ts` until a Server Component needs the user. The Supabase library is only downloaded when it's configured, and `isSupabaseConfigured()` refuses a secret key pasted into the public setting. | Nothing for a beginner to manage; no broken buttons; protects against the wrong key. |
+| 2026-10-22 | Roster sync rules: no account copy → save the device team; empty device → load the account's; synced last by another account → load this account's (never overwrite someone else's); otherwise the side that changed wins, then the newest edit (tie → account). Edits save ~1.2 s after you stop tapping; offline edits retry with backoff. Only ids, slots and positions are stored; names and photos come from `/api/players`. Sign-out clears the device team only after a successful save. | Never lose or leak a team. |
+| 2026-10-22 | Chat: shared plays are a `[play]{json}` prefix in the message body (validated, shown as plain text if malformed); profanity is masked on screen only (whole words; the database rules are the real guard); blocked people are hidden immediately with Undo; links aren't clickable (safety). | Cards render without lookups; safety first. |
+
+## Live-data worker (`worker/`)
+
+| Date | Decision | Why |
+|------|----------|-----|
+| 2026-10-22 | Runs TypeScript directly through `tsx` (`node worker/start.mjs`, no build step), reusing `lib/` via the `@/` alias, with only the provider methods it uses (`Pick<DataProvider, …>`). The Postgres driver is postgres.js loaded with `createRequire` and typed by hand. | The app's build type-checks every file and Vercel never installs the worker's packages; `pg` ships test files the root test runner would pick up. |
+| 2026-10-22 | Schedule: scoreboard every 5 min off-hours, every 30 s within 30 min of a kickoff, every ~8 s while games are live (plus play-by-play for live games with a rostered player, or all with `POLL_ALL_LIVE_GAMES`). A per-minute ESPN request cap (default 120) with a reserve for scoreboard checks; exponential backoff per game with jitter. | Fresh data on Sundays without hammering ESPN. |
+| 2026-10-22 | Writes only change rows that really changed (`is distinct from`); removed plays are marked `deleted`, but deletions are skipped if a response drops more than max(10, 20%) of stored plays; stat lines = official box score + two-point conversions (same rule as `lib/live/team.ts`). Injury events get stable ids from play+player+status (hash prefix `the-feed:` must never change). | Realtime only announces real changes; ESPN glitches can't wipe a game; the app and database agree. |
+| 2026-10-22 | Replays write under `replay-<id>` ids and never touch real rows; `clean-replays` removes them. SSL "require" without certificate verification for non-local hosts (Supabase's CA isn't in Node's store). Connects as the database owner for now; a write-only role is a later improvement. | Safe testing; works with both Supabase poolers. |
+
 ## Tooling and process
 
 | Date | Decision | Why |

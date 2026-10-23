@@ -6,7 +6,7 @@ import { InjuryBadge } from "@/components/player/InjuryBadge";
 import { PlayerAvatar } from "@/components/ui/PlayerAvatar";
 import { visibleTeamColor } from "@/lib/color";
 import type { PlayerLive, TeamLite } from "@/lib/live/types";
-import { gsap } from "@/lib/motion/gsap";
+import { gsap, prefersReducedMotion } from "@/lib/motion/gsap";
 import type { Slot } from "@/lib/roster/lineup";
 import { formatPoints } from "@/lib/scoring";
 import { GameStatus } from "./GameStatus";
@@ -52,7 +52,7 @@ export function PlayerRow({
     previous.current = points;
     if (before === null || Math.abs(points - before) < 0.05) return;
     const up = points > before;
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reduce = prefersReducedMotion();
     if (bubble.current) {
       bubble.current.textContent = formatPoints(points - before);
       bubble.current.className = `pointer-events-none absolute -top-2 right-0 text-[13px] font-semibold ${up ? "text-positive" : "text-negative"}`;

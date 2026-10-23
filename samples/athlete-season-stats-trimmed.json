@@ -1,0 +1,1062 @@
+{
+ "8439": {
+  "season": {
+   "$ref": "http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/seasons/2026?lang=en&region=us"
+  },
+  "splits": {
+   "categories": [
+    {
+     "name": "general",
+     "stats": [
+      {
+       "name": "gamesPlayed",
+       "value": 6
+      }
+     ]
+    },
+    {
+     "name": "passing",
+     "stats": [
+      {
+       "name": "passingAttempts",
+       "value": 233
+      },
+      {
+       "name": "passingYards",
+       "value": 1487
+      },
+      {
+       "name": "passingYardsAfterCatch",
+       "value": 877
+      },
+      {
+       "name": "passingYardsAtCatch",
+       "value": 610
+      },
+      {
+       "name": "QBRating",
+       "value": 88.04499816894531
+      },
+      {
+       "name": "sacks",
+       "value": 19
+      },
+      {
+       "name": "sackYardsLost",
+       "value": 159
+      },
+      {
+       "name": "offensiveSnapPct",
+       "value": 0
+      },
+      {
+       "name": "targetSharePct",
+       "value": 0
+      },
+      {
+       "name": "yardsPerRouteRun",
+       "value": 0
+      },
+      {
+       "name": "avgDepthOfTarget",
+       "value": 0
+      }
+     ]
+    },
+    {
+     "name": "rushing",
+     "stats": [
+      {
+       "name": "rushingAttempts",
+       "value": 9
+      },
+      {
+       "name": "rushingBigPlays",
+       "value": 0
+      },
+      {
+       "name": "rushingFirstDowns",
+       "value": 1
+      },
+      {
+       "name": "rushingYards",
+       "value": 17
+      },
+      {
+       "name": "stuffs",
+       "value": 6
+      }
+     ]
+    },
+    {
+     "name": "receiving",
+     "stats": [
+      {
+       "name": "receivingBigPlays",
+       "value": 0
+      },
+      {
+       "name": "receivingFirstDowns",
+       "value": 0
+      },
+      {
+       "name": "receivingTargets",
+       "value": 0
+      },
+      {
+       "name": "receivingYards",
+       "value": 0
+      },
+      {
+       "name": "receivingYardsAfterCatch",
+       "value": 0
+      },
+      {
+       "name": "receivingYardsAtCatch",
+       "value": 0
+      },
+      {
+       "name": "receptions",
+       "value": 0
+      },
+      {
+       "name": "twoPointRecConvs",
+       "value": 0
+      }
+     ]
+    },
+    {
+     "name": "defensive",
+     "stats": [
+      {
+       "name": "sacks",
+       "value": 0
+      },
+      {
+       "name": "stuffs",
+       "value": 0
+      }
+     ]
+    },
+    {
+     "name": "defensiveInterceptions",
+     "stats": []
+    },
+    {
+     "name": "scoring",
+     "stats": [
+      {
+       "name": "twoPointRecConvs",
+       "value": 0
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "15847": {
+  "season": {
+   "$ref": "http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/seasons/2026?lang=en&region=us"
+  },
+  "splits": {
+   "categories": [
+    {
+     "name": "general",
+     "stats": [
+      {
+       "name": "gamesPlayed",
+       "value": 5
+      }
+     ]
+    },
+    {
+     "name": "passing",
+     "stats": [
+      {
+       "name": "passingAttempts",
+       "value": 0
+      },
+      {
+       "name": "passingYards",
+       "value": 0
+      },
+      {
+       "name": "passingYardsAfterCatch",
+       "value": 0
+      },
+      {
+       "name": "passingYardsAtCatch",
+       "value": 0
+      },
+      {
+       "name": "QBRating",
+       "value": 0
+      },
+      {
+       "name": "sacks",
+       "value": 0
+      },
+      {
+       "name": "sackYardsLost",
+       "value": 0
+      },
+      {
+       "name": "offensiveSnapPct",
+       "value": 0
+      },
+      {
+       "name": "targetSharePct",
+       "value": 0
+      },
+      {
+       "name": "yardsPerRouteRun",
+       "value": 2.390000104904175
+      },
+      {
+       "name": "avgDepthOfTarget",
+       "value": 6.429999828338623
+      }
+     ]
+    },
+    {
+     "name": "rushing",
+     "stats": [
+      {
+       "name": "rushingAttempts",
+       "value": 0
+      },
+      {
+       "name": "rushingBigPlays",
+       "value": 0
+      },
+      {
+       "name": "rushingFirstDowns",
+       "value": 0
+      },
+      {
+       "name": "rushingYards",
+       "value": 0
+      },
+      {
+       "name": "stuffs",
+       "value": 0
+      }
+     ]
+    },
+    {
+     "name": "receiving",
+     "stats": [
+      {
+       "name": "receivingBigPlays",
+       "value": 3
+      },
+      {
+       "name": "receivingFirstDowns",
+       "value": 15
+      },
+      {
+       "name": "receivingTargets",
+       "value": 28
+      },
+      {
+       "name": "receivingYards",
+       "value": 299
+      },
+      {
+       "name": "receivingYardsAfterCatch",
+       "value": 196
+      },
+      {
+       "name": "receivingYardsAtCatch",
+       "value": 103
+      },
+      {
+       "name": "receptions",
+       "value": 20
+      },
+      {
+       "name": "twoPointRecConvs",
+       "value": 28
+      }
+     ]
+    },
+    {
+     "name": "scoring",
+     "stats": [
+      {
+       "name": "twoPointRecConvs",
+       "value": 0
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "16800": {
+  "season": {
+   "$ref": "http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/seasons/2026?lang=en&region=us"
+  },
+  "splits": {
+   "categories": [
+    {
+     "name": "general",
+     "stats": [
+      {
+       "name": "gamesPlayed",
+       "value": 6
+      }
+     ]
+    },
+    {
+     "name": "passing",
+     "stats": [
+      {
+       "name": "passingAttempts",
+       "value": 0
+      },
+      {
+       "name": "passingYards",
+       "value": 0
+      },
+      {
+       "name": "passingYardsAfterCatch",
+       "value": 0
+      },
+      {
+       "name": "passingYardsAtCatch",
+       "value": 0
+      },
+      {
+       "name": "QBRating",
+       "value": 0
+      },
+      {
+       "name": "sacks",
+       "value": 0
+      },
+      {
+       "name": "sackYardsLost",
+       "value": 0
+      },
+      {
+       "name": "offensiveSnapPct",
+       "value": 0
+      },
+      {
+       "name": "targetSharePct",
+       "value": 0
+      },
+      {
+       "name": "yardsPerRouteRun",
+       "value": 2.3299999237060547
+      },
+      {
+       "name": "avgDepthOfTarget",
+       "value": 14.670000076293945
+      }
+     ]
+    },
+    {
+     "name": "rushing",
+     "stats": [
+      {
+       "name": "rushingAttempts",
+       "value": 0
+      },
+      {
+       "name": "rushingBigPlays",
+       "value": 0
+      },
+      {
+       "name": "rushingFirstDowns",
+       "value": 0
+      },
+      {
+       "name": "rushingYards",
+       "value": 0
+      },
+      {
+       "name": "stuffs",
+       "value": 0
+      }
+     ]
+    },
+    {
+     "name": "receiving",
+     "stats": [
+      {
+       "name": "receivingBigPlays",
+       "value": 7
+      },
+      {
+       "name": "receivingFirstDowns",
+       "value": 21
+      },
+      {
+       "name": "receivingTargets",
+       "value": 49
+      },
+      {
+       "name": "receivingYards",
+       "value": 480
+      },
+      {
+       "name": "receivingYardsAfterCatch",
+       "value": 128
+      },
+      {
+       "name": "receivingYardsAtCatch",
+       "value": 352
+      },
+      {
+       "name": "receptions",
+       "value": 30
+      },
+      {
+       "name": "twoPointRecConvs",
+       "value": 49
+      }
+     ]
+    },
+    {
+     "name": "defensive",
+     "stats": [
+      {
+       "name": "sacks",
+       "value": 0
+      },
+      {
+       "name": "stuffs",
+       "value": 0
+      }
+     ]
+    },
+    {
+     "name": "defensiveInterceptions",
+     "stats": []
+    },
+    {
+     "name": "scoring",
+     "stats": [
+      {
+       "name": "twoPointRecConvs",
+       "value": 0
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "3139477": {
+  "season": {
+   "$ref": "http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/seasons/2026?lang=en&region=us"
+  },
+  "splits": {
+   "categories": [
+    {
+     "name": "general",
+     "stats": [
+      {
+       "name": "gamesPlayed",
+       "value": 5
+      }
+     ]
+    },
+    {
+     "name": "passing",
+     "stats": [
+      {
+       "name": "passingAttempts",
+       "value": 158
+      },
+      {
+       "name": "passingYards",
+       "value": 1309
+      },
+      {
+       "name": "passingYardsAfterCatch",
+       "value": 782
+      },
+      {
+       "name": "passingYardsAtCatch",
+       "value": 527
+      },
+      {
+       "name": "QBRating",
+       "value": 103.05899810791016
+      },
+      {
+       "name": "sacks",
+       "value": 6
+      },
+      {
+       "name": "sackYardsLost",
+       "value": 38
+      },
+      {
+       "name": "offensiveSnapPct",
+       "value": 0
+      },
+      {
+       "name": "targetSharePct",
+       "value": 0
+      },
+      {
+       "name": "yardsPerRouteRun",
+       "value": 0
+      },
+      {
+       "name": "avgDepthOfTarget",
+       "value": 0
+      }
+     ]
+    },
+    {
+     "name": "rushing",
+     "stats": [
+      {
+       "name": "rushingAttempts",
+       "value": 17
+      },
+      {
+       "name": "rushingBigPlays",
+       "value": 0
+      },
+      {
+       "name": "rushingFirstDowns",
+       "value": 5
+      },
+      {
+       "name": "rushingYards",
+       "value": 57
+      },
+      {
+       "name": "stuffs",
+       "value": 6
+      }
+     ]
+    },
+    {
+     "name": "receiving",
+     "stats": [
+      {
+       "name": "receivingBigPlays",
+       "value": 0
+      },
+      {
+       "name": "receivingFirstDowns",
+       "value": 0
+      },
+      {
+       "name": "receivingTargets",
+       "value": 0
+      },
+      {
+       "name": "receivingYards",
+       "value": 0
+      },
+      {
+       "name": "receivingYardsAfterCatch",
+       "value": 0
+      },
+      {
+       "name": "receivingYardsAtCatch",
+       "value": 0
+      },
+      {
+       "name": "receptions",
+       "value": 0
+      },
+      {
+       "name": "twoPointRecConvs",
+       "value": 0
+      }
+     ]
+    },
+    {
+     "name": "defensive",
+     "stats": [
+      {
+       "name": "sacks",
+       "value": 0
+      },
+      {
+       "name": "stuffs",
+       "value": 0
+      }
+     ]
+    },
+    {
+     "name": "defensiveInterceptions",
+     "stats": []
+    },
+    {
+     "name": "scoring",
+     "stats": [
+      {
+       "name": "twoPointRecConvs",
+       "value": 0
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "3953687": {
+  "season": {
+   "$ref": "http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/seasons/2026?lang=en&region=us"
+  },
+  "splits": {
+   "categories": [
+    {
+     "name": "general",
+     "stats": [
+      {
+       "name": "gamesPlayed",
+       "value": 6
+      }
+     ]
+    },
+    {
+     "name": "passing",
+     "stats": [
+      {
+       "name": "passingAttempts",
+       "value": 0
+      },
+      {
+       "name": "passingYards",
+       "value": 0
+      },
+      {
+       "name": "passingYardsAfterCatch",
+       "value": 0
+      },
+      {
+       "name": "passingYardsAtCatch",
+       "value": 0
+      },
+      {
+       "name": "QBRating",
+       "value": 0
+      },
+      {
+       "name": "sacks",
+       "value": 0
+      },
+      {
+       "name": "sackYardsLost",
+       "value": 0
+      },
+      {
+       "name": "offensiveSnapPct",
+       "value": 0
+      },
+      {
+       "name": "targetSharePct",
+       "value": 0
+      },
+      {
+       "name": "yardsPerRouteRun",
+       "value": 0
+      },
+      {
+       "name": "avgDepthOfTarget",
+       "value": 0
+      }
+     ]
+    },
+    {
+     "name": "rushing",
+     "stats": [
+      {
+       "name": "rushingAttempts",
+       "value": 0
+      },
+      {
+       "name": "rushingBigPlays",
+       "value": 0
+      },
+      {
+       "name": "rushingFirstDowns",
+       "value": 0
+      },
+      {
+       "name": "rushingYards",
+       "value": 0
+      },
+      {
+       "name": "stuffs",
+       "value": 0
+      }
+     ]
+    },
+    {
+     "name": "receiving",
+     "stats": [
+      {
+       "name": "receivingBigPlays",
+       "value": 0
+      },
+      {
+       "name": "receivingFirstDowns",
+       "value": 0
+      },
+      {
+       "name": "receivingTargets",
+       "value": 0
+      },
+      {
+       "name": "receivingYards",
+       "value": 0
+      },
+      {
+       "name": "receivingYardsAfterCatch",
+       "value": 0
+      },
+      {
+       "name": "receivingYardsAtCatch",
+       "value": 0
+      },
+      {
+       "name": "receptions",
+       "value": 0
+      },
+      {
+       "name": "twoPointRecConvs",
+       "value": 0
+      }
+     ]
+    },
+    {
+     "name": "kicking",
+     "stats": [
+      {
+       "name": "longFieldGoalMade",
+       "value": 60
+      }
+     ]
+    },
+    {
+     "name": "scoring",
+     "stats": [
+      {
+       "name": "twoPointRecConvs",
+       "value": 0
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "4362628": {
+  "season": {
+   "$ref": "http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/seasons/2026?lang=en&region=us"
+  },
+  "splits": {
+   "categories": [
+    {
+     "name": "general",
+     "stats": [
+      {
+       "name": "gamesPlayed",
+       "value": 5
+      }
+     ]
+    },
+    {
+     "name": "passing",
+     "stats": [
+      {
+       "name": "passingAttempts",
+       "value": 0
+      },
+      {
+       "name": "passingYards",
+       "value": 0
+      },
+      {
+       "name": "passingYardsAfterCatch",
+       "value": 0
+      },
+      {
+       "name": "passingYardsAtCatch",
+       "value": 0
+      },
+      {
+       "name": "QBRating",
+       "value": 0
+      },
+      {
+       "name": "sacks",
+       "value": 0
+      },
+      {
+       "name": "sackYardsLost",
+       "value": 0
+      },
+      {
+       "name": "offensiveSnapPct",
+       "value": 0
+      },
+      {
+       "name": "targetSharePct",
+       "value": 0
+      },
+      {
+       "name": "yardsPerRouteRun",
+       "value": 2.059999942779541
+      },
+      {
+       "name": "avgDepthOfTarget",
+       "value": 9.109999656677246
+      }
+     ]
+    },
+    {
+     "name": "rushing",
+     "stats": [
+      {
+       "name": "rushingAttempts",
+       "value": 0
+      },
+      {
+       "name": "rushingBigPlays",
+       "value": 0
+      },
+      {
+       "name": "rushingFirstDowns",
+       "value": 0
+      },
+      {
+       "name": "rushingYards",
+       "value": 0
+      },
+      {
+       "name": "stuffs",
+       "value": 0
+      }
+     ]
+    },
+    {
+     "name": "receiving",
+     "stats": [
+      {
+       "name": "receivingBigPlays",
+       "value": 3
+      },
+      {
+       "name": "receivingFirstDowns",
+       "value": 14
+      },
+      {
+       "name": "receivingTargets",
+       "value": 38
+      },
+      {
+       "name": "receivingYards",
+       "value": 289
+      },
+      {
+       "name": "receivingYardsAfterCatch",
+       "value": 71
+      },
+      {
+       "name": "receivingYardsAtCatch",
+       "value": 218
+      },
+      {
+       "name": "receptions",
+       "value": 27
+      },
+      {
+       "name": "twoPointRecConvs",
+       "value": 38
+      }
+     ]
+    },
+    {
+     "name": "defensive",
+     "stats": [
+      {
+       "name": "sacks",
+       "value": 0
+      },
+      {
+       "name": "stuffs",
+       "value": 0
+      }
+     ]
+    },
+    {
+     "name": "defensiveInterceptions",
+     "stats": []
+    },
+    {
+     "name": "scoring",
+     "stats": [
+      {
+       "name": "twoPointRecConvs",
+       "value": 0
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "4430807": {
+  "season": {
+   "$ref": "http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/seasons/2026?lang=en&region=us"
+  },
+  "splits": {
+   "categories": [
+    {
+     "name": "general",
+     "stats": [
+      {
+       "name": "gamesPlayed",
+       "value": 6
+      }
+     ]
+    },
+    {
+     "name": "passing",
+     "stats": [
+      {
+       "name": "passingAttempts",
+       "value": 0
+      },
+      {
+       "name": "passingYards",
+       "value": 0
+      },
+      {
+       "name": "passingYardsAfterCatch",
+       "value": 0
+      },
+      {
+       "name": "passingYardsAtCatch",
+       "value": 0
+      },
+      {
+       "name": "QBRating",
+       "value": 0
+      },
+      {
+       "name": "sacks",
+       "value": 0
+      },
+      {
+       "name": "sackYardsLost",
+       "value": 0
+      },
+      {
+       "name": "offensiveSnapPct",
+       "value": 0
+      },
+      {
+       "name": "targetSharePct",
+       "value": 0
+      },
+      {
+       "name": "yardsPerRouteRun",
+       "value": 1.690000057220459
+      },
+      {
+       "name": "avgDepthOfTarget",
+       "value": -1.3899999856948853
+      }
+     ]
+    },
+    {
+     "name": "rushing",
+     "stats": [
+      {
+       "name": "rushingAttempts",
+       "value": 111
+      },
+      {
+       "name": "rushingBigPlays",
+       "value": 7
+      },
+      {
+       "name": "rushingFirstDowns",
+       "value": 30
+      },
+      {
+       "name": "rushingYards",
+       "value": 641
+      },
+      {
+       "name": "stuffs",
+       "value": 8
+      }
+     ]
+    },
+    {
+     "name": "receiving",
+     "stats": [
+      {
+       "name": "receivingBigPlays",
+       "value": 2
+      },
+      {
+       "name": "receivingFirstDowns",
+       "value": 4
+      },
+      {
+       "name": "receivingTargets",
+       "value": 28
+      },
+      {
+       "name": "receivingYards",
+       "value": 144
+      },
+      {
+       "name": "receivingYardsAfterCatch",
+       "value": 169
+      },
+      {
+       "name": "receivingYardsAtCatch",
+       "value": -25
+      },
+      {
+       "name": "receptions",
+       "value": 20
+      },
+      {
+       "name": "twoPointRecConvs",
+       "value": 28
+      }
+     ]
+    },
+    {
+     "name": "defensive",
+     "stats": [
+      {
+       "name": "sacks",
+       "value": 0
+      },
+      {
+       "name": "stuffs",
+       "value": 0
+      }
+     ]
+    },
+    {
+     "name": "defensiveInterceptions",
+     "stats": []
+    },
+    {
+     "name": "scoring",
+     "stats": [
+      {
+       "name": "twoPointRecConvs",
+       "value": 0
+      }
+     ]
+    }
+   ]
+  }
+ }
+}

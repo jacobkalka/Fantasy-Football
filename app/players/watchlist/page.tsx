@@ -1,8 +1,16 @@
 import type { Metadata } from "next";
-import { ComingSoon } from "@/components/shell/ComingSoon";
+import { WatchlistScreen } from "@/components/players/WatchlistScreen";
+import { SectionTabs } from "@/components/shell/SectionTabs";
+import { PageTitle } from "@/components/ui/bits";
 
 export const metadata: Metadata = { title: "Watchlist" };
 
-export default function Page() {
-  return <ComingSoon section="/players" current="/players/watchlist" title="Watchlist" what="Players you're keeping an eye on, with their latest numbers." />;
+export default function WatchlistPage() {
+  return (
+    <>
+      <SectionTabs section="/players" current="/players/watchlist" />
+      <PageTitle sub="Players you're keeping an eye on, saved on this device">Watchlist</PageTitle>
+      <WatchlistScreen />
+    </>
+  );
 }

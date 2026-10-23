@@ -1,0 +1,927 @@
+{
+ "8439": {
+  "athlete": {
+   "id": "8439",
+   "firstName": "Aaron",
+   "lastName": "Rodgers",
+   "displayName": "Aaron Rodgers",
+   "fullName": "Aaron Rodgers",
+   "jersey": "8",
+   "active": true,
+   "status": {
+    "id": "1",
+    "name": "Active",
+    "type": "active",
+    "abbreviation": "Active"
+   },
+   "statsSummary": {
+    "displayName": "2026 regular season stats",
+    "statistics": [
+     {
+      "name": "passingYards",
+      "displayName": "Passing Yards",
+      "shortDisplayName": "Pass Yards",
+      "description": "The total passing yards.",
+      "abbreviation": "YDS",
+      "value": 1487,
+      "displayValue": "1,487",
+      "rank": 8,
+      "rankDisplayValue": "8th"
+     },
+     {
+      "name": "passingTouchdowns",
+      "displayName": "Passing Touchdowns",
+      "shortDisplayName": "Touchdowns",
+      "description": "The total number of passing touchdowns.",
+      "abbreviation": "TD",
+      "value": 12,
+      "displayValue": "12",
+      "rank": 4,
+      "rankDisplayValue": "Tied-4th"
+     },
+     {
+      "name": "interceptions",
+      "displayName": "Interceptions",
+      "shortDisplayName": "INT",
+      "description": "The number of passes thrown that were intercepted by the opposing team.",
+      "abbreviation": "INT",
+      "value": 5,
+      "displayValue": "5",
+      "rank": 22,
+      "rankDisplayValue": "Tied-22nd"
+     },
+     {
+      "name": "adjQBR",
+      "displayName": "Adjusted QBR",
+      "shortDisplayName": "QBR",
+      "description": "Adjusted Quarterback Rating.",
+      "abbreviation": "QBR",
+      "value": 47.04,
+      "displayValue": "47.0",
+      "rank": 22,
+      "rankDisplayValue": "22nd"
+     }
+    ]
+   },
+   "displayBirthPlace": "Chico, CA",
+   "displayHeight": "6' 2\"",
+   "displayWeight": "223 lbs",
+   "displayDOB": "2/12/1983",
+   "age": 42,
+   "displayExperience": "22nd Season",
+   "displayDraft": "2005: Rd 1, Pk 24 (GB)",
+   "debutYear": 2005,
+   "college": {
+    "id": "25",
+    "name": "California",
+    "abbrev": "CAL"
+   },
+   "headshot": {
+    "href": "https://a.espncdn.com/i/headshots/nfl/players/full/8439.png",
+    "alt": "Aaron Rodgers"
+   },
+   "position": {
+    "id": "8",
+    "name": "Quarterback",
+    "displayName": "Quarterback",
+    "abbreviation": "QB"
+   },
+   "team": {
+    "id": "23",
+    "abbreviation": "PIT",
+    "displayName": "Pittsburgh Steelers",
+    "name": "Steelers",
+    "location": "Pittsburgh"
+   }
+  }
+ },
+ "15795": {
+  "athlete": {
+   "id": "15795",
+   "firstName": "DeAndre",
+   "lastName": "Hopkins",
+   "displayName": "DeAndre Hopkins",
+   "fullName": "DeAndre Hopkins",
+   "jersey": "10",
+   "active": true,
+   "status": {
+    "id": "9",
+    "name": "Free Agent",
+    "type": "free-agent",
+    "abbreviation": "FA"
+   },
+   "statsSummary": {
+    "displayName": "2025 regular season stats",
+    "statistics": [
+     {
+      "name": "receptions",
+      "displayName": "Receptions",
+      "shortDisplayName": "Receptions",
+      "description": "The total number of receptions.",
+      "abbreviation": "REC",
+      "value": 22,
+      "displayValue": "22"
+     },
+     {
+      "name": "receivingYards",
+      "displayName": "Receiving Yards",
+      "shortDisplayName": "Rec. Yards",
+      "description": "The total receiving yards.",
+      "abbreviation": "YDS",
+      "value": 330,
+      "displayValue": "330"
+     },
+     {
+      "name": "receivingTouchdowns",
+      "displayName": "Receiving Touchdowns",
+      "shortDisplayName": "Receiving Touchdowns",
+      "description": "The total number of receiving touchdowns.",
+      "abbreviation": "TD",
+      "value": 2,
+      "displayValue": "2"
+     },
+     {
+      "name": "yardsPerReception",
+      "displayName": "Yards Per Reception",
+      "shortDisplayName": "YDS/R",
+      "description": "The average number of yards per reception.",
+      "abbreviation": "AVG",
+      "value": 15,
+      "displayValue": "15.0"
+     }
+    ]
+   },
+   "displayBirthPlace": "Central, SC",
+   "displayHeight": "6' 1\"",
+   "displayWeight": "210 lbs",
+   "displayDOB": "6/6/1992",
+   "age": 34,
+   "displayExperience": "13th Season",
+   "displayDraft": "2013: Rd 1, Pk 27 (HOU)",
+   "debutYear": 2013,
+   "college": {
+    "id": "228",
+    "name": "Clemson",
+    "abbrev": "CLEM"
+   },
+   "headshot": {
+    "href": "https://a.espncdn.com/i/headshots/nfl/players/full/15795.png",
+    "alt": "DeAndre Hopkins"
+   },
+   "position": {
+    "id": "1",
+    "name": "Wide Receiver",
+    "displayName": "Wide Receiver",
+    "abbreviation": "WR"
+   },
+   "team": {
+    "id": "33",
+    "abbreviation": "BAL",
+    "displayName": "Baltimore Ravens",
+    "name": "Ravens",
+    "location": "Baltimore"
+   }
+  }
+ },
+ "15847": {
+  "athlete": {
+   "id": "15847",
+   "firstName": "Travis",
+   "lastName": "Kelce",
+   "displayName": "Travis Kelce",
+   "fullName": "Travis Kelce",
+   "jersey": "87",
+   "active": true,
+   "status": {
+    "id": "1",
+    "name": "Active",
+    "type": "active",
+    "abbreviation": "Active"
+   },
+   "injuries": [
+    {
+     "longComment": "Kelce has operated with a cap on his reps for the Chiefs' first two practices of Week 7, but as long as he's able to maintain limited activity or upgrade to full participation Friday, he should be in good position to play Sunday in Seattle. With top wideout Rashee Rice (hamstring/knee) remaining sidelined for Thursday's practice and perhaps trending toward another missed game in Week 7, Kelce could be a candidate to take on more volume than usual in the Kansas City passing attack if he's not too hindered by the ankle issue.",
+     "shortComment": "Kelce (ankle) was listed as a limited participant in Thursday's practice.",
+     "status": "Questionable",
+     "date": "2026-10-22T20:56:00.000+00:00",
+     "type": {
+      "id": "2",
+      "name": "INJURY_STATUS_QUESTIONABLE",
+      "description": "questionable",
+      "abbreviation": "Q"
+     },
+     "details": {
+      "fantasyStatus": {
+       "description": "QUESTIONABLE",
+       "abbreviation": "QUESTIONABLE"
+      },
+      "type": "Ankle",
+      "location": "Leg",
+      "detail": "Not Specified",
+      "side": "Not Specified",
+      "returnDate": "2026-10-25T00:00:00.000+00:00"
+     }
+    }
+   ],
+   "statsSummary": {
+    "displayName": "2026 regular season stats",
+    "statistics": [
+     {
+      "name": "receptions",
+      "displayName": "Receptions",
+      "shortDisplayName": "Receptions",
+      "description": "The total number of receptions.",
+      "abbreviation": "REC",
+      "value": 20,
+      "displayValue": "20",
+      "rank": 66,
+      "rankDisplayValue": "Tied-66th"
+     },
+     {
+      "name": "receivingYards",
+      "displayName": "Receiving Yards",
+      "shortDisplayName": "Rec. Yards",
+      "description": "The total receiving yards.",
+      "abbreviation": "YDS",
+      "value": 299,
+      "displayValue": "299",
+      "rank": 35,
+      "rankDisplayValue": "35th"
+     },
+     {
+      "name": "receivingTouchdowns",
+      "displayName": "Receiving Touchdowns",
+      "shortDisplayName": "Receiving Touchdowns",
+      "description": "The total number of receiving touchdowns.",
+      "abbreviation": "TD",
+      "value": 2,
+      "displayValue": "2",
+      "rank": 31,
+      "rankDisplayValue": "Tied-31st"
+     },
+     {
+      "name": "yardsPerReception",
+      "displayName": "Yards Per Reception",
+      "shortDisplayName": "YDS/R",
+      "description": "The average number of yards per reception.",
+      "abbreviation": "AVG",
+      "value": 14.949999809265137,
+      "displayValue": "14.9",
+      "rank": 18,
+      "rankDisplayValue": "18th"
+     }
+    ]
+   },
+   "displayBirthPlace": "Cleveland Heights, OH",
+   "displayHeight": "6' 5\"",
+   "displayWeight": "250 lbs",
+   "displayDOB": "5/10/1989",
+   "age": 37,
+   "displayExperience": "14th Season",
+   "displayDraft": "2013: Rd 3, Pk 63 (KC)",
+   "debutYear": 2013,
+   "college": {
+    "id": "2132",
+    "name": "Cincinnati",
+    "abbrev": "CIN"
+   },
+   "headshot": {
+    "href": "https://a.espncdn.com/i/headshots/nfl/players/full/15847.png",
+    "alt": "Travis Kelce"
+   },
+   "position": {
+    "id": "7",
+    "name": "Tight End",
+    "displayName": "Tight End",
+    "abbreviation": "TE"
+   },
+   "team": {
+    "id": "12",
+    "abbreviation": "KC",
+    "displayName": "Kansas City Chiefs",
+    "name": "Chiefs",
+    "location": "Kansas City"
+   }
+  }
+ },
+ "16800": {
+  "athlete": {
+   "id": "16800",
+   "firstName": "Davante",
+   "lastName": "Adams",
+   "displayName": "Davante Adams",
+   "fullName": "Davante Adams",
+   "jersey": "17",
+   "active": true,
+   "status": {
+    "id": "13",
+    "name": "Day-To-Day",
+    "type": "day-to-day",
+    "abbreviation": "Day-To-Day"
+   },
+   "injuries": [
+    {
+     "longComment": "As a result, Adams is slated to miss at least four games, although Ian Rapoport of NFL Network previously suggested that the wideout was hoping to return not too long after the Rams' Week 11 bye. In his absence, Jordan Whittington, Konata Mumpfield and Tutu Atwellare candidates to see added looks behind top WR Puka Nacua.",
+     "shortComment": "Adams (hamstring) was placed on injured reserve Tuesday, Ian Rapoport of NFL Network reports.",
+     "status": "Injured Reserve",
+     "date": "2026-10-20T21:36:00.000+00:00",
+     "type": {
+      "id": "5",
+      "name": "INJURY_STATUS_IR",
+      "description": "Injured Reserve",
+      "abbreviation": "IR"
+     },
+     "details": {
+      "fantasyStatus": {
+       "description": "IR",
+       "abbreviation": "IR"
+      },
+      "type": "Hamstring",
+      "location": "Leg",
+      "detail": "Surgery",
+      "side": "Left",
+      "returnDate": "2026-11-25T00:00:00.000+00:00"
+     }
+    }
+   ],
+   "statsSummary": {
+    "displayName": "2026 regular season stats",
+    "statistics": [
+     {
+      "name": "receptions",
+      "displayName": "Receptions",
+      "shortDisplayName": "Receptions",
+      "description": "The total number of receptions.",
+      "abbreviation": "REC",
+      "value": 30,
+      "displayValue": "30",
+      "rank": 16,
+      "rankDisplayValue": "Tied-16th"
+     },
+     {
+      "name": "receivingYards",
+      "displayName": "Receiving Yards",
+      "shortDisplayName": "Rec. Yards",
+      "description": "The total receiving yards.",
+      "abbreviation": "YDS",
+      "value": 480,
+      "displayValue": "480",
+      "rank": 8,
+      "rankDisplayValue": "8th"
+     },
+     {
+      "name": "receivingTouchdowns",
+      "displayName": "Receiving Touchdowns",
+      "shortDisplayName": "Receiving Touchdowns",
+      "description": "The total number of receiving touchdowns.",
+      "abbreviation": "TD",
+      "value": 4,
+      "displayValue": "4",
+      "rank": 6,
+      "rankDisplayValue": "Tied-6th"
+     },
+     {
+      "name": "yardsPerReception",
+      "displayName": "Yards Per Reception",
+      "shortDisplayName": "YDS/R",
+      "description": "The average number of yards per reception.",
+      "abbreviation": "AVG",
+      "value": 16,
+      "displayValue": "16.0",
+      "rank": 8,
+      "rankDisplayValue": "Tied-8th"
+     }
+    ]
+   },
+   "displayBirthPlace": "Palo Alto, CA",
+   "displayHeight": "6' 1\"",
+   "displayWeight": "204 lbs",
+   "displayDOB": "24/12/1992",
+   "age": 33,
+   "displayExperience": "13th Season",
+   "displayDraft": "2014: Rd 2, Pk 53 (GB)",
+   "debutYear": 2014,
+   "college": {
+    "id": "278",
+    "name": "Fresno State",
+    "abbrev": "FRES"
+   },
+   "headshot": {
+    "href": "https://a.espncdn.com/i/headshots/nfl/players/full/16800.png",
+    "alt": "Davante Adams"
+   },
+   "position": {
+    "id": "1",
+    "name": "Wide Receiver",
+    "displayName": "Wide Receiver",
+    "abbreviation": "WR"
+   },
+   "team": {
+    "id": "14",
+    "abbreviation": "LAR",
+    "displayName": "Los Angeles Rams",
+    "name": "Rams",
+    "location": "Los Angeles"
+   }
+  }
+ },
+ "3139477": {
+  "athlete": {
+   "id": "3139477",
+   "firstName": "Patrick",
+   "lastName": "Mahomes",
+   "displayName": "Patrick Mahomes",
+   "fullName": "Patrick Mahomes",
+   "jersey": "15",
+   "active": true,
+   "status": {
+    "id": "1",
+    "name": "Active",
+    "type": "active",
+    "abbreviation": "Active"
+   },
+   "statsSummary": {
+    "displayName": "2026 regular season stats",
+    "statistics": [
+     {
+      "name": "passingYards",
+      "displayName": "Passing Yards",
+      "shortDisplayName": "Pass Yards",
+      "description": "The total passing yards.",
+      "abbreviation": "YDS",
+      "value": 1309,
+      "displayValue": "1,309",
+      "rank": 17,
+      "rankDisplayValue": "17th"
+     },
+     {
+      "name": "passingTouchdowns",
+      "displayName": "Passing Touchdowns",
+      "shortDisplayName": "Touchdowns",
+      "description": "The total number of passing touchdowns.",
+      "abbreviation": "TD",
+      "value": 9,
+      "displayValue": "9",
+      "rank": 13,
+      "rankDisplayValue": "Tied-13th"
+     },
+     {
+      "name": "interceptions",
+      "displayName": "Interceptions",
+      "shortDisplayName": "INT",
+      "description": "The number of passes thrown that were intercepted by the opposing team.",
+      "abbreviation": "INT",
+      "value": 3,
+      "displayValue": "3",
+      "rank": 13,
+      "rankDisplayValue": "Tied-13th"
+     },
+     {
+      "name": "adjQBR",
+      "displayName": "Adjusted QBR",
+      "shortDisplayName": "QBR",
+      "description": "Adjusted Quarterback Rating.",
+      "abbreviation": "QBR",
+      "value": 68.17,
+      "displayValue": "68.2",
+      "rank": 9,
+      "rankDisplayValue": "9th"
+     }
+    ]
+   },
+   "displayBirthPlace": "Whitehouse, TX",
+   "displayHeight": "6' 2\"",
+   "displayWeight": "225 lbs",
+   "displayDOB": "17/9/1995",
+   "age": 31,
+   "displayExperience": "10th Season",
+   "displayDraft": "2017: Rd 1, Pk 10 (KC)",
+   "debutYear": 2017,
+   "college": {
+    "id": "2641",
+    "name": "Texas Tech",
+    "abbrev": "TTU"
+   },
+   "headshot": {
+    "href": "https://a.espncdn.com/i/headshots/nfl/players/full/3139477.png",
+    "alt": "Patrick Mahomes"
+   },
+   "position": {
+    "id": "8",
+    "name": "Quarterback",
+    "displayName": "Quarterback",
+    "abbreviation": "QB"
+   },
+   "team": {
+    "id": "12",
+    "abbreviation": "KC",
+    "displayName": "Kansas City Chiefs",
+    "name": "Chiefs",
+    "location": "Kansas City"
+   }
+  }
+ },
+ "3953687": {
+  "athlete": {
+   "id": "3953687",
+   "firstName": "Brandon",
+   "lastName": "Aubrey",
+   "displayName": "Brandon Aubrey",
+   "fullName": "Brandon Aubrey",
+   "jersey": "17",
+   "active": true,
+   "status": {
+    "id": "1",
+    "name": "Active",
+    "type": "active",
+    "abbreviation": "Active"
+   },
+   "statsSummary": {
+    "displayName": "2026 regular season stats",
+    "statistics": [
+     {
+      "name": "fieldGoalPct",
+      "displayName": "Field Goal Percentage",
+      "shortDisplayName": "FG%",
+      "description": "The percentage of field goals attempted that are made.",
+      "abbreviation": "FG%",
+      "value": 75,
+      "displayValue": "75.0",
+      "rank": 27,
+      "rankDisplayValue": "Tied-27th"
+     },
+     {
+      "name": "extraPointPct",
+      "displayName": "Extra Point Percentage",
+      "shortDisplayName": "XP%",
+      "description": "The percentage of extra point attempts that are converted.",
+      "abbreviation": "XP%",
+      "value": 93.33300018310547,
+      "displayValue": "93.3",
+      "rank": 20,
+      "rankDisplayValue": "Tied-20th"
+     },
+     {
+      "name": "longFieldGoalMade",
+      "displayName": "Long Field Goal Made",
+      "shortDisplayName": "LFGM",
+      "description": "The distance of the longest field goal made.",
+      "abbreviation": "LNG",
+      "value": 60,
+      "displayValue": "60",
+      "rank": 2,
+      "rankDisplayValue": "Tied-2nd"
+     },
+     {
+      "name": "totalKickingPoints",
+      "displayName": "Total Kicking Points",
+      "shortDisplayName": "TP",
+      "description": "The number of total points earned kicking.",
+      "abbreviation": "PTS",
+      "value": 41,
+      "displayValue": "41",
+      "rank": 20,
+      "rankDisplayValue": "Tied-20th"
+     }
+    ]
+   },
+   "displayHeight": "6' 3\"",
+   "displayWeight": "218 lbs",
+   "displayDOB": "14/3/1995",
+   "age": 31,
+   "displayExperience": "4th Season",
+   "college": {
+    "id": "87",
+    "name": "Notre Dame",
+    "abbrev": "ND"
+   },
+   "headshot": {
+    "href": "https://a.espncdn.com/i/headshots/nfl/players/full/3953687.png",
+    "alt": "Brandon Aubrey"
+   },
+   "position": {
+    "id": "22",
+    "name": "Place kicker",
+    "displayName": "Place Kicker",
+    "abbreviation": "PK"
+   },
+   "team": {
+    "id": "6",
+    "abbreviation": "DAL",
+    "displayName": "Dallas Cowboys",
+    "name": "Cowboys",
+    "location": "Dallas"
+   }
+  }
+ },
+ "4362628": {
+  "athlete": {
+   "id": "4362628",
+   "firstName": "Ja'Marr",
+   "lastName": "Chase",
+   "displayName": "Ja'Marr Chase",
+   "fullName": "Ja'Marr Chase",
+   "jersey": "1",
+   "active": true,
+   "status": {
+    "id": "1",
+    "name": "Active",
+    "type": "active",
+    "abbreviation": "Active"
+   },
+   "statsSummary": {
+    "displayName": "2026 regular season stats",
+    "statistics": [
+     {
+      "name": "receptions",
+      "displayName": "Receptions",
+      "shortDisplayName": "Receptions",
+      "description": "The total number of receptions.",
+      "abbreviation": "REC",
+      "value": 27,
+      "displayValue": "27",
+      "rank": 29,
+      "rankDisplayValue": "Tied-29th"
+     },
+     {
+      "name": "receivingYards",
+      "displayName": "Receiving Yards",
+      "shortDisplayName": "Rec. Yards",
+      "description": "The total receiving yards.",
+      "abbreviation": "YDS",
+      "value": 289,
+      "displayValue": "289",
+      "rank": 38,
+      "rankDisplayValue": "Tied-38th"
+     },
+     {
+      "name": "receivingTouchdowns",
+      "displayName": "Receiving Touchdowns",
+      "shortDisplayName": "Receiving Touchdowns",
+      "description": "The total number of receiving touchdowns.",
+      "abbreviation": "TD",
+      "value": 4,
+      "displayValue": "4",
+      "rank": 6,
+      "rankDisplayValue": "Tied-6th"
+     },
+     {
+      "name": "yardsPerReception",
+      "displayName": "Yards Per Reception",
+      "shortDisplayName": "YDS/R",
+      "description": "The average number of yards per reception.",
+      "abbreviation": "AVG",
+      "value": 10.704000473022461,
+      "displayValue": "10.7",
+      "rank": 70,
+      "rankDisplayValue": "70th"
+     }
+    ]
+   },
+   "displayBirthPlace": "Harvey, LA",
+   "displayHeight": "6' 0\"",
+   "displayWeight": "205 lbs",
+   "displayDOB": "1/3/2000",
+   "age": 26,
+   "displayExperience": "6th Season",
+   "displayDraft": "2021: Rd 1, Pk 5 (CIN)",
+   "college": {
+    "id": "99",
+    "name": "LSU",
+    "abbrev": "LSU"
+   },
+   "headshot": {
+    "href": "https://a.espncdn.com/i/headshots/nfl/players/full/4362628.png",
+    "alt": "Ja'Marr Chase"
+   },
+   "position": {
+    "id": "1",
+    "name": "Wide Receiver",
+    "displayName": "Wide Receiver",
+    "abbreviation": "WR"
+   },
+   "team": {
+    "id": "4",
+    "abbreviation": "CIN",
+    "displayName": "Cincinnati Bengals",
+    "name": "Bengals",
+    "location": "Cincinnati"
+   }
+  }
+ },
+ "4430807": {
+  "athlete": {
+   "id": "4430807",
+   "firstName": "Bijan",
+   "lastName": "Robinson",
+   "displayName": "Bijan Robinson",
+   "fullName": "Bijan Robinson",
+   "jersey": "7",
+   "active": true,
+   "status": {
+    "id": "1",
+    "name": "Active",
+    "type": "active",
+    "abbreviation": "Active"
+   },
+   "statsSummary": {
+    "displayName": "2026 regular season stats",
+    "statistics": [
+     {
+      "name": "rushingAttempts",
+      "displayName": "Rushing Attempts",
+      "shortDisplayName": "Rushing Attempts",
+      "description": "The total number of attempted rushes.",
+      "abbreviation": "CAR",
+      "value": 111,
+      "displayValue": "111",
+      "rank": 4,
+      "rankDisplayValue": "4th"
+     },
+     {
+      "name": "rushingYards",
+      "displayName": "Rushing Yards",
+      "shortDisplayName": "Rush Yards",
+      "description": "The total rushing yards.",
+      "abbreviation": "YDS",
+      "value": 641,
+      "displayValue": "641",
+      "rank": 2,
+      "rankDisplayValue": "2nd"
+     },
+     {
+      "name": "rushingTouchdowns",
+      "displayName": "Rushing Touchdowns",
+      "shortDisplayName": "Rushing Touchdowns",
+      "description": "The total number of rushing touchdowns.",
+      "abbreviation": "TD",
+      "value": 4,
+      "displayValue": "4",
+      "rank": 10,
+      "rankDisplayValue": "Tied-10th"
+     },
+     {
+      "name": "yardsPerRushAttempt",
+      "displayName": "Yards Per Rush Attempt",
+      "shortDisplayName": "YDS/RA",
+      "description": "The average number of yards per rush attempt.",
+      "abbreviation": "AVG",
+      "value": 5.775000095367432,
+      "displayValue": "5.8",
+      "rank": 2,
+      "rankDisplayValue": "2nd"
+     }
+    ]
+   },
+   "displayBirthPlace": "Tucson, AZ",
+   "displayHeight": "5' 11\"",
+   "displayWeight": "215 lbs",
+   "displayDOB": "30/1/2002",
+   "age": 24,
+   "displayExperience": "4th Season",
+   "displayDraft": "2023: Rd 1, Pk 8 (ATL)",
+   "college": {
+    "id": "251",
+    "name": "Texas",
+    "abbrev": "TEX"
+   },
+   "headshot": {
+    "href": "https://a.espncdn.com/i/headshots/nfl/players/full/4430807.png",
+    "alt": "Bijan Robinson"
+   },
+   "position": {
+    "id": "9",
+    "name": "Running Back",
+    "displayName": "Running Back",
+    "abbreviation": "RB"
+   },
+   "team": {
+    "id": "1",
+    "abbreviation": "ATL",
+    "displayName": "Atlanta Falcons",
+    "name": "Falcons",
+    "location": "Atlanta"
+   }
+  }
+ },
+ "4870808": {
+  "athlete": {
+   "id": "4870808",
+   "firstName": "Jeremiyah",
+   "lastName": "Love",
+   "displayName": "Jeremiyah Love",
+   "fullName": "Jeremiyah Love",
+   "jersey": "4",
+   "active": true,
+   "status": {
+    "id": "1",
+    "name": "Active",
+    "type": "active",
+    "abbreviation": "Active"
+   },
+   "injuries": [
+    {
+     "longComment": "Love has logged back-to-back DNPs to begin the practice week and appears well on his way to missing a second straight contest Sunday against the Broncos. With Love sidelined for Week 6 against the Rams, Tyler Allgeier narrowly out-snapped Bam Knight 40 to 32, but it was Knight who was far more effective in the box score. While Allgeier out-carried him 15 to 13, Knight picked up 80 rushing yards to Allgeier's 38. Knight added two catches for 18 yards on two targets and would be a worthwhile RB2/flex option in fantasy if Love does miss Sunday's game.",
+     "shortComment": "Love (ankle) remained sidelined at Thursday's practice, Darren Urban of the Cardinals' official site reports.",
+     "status": "Questionable",
+     "date": "2026-10-22T23:28:00.000+00:00",
+     "type": {
+      "id": "2",
+      "name": "INJURY_STATUS_QUESTIONABLE",
+      "description": "questionable",
+      "abbreviation": "Q"
+     },
+     "details": {
+      "fantasyStatus": {
+       "description": "QUESTIONABLE",
+       "abbreviation": "QUESTIONABLE"
+      },
+      "type": "Ankle",
+      "location": "Leg",
+      "detail": "Not Specified",
+      "side": "Not Specified",
+      "returnDate": "2026-10-25T00:00:00.000+00:00"
+     }
+    }
+   ],
+   "statsSummary": {
+    "displayName": "2026 regular season stats",
+    "statistics": [
+     {
+      "name": "rushingAttempts",
+      "displayName": "Rushing Attempts",
+      "shortDisplayName": "Rushing Attempts",
+      "description": "The total number of attempted rushes.",
+      "abbreviation": "CAR",
+      "value": 67,
+      "displayValue": "67",
+      "rank": 26,
+      "rankDisplayValue": "Tied-26th"
+     },
+     {
+      "name": "rushingYards",
+      "displayName": "Rushing Yards",
+      "shortDisplayName": "Rush Yards",
+      "description": "The total rushing yards.",
+      "abbreviation": "YDS",
+      "value": 245,
+      "displayValue": "245",
+      "rank": 26,
+      "rankDisplayValue": "26th"
+     },
+     {
+      "name": "rushingTouchdowns",
+      "displayName": "Rushing Touchdowns",
+      "shortDisplayName": "Rushing Touchdowns",
+      "description": "The total number of rushing touchdowns.",
+      "abbreviation": "TD",
+      "value": 1,
+      "displayValue": "1",
+      "rank": 30,
+      "rankDisplayValue": "Tied-30th"
+     },
+     {
+      "name": "yardsPerRushAttempt",
+      "displayName": "Yards Per Rush Attempt",
+      "shortDisplayName": "YDS/RA",
+      "description": "The average number of yards per rush attempt.",
+      "abbreviation": "AVG",
+      "value": 3.6570000648498535,
+      "displayValue": "3.7",
+      "rank": 29,
+      "rankDisplayValue": "29th"
+     }
+    ]
+   },
+   "displayBirthPlace": "St. Louis, MO",
+   "displayHeight": "6' 0\"",
+   "displayWeight": "212 lbs",
+   "displayDOB": "31/5/2005",
+   "age": 21,
+   "displayExperience": "Rookie",
+   "displayDraft": "2026: Rd 1, Pk 3 (ARI)",
+   "college": {
+    "id": "87",
+    "name": "Notre Dame",
+    "abbrev": "ND"
+   },
+   "headshot": {
+    "href": "https://a.espncdn.com/i/headshots/nfl/players/full/4870808.png",
+    "alt": "Jeremiyah Love"
+   },
+   "position": {
+    "id": "9",
+    "name": "Running Back",
+    "displayName": "Running Back",
+    "abbreviation": "RB"
+   },
+   "team": {
+    "id": "22",
+    "abbreviation": "ARI",
+    "displayName": "Arizona Cardinals",
+    "name": "Cardinals",
+    "location": "Arizona"
+   }
+  }
+ }
+}

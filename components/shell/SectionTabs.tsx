@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useLayoutEffect, useRef } from "react";
-import { gsap, MOTION } from "@/lib/motion/gsap";
+import { gsap, MOTION, prefersReducedMotion } from "@/lib/motion/gsap";
 import { activeChild, NAV } from "@/lib/config";
 
 /** Where the underline was on the previous screen, so it can slide from there to the new tab. */
@@ -29,7 +29,7 @@ export function SectionTabs({ section: sectionHref, current }: { section: string
       return;
     }
     const to = { x: target.offsetLeft + 12, width: target.offsetWidth - 24 };
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reduce = prefersReducedMotion();
     if (last && last.section === sectionHref && !reduce && (last.x !== to.x || last.width !== to.width)) {
       gsap.fromTo(line, { x: last.x, width: last.width }, { ...to, duration: MOTION.base, ease: "power3.out" });
     } else {

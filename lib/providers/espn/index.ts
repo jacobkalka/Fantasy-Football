@@ -17,6 +17,8 @@ import { parseScoreboard } from "./scoreboard";
 import { parseBoxscore, parseCorePlays } from "./stats";
 import { parseDrives, parseSummaryGame, parseTeamStats, parseWinProbability } from "./summary";
 import { parseTeams } from "./teams";
+import { fetchPlayerUniverse } from "./universe";
+import { fetchDepthChart, fetchPlayerBio, fetchPlayerCareer, fetchPlayerSeason, fetchTeamSchedule } from "./player";
 
 export { ProviderError } from "./http";
 
@@ -92,4 +94,10 @@ export const espnProvider: DataProvider = {
   getLeagueNews: fetchLeagueNews,
   getInjuries: fetchInjuries,
   getDefenseVsPosition: fetchDefenseVsPosition,
+  getPlayerUniverse: fetchPlayerUniverse,
+  getPlayerBio: fetchPlayerBio,
+  getPlayerCareer: fetchPlayerCareer,
+  getPlayerSeason: fetchPlayerSeason,
+  getDepthChart: fetchDepthChart,
+  getTeamSchedule: fetchTeamSchedule,
 };

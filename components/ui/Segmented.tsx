@@ -1,7 +1,7 @@
 "use client";
 
 import { useLayoutEffect, useRef } from "react";
-import { gsap, MOTION } from "@/lib/motion/gsap";
+import { gsap, MOTION, prefersReducedMotion } from "@/lib/motion/gsap";
 
 /**
  * A segmented switch (e.g. Standard · Half · PPR). The selected option sits on a raised
@@ -32,7 +32,7 @@ export function Segmented<T extends string>({
     const target = root?.querySelector<HTMLElement>('[aria-checked="true"]');
     if (!root || !pill || !target) return;
     const move = { x: target.offsetLeft, width: target.offsetWidth };
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reduce = prefersReducedMotion();
     if (!placed.current || reduce) {
       gsap.set(pill, move);
       placed.current = true;
