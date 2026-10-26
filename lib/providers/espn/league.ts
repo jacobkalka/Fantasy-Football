@@ -261,3 +261,29 @@ export function parseLeague(raw: Json): FantasyLeague {
       .sort((a, b) => a.period - b.period),
   };
 }
+
+/** "{ABC...}" in any case, with or without braces → "{ABC...}" upper case. */
+export function normalizeSwid(swid: string): string {
+  return `{${swid.trim().replace(/^\{|\}$/g, "").toUpperCase()}}`;
+}
+
+/** The league teams this ESPN account owns (its SWID among a team's owners). */
+export function ownedTeamIds(raw: Json, swid: string): number[] {
+  const me = normalizeSwid(swid);
+  return arr(get(raw, "teams"))
+    .map(obj)
+    .filter((t) => arr(t.owners).some((o) => normalizeSwid(str(o)) === me))
+    .map((t) => num(t.id));
+}
+
+/** Which teams in a league belong to the ESPN account these credentials sign in as. */
+export async function fetchLeagueOwnership(leagueId: string, season: number, credentials: LeagueCredentials): Promise<number[]> {
+  const url = `${ESPN.fantasy}/seasons/${season}/segments/0/leagues/${encodeURIComponent(leagueId)}?view=mTeam`;
+  try {
+    return ownedTeamIds(await espnJson(url, { headers: { cookie: `espn_s2=${credentials.espnS2}; SWID=${credentials.swid}` } }), credentials.swid);
+  } catch (error) {
+    if (error instanceof ProviderError && (error.status === 401 || error.status === 403)) throw new LeaguePrivateError();
+    if (error instanceof ProviderError && error.status === 404) throw new LeagueNotFoundError();
+    throw error;
+  }
+}

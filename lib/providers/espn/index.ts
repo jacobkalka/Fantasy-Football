@@ -12,7 +12,7 @@ import {
   playersListRequest,
 } from "./fantasy";
 import { ESPN, espnJson } from "./http";
-import { fetchLeague } from "./league";
+import { fetchLeague, fetchLeagueOwnership } from "./league";
 import { parseArticles, parseInjuries, parseNews, parsePlayerArticles, parsePlayerNews } from "./news";
 import { parseScoreboard } from "./scoreboard";
 import { parseBoxscore, parseCorePlays } from "./stats";
@@ -124,5 +124,6 @@ export const espnProvider: DataProvider = {
   getDepthChart: fetchDepthChart,
   getTeamSchedule: fetchTeamSchedule,
   getLeague: fetchLeague,
+  getLeagueOwnership: fetchLeagueOwnership,
   getFantasyNews: fetchFantasyNews,
 };

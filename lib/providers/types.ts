@@ -649,6 +649,8 @@ export interface DataProvider {
   getTeamSchedule(teamId: string, season: number): Promise<TeamSchedule>;
   /** A fantasy league with its teams, rosters and this week's matchups. Private leagues need credentials. */
   getLeague(leagueId: string, season: number, credentials?: LeagueCredentials | null): Promise<FantasyLeague>;
+  /** The league teams owned by the ESPN account these credentials belong to (membership check). */
+  getLeagueOwnership(leagueId: string, season: number, credentials: LeagueCredentials): Promise<number[]>;
   /** Fantasy news: league-wide (no ids) or about specific players. */
   getFantasyNews(playerIds?: string[]): Promise<NewsArticle[]>;
 }

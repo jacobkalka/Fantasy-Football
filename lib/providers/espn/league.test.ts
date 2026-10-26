@@ -1,6 +1,6 @@
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
-import { parseLeague, parseScoring } from "./league";
+import { normalizeSwid, ownedTeamIds, parseLeague, parseScoring } from "./league";
 
 const raw = JSON.parse(readFileSync("samples/fantasy-league-week7.json", "utf8"));
 
@@ -50,5 +50,14 @@ describe("ESPN league (real week-7 sample)", () => {
   it("keeps every week's results for charts", () => {
     expect(league.results.filter((r) => r.period === 1)).toHaveLength(5);
     expect(league.results.every((r) => r.period <= 7)).toBe(true);
+  });
+});
+
+describe("league membership (owners are ESPN account ids)", () => {
+  it("finds the teams an account owns, whatever the SWID's case or braces", () => {
+    const owner = raw.teams[3].owners[0] as string;
+    expect(ownedTeamIds(raw, owner.toLowerCase().replace(/[{}]/g, ""))).toEqual([raw.teams[3].id]);
+    expect(ownedTeamIds(raw, "{00000000-0000-4000-8000-999999999999}")).toEqual([]);
+    expect(normalizeSwid(" abc ")).toBe("{ABC}");
   });
 });

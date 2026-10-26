@@ -468,6 +468,23 @@ begin;
 select test.login('alice');
 insert into public.rosters (name, source, espn_league_id, espn_team_id, season)
   values ('Alice ESPN', 'espn', '424242', '1', 2026);
+select test.fails($$select public.ensure_league_room('424242')$$,
+  'naming a league isn''t enough: an unverified member cannot open its room', '42501');
+select test.fails($$update public.rosters set espn_verified = true where espn_league_id = '424242'$$,
+  'you cannot verify your own league membership', '42501');
+select test.fails($$insert into public.rosters (name, source, espn_league_id, espn_team_id, season, espn_verified)
+    values ('Fake', 'espn', '999999', '1', 2026, true)$$,
+  'you cannot create a verified membership either', '42501');
+commit;
+
+-- The server verifies Alice after reading the league with her own ESPN login.
+begin;
+set local role service_role;
+update public.rosters set espn_verified = true where espn_league_id = '424242' and user_id = test.id('alice');
+commit;
+
+begin;
+select test.login('alice');
 select test.check(public.ensure_league_room('424242') = public.ensure_league_room('424242'),
   'a league member can open the league room, and always gets the same one');
 insert into public.messages (room_id, body) values (test.room('league', '424242'), 'League trash talk');
@@ -491,8 +508,19 @@ begin;
 select test.login('bob');
 insert into public.rosters (name, source, espn_league_id, espn_team_id, season)
   values ('Bob ESPN', 'espn', '424242', '2', 2026);
+select test.check((select count(*) from public.chat_rooms where type = 'league') = 0,
+  'claiming the league isn''t enough for Bob either');
+commit;
+
+begin;
+set local role service_role;
+update public.rosters set espn_verified = true where espn_league_id = '424242' and user_id = test.id('bob');
+commit;
+
+begin;
+select test.login('bob');
 select test.check((select count(*) from public.chat_rooms where type = 'league') = 1,
-  'once Bob has a roster in the league, he sees the room');
+  'once the server verifies Bob in the league, he sees the room');
 select test.check((select body from public.messages where room_id = test.room('league', '424242')) = 'League trash talk',
   '...can read its messages');
 insert into public.messages (room_id, body) values (test.room('league', '424242'), 'Bring it');
@@ -557,6 +585,180 @@ select test.login('alice');
 delete from public.user_blocks where blocked_id = test.id('bob');
 select test.check((select count(*) from public.messages where user_id = test.id('bob')) = 2,
   'after unblocking, Bob''s messages are visible again');
+commit;
+
+
+-- -----------------------------------------------------------------------------
+\echo '12b. Community: channels, threads, reactions, polls, unread, mutes, public teams'
+-- -----------------------------------------------------------------------------
+create function test.channel(channel_slug text) returns uuid
+language sql stable security definer set search_path = ''
+as $$ select cr.id from public.chat_rooms cr where cr.slug = channel_slug $$;
+
+begin;
+select test.login('alice');
+select test.check((select count(*) from public.chat_rooms where type = 'channel') = 5,
+  'every signed-in user sees the five channels');
+select test.check((select title from public.chat_rooms where slug = 'general') = 'General',
+  'the old global room is now General');
+select test.check(public.ensure_player_room('4374302', 'Amon-Ra St. Brown') = public.ensure_player_room('4374302', 'Someone Else'),
+  'a player room is created once and reused');
+select test.check((select title from public.chat_rooms where type = 'player' and ref_id = '4374302') = 'Amon-Ra St. Brown',
+  'a player room keeps the name it was created with');
+select test.fails($$select public.ensure_player_room('drop table x', 'x')$$,
+  'a player room needs a real player id', '22023');
+select test.fails($$insert into public.chat_rooms (type, slug, title) values ('channel', 'fake', 'Fake')$$,
+  'nobody can create channels from the app', '42501');
+commit;
+
+select test.pause();
+begin;
+select test.login('alice');
+insert into public.messages (room_id, body) values (test.channel('trades'), 'Is Chase for Bijan fair?');
+commit;
+
+begin;
+select test.login_anon();
+select test.fails($$select public.ensure_player_room('4374302', 'x')$$, 'signed-out visitors cannot open player rooms', '42501');
+select test.fails($$select count(*) from public.public_teams$$, 'signed-out visitors cannot read public teams', '42501');
+select test.fails($$select count(*) from public.chat_polls$$, 'signed-out visitors cannot read polls', '42501');
+commit;
+
+select test.pause();
+begin;
+select test.login('bob');
+insert into public.messages (room_id, body, thread_id)
+  select test.channel('trades'), 'Smash accept', m.id from public.messages m where m.body = 'Is Chase for Bijan fair?';
+select test.check((select thread_reply_count from public.messages where body = 'Is Chase for Bijan fair?') = 1,
+  'a thread reply counts on its root (kept by the database)');
+select test.fails($$insert into public.messages (room_id, body, thread_reply_count) values (test.channel('trades'), 'x', 99)$$,
+  'nobody can set a thread''s reply count', '42501');
+select test.fails($$insert into public.messages (room_id, body, reply_to)
+    select test.channel('waivers'), 'wrong room', m.id from public.messages m where m.body = 'Is Chase for Bijan fair?'$$,
+  'a reply must be in the same channel as the message it answers', '22023');
+select test.fails($$insert into public.messages (room_id, body, thread_id)
+    select test.channel('trades'), 'nested', m.id from public.messages m where m.body = 'Smash accept'$$,
+  'threads cannot nest', '22023');
+insert into public.message_reactions (message_id, emoji)
+  select m.id, '❤️' from public.messages m where m.body = 'Is Chase for Bijan fair?';
+select test.fails($$insert into public.message_reactions (message_id, emoji)
+    select m.id, '🤡' from public.messages m where m.body = 'Is Chase for Bijan fair?'$$,
+  'only the curated reactions are allowed', '23514');
+select test.fails($$insert into public.message_reactions (message_id, user_id, emoji)
+    select m.id, test.id('alice'), '🔥' from public.messages m where m.body = 'Is Chase for Bijan fair?'$$,
+  'you cannot react as someone else', '42501');
+commit;
+
+begin;
+select test.login('dave');
+select test.fails($$insert into public.messages (room_id, body, attachments) values (test.channel('trades'), 'x', '{"script": "<b>"}')$$,
+  'attachments only take the known kinds', '23514');
+commit;
+
+-- Polls
+select test.pause();
+begin;
+select test.login('alice');
+insert into public.messages (room_id, body, attachments) values (test.channel('start-sit'), 'Who do I start?', '{"poll": true}');
+insert into public.chat_polls (message_id, question, options)
+  select m.id, 'Who do I start?', array['Player A', 'Player B'] from public.messages m where m.body = 'Who do I start?';
+select test.fails($$insert into public.chat_polls (message_id, question, options)
+    select m.id, 'Bad', array['only one'] from public.messages m where m.body = 'Smash accept'$$,
+  'you cannot attach a poll to someone else''s message', '42501');
+commit;
+
+begin;
+select test.login('bob');
+insert into public.chat_poll_votes (message_id, option_index)
+  select p.message_id, 1 from public.chat_polls p;
+update public.chat_poll_votes set option_index = 0;
+select test.check((select option_index from public.chat_poll_votes where user_id = auth.uid()) = 0,
+  'you can change your vote');
+select test.fails($$insert into public.chat_poll_votes (message_id, user_id, option_index)
+    select p.message_id, test.id('carol'), 0 from public.chat_polls p$$,
+  'you cannot vote as someone else', '42501');
+select test.fails($$update public.chat_poll_votes set option_index = 9$$,
+  'a vote must be one of the options', '22023');
+select test.fails($$insert into public.chat_poll_votes (message_id, option_index) select p.message_id, 0 from public.chat_polls p$$,
+  'one vote per person per poll', '23505');
+commit;
+
+begin;
+select test.login('alice');
+select test.check((select count(*) from public.chat_poll_votes) = 1, 'everyone sees a poll''s votes');
+select test.check(test.rows($$update public.chat_poll_votes set option_index = 1$$) = 0,
+  'you cannot change someone else''s vote');
+commit;
+
+-- Unread counts, read state, mutes
+begin;
+select test.login('carol');
+select test.check((select unread from public.my_unread_counts() where room_id = test.channel('trades')) = 1,
+  'unread counts main-channel messages only (the thread reply does not count)');
+insert into public.chat_read_state (room_id) values (test.channel('trades'));
+select test.check(not exists (select 1 from public.my_unread_counts() where room_id = test.channel('trades')),
+  'opening a channel clears its unread count');
+select test.check(exists (select 1 from public.my_unread_counts() where room_id = test.channel('start-sit')),
+  'other channels keep their unread count');
+select test.fails($$insert into public.chat_read_state (user_id, room_id) values (test.id('alice'), test.channel('waivers'))$$,
+  'you cannot mark rooms read for someone else', '42501');
+insert into public.user_mutes (muted_id) values (test.id('alice'));
+select test.check(not exists (select 1 from public.my_unread_counts() where room_id = test.channel('start-sit')),
+  'muted people don''t count as unread');
+commit;
+
+begin;
+select test.login('alice');
+select test.check((select count(*) from public.chat_read_state) = 0, 'read state is private');
+select test.check((select count(*) from public.user_mutes) = 0, 'mutes are private');
+commit;
+
+-- Flood limit: 20 messages in a minute is the most anyone can send.
+begin;
+set local session_replication_role = replica;  -- test setup only: insert history without triggers
+insert into public.messages (room_id, user_id, body, created_at)
+  select test.channel('general'), test.id('erin'), 'flood ' || n, now() - interval '30 seconds' + n * interval '1 second'
+  from generate_series(1, 20) n;
+commit;
+begin;
+select test.login('erin');
+select test.fails($$insert into public.messages (room_id, body) values (test.channel('general'), 'one more')$$,
+  'a flood of messages is stopped (20 a minute)', 'P0001');
+commit;
+
+-- Public teams and profiles
+begin;
+select test.login('alice');
+insert into public.public_teams (local_id, name, record, roster)
+  values ('t_alice1', 'Sunday Scaries', '4-2', '[{"id": "4374302", "name": "Amon-Ra St. Brown", "position": "WR", "slot": "WR"}]');
+update public.profiles set primary_team_id = (select id from public.public_teams where local_id = 't_alice1'), bio = 'WR truther'
+ where id = auth.uid();
+select test.fails($$insert into public.public_teams (user_id, local_id, name) values (test.id('bob'), 't_bobfake', 'Fake')$$,
+  'you cannot publish a team as someone else', '42501');
+select test.fails($$update public.public_teams set logo_url = 'https://evil.example.com/x.png'$$,
+  'team logos must be ESPN-hosted', '23514');
+commit;
+
+begin;
+select test.login('bob');
+select test.check((select name from public.public_teams where local_id = 't_alice1') = 'Sunday Scaries',
+  'other people can see a team you made public');
+select test.check(test.rows($$update public.public_teams set name = 'Hacked'$$) = 0,
+  'nobody can edit someone else''s public team');
+select test.fails($$update public.profiles set primary_team_id = (select id from public.public_teams where local_id = 't_alice1') where id = auth.uid()$$,
+  'your primary team has to be your own', '42501');
+commit;
+
+begin;
+select test.login('alice');
+update public.profiles set is_public = false where id = auth.uid();
+commit;
+begin;
+select test.login('bob');
+select test.check(not exists (select 1 from public.public_teams where local_id = 't_alice1'),
+  'a private profile hides its teams');
+select test.check((select username from public.profiles where id = test.id('alice')) = 'alice',
+  'a private profile still shows its username in chat');
 commit;
 
 
