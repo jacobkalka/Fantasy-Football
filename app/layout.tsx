@@ -3,6 +3,8 @@ import { Inter } from "next/font/google";
 import { Suspense } from "react";
 import { RosterSync } from "@/components/auth/RosterSync";
 import { PlayerProfileHost } from "@/components/player/PlayerProfileHost";
+import { PublicTeamsSync } from "@/components/profile/PublicTeamsSync";
+import { UserProfileHost } from "@/components/profile/UserProfileHost";
 import { LivePulse } from "@/components/live/LivePulse";
 import { LeagueSync } from "@/components/teams/LeagueSync";
 import { HydrationMarker } from "@/components/motion/hydration";
@@ -79,6 +81,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <Suspense fallback={null}>
             <PlayerProfileHost />
           </Suspense>
+          {/* A person's public profile, over any screen (?user=<username>, from chat). */}
+          <Suspense fallback={null}>
+            <UserProfileHost />
+          </Suspense>
+          {/* Keeps the teams you made public up to date as they change on this device. */}
+          <PublicTeamsSync />
           {/* One shared "is anything live?" scoreboard poll that paces every other live poll. */}
           <LivePulse />
           {/* Keeps the active ESPN team's roster and record current from its league. */}

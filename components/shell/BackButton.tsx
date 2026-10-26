@@ -9,6 +9,7 @@ const PARENTS: [RegExp, string][] = [
   [/^\/games\/[^/]+$/, "/games"],
   [/^\/players\/(?!pickups$|watchlist$)[^/]+$/, "/players"],
   [/^\/chat\/[^/]+$/, "/chat"],
+  [/^\/u\/[^/]+$/, "/chat"],
   [/^\/team\/import$/, "/team"],
   [/^\/(settings|account|offline)$/, "/"],
   [/^\/auth\//, "/"],

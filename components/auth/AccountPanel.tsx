@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { TiltCard } from "@/components/motion/TiltCard";
+import { ProfileSettings } from "@/components/profile/ProfileSettings";
+import { Button, ButtonLink } from "@/components/ui/Button";
 import { Notice, SectionLabel, Skeleton } from "@/components/ui/bits";
 import { TeamLogo } from "@/components/ui/TeamLogo";
 import { useTeams } from "@/lib/hooks/useTeams";
@@ -14,9 +15,8 @@ import { normalizeUsername, USERNAME_MAX, usernameProblem } from "@/lib/supabase
 import { SetupNeeded } from "./SetupNeeded";
 import { UserAvatar } from "./UserAvatar";
 
-const LABEL = "text-[12px] text-muted";
-const INPUT =
-  "glass-chip min-h-12 w-full rounded-2xl px-4 text-[16px] text-ink-strong outline-none focus-visible:ring-2 focus-visible:ring-gain/70";
+const LABEL = "text-[13px] text-muted";
+const INPUT = "h-11 w-full rounded-xl bg-raised px-3 text-[16px] text-ink outline-none focus-visible:ring-2 focus-visible:ring-accent";
 
 function timeLabel(iso: string | null) {
   if (!iso) return "";
@@ -47,11 +47,11 @@ function ProfileForm({ profile }: { profile: Profile }) {
   }
 
   return (
-    <form onSubmit={onSave} className="glass flex flex-col gap-4 p-5">
+    <form onSubmit={onSave} className="card flex flex-col gap-4 p-5">
       <label className="flex flex-col gap-1.5">
         <span className={LABEL}>Username (what others see in chat)</span>
         <span className="relative">
-          <span className="pointer-events-none absolute top-1/2 left-4 -translate-y-1/2 text-muted" aria-hidden="true">
+          <span className="pointer-events-none absolute top-1/2 left-3 -translate-y-1/2 text-muted" aria-hidden="true">
             @
           </span>
           <input
@@ -66,11 +66,11 @@ function ProfileForm({ profile }: { profile: Profile }) {
             maxLength={USERNAME_MAX + 4}
             aria-invalid={problem ? true : undefined}
             aria-describedby="username-help"
-            className={`${INPUT} pl-9`}
+            className={`${INPUT} pl-8`}
           />
         </span>
-        <span id="username-help" className={`text-[12.5px] ${problem ? "text-alert" : "text-muted"}`}>
-          {problem ? `⚠ ${problem}` : "3 to 24 characters: letters, numbers and _ . Capitals become lowercase."}
+        <span id="username-help" className={`text-[13px] ${problem ? "text-warning" : "text-muted"}`}>
+          {problem ?? "3 to 24 characters: letters, numbers and _ . Capitals become lowercase."}
         </span>
       </label>
 
@@ -80,7 +80,7 @@ function ProfileForm({ profile }: { profile: Profile }) {
           {picked ? (
             <TeamLogo abbr={picked.abbr} logo={picked.logo} color={picked.color} size={40} />
           ) : (
-            <span className="glass-chip flex size-10 shrink-0 items-center justify-center rounded-full text-[12px] text-muted" aria-hidden="true">
+            <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-well text-[12px] text-muted" aria-hidden="true">
               NFL
             </span>
           )}
@@ -90,7 +90,7 @@ function ProfileForm({ profile }: { profile: Profile }) {
               setTeam(e.target.value);
               setResult(null);
             }}
-            className={`${INPUT} appearance-none bg-transparent`}
+            className={`${INPUT} appearance-none`}
           >
             <option value="">No favorite</option>
             {teamList.map((t) => (
@@ -104,21 +104,13 @@ function ProfileForm({ profile }: { profile: Profile }) {
       </label>
 
       {result && (
-        <p
-          role={result.ok ? "status" : "alert"}
-          className={`rounded-xl px-3 py-2 text-[13.5px] ring-1 ${result.ok ? "bg-gain/10 text-gain ring-gain/30" : "bg-alert/10 text-alert ring-alert/30"}`}
-        >
-          {result.ok ? "✓ " : "⚠ "}
+        <p role={result.ok ? "status" : "alert"} className={`text-[14px] ${result.ok ? "text-muted" : "text-negative"}`}>
           {result.text}
         </p>
       )}
-      <button
-        type="submit"
-        disabled={busy || !changed || Boolean(problem)}
-        className="glass-gain pressable min-h-12 rounded-2xl px-4 text-[12px] font-bold text-gain disabled:opacity-40 disabled:hover:translate-y-0"
-      >
+      <Button type="submit" variant="primary" disabled={busy || !changed || Boolean(problem)} className="self-start">
         {busy ? "Saving…" : "Save changes"}
-      </button>
+      </Button>
     </form>
   );
 }
@@ -150,33 +142,26 @@ function SyncCard() {
   const sync = useRosterSync();
   const { roster } = useRoster();
   const status = syncText(sync, roster.players.length);
-  const dot = { ok: "bg-gain", busy: "bg-sky live-dot text-sky", warn: "bg-alert" }[status.tone];
+  const dot = { ok: "bg-accent", busy: "bg-muted live-dot text-muted", warn: "bg-warning" }[status.tone];
   return (
-    <div className="glass flex flex-col gap-3 p-5" role="status" aria-live="polite">
+    <div className="card flex flex-col gap-3 p-5" role="status" aria-live="polite">
       <div className="flex items-start gap-3">
         <span className={`mt-1.5 size-2.5 shrink-0 rounded-full ${dot}`} aria-hidden="true" />
         <div className="flex flex-col gap-1">
-          <p className="font-semibold text-ink">
+          <p className="font-semibold">
             {roster.name} · {roster.players.length} {roster.players.length === 1 ? "player" : "players"}
           </p>
-          <p className="text-[14px] leading-relaxed text-ink-soft">{status.text}</p>
+          <p className="text-[14px] leading-relaxed text-muted">{status.text}</p>
         </div>
       </div>
       <div className="flex flex-wrap gap-2">
-        <Link
-          href="/team/edit"
-          className="glass-chip pressable flex min-h-11 items-center rounded-xl px-4 text-[12px] font-bold text-ink"
-        >
+        <ButtonLink href="/team/edit" size="sm" icon="edit">
           Edit team
-        </Link>
+        </ButtonLink>
         {status.tone === "warn" && (
-          <button
-            type="button"
-            onClick={() => rosterSync.retry()}
-            className="glass-chip pressable min-h-11 rounded-xl px-4 text-[12px] font-bold text-alert"
-          >
+          <Button size="sm" icon="refresh" onClick={() => rosterSync.retry()}>
             Try again
-          </button>
+          </Button>
         )}
       </div>
     </div>
@@ -189,9 +174,10 @@ function SignOutButton() {
   const [error, setError] = useState<string | null>(null);
   return (
     <div className="flex flex-col gap-2">
-      <button
-        type="button"
+      <Button
+        variant="danger"
         disabled={busy}
+        className="self-start"
         onClick={async () => {
           setBusy(true);
           setError(null);
@@ -201,33 +187,32 @@ function SignOutButton() {
           // The header shows what happened to the team.
           router.push("/");
         }}
-        className="min-h-12 rounded-2xl border border-loss-line/50 bg-loss/10 px-4 text-[12px] font-bold text-loss transition-colors hover:bg-loss/15 disabled:opacity-50"
       >
         {busy ? "Signing out…" : "Sign out"}
-      </button>
-      <p className="px-1 text-[12.5px] leading-relaxed text-muted">
+      </Button>
+      <p className="text-[13px] leading-relaxed text-muted">
         Signing out clears your team from this device. It stays saved in your account; sign back in to get it.
       </p>
       {error && (
-        <p role="alert" className="rounded-xl bg-alert/10 px-3 py-2 text-[13.5px] text-alert ring-1 ring-alert/30">
-          ⚠ {error}
+        <p role="alert" className="text-[14px] text-negative">
+          {error}
         </p>
       )}
     </div>
   );
 }
 
-/** The account screen: who you are, your team's save status, and signing out. */
+/** The account screen: who you are, your public profile, your team's save status, and signing out. */
 export function AccountPanel() {
   const auth = useAuth();
   const { profile, status } = useProfile();
 
   if (auth.status === "disabled") return <SetupNeeded feature="accounts" />;
-  if (auth.status === "loading") return <Skeleton className="h-72 rounded-3xl" />;
+  if (auth.status === "loading") return <Skeleton className="h-72 rounded-[20px]" />;
   if (auth.status === "signed-out") {
     return (
       <Notice title="You're signed out">
-        <Link href="/auth/sign-in?next=/account" className="text-gain underline underline-offset-4">
+        <Link href="/auth/sign-in?next=/account" className="font-medium text-ink underline underline-offset-4">
           Sign in
         </Link>{" "}
         to save your team to an account and join the chat.
@@ -238,36 +223,37 @@ export function AccountPanel() {
   const name = profile?.username ?? "…";
   return (
     <div className="flex flex-col gap-5">
-      <TiltCard className="glass flex items-center gap-4 p-5" max={6}>
-        <span style={{ transform: "translateZ(30px)" }}>
-          <UserAvatar username={profile?.username ?? auth.user.email ?? "?"} avatarUrl={profile?.avatarUrl} size={64} />
-        </span>
-        <div className="min-w-0" style={{ transform: "translateZ(18px)" }}>
-          <p className="truncate text-[24px] leading-8 font-semibold text-ink">@{name}</p>
-          {auth.user.email && <p className="mt-1 truncate text-[12px] text-muted">{auth.user.email}</p>}
-          {profile?.isAdmin && (
-            <p className="mt-1 text-[12px] font-bold text-sky">Moderator</p>
-          )}
+      <div className="card flex items-center gap-4 p-5">
+        <UserAvatar username={profile?.username ?? auth.user.email ?? "?"} avatarUrl={profile?.avatarUrl} size={64} />
+        <div className="min-w-0">
+          <p className="truncate text-[22px] leading-8 font-semibold">@{name}</p>
+          {auth.user.email && <p className="mt-0.5 truncate text-[13px] text-muted">{auth.user.email} · only you see this</p>}
+          {profile?.isAdmin && <p className="mt-1 text-[13px] font-medium text-muted">Moderator</p>}
         </div>
-      </TiltCard>
+      </div>
 
       <section>
         <SectionLabel>Your team</SectionLabel>
         <SyncCard />
       </section>
 
+      <section id="profile" className="scroll-mt-20">
+        <SectionLabel>Public profile</SectionLabel>
+        {profile ? <ProfileSettings userId={auth.user.id} username={profile.username} /> : <Skeleton className="h-56 rounded-[20px]" />}
+      </section>
+
       <section>
-        <SectionLabel>Profile</SectionLabel>
+        <SectionLabel>Account</SectionLabel>
         {profile ? (
           <ProfileForm key={profile.id} profile={profile} />
         ) : status === "error" ? (
           <Notice title="Couldn't load your profile" tone="warn">
-            <button type="button" onClick={reloadProfile} className="min-h-11 text-gain underline underline-offset-4">
+            <Button size="sm" onClick={reloadProfile}>
               Try again
-            </button>
+            </Button>
           </Notice>
         ) : (
-          <Skeleton className="h-56 rounded-3xl" />
+          <Skeleton className="h-56 rounded-[20px]" />
         )}
       </section>
 
