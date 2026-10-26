@@ -51,4 +51,4 @@ npm run build    # the same production build Vercel runs
 ## Build plan
 
 Built in phases; each one is finished, working, and committed before the next starts. Current
-progress is shown on the app's Team tab and in `lib/roadmap.ts`.
+state, what's unfinished and how to pick the work back up: `CLAUDE.md`.
