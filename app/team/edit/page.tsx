@@ -10,7 +10,7 @@ export const metadata: Metadata = { title: "Roster" };
 export default function EditTeamPage() {
   return (
     <>
-      <SectionTabs section="/team" current="/team/edit" />
+      <SectionTabs section="/team" current="/team" />
       <PageTitle
         sub="Saved on this device, and to your account when you sign in"
         actions={

@@ -8,6 +8,7 @@ import { visibleTeamColor } from "@/lib/color";
 import type { SharedPlay } from "@/lib/chat/shared-play";
 import { periodLabel } from "@/lib/format";
 import { useTeams } from "@/lib/hooks/useTeams";
+import { PlayerLink } from "@/components/player/PlayerLink";
 
 /** A play shared from the feed, shown in chat as a small glass card that tilts in 3D. */
 export function SharedPlayCard({ play, compact = false }: { play: SharedPlay; compact?: boolean }) {
@@ -23,7 +24,7 @@ export function SharedPlayCard({ play, compact = false }: { play: SharedPlay; co
       <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[12px] whitespace-nowrap">
         <span className="text-sky">Shared play</span>
         {play.isTouchdown && (
-          <span className="rounded-md bg-gain/15 px-1.5 py-0.5 font-bold text-gain ring-1 ring-gain/40">Touchdown</span>
+          <span className="rounded-full bg-[rgb(255_211_107/0.15)] px-1.5 py-0.5 font-semibold text-accent">Touchdown</span>
         )}
         <span className="ml-auto text-muted">
           {periodLabel(play.period)} {play.clock}
@@ -41,7 +42,9 @@ export function SharedPlayCard({ play, compact = false }: { play: SharedPlay; co
         <div className="flex min-w-0 flex-1 flex-col gap-1" style={{ transform: "translateZ(14px)" }}>
           <div className="flex min-w-0 items-center gap-2">
             <PointsBadge points={play.points} size="sm" />
-            <span className="truncate text-[14px] font-semibold text-ink">{play.playerName}</span>
+            <PlayerLink id={play.playerId} className="truncate text-[14px] font-semibold text-ink hover:underline">
+              {play.playerName}
+            </PlayerLink>
           </div>
           {play.text && <p className={`text-[13px] leading-snug text-ink-soft ${compact ? "line-clamp-2" : ""}`}>{play.text}</p>}
         </div>

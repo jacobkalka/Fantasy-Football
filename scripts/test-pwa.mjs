@@ -276,7 +276,7 @@ try {
   );
   check(
     "Shortcuts for the main destinations",
-    ["/", "/team", "/start-sit", "/players", "/trades"].every((u) => manifest.shortcuts?.some((s) => s.url === u)),
+    ["/", "/team", "/start-sit", "/feed", "/team/matchup"].every((u) => manifest.shortcuts?.some((s) => s.url === u)),
     manifest.shortcuts?.map((s) => `${s.name} → ${s.url}`).join(", "),
   );
 
@@ -455,11 +455,11 @@ try {
     (await heading(page)) === "You're offline" && here() === "/offline?from=%2Fgames",
     `h1 "${await heading(page)}", address ${here()}`,
   );
-  response = await page.goto(`${BASE}/trades/calculator`, { waitUntil: "load" });
+  response = await page.goto(`${BASE}/team/trades`, { waitUntil: "load" });
   await page.waitForTimeout(800);
   check(
     "Navigating to a page never visited shows the offline page",
-    response?.fromServiceWorker() && (await heading(page)) === "You're offline" && here() === "/offline?from=%2Ftrades%2Fcalculator",
+    response?.fromServiceWorker() && (await heading(page)) === "You're offline" && here() === "/offline?from=%2Fteam%2Ftrades",
     `h1 "${await heading(page)}", address ${here()}`,
   );
   const savedLinks = await page.locator("[data-saved-screen]").count();
@@ -473,7 +473,7 @@ try {
   // In-app navigation (tab bar) while offline: Next.js falls back to a full page load, which the
   // worker answers. (With next.config `experimental.useOffline` it would wait for the connection instead.)
   await page.goto(`${BASE}/feed`, { waitUntil: "load" });
-  await page.locator('nav[aria-label="Main"] a[href="/players"]:visible').first().click();
+  await page.locator('nav[aria-label="Main"] a[href="/news"]:visible').first().click();
   await page.waitForTimeout(3000);
   check(
     "Tab-bar navigation while offline opens a saved copy or the offline page (doesn't hang or error)",
@@ -481,10 +481,10 @@ try {
     `now at ${here()}, h1 "${await heading(page)}"`,
   );
   // Back online, "Try again" on the offline page returns to the screen that couldn't load.
-  await page.goto(`${BASE}/trades/calculator`, { waitUntil: "load" });
+  await page.goto(`${BASE}/team/trades`, { waitUntil: "load" });
   proxy.state.mode = "up";
   await Promise.all([
-    page.waitForURL((u) => u.pathname === "/trades/calculator", { timeout: 15_000 }),
+    page.waitForURL((u) => u.pathname === "/team/trades", { timeout: 15_000 }),
     page.getByRole("button", { name: "Try again" }).click(),
   ]);
   await page.waitForLoadState("load");

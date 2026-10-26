@@ -52,45 +52,8 @@ export function usePlayers(enabled = true): State & { retry: () => void } {
   };
 }
 
-/** Lower-case, no accents or punctuation: "Ja'Marr Chase" → "jamarr chase". */
-export function normalizeName(s: string) {
-  return s
-    .normalize("NFD")
-    .replace(/[̀-ͯ]/g, "")
-    .replace(/[^a-z0-9 ]/gi, "")
-    .replace(/\s+/g, " ")
-    .trim()
-    .toLowerCase();
-}
-
 /**
- * Simple ranked search: exact name, then name/last-name prefix, then contains, then team
- * abbreviation; ties broken by % rostered.
+ * Player search for every search box: the forgiving search in lib/players/search.ts (accents,
+ * punctuation, initials, small typos, "kc wr"). Re-exported here so every caller shares it.
  */
-export function searchPlayers(
-  players: Player[],
-  query: string,
-  teamAbbr: (teamId: string | null) => string | null,
-  limit = 40,
-): Player[] {
-  const q = normalizeName(query);
-  if (!q) return players.slice(0, limit);
-  const scored: { p: Player; s: number }[] = [];
-  for (const p of players) {
-    const name = normalizeName(p.name);
-    const last = name.split(" ").slice(1).join(" ");
-    const abbr = teamAbbr(p.teamId)?.toLowerCase();
-    let s = 0;
-    if (name === q) s = 100;
-    else if (name.startsWith(q)) s = 80;
-    else if (last.startsWith(q)) s = 70;
-    else if (name.split(" ").some((w) => w.startsWith(q))) s = 60;
-    else if (name.includes(q)) s = 40;
-    else if (abbr && abbr === q) s = 30;
-    if (s) scored.push({ p, s: s + (p.percentOwned ?? 0) / 1000 });
-  }
-  return scored
-    .sort((a, b) => b.s - a.s)
-    .slice(0, limit)
-    .map((x) => x.p);
-}
+export { normalize as normalizeName, searchPlayers } from "@/lib/players/search";

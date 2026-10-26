@@ -1,6 +1,6 @@
 import { formatPoints, roundPoints } from "@/lib/scoring";
 
-/** "+9.4" green, "−2.0" red, "0.0" grey: a pale tint with the sign always carrying the meaning. */
+/** "+9.40" cyan, "−2.00" coral, "0.00" grey: a pale tint with the sign always carrying the meaning. */
 export function PointsBadge({
   points,
   size = "md",
@@ -10,7 +10,7 @@ export function PointsBadge({
   size?: "sm" | "md" | "lg";
   className?: string;
 }) {
-  const rounded = roundPoints(points, 1);
+  const rounded = roundPoints(points, 2);
   const sizes = {
     sm: "h-[22px] px-1.5 text-[12px]",
     md: "h-7 px-2 text-[14px]",

@@ -13,6 +13,7 @@ import { canFill, MAX_ROSTER, sortLineup, type Slot } from "@/lib/roster/lineup"
 import { teamLink } from "@/lib/roster/share";
 import { rosterActions, useRoster } from "@/lib/roster/store";
 import type { ScoringFormat } from "@/lib/scoring";
+import { PlayerLink } from "@/components/player/PlayerLink";
 
 const FORMATS = [
   { value: "standard", label: "Standard" },
@@ -133,7 +134,9 @@ export function RosterEditor() {
                     size={36}
                   />
                   <div className="min-w-0 flex-1">
-                    <p className="truncate text-[15px] leading-5 font-medium">{player.name}</p>
+                    <PlayerLink id={player.playerId} className="block truncate text-[15px] leading-5 font-medium hover:underline">
+                      {player.name}
+                    </PlayerLink>
                     <p className="text-[13px] leading-5 text-muted">
                       {player.position === "DST" ? "D/ST" : player.position} · {team?.abbr ?? "Free agent"}
                     </p>

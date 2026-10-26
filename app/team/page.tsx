@@ -2,17 +2,20 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import { SectionTabs } from "@/components/shell/SectionTabs";
 import { TeamDashboard } from "@/components/team/TeamDashboard";
-import { PageTitle, Skeleton } from "@/components/ui/bits";
+import { TeamTitle } from "@/components/team/TeamTitle";
+import { Skeleton } from "@/components/ui/bits";
 
-export const metadata: Metadata = { title: "Lineup" };
+export const metadata: Metadata = { title: "My team" };
 
-export default function LineupPage() {
+export default function TeamPage() {
   return (
     <>
       <SectionTabs section="/team" current="/team" />
-      <PageTitle sub="Live points for this week, play by play">Lineup</PageTitle>
+      <Suspense fallback={<div className="h-20" />}>
+        <TeamTitle />
+      </Suspense>
       {/* The lineup reads ?week= from the URL, which needs a Suspense boundary. */}
-      <Suspense fallback={<Skeleton className="h-72 rounded-[20px]" />}>
+      <Suspense fallback={<Skeleton className="h-72 rounded-[22px]" />}>
         <TeamDashboard />
       </Suspense>
     </>

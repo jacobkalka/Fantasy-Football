@@ -14,7 +14,7 @@ import {
   getTeamSchedule,
   getTeams,
 } from "@/lib/data/sports";
-import type { ScoringFormat } from "@/lib/scoring";
+import type { ScoringSpec } from "@/lib/scoring/spec";
 import { analyzePlayer } from "./analysis";
 import { buildPlayerProfile } from "./profile";
 import type { PlayerAnalysis, PlayerProfile } from "./types";
@@ -65,8 +65,8 @@ export async function getPlayerProfile(playerId: string): Promise<PlayerProfile>
 
 export async function getPlayerResearch(
   playerId: string,
-  format: ScoringFormat,
+  spec: ScoringSpec,
 ): Promise<{ profile: PlayerProfile; analysis: PlayerAnalysis }> {
   const profile = await getPlayerProfile(playerId);
-  return { profile, analysis: analyzePlayer(profile, format) };
+  return { profile, analysis: analyzePlayer(profile, spec.format, spec.rules) };
 }

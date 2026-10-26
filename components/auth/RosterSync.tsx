@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { useAuth } from "@/lib/supabase/auth";
 import { rosterSync, useRosterSync } from "@/lib/supabase/roster-sync";
-import { useRoster } from "@/lib/roster/store";
+import { usePrimaryRoster } from "@/lib/roster/store";
 import { FloatingNotice } from "./FloatingNotice";
 
 /**
@@ -13,12 +13,13 @@ import { FloatingNotice } from "./FloatingNotice";
  */
 export function RosterSync() {
   const auth = useAuth();
-  const { roster, ready } = useRoster();
+  // Your hand-built team is the one saved to your account; ESPN teams reload from ESPN.
+  const { roster, ready } = usePrimaryRoster();
   const { notice } = useRosterSync();
   const userId = auth.status === "signed-in" ? auth.user.id : null;
 
   useEffect(() => {
-    if (!ready) return;
+    if (!ready || !roster) return;
     if (userId) {
       rosterSync.start(userId, roster);
       rosterSync.localChanged(roster);

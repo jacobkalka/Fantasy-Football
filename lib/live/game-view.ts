@@ -4,7 +4,7 @@
  */
 import { headshotUrl, isAdministrativePlay } from "@/lib/providers";
 import type { Drive, Game, GameDetail, Position, TeamStat } from "@/lib/providers/types";
-import { roundPoints, rulesForFormat, scoreDelta, scoreStatLine, type ScoringFormat } from "@/lib/scoring";
+import { roundPoints, rulesForFormat, scoreDelta, scoreStatLine, type ScoringFormat, type ScoringRules } from "@/lib/scoring";
 import type { StatLine } from "@/lib/stats";
 import { cleanPlayText } from "./play-text";
 import { statLineSummary } from "./statline";
@@ -102,8 +102,10 @@ export function fieldPositionFrom(game: Game): FieldPosition | null {
 export function buildGameView(
   detail: GameDetail & { fetchedAt?: string },
   format: ScoringFormat,
+  /** A league's own rules (lib/scoring/spec.ts); the format's preset otherwise. */
+  custom?: Readonly<ScoringRules> | null,
 ): GameView {
-  const rules = rulesForFormat(format);
+  const rules = custom ?? rulesForFormat(format);
   const driveOf = new Map<string, string>();
   for (const drive of detail.drives) for (const id of drive.playIds) driveOf.set(id, drive.id);
   const winPct = new Map(detail.winProbability.map((w) => [w.playId, w.homeWinPct]));

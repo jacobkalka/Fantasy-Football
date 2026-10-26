@@ -4,7 +4,7 @@
  * The result is small enough to send to the phone (/api/universe), where the analysis runs.
  */
 import type { InjuryStatus, PlayerUniverse, Position, UniversePlayer } from "@/lib/providers/types";
-import { roundPoints, rulesForFormat, scoreStatLine, type ScoringFormat } from "@/lib/scoring";
+import { roundPoints, rulesForFormat, scoreStatLine, type ScoringFormat, type ScoringRules } from "@/lib/scoring";
 import type { StatLine } from "@/lib/stats";
 
 export interface AnalysisGame {
@@ -74,8 +74,13 @@ function opportunities(position: Position, stats: StatLine): number | null {
  * team's game this week has started (a real line for this week exists), that game is no longer
  * "rest of season", so this week's projection and one game are taken out.
  */
-export function scorePlayer(raw: UniversePlayer, week: number, format: ScoringFormat): AnalysisPlayer {
-  const rules = rulesForFormat(format);
+export function scorePlayer(
+  raw: UniversePlayer,
+  week: number,
+  format: ScoringFormat,
+  custom?: Readonly<ScoringRules> | null,
+): AnalysisPlayer {
+  const rules = custom ?? rulesForFormat(format);
   const score = (line: StatLine) => scoreStatLine(line, rules).total;
 
   const games: AnalysisGame[] = raw.weeks
@@ -133,14 +138,19 @@ function statusNote(status: InjuryStatus): string {
   return words[status] ?? "";
 }
 
-export function scoreUniverse(raw: PlayerUniverse & { fetchedAt?: string }, format: ScoringFormat): Universe {
+/** `custom` = a league's own rules; `format` stays the nearest preset for preset-only tools. */
+export function scoreUniverse(
+  raw: PlayerUniverse & { fetchedAt?: string },
+  format: ScoringFormat,
+  custom?: Readonly<ScoringRules> | null,
+): Universe {
   return {
     season: raw.season,
     week: raw.week,
     throughWeek: Math.max(0, raw.week - 1),
     format,
     fetchedAt: raw.fetchedAt ?? null,
-    players: raw.players.map((p) => scorePlayer(p, raw.week, format)),
+    players: raw.players.map((p) => scorePlayer(p, raw.week, format, custom)),
   };
 }
 

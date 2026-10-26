@@ -6,7 +6,7 @@ export async function GET(request: NextRequest) {
   const week = Number(request.nextUrl.searchParams.get("week")) || undefined;
   const season = Number(request.nextUrl.searchParams.get("season")) || undefined;
   try {
-    return Response.json(await getScoreboard(week, season));
+    return Response.json({ ...(await getScoreboard(week, season)), servedAt: new Date().toISOString() });
   } catch (error) {
     console.error("scoreboard failed", error);
     return Response.json({ error: "ESPN isn't responding right now." }, { status: 502 });

@@ -4,7 +4,7 @@ export const APP_NAME = "FantasyLab";
 export const APP_DESCRIPTION =
   "Your fantasy football lab: team rating, start/sit, trades, pickups and live scoring, built on real NFL data.";
 
-export type NavIcon = "home" | "team" | "players" | "trades" | "live";
+export type NavIcon = "home" | "team" | "live" | "news" | "chat";
 
 export interface NavSection {
   href: string;
@@ -17,8 +17,10 @@ export interface NavSection {
 }
 
 /**
- * The app's map (DECISIONS.md, "Navigation"). Five sections: the phone's bottom bar
- * shows all five; the desktop sidebar shows them with their sub-pages.
+ * The app's map (DECISIONS.md, "Navigation", 2026-10-26). Five destinations, each answering
+ * "what does this mean for my team?": Home (command center), Team (roster, matchup and every
+ * roster decision), Live (points as they happen), News, and Chat (the community). The phone's
+ * bottom bar shows all five; the desktop sidebar shows them with their sub-pages.
  */
 export const NAV: NavSection[] = [
   { href: "/", label: "Home", icon: "home", match: ["/"] },
@@ -26,46 +28,28 @@ export const NAV: NavSection[] = [
     href: "/team",
     label: "Team",
     icon: "team",
-    match: ["/team", "/start-sit"],
+    match: ["/team", "/start-sit", "/players", "/trades"],
     children: [
-      { href: "/team", label: "Lineup" },
-      { href: "/team/rating", label: "Rating" },
+      { href: "/team", label: "My team" },
+      { href: "/team/matchup", label: "Matchup" },
       { href: "/start-sit", label: "Start/Sit" },
-      { href: "/team/edit", label: "Roster" },
-    ],
-  },
-  {
-    href: "/players",
-    label: "Players",
-    icon: "players",
-    match: ["/players"],
-    children: [
-      { href: "/players", label: "Search" },
-      { href: "/players/pickups", label: "Pickups" },
-      { href: "/players/watchlist", label: "Watchlist" },
-    ],
-  },
-  {
-    href: "/trades",
-    label: "Trades",
-    icon: "trades",
-    match: ["/trades"],
-    children: [
-      { href: "/trades", label: "Ideas" },
-      { href: "/trades/calculator", label: "Calculator" },
+      { href: "/team/trades", label: "Trades" },
+      { href: "/team/pickups", label: "Pickups" },
+      { href: "/players", label: "Rankings" },
     ],
   },
   {
     href: "/feed",
     label: "Live",
     icon: "live",
-    match: ["/feed", "/games", "/chat"],
+    match: ["/feed", "/games"],
     children: [
       { href: "/feed", label: "Plays" },
       { href: "/games", label: "Games" },
-      { href: "/chat", label: "Chat" },
     ],
   },
+  { href: "/news", label: "News", icon: "news", match: ["/news"] },
+  { href: "/chat", label: "Chat", icon: "chat", match: ["/chat", "/u"] },
 ];
 
 /** Which section a path belongs to (longest match wins; "/" only matches itself). */

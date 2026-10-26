@@ -1,4 +1,4 @@
-import type { Injury, NewsItem } from "@/lib/providers/types";
+import type { Injury, NewsArticle, NewsItem } from "@/lib/providers/types";
 import { arr, get, num, obj, str, type Json } from "./json";
 
 export function parseNews(raw: Json): NewsItem[] {
@@ -71,4 +71,107 @@ export function parseInjuries(raw: Json): Injury[] {
     }
   }
   return injuries;
+}
+
+// ── Rich articles for the News screen ─────────────────────────────────────────
+
+const TYPE_LABEL: Record<string, string> = {
+  HeadlineNews: "News",
+  Story: "Story",
+  Media: "Video",
+  Preview: "Preview",
+  Recap: "Recap",
+  Rotowire: "Player update",
+};
+
+/** Injury-flavoured stories get their own label so they stand out (words from the headline only). */
+function category(type: string, headline: string) {
+  if (/\b(injur|out for|ruled out|questionable|doubtful|IR\b|sprain|strain|torn|concussion|day-to-day)/i.test(headline)) {
+    return "Injury";
+  }
+  if (/\b(fantasy|start|sit|waiver|sleeper|rankings?)\b/i.test(headline)) return "Fantasy";
+  if (/\b(trade|traded|acquire|deal|signs?|released|waived)\b/i.test(headline)) return "Transaction";
+  return TYPE_LABEL[type] ?? "News";
+}
+
+function headerImage(a: Record<string, Json>): string | null {
+  const images = arr(a.images).map(obj);
+  const pick = images.find((i) => str(i.type) === "header") ?? images[0];
+  const url = str(pick?.url);
+  return /^https:\/\/a\.espncdn\.com\//.test(url) ? url : null;
+}
+
+function ids(a: Record<string, Json>, type: "athlete" | "team", field: "athleteId" | "teamId") {
+  return [
+    ...new Set(
+      arr(a.categories)
+        .map(obj)
+        .filter((c) => str(c.type) === type && c[field] !== undefined)
+        .map((c) => String(num(c[field]))),
+    ),
+  ];
+}
+
+/** ESPN's NFL news feed as article cards. Only headline, summary, image and link: reading happens on ESPN. */
+export function parseArticles(raw: Json): NewsArticle[] {
+  return arr(get(raw, "articles"))
+    .map(obj)
+    .map((a) => {
+      const headline = str(a.headline);
+      return {
+        id: str(a.id) || str(a.nowId) || headline,
+        headline,
+        description: str(a.description),
+        published: str(a.published) || str(a.lastModified),
+        link: /^https:\/\/(www\.)?espn\.com\//.test(str(get(a, "links", "web", "href"))) ? str(get(a, "links", "web", "href")) : null,
+        image: headerImage(a),
+        category: category(str(a.type), headline),
+        source: str(a.byline) || "ESPN",
+        playerIds: ids(a, "athlete", "athleteId"),
+        playerNames: Object.fromEntries(
+          arr(a.categories)
+            .map(obj)
+            .filter((c) => str(c.type) === "athlete" && c.athleteId !== undefined && str(c.description))
+            .map((c) => [String(num(c.athleteId)), str(c.description)]),
+        ),
+        teamIds: ids(a, "team", "teamId"),
+        premium: a.premium === true,
+      };
+    })
+    .filter((n) => n.headline);
+}
+
+/**
+ * ESPN's fantasy news for one player as article cards. "Rotowire" items are short player
+ * updates ESPN publishes on its player pages: shown as a short note with credit, linking to
+ * the player's ESPN page (the update itself has no article link).
+ */
+export function parsePlayerArticles(raw: Json, playerId: string): NewsArticle[] {
+  return arr(get(raw, "feed"))
+    .map(obj)
+    .map((a) => {
+      const type = str(a.type);
+      const rotowire = type === "Rotowire";
+      const headline = str(a.headline);
+      const href = str(get(a, "links", "web", "href"));
+      return {
+        id: str(a.id) || str(a.nowId) || headline,
+        headline,
+        description: rotowire ? stripHtml(str(a.story)).slice(0, 600) || str(a.description) : str(a.description),
+        published: str(a.published) || str(a.lastModified),
+        link: /^https:\/\/(www\.)?espn\.com\//.test(href)
+          ? href
+          : playerId.startsWith("-")
+            ? null
+            : `https://www.espn.com/nfl/player/_/id/${playerId}`,
+        image: headerImage(a),
+        category: rotowire ? "Player update" : category(type, headline),
+        source: rotowire ? "RotoWire via ESPN" : str(a.byline) || "ESPN Fantasy",
+        playerIds: [playerId],
+        playerNames: {},
+        teamIds: [],
+        premium: a.premium === true,
+      };
+    })
+    .filter((n) => n.headline);
 }

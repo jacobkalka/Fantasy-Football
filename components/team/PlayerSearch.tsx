@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useDeferredValue, useMemo, useRef, useState } from "react";
 import { Card } from "@/components/ui/Card";
 import { Icon } from "@/components/ui/Icon";
@@ -12,6 +11,7 @@ import { useTeams } from "@/lib/hooks/useTeams";
 import { gsap, prefersReducedMotion } from "@/lib/motion/gsap";
 import type { Player, Position } from "@/lib/providers/types";
 import { rosterActions, useRoster } from "@/lib/roster/store";
+import { PlayerLink } from "@/components/player/PlayerLink";
 
 const POSITIONS = [
   { value: "ALL", label: "All" },
@@ -105,13 +105,13 @@ export function PlayerSearch() {
                 teamColor={visibleTeamColor(team)}
                 size={36}
               />
-              <Link href={`/players/${player.id}`} className="min-w-0 flex-1 rounded-md hover:underline">
+              <PlayerLink id={player.id} className="min-w-0 flex-1 rounded-md hover:underline">
                 <p className="truncate text-[15px] leading-5 font-medium">{player.name}</p>
                 <p className="text-[13px] leading-5 text-muted">
                   {player.position === "DST" ? "D/ST" : player.position} · {team?.abbr ?? "Free agent"}
                   {player.percentOwned != null ? ` · ${Math.round(player.percentOwned)}% rostered` : ""}
                 </p>
-              </Link>
+              </PlayerLink>
               <button
                 type="button"
                 onClick={() => (added ? rosterActions.remove(player.id) : add(player))}

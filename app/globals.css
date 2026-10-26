@@ -4,10 +4,12 @@
   FantasyLab design tokens. Every colour, font, radius and surface lives here; components
   only use these names, so changing the look means editing this file.
 
-  Direction (DECISIONS.md, "Design"): true-black flat. Elevation is a lightness step
-  (#000 ground, #111 card, #2a2a2a nested panel), with no borders or shadows on things at
-  rest. Colour is for data: the logo's blue marks the main number on a screen, green and
-  red say good and bad. The one primary action is a white pill with black text.
+  Direction (DECISIONS.md, "Design"): true-black flat, dealt by the Taste skill's app draw
+  (style "true-black-flat", seed 1993303539). Elevation is a lightness step (#000 ground,
+  #111 card, #2a2a2a nested panel), with no borders or shadows on things at rest. Colour is
+  for data: the logo's blue is the one data hue AND "good" (the sheet's rule: the data hue
+  doubles as positive rather than adding a second hue; the owner asked for no green), red
+  says bad. The one primary action is a white pill with black text.
   Liquid glass is kept for things that float above content (the phone tab bar, sheets).
 */
 @theme {
@@ -32,20 +34,28 @@
   --color-accent: #4c8dff;
   --color-accent-soft: #0f1d33;
 
-  /* Good and bad. Always paired with a sign or a word, never colour alone. */
-  --color-positive: #3fc07a;
-  --color-positive-soft: #172a1d;
+  /* Good and bad. Always paired with a sign or a word, never colour alone. Good = the data hue. */
+  --color-positive: #4c8dff;
+  --color-positive-soft: #0f1d33;
   --color-negative: #e5566f;
   --color-negative-soft: #2c1a20;
   --color-warning: #e5a93b;
   --color-warning-soft: #2b2414;
+  /* A game in progress (the same hue: it's data, not chrome). */
+  --color-live: #4c8dff;
+
+  /* Charts: the one data hue on the main series, neutrals for comparison (Taste sheet). */
+  --color-chart-1: #4c8dff;
+  --color-chart-2: #e6e6e6;
+  --color-chart-3: #6b6b6b;
+  --color-chart-grid: #2b2b2b;
 
   /* Legacy names, mapped onto the new palette so screens not yet redesigned stay coherent. */
   --color-panel: #111111;
   --color-line-soft: #181818;
   --color-ink-strong: #ffffff;
   --color-ink-soft: #d4d4d4;
-  --color-gain: #3fc07a;
+  --color-gain: #4c8dff;
   --color-gain-ink: #000000;
   --color-loss: #e5566f;
   --color-loss-line: #e5566f;
@@ -136,6 +146,16 @@ html[data-standalone] :is(nav, header, button, [role="tab"], [data-pwa]) {
 @utility card {
   border-radius: var(--radius-card);
   background: var(--color-surface);
+}
+
+/* A row or option you can tap inside a card: one lightness step, the next on hover. */
+@utility tile {
+  border-radius: var(--radius-inner);
+  background: var(--color-raised);
+  transition: background-color 160ms ease;
+  &:hover {
+    background: var(--color-well);
+  }
 }
 
 /* A panel nested inside a card. */

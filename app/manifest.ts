@@ -83,8 +83,8 @@ export default function manifest(): MetadataRoute.Manifest {
         description: "Who to start this week",
         icons: shortcutIcons,
       },
-      { name: "Players", url: "/players", description: "Search and compare players", icons: shortcutIcons },
-      { name: "Trades", url: "/trades", description: "Check a trade before you make it", icons: shortcutIcons },
+      { name: "Live", url: "/feed", description: "Every play that moves your points", icons: shortcutIcons },
+      { name: "Matchup", url: "/team/matchup", description: "Your head-to-head, live", icons: shortcutIcons },
     ],
   };
 }

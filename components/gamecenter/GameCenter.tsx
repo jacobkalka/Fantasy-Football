@@ -9,7 +9,9 @@ import { usePoll } from "@/lib/hooks/usePoll";
 import { useReplay } from "@/lib/hooks/useReplay";
 import type { GameView, LeaderView } from "@/lib/live/game-view";
 import type { Team } from "@/lib/providers/types";
-import { useRoster } from "@/lib/roster/store";
+import { specOf } from "@/lib/fantasy/context";
+import { specQuery } from "@/lib/scoring/spec";
+import { useActiveTeam } from "@/lib/teams/store";
 import { roundPoints } from "@/lib/scoring";
 import { FieldBar, WinProbabilityBar } from "./Bars";
 import { Scorebug, scoreStateFor, type ScoreState } from "./Scorebug";
@@ -49,11 +51,13 @@ function useNewPlayIds(ids: string[]) {
 }
 
 export function GameCenter({ initial }: { initial: GameView }) {
-  const { roster } = useRoster();
+  const { team } = useActiveTeam();
   const [tab, setTab] = useState<Tab>("plays");
-  const format = roster.format;
-  const { data, delayed } = usePoll<GameView>(`/api/games/${initial.game.id}?format=${format}`, {
-    initial: format === initial.format ? initial : undefined,
+  const spec = specOf(team);
+  const format = spec.format;
+  // Scored with the active team's rules (a league's own scoring included).
+  const { data, error, receivedAt } = usePoll<GameView & { servedAt?: string }>(`/api/games/${initial.game.id}?${specQuery(spec)}`, {
+    initial: format === initial.format && !spec.rules ? initial : undefined,
     intervalMs: interval,
   });
   const view = data ?? initial;
@@ -101,7 +105,7 @@ export function GameCenter({ initial }: { initial: GameView }) {
       <Scorebug game={game} state={state} />
 
       <div className="flex items-center justify-between gap-3 px-1">
-        {replay.active ? <span /> : <UpdatedAgo fetchedAt={view.fetchedAt} delayed={delayed} live={game.state === "in"} />}
+        {replay.active ? <span /> : <UpdatedAgo stamps={data} receivedAt={receivedAt} error={error} live={game.state === "in"} />}
         {game.state === "post" && view.plays.length > 0 && !replay.active && (
           <button
             type="button"

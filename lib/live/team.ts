@@ -13,6 +13,7 @@ import {
   scoreDelta,
   scoreStatLine,
   type ScoringFormat,
+  type ScoringRules,
 } from "@/lib/scoring";
 import { defensePlayDeltas, defenseStatLine } from "@/lib/providers";
 import type { StatLine } from "@/lib/stats";
@@ -29,6 +30,8 @@ export interface RosterInput {
 export interface TeamLiveInput {
   roster: RosterInput[];
   format: ScoringFormat;
+  /** Exact rules to score with (a league's own); defaults to the format's preset. */
+  rules?: Readonly<ScoringRules>;
   scoreboard: Scoreboard;
   /** Game details for games that have started, keyed by game id. */
   details: Record<string, GameDetail>;
@@ -70,6 +73,17 @@ function playerGame(game: Game, teamId: string): PlayerGame {
     teamScore: us.score,
     opponentScore: them.score,
     hasBall: game.state === "in" && game.situation?.possessionTeamId === teamId,
+    possession:
+      game.state !== "in"
+        ? null
+        : !game.situation?.possessionTeamId
+          ? "unknown"
+          : game.situation.possessionTeamId === teamId
+            ? "ball"
+            : game.situation.possessionTeamId === them.team.id
+              ? "defense"
+              : "unknown",
+    downDistance: game.state === "in" ? (game.situation?.downDistance ?? null) : null,
     isRedZone: game.state === "in" && Boolean(game.situation?.isRedZone) && game.situation?.possessionTeamId === teamId,
   };
 }
@@ -105,7 +119,7 @@ function injuryNote(text: string, shortName: string): string | null {
 }
 
 export function buildTeamLive(input: TeamLiveInput): TeamLive {
-  const rules = rulesForFormat(input.format);
+  const rules = input.rules ?? rulesForFormat(input.format);
   const feed: FeedItem[] = [];
   const outlooks = new Map(input.outlooks.map((o) => [o.playerId, o]));
 

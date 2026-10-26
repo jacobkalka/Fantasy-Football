@@ -35,3 +35,29 @@ export function agoLabel(ms: number) {
   if (m < 60) return `${m}m ago`;
   return `${Math.round(m / 60)}h ago`;
 }
+
+/**
+ * Fantasy points for display: two decimals ("12.47"). Points are kept exact (to the cent) in
+ * the data layer and only formatted here, so every screen shows the same number.
+ */
+export function pts(value: number | null | undefined, empty = "–"): string {
+  if (value === null || value === undefined || !Number.isFinite(value)) return empty;
+  return (Math.abs(value) < 0.005 ? 0 : value).toFixed(2);
+}
+
+/** Signed points: "+3.20", "−1.04", "0.00". */
+export function signedPts(value: number): string {
+  if (Math.abs(value) < 0.005) return "0.00";
+  return `${value > 0 ? "+" : "−"}${Math.abs(value).toFixed(2)}`;
+}
+
+/** "WR5", "D/ST3". */
+export function posRank(position: string, rank: number | null | undefined): string {
+  if (!rank) return "–";
+  return `${position === "DST" ? "D/ST" : position}${rank}`;
+}
+
+/** "52%" from 0-1. */
+export function pct(share: number | null | undefined): string {
+  return share === null || share === undefined ? "–" : `${Math.round(share * 100)}%`;
+}

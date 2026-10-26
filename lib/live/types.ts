@@ -26,6 +26,14 @@ export interface PlayerGame {
   teamScore: number;
   opponentScore: number;
   hasBall: boolean;
+  /**
+   * Who has the ball right now, from ESPN's live game situation: "ball" = this team, "defense" =
+   * the opponent. "unknown" while a game is on but ESPN gives no possession (halftime, a review,
+   * between drives): shown as unknown, never guessed. null when the game isn't in progress.
+   */
+  possession: "ball" | "defense" | "unknown" | null;
+  /** "3rd & 7 at KC 35", when ESPN gives it. */
+  downDistance: string | null;
   isRedZone: boolean;
 }
 

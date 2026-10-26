@@ -50,7 +50,7 @@ function Token({
       data-token=""
       onClick={onOpen}
       className="pressable flex flex-col items-center gap-1 rounded-xl p-1"
-      aria-label={`${player.name}, ${live?.points.toFixed(1) ?? "0.0"} points${playing ? ", playing now" : ""}`}
+      aria-label={`${player.name}, ${live?.points.toFixed(2) ?? "0.00"} points${playing ? ", playing now" : ""}`}
     >
       <PlayerAvatar
         name={player.name}

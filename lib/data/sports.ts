@@ -6,7 +6,8 @@
  * keeps one shared copy across all of Vercel's servers.
  */
 import { cacheLife, cacheTag } from "next/cache";
-import { sports } from "@/lib/providers";
+import { LeagueNotFoundError, LeaguePrivateError, sports } from "@/lib/providers";
+import type { FantasyLeague } from "@/lib/providers/types";
 
 /** Data plus the moment it was fetched from ESPN, for "Updated 6s ago". */
 export type Stamped<T> = T & { fetchedAt: string };
@@ -136,4 +137,45 @@ export async function getDepthChart(teamId: string, season: number) {
   cacheLife("hours");
   cacheTag(`depth-${teamId}`);
   return sports.getDepthChart(teamId, season);
+}
+
+// --- Fantasy leagues and news ---
+
+/**
+ * A PUBLIC league (no login). Shared by everyone in that league; refreshed like live scores so
+ * matchup numbers move during games. Private leagues are fetched per user, never cached here
+ * (their login cookies must not become part of a shared cache key).
+ */
+export async function getPublicLeague(leagueId: string, season: number): Promise<LeagueLookup> {
+  "use cache: remote";
+  cacheLife("live");
+  cacheTag(`league-${leagueId}`);
+  // Errors lose their type when they leave a cached function, so the outcome is returned as data.
+  try {
+    return { status: "ok", league: stamp(await sports.getLeague(leagueId, season, null)) };
+  } catch (error) {
+    if (error instanceof LeaguePrivateError) return { status: "private" };
+    if (error instanceof LeagueNotFoundError) return { status: "not-found" };
+    throw error;
+  }
+}
+
+export type LeagueLookup =
+  | { status: "ok"; league: Stamped<FantasyLeague> }
+  | { status: "private" }
+  | { status: "not-found" };
+
+/** ESPN's NFL news (league-wide). */
+export async function getNewsArticles() {
+  "use cache: remote";
+  cacheLife("news");
+  cacheTag("news");
+  return stamp({ articles: await sports.getFantasyNews() });
+}
+
+/** Fantasy news for a set of players. Pass ids sorted, so the same roster shares one cache entry. */
+export async function getPlayersNews(sortedIds: string[]) {
+  "use cache: remote";
+  cacheLife("news");
+  return stamp({ articles: await sports.getFantasyNews(sortedIds) });
 }

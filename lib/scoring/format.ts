@@ -7,12 +7,12 @@ import { roundPoints, type ScoringPart } from "./score";
 // The real minus sign (U+2212). It's as wide as "+", so numbers line up.
 const MINUS = "−";
 
-/** "+9.4", "−2.0", or "0.0". Always one decimal. */
+/** "+9.40", "−2.00", or "0.00". Always two decimals (DECISIONS.md, "Precision"). */
 export function formatPoints(points: number): string {
-  const rounded = roundPoints(points, 1);
-  if (rounded === 0) return "0.0"; // also covers tiny values like 0.04 and -0.04
+  const rounded = roundPoints(points, 2);
+  if (rounded === 0) return "0.00"; // also covers float noise like 0.001
   const sign = rounded > 0 ? "+" : MINUS;
-  return sign + Math.abs(rounded).toFixed(1);
+  return sign + Math.abs(rounded).toFixed(2);
 }
 
 /** "+7.4 yds, +6 TD, +1 reception". Keeps the order of `parts` (scoreStatLine already sorts them). */

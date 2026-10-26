@@ -12,7 +12,7 @@ const DIGITS = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
  */
 export function AnimatedNumber({
   value,
-  decimals = 1,
+  decimals = 2,
   className = "",
 }: {
   value: number;

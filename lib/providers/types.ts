@@ -518,6 +518,105 @@ export interface TeamSchedule {
   games: TeamScheduleGame[];
 }
 
+// ---------------------------------------------------------------------------
+// Fantasy leagues (an ESPN league you connect). Everything comes from the league itself:
+// team names, records, rosters, live matchup scores, projections and win probability.
+// ---------------------------------------------------------------------------
+
+/** Login cookies for a private league. Server only; never sent to a browser. */
+export interface LeagueCredentials {
+  espnS2: string;
+  swid: string;
+}
+
+/** Lineup slots in the app's terms. Leagues with extra slot types map onto these (see league.ts). */
+export type LeagueSlot = "QB" | "RB" | "WR" | "TE" | "FLEX" | "K" | "DST" | "BENCH" | "IR";
+
+export interface LeagueRosterEntry {
+  playerId: string;
+  name: string;
+  position: Position;
+  /** NFL team id; null for free agents. */
+  teamId: string | null;
+  slot: LeagueSlot;
+  injuryStatus: InjuryStatus;
+  /** League-scored points this week (ESPN's number, the league's own rules). null before he plays. */
+  points: number | null;
+  /** ESPN's projection for this week in the league's scoring. */
+  projected: number | null;
+}
+
+export interface MatchupSide {
+  teamId: number;
+  /** Points so far this matchup (live), in the league's scoring. */
+  points: number;
+  /** ESPN's live projected final for the matchup (updates during games). null if ESPN doesn't say. */
+  projectedLive: number | null;
+  /** ESPN's projection before the week's games. */
+  projectedPregame: number | null;
+  /** ESPN's live chance of winning, 0-1. null if ESPN doesn't say. */
+  winProbability: number | null;
+  /** Lineup for the current scoring period (empty for past weeks). */
+  roster: LeagueRosterEntry[];
+  /** Starters the app can't show (individual defensive players, IDP) and their points, included in `points`. */
+  otherStarters: number;
+  otherPoints: number;
+}
+
+export interface LeagueMatchup {
+  id: number;
+  /** Matchup period (usually the NFL week). */
+  period: number;
+  home: MatchupSide;
+  /** null on a bye week. */
+  away: MatchupSide | null;
+  winner: "HOME" | "AWAY" | "TIE" | "UNDECIDED";
+}
+
+export interface LeagueTeamInfo {
+  id: number;
+  name: string;
+  abbrev: string;
+  /** ESPN-hosted logo URL; null when the team has none. */
+  logo: string | null;
+  wins: number;
+  losses: number;
+  ties: number;
+  pointsFor: number;
+  pointsAgainst: number;
+  /** Standings position (1 = first), when ESPN has one. */
+  rank: number | null;
+  /** Player ids on this team's full roster. */
+  playerIds: string[];
+}
+
+export interface LeagueScoring {
+  /** The league's rules in the app's stat names (offense, kickers and D/ST). */
+  rules: Partial<Record<import("@/lib/stats").StatKey, number>>;
+  /** Points per reception. */
+  ppr: number;
+  /** ESPN stat ids the league scores that the app can't score play by play (bonuses, etc.). */
+  unsupported: number[];
+}
+
+export interface FantasyLeague {
+  id: string;
+  season: number;
+  name: string;
+  size: number;
+  /** The league's current matchup period and scoring period (NFL week). */
+  currentPeriod: number;
+  scoringPeriod: number;
+  scoring: LeagueScoring;
+  /** Starting lineup counts in the app's slot names (bench excluded). */
+  lineup: Partial<Record<LeagueSlot, number>>;
+  teams: LeagueTeamInfo[];
+  /** This period's matchups, with lineups and live numbers. */
+  matchups: LeagueMatchup[];
+  /** Every period's results so far (scores only), for charts. */
+  results: { period: number; homeId: number; awayId: number | null; homePoints: number; awayPoints: number | null; winner: LeagueMatchup["winner"] }[];
+}
+
 /** Everything the app needs from a sports data source. */
 export interface DataProvider {
   /** This week's games (the source decides which week is current), or a specific week. */
@@ -548,4 +647,30 @@ export interface DataProvider {
   /** A team's current depth chart (offense and kickers). */
   getDepthChart(teamId: string, season: number): Promise<DepthChart>;
   getTeamSchedule(teamId: string, season: number): Promise<TeamSchedule>;
+  /** A fantasy league with its teams, rosters and this week's matchups. Private leagues need credentials. */
+  getLeague(leagueId: string, season: number, credentials?: LeagueCredentials | null): Promise<FantasyLeague>;
+  /** Fantasy news: league-wide (no ids) or about specific players. */
+  getFantasyNews(playerIds?: string[]): Promise<NewsArticle[]>;
+}
+
+/** A news article with what's needed to show it as a card and link to the source. */
+export interface NewsArticle {
+  id: string;
+  headline: string;
+  description: string;
+  /** ISO time. */
+  published: string;
+  /** The article on the publisher's site. Reading happens there (we don't copy articles). */
+  link: string | null;
+  image: string | null;
+  /** "News", "Injury", "Analysis", "Video"..., from the source's own label. */
+  category: string;
+  /** Who wrote/published it, when given ("ESPN", a byline). */
+  source: string;
+  playerIds: string[];
+  /** Player id → name, as the source tagged the article (for player chips). */
+  playerNames: Record<string, string>;
+  teamIds: string[];
+  /** Fantasy-relevant summary the source attached (ESPN fantasy "story" blurbs), when given. */
+  premium: boolean;
 }

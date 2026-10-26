@@ -15,3 +15,5 @@ export { headshotUrl } from "./espn/teams";
 export { isAdministrativePlay } from "./espn/stats";
 /** Team defense (D/ST) scoring helpers: a D/ST's stat line and its per-play changes for a game. */
 export { defensePlayDeltas, defenseStatLine, dstPlayerId, dstTeamId } from "./espn/stats";
+/** A connected league that's private (needs ESPN login cookies) or doesn't exist. */
+export { LeagueNotFoundError, LeaguePrivateError } from "./espn/league";

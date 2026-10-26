@@ -7,6 +7,7 @@ import { gsap, prefersReducedMotion, useGSAP } from "@/lib/motion/gsap";
 import { shortName } from "@/lib/startsit/model";
 import type { StartSitResult } from "@/lib/startsit/types";
 import { ConfidenceMeter } from "./ConfidenceMeter";
+import { PlayerLink } from "@/components/player/PlayerLink";
 
 const FORMAT_LABEL = { standard: "Standard", half: "Half PPR", ppr: "PPR" } as const;
 
@@ -68,10 +69,16 @@ export function Verdict({
           <>
             <div data-answer="">
               <h2 className="text-[28px] leading-9 font-semibold tracking-[-0.015em]">
-                Start <span className="text-accent">{name(rec.startId)}</span>
+                Start{" "}
+                <PlayerLink id={rec.startId} className="text-accent hover:underline">
+                  {name(rec.startId)}
+                </PlayerLink>
               </h2>
               <p className="mt-1 text-[15px] text-muted">
-                over <span className="text-ink">{name(rec.overId)}</span>
+                over{" "}
+                <PlayerLink id={rec.overId} className="text-ink hover:underline">
+                  {name(rec.overId)}
+                </PlayerLink>
                 {result.players.length > 2 && " (the next-best option)"}
               </p>
             </div>

@@ -62,7 +62,8 @@ export function FieldBar({ away, home, field }: { away: Team; home: Team; field:
             transform: "rotateX(28deg)",
             transformOrigin: "50% 100%",
             background:
-              "repeating-linear-gradient(90deg, rgb(255 255 255 / 0.14) 0 1px, transparent 1px 10%), linear-gradient(180deg, #123a1e, #0c2a15)",
+              // Yard lines every 10% on the nested-panel grey (no green turf: colour is for data).
+              "repeating-linear-gradient(90deg, rgb(255 255 255 / 0.14) 0 1px, transparent 1px 10%), var(--color-well)",
           }}
         >
           <div className="absolute inset-y-0 left-0 w-[8%]" style={{ background: `${visibleTeamColor(away)}99` }} />

@@ -6,37 +6,36 @@ import { scoreStatLine } from "./score";
 const MINUS = "−"; // the real minus sign "−", not the hyphen "-"
 
 describe("formatPoints", () => {
-  it("shows a plus sign and one decimal for positive points", () => {
-    expect(formatPoints(9.4)).toBe("+9.4");
-    expect(formatPoints(6)).toBe("+6.0");
-    expect(formatPoints(19.88)).toBe("+19.9"); // 19.88 → 19.9
-    expect(formatPoints(100)).toBe("+100.0");
+  it("shows a plus sign and two decimals for positive points", () => {
+    expect(formatPoints(9.4)).toBe("+9.40");
+    expect(formatPoints(6)).toBe("+6.00");
+    expect(formatPoints(19.88)).toBe("+19.88");
+    expect(formatPoints(100)).toBe("+100.00");
   });
 
   it("uses the real minus sign for negative points", () => {
-    expect(formatPoints(-2)).toBe(`${MINUS}2.0`);
-    expect(formatPoints(-6.1)).toBe(`${MINUS}6.1`);
+    expect(formatPoints(-2)).toBe(`${MINUS}2.00`);
+    expect(formatPoints(-6.1)).toBe(`${MINUS}6.10`);
     expect(formatPoints(-2).charCodeAt(0)).toBe(0x2212);
   });
 
-  it("shows plain 0.0 for zero, with no sign", () => {
-    expect(formatPoints(0)).toBe("0.0");
-    expect(formatPoints(-0)).toBe("0.0");
-    // Tiny amounts round to zero: 1 pass yd = 0.04 → 0.0. No "−0.0" either.
-    expect(formatPoints(0.04)).toBe("0.0");
-    expect(formatPoints(-0.04)).toBe("0.0");
+  it("shows plain 0.00 for zero, with no sign", () => {
+    expect(formatPoints(0)).toBe("0.00");
+    expect(formatPoints(-0)).toBe("0.00");
+    // Hundredths are kept: 1 pass yd = +0.04. Float noise rounds to zero, never "−0.00".
+    expect(formatPoints(0.04)).toBe("+0.04");
+    expect(formatPoints(-0.001)).toBe("0.00");
   });
 
   it("rounds halves away from zero", () => {
-    // 9.45 is stored as 9.4499999..., so (9.45).toFixed(1) would give "9.4".
-    expect(formatPoints(9.45)).toBe("+9.5");
-    expect(formatPoints(-9.45)).toBe(`${MINUS}9.5`);
-    expect(formatPoints(0.05)).toBe("+0.1");
-    expect(formatPoints(9.44)).toBe("+9.4");
+    // 1.005 is stored as 1.00499..., so (1.005).toFixed(2) would give "1.00".
+    expect(formatPoints(1.005)).toBe("+1.01");
+    expect(formatPoints(-1.005)).toBe(`${MINUS}1.01`);
+    expect(formatPoints(9.444)).toBe("+9.44");
   });
 
   it("cleans up floating-point leftovers", () => {
-    expect(formatPoints(0.1 * 3)).toBe("+0.3"); // 0.30000000000000004
+    expect(formatPoints(0.1 * 3)).toBe("+0.30"); // 0.30000000000000004
   });
 });
 

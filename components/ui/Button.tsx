@@ -69,11 +69,24 @@ export function ButtonLink({
   children: React.ReactNode;
   prefetch?: boolean;
 }) {
-  return (
-    <Link href={href} prefetch={prefetch} className={buttonClass(variant, size, className)}>
+  const inner = (
+    <>
       {icon && <Icon name={icon} size={size === "sm" ? 16 : 18} />}
       {children}
       {iconRight && <Icon name={iconRight} size={size === "sm" ? 16 : 18} />}
+    </>
+  );
+  // Another site (ESPN articles): a plain link in a new tab.
+  if (/^https?:\/\//.test(href)) {
+    return (
+      <a href={href} target="_blank" rel="noreferrer" className={buttonClass(variant, size, className)}>
+        {inner}
+      </a>
+    );
+  }
+  return (
+    <Link href={href} prefetch={prefetch} className={buttonClass(variant, size, className)}>
+      {inner}
     </Link>
   );
 }

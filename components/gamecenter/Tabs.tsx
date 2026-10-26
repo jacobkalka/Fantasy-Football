@@ -11,6 +11,7 @@ import { periodLabel } from "@/lib/format";
 import type { GamePlayer, LeaderView, PlayView } from "@/lib/live/game-view";
 import type { Drive, Team, TeamStat } from "@/lib/providers/types";
 import { formatPoints } from "@/lib/scoring";
+import { PlayerLink } from "@/components/player/PlayerLink";
 
 function shortName(name: string) {
   const parts = name.split(" ");
@@ -35,7 +36,7 @@ function PlayRow({
   players: Record<string, GamePlayer>;
   isNew: boolean;
 }) {
-  const color = visibleTeamColor(team, "#c8ff2e");
+  const color = visibleTeamColor(team, "#4c8dff");
   return (
     <div
       className={`relative overflow-hidden ${play.scoring ? "glass p-3.5" : "px-1 py-3"} [contain-intrinsic-size:auto_80px] [content-visibility:auto]`}
@@ -283,7 +284,9 @@ export function FantasyLeaders({
             <span className="w-5 text-[12px] text-muted">{index + 1}</span>
             <PlayerAvatar name={player?.name ?? "Player"} headshot={player?.headshot} teamColor={visibleTeamColor(team)} size={42} />
             <div className="min-w-0 flex-1">
-              <p className="truncate text-[15px] font-semibold text-ink">{player?.name ?? "Player"}</p>
+              <PlayerLink id={leader.playerId} className="block truncate text-[15px] font-semibold text-ink hover:underline">
+                {player?.name ?? "Player"}
+              </PlayerLink>
               <p className="truncate text-[12px] text-muted">{leader.summary}</p>
             </div>
             <PointsBadge points={leader.points} />

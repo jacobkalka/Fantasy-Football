@@ -1,6 +1,5 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useCallback, useDeferredValue, useEffect, useId, useMemo, useRef, useState } from "react";
 import { Icon } from "@/components/ui/Icon";
 import { PlayerAvatar } from "@/components/ui/PlayerAvatar";
@@ -11,6 +10,7 @@ import { visibleTeamColor } from "@/lib/color";
 import { searchPlayers, usePlayers } from "@/lib/hooks/usePlayers";
 import { useTeams } from "@/lib/hooks/useTeams";
 import { useRoster } from "@/lib/roster/store";
+import { openPlayer } from "@/lib/nav/query";
 
 const POSITION_LABEL: Record<string, string> = { DST: "D/ST" };
 
@@ -66,7 +66,6 @@ export function GlobalSearch({ variant }: { variant: "field" | "icon" }) {
 }
 
 function SearchBody({ onDone }: { onDone: () => void }) {
-  const router = useRouter();
   const { players, error, retry } = usePlayers();
   const teams = useTeams();
   const { roster } = useRoster();
@@ -89,7 +88,8 @@ function SearchBody({ onDone }: { onDone: () => void }) {
 
   const go = (id: string) => {
     onDone();
-    router.push(`/players/${encodeURIComponent(id)}`);
+    // The one player profile, over whatever screen you're on.
+    openPlayer(id);
   };
 
   return (

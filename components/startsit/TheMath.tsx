@@ -5,6 +5,7 @@ import { Card } from "@/components/ui/Card";
 import { Icon } from "@/components/ui/Icon";
 import { shortName } from "@/lib/startsit/model";
 import type { PlayerVerdict } from "@/lib/startsit/types";
+import { PlayerLink } from "@/components/player/PlayerLink";
 
 function pts(value: number) {
   if (Math.abs(value) < 0.05) return "0.0";
@@ -41,7 +42,11 @@ export function TheMath({ players }: { players: PlayerVerdict[] }) {
               return (
                 <div key={p.playerId}>
                   <div className="flex items-baseline justify-between border-b border-rule pb-2">
-                    <h3 className="text-[15px] font-semibold">{shortName(p.name)}</h3>
+                    <h3 className="text-[15px] font-semibold">
+                      <PlayerLink id={p.playerId} className="hover:underline">
+                        {shortName(p.name)}
+                      </PlayerLink>
+                    </h3>
                     <span className="tabular text-[18px] font-semibold">{p.score.toFixed(1)}</span>
                   </div>
                   <dl className="mt-2 flex flex-col gap-2.5">

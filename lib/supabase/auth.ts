@@ -10,7 +10,7 @@
  * "signed-in".
  */
 import { useSyncExternalStore } from "react";
-import { rosterActions } from "@/lib/roster/store";
+import { primaryRoster } from "@/lib/roster/store";
 import { friendlyAuthError } from "./auth-errors";
 import { loadSupabase, requireSupabase } from "./client";
 import { isSupabaseConfigured, readSupabaseEnv } from "./config";
@@ -253,7 +253,7 @@ export async function signOut(): Promise<{ error?: string; keptOnDevice?: boolea
   setAuth(SIGNED_OUT);
   if (saved) {
     rosterSync.forget();
-    rosterActions.clear();
+    primaryRoster.actions.clear();
     rosterSync.announce("Signed out. Your team is saved in your account; sign in to get it back.");
     return { keptOnDevice: false };
   }

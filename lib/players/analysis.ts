@@ -5,7 +5,7 @@
  * from the profile, every threshold from lib/players/rules.ts.
  */
 import type { CareerSeason, Position } from "@/lib/providers/types";
-import { rulesForFormat, scoreAllFormats, scoreStatLine, type ScoringFormat } from "@/lib/scoring";
+import { rulesForFormat, scoreAllFormats, scoreStatLine, type ScoringFormat, type ScoringRules } from "@/lib/scoring";
 import type { StatKey, StatLine } from "@/lib/stats";
 import { roleLabels } from "./labels";
 import { fixed, mean, median, round, stdDev, sum } from "./math";
@@ -18,8 +18,8 @@ import { advancedMetrics, redZoneMetrics, seasonNumbers, usageMetrics, type Seas
 /** Stats that are touchdowns, for "how much of his scoring came from TDs". */
 const TD_KEYS: StatKey[] = ["passTd", "rushTd", "recTd", "retTd", "fumRecTd", "dstIntTd", "dstFumTd", "dstBlkTd"];
 
-export function gamePoints(profile: PlayerProfile, format: ScoringFormat): GamePoints[] {
-  const rules = rulesForFormat(format);
+export function gamePoints(profile: PlayerProfile, format: ScoringFormat, custom?: Readonly<ScoringRules> | null): GamePoints[] {
+  const rules = custom ?? rulesForFormat(format);
   return profile.games.map((g) => ({
     gameId: g.gameId,
     week: g.week,
@@ -130,8 +130,8 @@ export function careerLine(season: CareerSeason): { line: StatLine; note: string
   return { line, note: notes.length ? `Estimated from the season table: ${notes.join("; ")}.` : null };
 }
 
-export function careerRows(profile: PlayerProfile, format: ScoringFormat): CareerRow[] {
-  const rules = rulesForFormat(format);
+export function careerRows(profile: PlayerProfile, format: ScoringFormat, custom?: Readonly<ScoringRules> | null): CareerRow[] {
+  const rules = custom ?? rulesForFormat(format);
   const official = new Map(profile.fantasy.seasonTotals.map((t) => [t.season, t]));
   const row = (season: number, teams: string[], games: number, points: number, source: CareerRow["source"], note: string | null): CareerRow => ({
     season,
@@ -158,8 +158,8 @@ export function careerRows(profile: PlayerProfile, format: ScoringFormat): Caree
 }
 
 /** Share of fantasy points that came from touchdowns (null with no points). */
-export function touchdownShare(numbers: SeasonNumbers, format: ScoringFormat): number | null {
-  const rules = rulesForFormat(format);
+export function touchdownShare(numbers: SeasonNumbers, format: ScoringFormat, custom?: Readonly<ScoringRules> | null): number | null {
+  const rules = custom ?? rulesForFormat(format);
   const total = scoreStatLine(numbers.line, rules).total;
   if (total <= 0) return null;
   const td: StatLine = {};
@@ -194,8 +194,12 @@ function unavailableFor(profile: PlayerProfile): string[] {
   return out;
 }
 
-export function analyzePlayer(profile: PlayerProfile, format: ScoringFormat): PlayerAnalysis {
-  const points = gamePoints(profile, format);
+/**
+ * `custom` = a league's own rules (lib/scoring/spec.ts). Points then follow the league exactly;
+ * the "useful/boom/bust" lines still use the nearest preset (`format`).
+ */
+export function analyzePlayer(profile: PlayerProfile, format: ScoringFormat, custom?: Readonly<ScoringRules> | null): PlayerAnalysis {
+  const points = gamePoints(profile, format, custom);
   const played = points.filter((g) => g.points !== null);
   const values = played.map((g) => g.points as number);
   const numbers = seasonNumbers(profile.games, profile.advanced);
@@ -205,8 +209,8 @@ export function analyzePlayer(profile: PlayerProfile, format: ScoringFormat): Pl
   const worst = played.reduce<GamePoints | null>((w, g) => (!w || (g.points as number) < (w.points as number) ? g : w), null);
   const consistency = consistencyOf(points, profile.position, format);
   const trends = trendsOf(points, profile, format);
-  const tdShare = touchdownShare(numbers, format);
-  const career = careerRows(profile, format);
+  const tdShare = touchdownShare(numbers, format, custom);
+  const career = careerRows(profile, format, custom);
 
   const partial: Omit<PlayerAnalysis, "summary" | "signals" | "labels"> = {
     format,

@@ -2,6 +2,9 @@ import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import { Suspense } from "react";
 import { RosterSync } from "@/components/auth/RosterSync";
+import { PlayerProfileHost } from "@/components/player/PlayerProfileHost";
+import { LivePulse } from "@/components/live/LivePulse";
+import { LeagueSync } from "@/components/teams/LeagueSync";
 import { HydrationMarker } from "@/components/motion/hydration";
 import { MotionPreferenceSync } from "@/components/motion/MotionPreferenceSync";
 import { MotionProvider } from "@/components/motion/MotionProvider";
@@ -72,6 +75,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
               <BottomBar />
             </Suspense>
           </BottomBarFrame>
+          {/* The one player profile, over any screen (?player=<id>). Reads the URL, hence Suspense. */}
+          <Suspense fallback={null}>
+            <PlayerProfileHost />
+          </Suspense>
+          {/* One shared "is anything live?" scoreboard poll that paces every other live poll. */}
+          <LivePulse />
+          {/* Keeps the active ESPN team's roster and record current from its league. */}
+          <LeagueSync />
           {/* Keeps your team saved to your account while you're signed in (mounted once). */}
           <RosterSync />
           {/* Service worker, "Update ready" prompt and offline indicator. */}

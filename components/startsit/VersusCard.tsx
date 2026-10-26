@@ -12,6 +12,7 @@ import { shortName, toughnessLabel } from "@/lib/startsit/model";
 import type { PlayerVerdict } from "@/lib/startsit/types";
 import type { Pickable } from "./PlayerPicker";
 import { RangeBar } from "./RangeBar";
+import { PlayerLink } from "@/components/player/PlayerLink";
 
 export type CardRole = "start" | "sit" | null;
 
@@ -75,7 +76,9 @@ export function VersusCard({
         <PlayerAvatar name={player.name} headshot={player.headshot} teamColor={visibleTeamColor(team)} size={compact ? 44 : 52} />
         <div className="min-w-0">
           <h3 className={`truncate font-semibold ${compact ? "text-[14px]" : "text-[16px]"}`} title={player.name}>
-            {shortName(player.name)}
+            <PlayerLink id={player.playerId} className="hover:underline">
+              {shortName(player.name)}
+            </PlayerLink>
           </h3>
           <p className="truncate text-[12px] text-muted">
             {player.position} · {team?.abbr ?? "FA"}

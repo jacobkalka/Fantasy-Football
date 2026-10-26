@@ -1,16 +1,20 @@
 import type { Metadata } from "next";
-import { PlayerBrowser } from "@/components/players/PlayerBrowser";
+import { Suspense } from "react";
+import { RankingsScreen } from "@/components/players/RankingsScreen";
 import { SectionTabs } from "@/components/shell/SectionTabs";
-import { PageTitle } from "@/components/ui/bits";
+import { PageTitle, Skeleton } from "@/components/ui/bits";
 
-export const metadata: Metadata = { title: "Players" };
+export const metadata: Metadata = { title: "Rankings" };
 
-export default function PlayersPage() {
+export default function RankingsPage() {
   return (
     <>
-      <SectionTabs section="/players" current="/players" />
-      <PageTitle sub="Every NFL player: search, browse, and open a profile">Players</PageTitle>
-      <PlayerBrowser />
+      <SectionTabs section="/team" current="/players" />
+      <PageTitle sub="Season fantasy rankings in your team's scoring. Tap a player for the full profile.">Rankings</PageTitle>
+      {/* Filters and sort live in the URL, which needs a Suspense boundary. */}
+      <Suspense fallback={<Skeleton className="h-96 rounded-[22px]" />}>
+        <RankingsScreen />
+      </Suspense>
     </>
   );
 }

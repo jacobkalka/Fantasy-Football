@@ -27,7 +27,7 @@ export function Sheet({
   children: React.ReactNode;
   /** Pinned actions at the bottom (stays visible while the body scrolls). */
   footer?: React.ReactNode;
-  size?: "sm" | "md" | "lg";
+  size?: "sm" | "md" | "lg" | "xl";
   /** Keep the title for screen readers but don't show it (when the body has its own header). */
   hideTitle?: boolean;
 }) {
@@ -115,7 +115,13 @@ export function Sheet({
     [],
   );
 
-  const widths = { sm: "sm:max-w-[420px]", md: "sm:max-w-[560px]", lg: "sm:max-w-[760px]" };
+  const widths = {
+    sm: "sm:max-w-[420px]",
+    md: "sm:max-w-[560px]",
+    lg: "sm:max-w-[760px]",
+    // Nearly full screen: the player profile and other "page in a sheet" views.
+    xl: "h-[calc(100dvh-var(--safe-top)-12px)] sm:h-auto sm:max-w-[920px]",
+  };
 
   return (
     <dialog
@@ -131,7 +137,7 @@ export function Sheet({
     >
       <div
         ref={panelRef}
-        className={`flex max-h-[calc(100dvh-var(--safe-top)-24px)] w-full flex-col overflow-hidden rounded-t-[24px] bg-surface shadow-[0_-8px_40px_rgb(0_0_0/0.6)] sm:max-h-[min(86dvh,860px)] sm:rounded-[24px] ${widths[size]}`}
+        className={`flex max-h-[calc(100dvh-var(--safe-top)-12px)] w-full flex-col overflow-hidden rounded-t-[24px] bg-surface shadow-[0_-8px_40px_rgb(0_0_0/0.6)] sm:max-h-[min(90dvh,920px)] sm:rounded-[24px] ${widths[size]}`}
       >
         <div className="flex items-start gap-3 px-5 pt-3 pb-2 sm:pt-5">
           <div className="min-w-0 flex-1">

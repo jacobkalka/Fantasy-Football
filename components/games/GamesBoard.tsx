@@ -56,7 +56,7 @@ function GameList({ games }: { games: Game[] }) {
 export function GamesBoard({ initial, currentWeek }: { initial: Stamped<Scoreboard>; currentWeek: number }) {
   const hydrated = useHydrated();
   const pastWeek = initial.week !== currentWeek;
-  const { data, delayed } = usePoll<Stamped<Scoreboard>>(`/api/scoreboard${pastWeek ? `?week=${initial.week}` : ""}`, {
+  const { data, error, receivedAt } = usePoll<Stamped<Scoreboard> & { servedAt?: string }>(`/api/scoreboard${pastWeek ? `?week=${initial.week}` : ""}`, {
     initial,
     intervalMs: scoreboardInterval,
   });
@@ -69,7 +69,7 @@ export function GamesBoard({ initial, currentWeek }: { initial: Stamped<Scoreboa
     <div className="flex flex-col gap-6">
       <div className="flex items-center justify-between gap-3">
         <WeekPicker currentWeek={currentWeek} week={board.week} />
-        <UpdatedAgo fetchedAt={board.fetchedAt} delayed={delayed} live={live.length > 0} />
+        <UpdatedAgo stamps={data} receivedAt={receivedAt} error={error} live={live.length > 0} />
       </div>
 
       {board.games.length === 0 && (

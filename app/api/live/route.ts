@@ -9,12 +9,13 @@ import {
 } from "@/lib/data/sports";
 import { buildTeamLive, findGame, teamIdOf, type RosterInput } from "@/lib/live/team";
 import type { GameDetail } from "@/lib/providers/types";
-import { SCORING_FORMATS, type ScoringFormat } from "@/lib/scoring";
+import { rulesOf, specFromParams } from "@/lib/scoring/spec";
 
-const MAX_PLAYERS = 20;
+/** Your roster, your opponent's and the players you track, in one request (one source of truth). */
+const MAX_PLAYERS = 64;
 
 /**
- * GET /api/live?ids=4432577,3139477&format=ppr[&week=6]
+ * GET /api/live?ids=4432577,3139477&format=ppr[&rules=passTd:6,…][&week=6]
  * Live points, game status and the play-by-play feed for a roster. Every ESPN call
  * underneath is a shared cache, so this stays cheap no matter how many people poll it.
  */
@@ -23,8 +24,9 @@ export async function GET(request: NextRequest) {
   const ids = [...new Set((params.get("ids") ?? "").split(",").map((s) => s.trim()))]
     .filter((id) => /^-?\d{1,12}$/.test(id))
     .slice(0, MAX_PLAYERS);
-  const formatParam = params.get("format") as ScoringFormat;
-  const format: ScoringFormat = SCORING_FORMATS.includes(formatParam) ? formatParam : "ppr";
+  // A league team sends its own rules; everyone else one of the presets.
+  const spec = specFromParams(params);
+  const format = spec.format;
   const week = Number(params.get("week")) || undefined;
 
   try {
@@ -60,13 +62,17 @@ export async function GET(request: NextRequest) {
       }),
     );
     const outlooks = await getPlayerOutlooks([...ids].sort(), board.season, board.week).catch(() => []);
-    const fetchedTimes = Object.values(details)
+    // Freshness = the oldest LIVE source: the scoreboard and games still in progress. Finished
+    // games are cached for 30 minutes on purpose (they don't change), so they must not count,
+    // or every Sunday afternoon would look "delayed" (the old bug).
+    const liveTimes = Object.values(details)
+      .filter((d) => d.game.state === "in")
       .map((d) => (d as GameDetail & { fetchedAt?: string }).fetchedAt)
       .filter((t): t is string => Boolean(t));
-    const fetchedAt = [board.fetchedAt, ...fetchedTimes].sort()[0];
+    const fetchedAt = [board.fetchedAt, ...liveTimes].sort()[0];
 
-    const live = buildTeamLive({ roster, format, scoreboard: board, details, outlooks, byeWeeks, teams, fetchedAt });
-    return Response.json({ ...live, currentWeek: current.week, partial: missing > 0 });
+    const live = buildTeamLive({ roster, format, rules: rulesOf(spec), scoreboard: board, details, outlooks, byeWeeks, teams, fetchedAt });
+    return Response.json({ ...live, currentWeek: current.week, partial: missing > 0, servedAt: new Date().toISOString() });
   } catch (error) {
     console.error("live failed", error);
     return Response.json({ error: "ESPN isn't responding right now." }, { status: 502 });

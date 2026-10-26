@@ -36,7 +36,7 @@ export function GameStatus({
     );
   }
   return (
-    <span className="inline-flex items-center gap-1.5 text-positive">
+    <span className="inline-flex items-center gap-1.5 font-medium text-live">
       <LiveDot />
       {game.statusText} · {score} {vs} {opp}
       {game.isRedZone && (

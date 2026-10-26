@@ -2,7 +2,7 @@ import type { NextRequest } from "next/server";
 import { connection } from "next/server";
 import { analysisWeek, scoreUniverse } from "@/lib/analysis/universe";
 import { getPlayerUniverse, getScoreboard } from "@/lib/data/sports";
-import { SCORING_FORMATS, type ScoringFormat } from "@/lib/scoring";
+import { specFromParams } from "@/lib/scoring/spec";
 
 /**
  * GET /api/universe?format=ppr: the ~650 most-rostered players with this week's projection,
@@ -13,15 +13,13 @@ import { SCORING_FORMATS, type ScoringFormat } from "@/lib/scoring";
 export async function GET(request: NextRequest) {
   // Runs per request (from the shared cache), never at build time: ESPN might be down during a deploy.
   await connection();
-  const formatParam = request.nextUrl.searchParams.get("format") ?? "ppr";
-  if (!(SCORING_FORMATS as readonly string[]).includes(formatParam)) {
-    return Response.json({ error: "Scoring format must be standard, half or ppr." }, { status: 400 });
-  }
+  // A preset (format=ppr) or a league's own rules (&rules=…).
+  const spec = specFromParams(request.nextUrl.searchParams);
   try {
     const board = await getScoreboard();
     const week = analysisWeek(board.seasonType, board.week);
     const universe = await getPlayerUniverse(board.season, week);
-    return Response.json(scoreUniverse(universe, formatParam as ScoringFormat), {
+    return Response.json(scoreUniverse(universe, spec.format, spec.rules), {
       // Projections and injuries: browser copies stay short. (Offline support never stores /api/.)
       headers: { "cache-control": "public, max-age=120, stale-while-revalidate=600" },
     });

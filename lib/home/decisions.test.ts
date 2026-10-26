@@ -17,6 +17,8 @@ const game = (state: PlayerGame["state"] = "pre"): PlayerGame => ({
   teamScore: 0,
   opponentScore: 0,
   hasBall: false,
+  possession: null,
+  downDistance: null,
   isRedZone: false,
 });
 

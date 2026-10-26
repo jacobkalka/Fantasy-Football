@@ -1,67 +1,34 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import type { Universe } from "@/lib/analysis/universe";
-import type { ScoringFormat } from "@/lib/scoring";
+import { specOf } from "@/lib/fantasy/context";
+import { specQuery, type ScoringSpec } from "@/lib/scoring/spec";
+import { useLive } from "@/lib/sync/useLive";
+import { useActiveTeam } from "@/lib/teams/store";
 
 export interface UniverseState {
-  /** Every analyzable player, scored in `format`; undefined while loading or after an error. */
+  /** Every analyzable player, scored with the team's rules; undefined while loading or after an error. */
   universe: Universe | undefined;
   loading: boolean;
   error: string | null;
-}
-
-// One download per format per visit, shared by every screen that asks.
-const cache = new Map<ScoringFormat, Universe>();
-const pending = new Map<ScoringFormat, Promise<Universe>>();
-
-function load(format: ScoringFormat): Promise<Universe> {
-  let request = pending.get(format);
-  if (!request) {
-    request = fetch(`/api/universe?format=${format}`)
-      .then(async (r) => {
-        const body = await r.json().catch(() => ({}));
-        if (!r.ok) throw new Error((body as { error?: string }).error ?? `Request failed (${r.status})`);
-        return body as Universe;
-      })
-      .then((universe) => {
-        cache.set(format, universe);
-        return universe;
-      })
-      .catch((error: unknown) => {
-        pending.delete(format); // let the next screen try again
-        throw error;
-      });
-    pending.set(format, request);
-  }
-  return request;
+  refresh: () => void;
 }
 
 /**
- * The player universe for the analysis engine (lib/analysis), loaded once and shared.
- * Pass the roster's scoring format (lib/roster/store.ts); league size and players marked
- * as taken come from lib/settings/store.ts and go straight into the analysis functions.
+ * The player universe for the analysis engine (lib/analysis), through the shared live-data
+ * client: one download per scoring spec, shared by every screen (rankings, pickups, trades,
+ * team rating, player profiles), refreshed every 10 minutes while something shows it.
+ * Without an argument it uses the ACTIVE team's scoring, so every screen agrees.
  */
-export function useUniverse(format: ScoringFormat): UniverseState {
-  const [state, setState] = useState<{ format: ScoringFormat; universe?: Universe; error: string | null }>(() => ({
-    format,
-    universe: cache.get(format),
-    error: null,
-  }));
-  useEffect(() => {
-    if (cache.has(format)) return;
-    let alive = true;
-    load(format).then(
-      (universe) => alive && setState({ format, universe, error: null }),
-      (error: unknown) =>
-        alive && setState({ format, error: error instanceof Error ? error.message : "Couldn't load player data" }),
-    );
-    return () => {
-      alive = false;
-    };
-  }, [format]);
-
-  const universe = cache.get(format) ?? (state.format === format ? state.universe : undefined);
-  const error = state.format === format ? state.error : null;
-  return { universe, loading: !universe && !error, error };
+export function useUniverse(spec?: ScoringSpec): UniverseState {
+  const { team, ready } = useActiveTeam();
+  const use = spec ?? specOf(team);
+  const url = ready || spec ? `/api/universe?${specQuery(use)}` : null;
+  const state = useLive<Universe>(url, { interval: 10 * 60_000 });
+  return {
+    universe: state.data,
+    loading: !state.data && !state.error,
+    error: state.data ? null : state.error,
+    refresh: state.refresh,
+  };
 }

@@ -114,16 +114,26 @@ function availabilityText(p: AnalysisPlayer, model: LeagueModel): string {
 export function pickupsFor(
   players: readonly AnalysisPlayer[],
   model: LeagueModel,
-  { taken = [], limit = 10 }: { taken?: Iterable<string>; limit?: number } = {},
+  {
+    taken = [],
+    limit = 10,
+    knownRosters = false,
+  }: {
+    taken?: Iterable<string>;
+    limit?: number;
+    /** `taken` is every player on another team in a connected league: exact, not an estimate. */
+    knownRosters?: boolean;
+  } = {},
 ): PickupSuggestions {
   const takenSet = new Set(taken);
+  const available = (id: string) => (knownRosters ? !takenSet.has(id) : isLikelyAvailable(model, id, takenSet));
   const onRoster = new Set(players.map((p) => p.id));
   const base = teamCore(players, model);
   const weak = weakPositions(weaknessesFor(players, model));
 
   const pool = Object.values(model.ranked).flatMap((list) =>
     list
-      .filter((p) => !onRoster.has(p.id) && isLikelyAvailable(model, p.id, takenSet) && xppg(p) > 0)
+      .filter((p) => !onRoster.has(p.id) && available(p.id) && xppg(p) > 0)
       .slice(0, CANDIDATES_PER_POSITION),
   );
 
@@ -167,7 +177,7 @@ export function pickupsFor(
           ...reasonsFor(candidate, kind, compared, spot),
           ...(move.dropped[0] ? [`To make room you'd drop ${move.dropped[0].name}, the player your team misses least.`] : []),
         ],
-        availability: availabilityText(candidate, model),
+        availability: knownRosters ? "Not on any team in your league (from ESPN)." : availabilityText(candidate, model),
 
       },
     });
@@ -188,7 +198,9 @@ export function pickupsFor(
   }
   return {
     pickups,
-    method: `"Likely available" means outside ESPN's ${model.likelyRosteredCount} most-rostered players (${model.settings.teams} teams × ${model.likelyRosteredCount / model.settings.teams} roster spots). Players you mark as taken are skipped.`,
+    method: knownRosters
+      ? "Available = not on any team in your ESPN league right now (from the league's rosters)."
+      : `"Likely available" means outside ESPN's ${model.likelyRosteredCount} most-rostered players (${model.settings.teams} teams × ${model.likelyRosteredCount / model.settings.teams} roster spots). Players you mark as taken are skipped.`,
   };
 }
 
@@ -207,7 +219,7 @@ export function suggestPickups(
   roster: RosterInput,
   universe: Universe,
   settings: LeagueSettings,
-  options: { taken?: Iterable<string>; limit?: number } = {},
+  options: { taken?: Iterable<string>; limit?: number; knownRosters?: boolean } = {},
 ): PickupSuggestions {
   const model = leagueModel(universe, settings);
   const { players } = resolveRoster(roster, model);

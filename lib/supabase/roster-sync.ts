@@ -14,7 +14,7 @@
 import { useSyncExternalStore } from "react";
 import type { Player } from "@/lib/providers/types";
 import type { Roster } from "@/lib/roster/lineup";
-import { rosterActions } from "@/lib/roster/store";
+import { primaryRoster } from "@/lib/roster/store";
 import {
   decideSync,
   fromAccountRoster,
@@ -156,7 +156,7 @@ async function initialSync(gen: number) {
       writeMemory({ userId: uid, signature: rosterSignature(account), rosterId: account.id, syncedAt: new Date().toISOString() });
       // The device copy now matches the account, so this doesn't trigger a save.
       latest = pulled;
-      rosterActions.replace(pulled);
+      primaryRoster.actions.replace(pulled);
     } else if (decision.action === "push") {
       await pushOnce(gen);
       if (gen !== generation) return;

@@ -12,7 +12,8 @@ import {
   playersListRequest,
 } from "./fantasy";
 import { ESPN, espnJson } from "./http";
-import { parseInjuries, parseNews, parsePlayerNews } from "./news";
+import { fetchLeague } from "./league";
+import { parseArticles, parseInjuries, parseNews, parsePlayerArticles, parsePlayerNews } from "./news";
 import { parseScoreboard } from "./scoreboard";
 import { parseBoxscore, parseCorePlays } from "./stats";
 import { parseDrives, parseSummaryGame, parseTeamStats, parseWinProbability } from "./summary";
@@ -83,6 +84,28 @@ export async function fetchInjuries() {
   return parseInjuries(await espnJson(`${ESPN.site}/injuries`, { timeoutMs: 15000 }));
 }
 
+/**
+ * Fantasy news cards. No ids: ESPN's NFL news feed. With ids: each player's fantasy news
+ * (ESPN has no multi-player feed), newest first, duplicates (one story about two players) merged.
+ */
+export async function fetchFantasyNews(playerIds?: string[]) {
+  if (!playerIds?.length) return parseArticles(await espnJson(`${ESPN.site}/news?limit=50`));
+  const lists = await Promise.all(
+    playerIds.slice(0, 20).map((id) =>
+      espnJson(`${ESPN.fantasyNews}/players?limit=8&playerId=${encodeURIComponent(id)}`)
+        .then((raw) => parsePlayerArticles(raw, id))
+        .catch(() => []),
+    ),
+  );
+  const byId = new Map<string, ReturnType<typeof parsePlayerArticles>[number]>();
+  for (const article of lists.flat()) {
+    const seen = byId.get(article.id);
+    if (seen) seen.playerIds = [...new Set([...seen.playerIds, ...article.playerIds])];
+    else byId.set(article.id, { ...article });
+  }
+  return [...byId.values()].sort((a, b) => b.published.localeCompare(a.published));
+}
+
 export const espnProvider: DataProvider = {
   getScoreboard: fetchScoreboard,
   getGameDetail: fetchGameDetail,
@@ -100,4 +123,6 @@ export const espnProvider: DataProvider = {
   getPlayerSeason: fetchPlayerSeason,
   getDepthChart: fetchDepthChart,
   getTeamSchedule: fetchTeamSchedule,
+  getLeague: fetchLeague,
+  getFantasyNews: fetchFantasyNews,
 };

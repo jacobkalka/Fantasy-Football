@@ -20,7 +20,7 @@ describe("a 74-yard receiving TD, from stat change to play feed", () => {
 
     // PPR: 74 × 0.1 + 6 + 1 = 7.4 + 6 + 1 = 14.4
     const play = scoreDelta(delta, rulesForFormat("ppr"));
-    expect(formatPoints(play.points)).toBe("+14.4");
+    expect(formatPoints(play.points)).toBe("+14.40");
     expect(formatBreakdown(play.parts)).toBe("+7.4 yds, +6 TD, +1 reception");
 
     // Standard: 7.4 + 6 = 13.4, half: 13.4 + 0.5 = 13.9, ppr: 13.4 + 1 = 14.4

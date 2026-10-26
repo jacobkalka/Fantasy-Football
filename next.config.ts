@@ -14,6 +14,8 @@ const nextConfig: NextConfig = {
     live: { stale: 30, revalidate: 5, expire: 120 },
     // Finished games don't change (except rare stat corrections).
     final: { stale: 300, revalidate: 1800, expire: 86400 },
+    // News: checked every couple of minutes (breaking injury news matters on game days).
+    news: { stale: 60, revalidate: 120, expire: 3600 },
     // Projections, injuries, news.
     outlook: { stale: 300, revalidate: 600, expire: 7200 },
     // Player list, teams, bye weeks.
@@ -26,6 +28,16 @@ const nextConfig: NextConfig = {
   },
   env: {
     PWA_BUILD_ID: pwaBuildId,
+  },
+  // Screens that moved in the 2026-10-26 navigation (DECISIONS.md, "Navigation"); old links keep working.
+  async redirects() {
+    return [
+      { source: "/trades", destination: "/team/trades", permanent: false },
+      { source: "/trades/calculator", destination: "/team/trades?tool=calculator", permanent: false },
+      { source: "/players/pickups", destination: "/team/pickups", permanent: false },
+      { source: "/players/watchlist", destination: "/feed?view=tracker", permanent: false },
+      { source: "/team/rating", destination: "/team", permanent: false },
+    ];
   },
   async headers() {
     return [
