@@ -64,7 +64,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
               <TopBar />
               <main
                 id="main"
-                className="mx-auto w-full max-w-[1120px] flex-1 px-4 pb-[calc(var(--tabbar-height)+max(10px,var(--safe-bottom))+32px)] sm:px-6 lg:px-10 lg:pb-16"
+                className="mx-auto w-full max-w-[1120px] flex-1 px-4 pb-[calc(var(--tabbar-height)+max(10px,var(--safe-bottom))+32px)] sm:px-6 lg:px-10 lg:pb-16 has-[[data-chat]]:max-w-[1440px] has-[[data-chat]]:pb-0 lg:has-[[data-chat]]:pb-0"
               >
                 {children}
               </main>

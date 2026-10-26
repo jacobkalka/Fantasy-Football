@@ -759,6 +759,27 @@ select test.check(not exists (select 1 from public.public_teams where local_id =
   'a private profile hides its teams');
 select test.check((select username from public.profiles where id = test.id('alice')) = 'alice',
   'a private profile still shows its username in chat');
+select test.fails($$select bio from public.profiles where id = test.id('alice')$$,
+  'nobody reads bios straight from the table', '42501');
+select test.check((select bio is null and primary_team_id is null from public.public_profile('alice')),
+  'a private profile hides its bio and primary team');
+commit;
+
+begin;
+select test.login('alice');
+select test.check((select bio = 'WR truther' and primary_team_id is not null from public.public_profile('alice')),
+  'you always see your own bio and primary team');
+update public.profiles set is_public = true where id = auth.uid();
+commit;
+begin;
+select test.login('bob');
+select test.check((select bio = 'WR truther' and primary_team_id is not null from public.public_profile('ALICE ')),
+  'a public profile shows its bio and primary team');
+commit;
+begin;
+set local role anon;
+select test.fails($$select * from public.public_profile('alice')$$,
+  'signed-out visitors cannot look up profiles', '42501');
 commit;
 
 

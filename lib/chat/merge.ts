@@ -57,6 +57,7 @@ export function countReactions(message: ChatMessage, me: string, order: readonly
 }
 
 export interface TimelineMessage {
+  kind: "message";
   key: string;
   message: ChatMessage;
   mine: boolean;
@@ -64,31 +65,65 @@ export interface TimelineMessage {
   firstInGroup: boolean;
 }
 
+/**
+ * Something that happened, not something someone said: a scoring play in a game room. Comes
+ * from ESPN's play-by-play, never from a user, and is drawn differently from messages.
+ */
+export interface ChatEvent {
+  id: string;
+  at: string;
+  title: string;
+  text: string;
+  detail?: string;
+}
+
+export interface TimelineEvent {
+  kind: "event";
+  key: string;
+  event: ChatEvent;
+}
+
+export type TimelineEntry = TimelineMessage | TimelineEvent;
+
 export interface TimelineDay {
   key: string;
   /** "Today", "Yesterday", "Sun, Oct 25". */
   label: string;
-  messages: TimelineMessage[];
+  messages: TimelineEntry[];
 }
 
 /**
- * What the room actually shows: messages split by day ("Today"), and grouped so
- * a run of messages from one person within a few minutes shows their name once.
+ * What the room actually shows: messages (and any events) in time order, split by day
+ * ("Today"), and grouped so a run of messages from one person within a few minutes shows
+ * their name once. Messages still sending stay last.
  */
-export function buildTimeline(messages: ChatMessage[], me: string, now: Date): TimelineDay[] {
+export function buildTimeline(messages: ChatMessage[], me: string, now: Date, events: ChatEvent[] = []): TimelineDay[] {
+  type Item = { at: string; message?: ChatMessage; event?: ChatEvent };
+  const sent: Item[] = messages.filter((m) => !m.pending).map((m) => ({ at: m.createdAt, message: m }));
+  const inWindow = sent.length ? events.filter((e) => e.at >= sent[0].at) : events;
+  const items: Item[] = [...sent, ...inWindow.map((e) => ({ at: e.at, event: e }))].sort((a, b) => a.at.localeCompare(b.at));
+  items.push(...messages.filter((m) => m.pending).map((m) => ({ at: m.createdAt, message: m })));
+
   const days: TimelineDay[] = [];
   let previous: ChatMessage | null = null;
-  for (const message of messages) {
-    const day = dayKey(message.createdAt);
+  for (const item of items) {
+    const day = dayKey(item.at);
     let current = days.at(-1);
     if (!current || current.key !== `day-${day}`) {
-      current = { key: `day-${day}`, label: dayLabel(message.createdAt, now), messages: [] };
+      current = { key: `day-${day}`, label: dayLabel(item.at, now), messages: [] };
       days.push(current);
       previous = null;
     }
+    if (item.event) {
+      current.messages.push({ kind: "event", key: `event-${item.event.id}`, event: item.event });
+      previous = null;
+      continue;
+    }
+    const message = item.message!;
     const gap = previous ? Date.parse(message.createdAt) - Date.parse(previous.createdAt) : Infinity;
-    const firstInGroup = !previous || previous.userId !== message.userId || previous.deleted || gap > GROUP_WINDOW_MS;
-    current.messages.push({ key: message.id, message, mine: message.userId === me, firstInGroup });
+    const firstInGroup =
+      !previous || previous.userId !== message.userId || previous.deleted || Boolean(message.replyTo) || gap > GROUP_WINDOW_MS;
+    current.messages.push({ kind: "message", key: message.id, message, mine: message.userId === me, firstInGroup });
     previous = message;
   }
   return days;

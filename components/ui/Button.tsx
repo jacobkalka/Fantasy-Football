@@ -59,6 +59,7 @@ export function ButtonLink({
   className = "",
   children,
   prefetch,
+  onClick,
 }: {
   href: string;
   variant?: Variant;
@@ -68,6 +69,7 @@ export function ButtonLink({
   className?: string;
   children: React.ReactNode;
   prefetch?: boolean;
+  onClick?: () => void;
 }) {
   const inner = (
     <>
@@ -79,13 +81,13 @@ export function ButtonLink({
   // Another site (ESPN articles): a plain link in a new tab.
   if (/^https?:\/\//.test(href)) {
     return (
-      <a href={href} target="_blank" rel="noreferrer" className={buttonClass(variant, size, className)}>
+      <a href={href} target="_blank" rel="noreferrer" onClick={onClick} className={buttonClass(variant, size, className)}>
         {inner}
       </a>
     );
   }
   return (
-    <Link href={href} prefetch={prefetch} className={buttonClass(variant, size, className)}>
+    <Link href={href} prefetch={prefetch} onClick={onClick} className={buttonClass(variant, size, className)}>
       {inner}
     </Link>
   );

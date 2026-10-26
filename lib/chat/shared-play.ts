@@ -124,5 +124,5 @@ export function decodeMessageBody(body: string): { play: SharedPlay | null; text
 /** A one-line preview ("Shared a play: Josh Allen +9.4") for places that can't show the card. */
 export function sharedPlaySummary(play: SharedPlay): string {
   const sign = play.points > 0 ? "+" : play.points < 0 ? "−" : "";
-  return `${play.playerName} ${sign}${Math.abs(play.points).toFixed(1)}`;
+  return `${play.playerName} ${sign}${Math.abs(play.points).toFixed(2)}`;
 }

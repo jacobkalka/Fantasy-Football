@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import { friendlyDbError, isDuplicateError } from "@/lib/supabase/db-errors";
 import type { FeedItem } from "@/lib/live/types";
 import { hasProfanity, maskProfanity } from "./profanity";
+import { parseAttachments, splitMentions } from "./attachments";
 import { parseRoomKey, roomHref, roomKey } from "./rooms";
 import {
   decodeMessageBody,
@@ -41,20 +42,56 @@ describe("maskProfanity", () => {
 
 describe("rooms", () => {
   it("parses room keys from the URL", () => {
+    expect(parseRoomKey("general")).toEqual({ type: "global" });
     expect(parseRoomKey("global")).toEqual({ type: "global" });
+    expect(parseRoomKey("start-sit")).toEqual({ type: "channel", slug: "start-sit" });
     expect(parseRoomKey("game-401772936")).toEqual({ type: "game", gameId: "401772936" });
+    expect(parseRoomKey("player-3918298")).toEqual({ type: "player", playerId: "3918298" });
+    expect(parseRoomKey("player--16")).toEqual({ type: "player", playerId: "-16" });
     expect(parseRoomKey("league-12345")).toEqual({ type: "league", leagueId: "12345" });
     expect(parseRoomKey("game-")).toBeNull();
+    expect(parseRoomKey("player-abc")).toBeNull();
     expect(parseRoomKey("game-<script>")).toBeNull();
     expect(parseRoomKey("game-%3Cx%3E")).toBeNull();
     expect(parseRoomKey("lobby")).toBeNull();
   });
 
   it("round-trips keys and links", () => {
-    for (const room of [{ type: "global" }, { type: "game", gameId: "401" }, { type: "league", leagueId: "9" }] as const) {
-      expect(parseRoomKey(roomKey(room))).toEqual(room);
-    }
+    const rooms = [
+      { type: "global" },
+      { type: "channel", slug: "waivers" },
+      { type: "game", gameId: "401" },
+      { type: "player", playerId: "42" },
+      { type: "league", leagueId: "9" },
+    ] as const;
+    for (const room of rooms) expect(parseRoomKey(roomKey(room))).toEqual(room);
     expect(roomHref({ type: "game", gameId: "401" })).toBe("/chat/game-401");
+    expect(roomHref({ type: "global" })).toBe("/chat/general");
+  });
+});
+
+describe("attachments from other people's apps", () => {
+  it("keeps only well-formed parts", () => {
+    expect(parseAttachments(null)).toBeNull();
+    expect(parseAttachments("x")).toBeNull();
+    expect(parseAttachments({ evil: 1 })).toBeNull();
+    expect(
+      parseAttachments({
+        players: [{ id: "123", name: "  Josh   Allen " }, { id: "<b>", name: "x" }, { id: "123", name: "dupe" }],
+        game: { id: "401772936" },
+        trade: { give: [{ id: "1", name: "A" }], get: [] },
+        poll: true,
+      }),
+    ).toEqual({ players: [{ id: "123", name: "Josh Allen" }], game: { id: "401772936" }, poll: true });
+  });
+
+  it("splits @mentions of attached players out of the text", () => {
+    const parts = splitMentions("Start @Josh Allen or @Jalen Hurts? @nobody", [
+      { id: "1", name: "Josh Allen" },
+      { id: "2", name: "Jalen Hurts" },
+    ]);
+    expect(parts.map((p) => (p.kind === "player" ? `[${p.player.id}]` : p.text)).join("")).toBe("Start [1] or [2]? @nobody");
+    expect(splitMentions("@Josh Allenby", [{ id: "1", name: "Josh Allen" }])).toEqual([{ kind: "text", text: "@Josh Allenby" }]);
   });
 });
 
@@ -115,8 +152,8 @@ describe("shared plays in messages", () => {
   });
 
   it("summarizes a play in one line", () => {
-    expect(sharedPlaySummary(sharedPlayFromFeedItem(item))).toBe("Josh Allen +9.4");
-    expect(sharedPlaySummary({ ...sharedPlayFromFeedItem(item), points: -2 })).toBe("Josh Allen −2.0");
+    expect(sharedPlaySummary(sharedPlayFromFeedItem(item))).toBe("Josh Allen +9.36");
+    expect(sharedPlaySummary({ ...sharedPlayFromFeedItem(item), points: -2 })).toBe("Josh Allen −2.00");
   });
 });
 

@@ -12,6 +12,11 @@ function msg(id: string, minute: number, extra: Partial<ChatMessage> = {}): Chat
     createdAt: new Date(Date.UTC(2026, 9, 25, 18, minute)).toISOString(),
     deleted: false,
     reactions: [],
+    replyTo: null,
+    threadId: null,
+    threadReplyCount: 0,
+    lastThreadReplyAt: null,
+    attachments: null,
     ...extra,
   };
 }
@@ -82,7 +87,7 @@ describe("buildTimeline", () => {
     );
     expect(days).toHaveLength(1);
     expect(days[0].label).toBe("Today");
-    expect(days[0].messages.map((i) => [i.key, i.firstInGroup, i.mine])).toEqual([
+    expect(days[0].messages.map((i) => [i.key, i.kind === "message" && i.firstInGroup, i.kind === "message" && i.mine])).toEqual([
       ["a", true, false],
       ["b", false, false],
       ["c", true, true],
@@ -94,6 +99,18 @@ describe("buildTimeline", () => {
   it("adds a divider when the day changes", () => {
     const yesterday = msg("y", 0, { createdAt: new Date(Date.UTC(2026, 9, 23, 18, 0)).toISOString() });
     const days = buildTimeline([yesterday, msg("t", 1)], "u1", now);
-    expect(days.map((d) => d.messages.map((m) => [m.key, m.firstInGroup]))).toEqual([[["y", true]], [["t", true]]]);
+    expect(days.map((d) => d.messages.map((m) => [m.key, m.kind === "message" && m.firstInGroup]))).toEqual([[["y", true]], [["t", true]]]);
+  });
+
+  it("places events between messages by time, after the first loaded message", () => {
+    const events = [
+      { id: "early", at: new Date(Date.UTC(2026, 9, 25, 17, 0)).toISOString(), title: "Touchdown", text: "x" },
+      { id: "mid", at: new Date(Date.UTC(2026, 9, 25, 18, 1, 30)).toISOString(), title: "Field goal", text: "y" },
+    ];
+    const days = buildTimeline([msg("a", 0), msg("b", 2)], "u1", now, events);
+    expect(days[0].messages.map((m) => m.key)).toEqual(["a", "event-mid", "b"]);
+    const b = days[0].messages[2];
+    expect(b.kind === "message" && b.firstInGroup).toBe(true);
   });
 });
+

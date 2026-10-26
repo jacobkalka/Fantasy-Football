@@ -1,23 +1,15 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
-import { ChatHome } from "@/components/chat/ChatHome";
-import { Screen } from "@/components/motion/Screen";
-import { SectionTabs } from "@/components/shell/SectionTabs";
-import { PageTitle, Skeleton } from "@/components/ui/bits";
+import { ChatShell } from "@/components/chat/ChatShell";
+import { Skeleton } from "@/components/ui/bits";
 
 export const metadata: Metadata = { title: "Chat" };
 
 export default function ChatPage() {
   return (
-    <Screen>
-      <div>
-        <SectionTabs section="/feed" current="/chat" />
-        <PageTitle sub="Talk it out with other fans, game by game">Chat</PageTitle>
-      </div>
-      {/* ChatHome reads ?tab= from the URL, which needs a Suspense boundary. */}
-      <Suspense fallback={<Skeleton className="h-64 rounded-3xl" />}>
-        <ChatHome />
-      </Suspense>
-    </Screen>
+    // The shell reads ?thread= from the URL, which needs a Suspense boundary.
+    <Suspense fallback={<Skeleton className="mt-6 h-[60dvh] rounded-[20px]" />}>
+      <ChatShell roomKey={null} />
+    </Suspense>
   );
 }

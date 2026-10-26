@@ -1,9 +1,11 @@
 "use client";
 
-import Link from "next/link";
 import { useState } from "react";
+import { Button, ButtonLink } from "@/components/ui/Button";
+import { Icon } from "@/components/ui/Icon";
 import { Segmented } from "@/components/ui/Segmented";
-import { postMessage, resolveRoomId } from "@/lib/chat/api";
+import { Sheet } from "@/components/ui/Sheet";
+import { postMessage, resolveRoom } from "@/lib/chat/api";
 import { roomHref } from "@/lib/chat/rooms";
 import { encodeSharedPlay, SHARE_COMMENT_MAX, sharedPlayFromFeedItem } from "@/lib/chat/shared-play";
 import type { RoomRef } from "@/lib/chat/types";
@@ -12,11 +14,11 @@ import { useAuth } from "@/lib/supabase/auth";
 import { requireSupabase } from "@/lib/supabase/client";
 import { friendlyDbError } from "@/lib/supabase/db-errors";
 import { SharedPlayCard } from "./SharedPlayCard";
-import { Sheet } from "./Sheet";
 
 const DESTINATIONS = [
   { value: "game", label: "This game's room" },
-  { value: "global", label: "Everyone" },
+  { value: "player", label: "Player's room" },
+  { value: "global", label: "General" },
 ] as const;
 type Destination = (typeof DESTINATIONS)[number]["value"];
 
@@ -26,7 +28,12 @@ function ShareForm({ item, userId, onClose }: { item: FeedItem; userId: string; 
   const [comment, setComment] = useState("");
   const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle");
   const [error, setError] = useState<string | null>(null);
-  const room: RoomRef = destination === "game" ? { type: "game", gameId: item.gameId } : { type: "global" };
+  const room: RoomRef =
+    destination === "game"
+      ? { type: "game", gameId: item.gameId }
+      : destination === "player"
+        ? { type: "player", playerId: item.playerId }
+        : { type: "global" };
 
   async function share(event: React.FormEvent) {
     event.preventDefault();
@@ -34,12 +41,11 @@ function ShareForm({ item, userId, onClose }: { item: FeedItem; userId: string; 
     setError(null);
     try {
       const supabase = await requireSupabase();
-      const { id } = await resolveRoomId(supabase, room);
+      const { id } = await resolveRoom(supabase, room, item.playerName);
       await postMessage(supabase, {
         roomId: id,
         userId,
-        body: encodeSharedPlay(play, comment),
-        sharedPlayId: play.playId.slice(0, 64),
+        message: { body: encodeSharedPlay(play, comment), sharedPlayId: play.playId.slice(0, 64) },
       });
       setStatus("sent");
     } catch (err) {
@@ -51,23 +57,14 @@ function ShareForm({ item, userId, onClose }: { item: FeedItem; userId: string; 
   if (status === "sent") {
     return (
       <div className="flex flex-col gap-4" role="status">
-        <div>
-          <p className="text-[12px] text-gain">✓ Shared</p>
-          <h2 className="text-[20px] leading-7 font-semibold text-ink">
-            {destination === "game" ? "Posted in the game room" : "Posted for everyone"}
-          </h2>
-        </div>
-        <div className="flex gap-2">
-          <button type="button" onClick={onClose} className="glass-chip min-h-12 flex-1 rounded-2xl text-[15px] text-ink-soft">
-            Done
-          </button>
-          <Link
-            href={roomHref(room)}
-            onClick={onClose}
-            className="glass-gain pressable flex min-h-12 flex-[2] items-center justify-center rounded-2xl text-[12px] font-bold text-gain"
-          >
-            Open the chat →
-          </Link>
+        <p className="flex items-center gap-2 text-[16px] font-semibold">
+          <Icon name="check" /> Shared to {DESTINATIONS.find((d) => d.value === destination)?.label.toLowerCase()}
+        </p>
+        <div className="flex justify-end gap-2">
+          <Button onClick={onClose}>Done</Button>
+          <ButtonLink href={roomHref(room)} variant="primary" onClick={onClose}>
+            Open the chat
+          </ButtonLink>
         </div>
       </div>
     );
@@ -75,13 +72,12 @@ function ShareForm({ item, userId, onClose }: { item: FeedItem; userId: string; 
 
   return (
     <form onSubmit={share} className="flex flex-col gap-4">
-      <h2 className="text-[20px] leading-7 font-semibold text-ink">Share this play</h2>
       <SharedPlayCard play={play} />
       <Segmented options={DESTINATIONS} value={destination} onChange={setDestination} label="Share to" />
       <label className="flex flex-col gap-1.5">
-        <span className="flex justify-between text-[12px] text-muted">
+        <span className="flex justify-between text-[13px] text-muted">
           <span>Add a comment (optional)</span>
-          <span className="tabular-nums">
+          <span className="tabular">
             {comment.length}/{SHARE_COMMENT_MAX}
           </span>
         </span>
@@ -90,28 +86,24 @@ function ShareForm({ item, userId, onClose }: { item: FeedItem; userId: string; 
           onChange={(e) => setComment(e.target.value)}
           maxLength={SHARE_COMMENT_MAX}
           placeholder="Called it."
-          className="glass-chip min-h-12 w-full rounded-2xl px-4 text-[16px] text-ink outline-none placeholder:text-muted/70 focus-visible:ring-2 focus-visible:ring-gain/70"
+          className="h-11 w-full rounded-xl bg-raised px-3 text-[16px] outline-none placeholder:text-faint focus:ring-2 focus:ring-accent"
         />
       </label>
       {error && (
-        <p role="alert" className="rounded-xl bg-alert/10 px-3 py-2 text-[13.5px] text-alert ring-1 ring-alert/30">
-          ⚠ {error}
+        <p role="alert" className="text-[14px] text-negative">
+          {error}
         </p>
       )}
-      <button
-        type="submit"
-        disabled={status === "sending"}
-        className="glass-gain pressable min-h-12 rounded-2xl text-[12px] font-bold text-gain disabled:opacity-50"
-      >
+      <Button type="submit" variant="primary" size="lg" disabled={status === "sending"}>
         {status === "sending" ? "Sharing…" : "Share to chat"}
-      </button>
+      </Button>
     </form>
   );
 }
 
 /**
- * "Share to chat" on a feed card. Only there when chat is available: the
- * database is connected and you're signed in. Injury notes can't be shared.
+ * "Share to chat" on a feed card. Only there when chat is available: the database is
+ * connected and you're signed in. Injury notes can't be shared.
  */
 export function SharePlayButton({ item }: { item: FeedItem }) {
   const auth = useAuth();
@@ -122,16 +114,13 @@ export function SharePlayButton({ item }: { item: FeedItem }) {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="relative -mr-1 -mb-1 flex min-h-9 items-center gap-1.5 rounded-full px-3 text-[12px] text-muted transition-colors after:absolute after:-inset-y-1 after:inset-x-0 after:content-[''] hover:bg-white/5 hover:text-ink"
+        className="-mr-1 -mb-1 flex min-h-9 items-center gap-1.5 rounded-full px-3 text-[12px] text-muted transition-colors hover:bg-raised hover:text-ink"
         aria-label={`Share ${item.playerName}'s play to chat`}
       >
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-          <path d="M4 5h16v11H9l-5 4z" />
-          <path d="M12 8v5M9.5 10.5 12 8l2.5 2.5" />
-        </svg>
+        <Icon name="share" size={14} />
         Share to chat
       </button>
-      <Sheet open={open} onClose={() => setOpen(false)} label="Share this play">
+      <Sheet open={open} onClose={() => setOpen(false)} title="Share this play">
         {open && <ShareForm item={item} userId={auth.user.id} onClose={() => setOpen(false)} />}
       </Sheet>
     </div>

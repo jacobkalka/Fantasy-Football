@@ -3,14 +3,8 @@
 import Image from "next/image";
 import { useState } from "react";
 
-// Token colors only; which one a person gets is fixed by their username.
-const TONES = [
-  "bg-gain/20 text-gain ring-gain/40",
-  "bg-sky/20 text-sky ring-sky/40",
-  "bg-alert/20 text-alert ring-alert/40",
-  "bg-loss/15 text-loss ring-loss/40",
-  "bg-white/10 text-ink-strong ring-white/25",
-];
+// Greys only (colour is for data): which step a person gets is fixed by their username.
+const TONES = ["bg-well text-ink", "bg-control text-ink", "bg-ink text-black"];
 
 function toneFor(name: string) {
   let hash = 0;
@@ -43,7 +37,7 @@ export function UserAvatar({
         unoptimized
         referrerPolicy="no-referrer"
         onError={() => setFailed(true)}
-        className={`shrink-0 rounded-full object-cover ring-1 ring-white/20 ${className}`}
+        className={`shrink-0 rounded-full object-cover ${className}`}
         style={style}
       />
     );
@@ -51,7 +45,7 @@ export function UserAvatar({
   return (
     <span
       aria-hidden="true"
-      className={`inline-flex shrink-0 items-center justify-center rounded-full font-bold ring-1 ${toneFor(username)} ${className}`}
+      className={`inline-flex shrink-0 items-center justify-center rounded-full font-semibold ${toneFor(username)} ${className}`}
       style={{ ...style, fontSize: size * 0.4 }}
     >
       {initials}

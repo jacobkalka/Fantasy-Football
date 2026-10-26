@@ -45,6 +45,8 @@ export function usePlayers(enabled = true): State & { retry: () => void } {
   }, [enabled]);
   return {
     ...state,
+    // Loaded by another screen while this one wasn't listening yet: use that copy.
+    players: state.players ?? cache,
     retry: () => {
       setState({ players: null, error: false });
       load().catch(() => {});
@@ -57,3 +59,19 @@ export function usePlayers(enabled = true): State & { retry: () => void } {
  * punctuation, initials, small typos, "kc wr"). Re-exported here so every caller shares it.
  */
 export { normalize as normalizeName, searchPlayers } from "@/lib/players/search";
+
+const indexes = new WeakMap<Player[], Map<string, Player>>();
+
+/** Players by id, for turning an id (from a message, a link) into a name, photo and team. */
+export function usePlayerIndex(enabled = true): Map<string, Player> {
+  const { players } = usePlayers(enabled);
+  if (!players) return EMPTY_INDEX;
+  let index = indexes.get(players);
+  if (!index) {
+    index = new Map(players.map((p) => [p.id, p]));
+    indexes.set(players, index);
+  }
+  return index;
+}
+
+const EMPTY_INDEX = new Map<string, Player>();

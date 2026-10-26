@@ -361,7 +361,7 @@ export function MatchupScreen() {
         <ButtonLink href="/feed?view=opponent" icon="live">
           Opponent&apos;s live plays
         </ButtonLink>
-        <ButtonLink href="/chat?c=matchups" icon="chat">
+        <ButtonLink href="/chat/matchups" icon="chat">
           Talk matchups
         </ButtonLink>
       </div>

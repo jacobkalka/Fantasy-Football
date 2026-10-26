@@ -657,3 +657,39 @@ begin
   return room_id;
 end;
 $$;
+
+
+-- -----------------------------------------------------------------------------
+-- 10. A private profile keeps its bio and primary team private
+-- -----------------------------------------------------------------------------
+-- Usernames, pictures and display names show in chat, so everyone signed in can
+-- read them. The bio and the primary team belong to the profile page: they come
+-- only from public_profile(), which returns them when the profile is public (or
+-- it's your own).
+
+revoke select on public.profiles from authenticated;
+grant select (id, username, avatar_url, favorite_team, is_admin, display_name, is_public, created_at, updated_at)
+  on public.profiles to authenticated;
+
+create function public.public_profile(name text)
+returns table (
+  id uuid, username text, avatar_url text, display_name text, bio text,
+  is_public boolean, primary_team_id uuid, is_admin boolean, created_at timestamptz
+)
+language sql
+stable
+security definer
+set search_path = ''
+as $$
+  select p.id, p.username, p.avatar_url, p.display_name,
+         case when p.is_public or p.id = (select auth.uid()) then p.bio end,
+         p.is_public,
+         case when p.is_public or p.id = (select auth.uid()) then p.primary_team_id end,
+         p.is_admin, p.created_at
+    from public.profiles p
+   where (select auth.uid()) is not null
+     and p.username = lower(btrim(public_profile.name));
+$$;
+
+revoke all on function public.public_profile(text) from public, anon;
+grant execute on function public.public_profile(text) to authenticated, service_role;

@@ -40,8 +40,12 @@ export function friendlyDbError(error: unknown, action: DbAction): string {
   if (isNetworkError(error)) return "You seem to be offline. Check your connection and try again.";
   const e = (error ?? {}) as DbErrorLike;
   if (e.hint === "rate_limited" || /too fast/i.test(e.message ?? "")) {
+    // The database's own limits explain themselves (a message flood, too many reactions).
+    if (e.code === "P0001" && e.message && e.message.length <= 160) return e.message;
     return "You're sending messages too fast. Wait a second and try again.";
   }
+  // Our database rules raise these with a plain-English sentence ("That thread isn't in this channel.").
+  if ((e.code === "P0001" || e.code === "22023") && e.message && /^[A-Z][^<>]{3,160}\.$/.test(e.message)) return e.message;
   switch (e.code) {
     case "23514": // a check rule failed
       if (action === "send" || action === "share") return "Messages need between 1 and 500 characters.";

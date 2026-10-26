@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { UpdatedAgo } from "@/components/live/UpdatedAgo";
 import { ReplayControls } from "@/components/motion/ReplayControls";
+import { Button, ButtonLink } from "@/components/ui/Button";
 import { Segmented } from "@/components/ui/Segmented";
 import { periodLabel } from "@/lib/format";
 import { usePoll } from "@/lib/hooks/usePoll";
@@ -106,15 +107,16 @@ export function GameCenter({ initial }: { initial: GameView }) {
 
       <div className="flex items-center justify-between gap-3 px-1">
         {replay.active ? <span /> : <UpdatedAgo stamps={data} receivedAt={receivedAt} error={error} live={game.state === "in"} />}
-        {game.state === "post" && view.plays.length > 0 && !replay.active && (
-          <button
-            type="button"
-            onClick={replay.start}
-            className="glass-gain pressable rounded-xl px-3.5 py-2 text-[12px] font-bold text-gain"
-          >
-            ▶ Replay game
-          </button>
-        )}
+        <div className="flex items-center gap-2">
+          <ButtonLink href={`/chat/game-${game.id}`} size="sm" icon="chat">
+            Game chat
+          </ButtonLink>
+          {game.state === "post" && view.plays.length > 0 && !replay.active && (
+            <Button size="sm" icon="refresh" onClick={replay.start}>
+              Replay game
+            </Button>
+          )}
+        </div>
       </div>
 
       {replay.active && <ReplayControls replay={replay} total={view.plays.length} />}

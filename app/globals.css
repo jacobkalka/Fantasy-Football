@@ -158,6 +158,17 @@ html[data-standalone] :is(nav, header, button, [role="tab"], [data-pwa]) {
   }
 }
 
+/*
+  Chat fills the screen between the top bar and the tab bar (phone) or the window (desktop);
+  its channel list, conversation and thread scroll on their own, so the message box stays put.
+*/
+@utility chat-frame {
+  height: calc(100dvh - var(--safe-top) - 56px - var(--tabbar-height) - max(10px, var(--safe-bottom)) - 20px);
+  @media (width >= 64rem) {
+    height: calc(100dvh - 64px - 48px);
+  }
+}
+
 /* A panel nested inside a card. */
 @utility well {
   border-radius: var(--radius-inner);

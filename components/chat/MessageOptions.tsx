@@ -1,9 +1,12 @@
 "use client";
 
 import { useState } from "react";
+import { Button } from "@/components/ui/Button";
+import { Icon, type IconName } from "@/components/ui/Icon";
+import { Sheet } from "@/components/ui/Sheet";
 import { decodeMessageBody, sharedPlaySummary } from "@/lib/chat/shared-play";
 import { REACTION_LABELS, REACTIONS, type ChatMessage, type Reaction } from "@/lib/chat/types";
-import { Sheet } from "./Sheet";
+import { openUser } from "@/lib/nav/query";
 
 const REPORT_REASONS = [
   "Spam or ads",
@@ -13,54 +16,71 @@ const REPORT_REASONS = [
   "Something else",
 ] as const;
 
-const ROW =
-  "flex min-h-12 w-full items-center gap-3 rounded-2xl px-4 text-left text-[15px] transition-colors hover:bg-white/5";
-
 type Step = "menu" | "report" | "block" | "delete";
 
+export interface OptionsActions {
+  onReact: (emoji: Reaction) => void;
+  onReply: () => void;
+  onThread?: () => void;
+  onReport: (reason: string) => Promise<boolean>;
+  onMute: () => void;
+  onUnmute: () => void;
+  onBlock: () => void;
+  onDelete: () => void;
+}
+
 /**
- * What you can do with a message: react, copy, report, block the sender,
- * or delete it (your own, or anyone's if you're a moderator).
+ * Everything you can do with a message: react, reply (here or in a thread), copy, see who
+ * wrote it, report, mute or block them, or delete it (your own; moderators can delete any).
  */
 export function MessageOptions({
   message,
   authorName,
   me,
   isAdmin,
+  muted,
   onClose,
-  onReact,
-  onReport,
-  onBlock,
-  onDelete,
+  actions,
 }: {
   message: ChatMessage | null;
   authorName: string;
   me: string;
   isAdmin: boolean;
+  muted: boolean;
   onClose: () => void;
-  onReact: (emoji: Reaction) => void;
-  onReport: (reason: string) => Promise<boolean>;
-  onBlock: () => void;
-  onDelete: () => void;
+  actions: OptionsActions;
 }) {
-  // Each time the sheet opens for a message, it starts on the menu (the key resets this state).
   return (
-    <Sheet open={message !== null} onClose={onClose} label="Message options">
+    <Sheet open={message !== null} onClose={onClose} title="Message" hideTitle size="sm">
       {message && (
+        // A new message starts on the menu (the key resets the steps).
         <OptionsBody
           key={message.id}
           message={message}
           authorName={authorName}
           me={me}
           isAdmin={isAdmin}
+          muted={muted}
           onClose={onClose}
-          onReact={onReact}
-          onReport={onReport}
-          onBlock={onBlock}
-          onDelete={onDelete}
+          actions={actions}
         />
       )}
     </Sheet>
+  );
+}
+
+function Row({ icon, label, onClick, tone = "ink" }: { icon: IconName; label: string; onClick: () => void; tone?: "ink" | "negative" }) {
+  return (
+    <li>
+      <button
+        type="button"
+        onClick={onClick}
+        className={`flex min-h-12 w-full items-center gap-3 rounded-xl px-3 text-left text-[15px] hover:bg-raised ${tone === "negative" ? "text-negative" : "text-ink"}`}
+      >
+        <Icon name={icon} size={19} className={tone === "negative" ? "" : "text-muted"} />
+        {label}
+      </button>
+    </li>
   );
 }
 
@@ -69,21 +89,17 @@ function OptionsBody({
   authorName,
   me,
   isAdmin,
+  muted,
   onClose,
-  onReact,
-  onReport,
-  onBlock,
-  onDelete,
+  actions,
 }: {
   message: ChatMessage;
   authorName: string;
   me: string;
   isAdmin: boolean;
+  muted: boolean;
   onClose: () => void;
-  onReact: (emoji: Reaction) => void;
-  onReport: (reason: string) => Promise<boolean>;
-  onBlock: () => void;
-  onDelete: () => void;
+  actions: OptionsActions;
 }) {
   const [step, setStep] = useState<Step>("menu");
   const [reason, setReason] = useState<string>(REPORT_REASONS[0]);
@@ -91,6 +107,10 @@ function OptionsBody({
   const [busy, setBusy] = useState(false);
   const mine = message.userId === me;
   const canDelete = !message.deleted && (mine || isAdmin);
+  const run = (fn: () => void) => () => {
+    fn();
+    onClose();
+  };
 
   if (step === "report") {
     return (
@@ -100,21 +120,21 @@ function OptionsBody({
           event.preventDefault();
           setBusy(true);
           const full = details.trim() ? `${reason}: ${details.trim()}` : reason;
-          const done = await onReport(full);
+          const done = await actions.onReport(full);
           setBusy(false);
           if (done) onClose();
         }}
       >
         <div>
-          <h2 className="text-[18px] leading-6 font-semibold text-ink">Report message</h2>
-          <p className="text-[14px] text-ink-soft">A moderator will review it. @{authorName} won&apos;t know who reported it.</p>
+          <h2 className="text-[18px] leading-6 font-semibold">Report message</h2>
+          <p className="text-[14px] text-muted">A moderator will review it. @{authorName} won&apos;t know who reported it.</p>
         </div>
-        <fieldset className="flex flex-col gap-1.5">
+        <fieldset className="flex flex-col gap-1">
           <legend className="sr-only">What&apos;s wrong with it?</legend>
           {REPORT_REASONS.map((option) => (
             <label
               key={option}
-              className={`flex min-h-12 cursor-pointer items-center gap-3 rounded-2xl px-4 text-[15px] ${ reason === option ? "glass-gain text-ink" : "glass-chip text-ink-soft" }`}
+              className={`flex min-h-12 cursor-pointer items-center gap-3 rounded-xl px-3 text-[15px] ${reason === option ? "bg-well" : "hover:bg-raised"}`}
             >
               <input
                 type="radio"
@@ -122,33 +142,27 @@ function OptionsBody({
                 value={option}
                 checked={reason === option}
                 onChange={() => setReason(option)}
-                className="size-4 accent-gain"
+                className="size-4 accent-white"
               />
               {option}
             </label>
           ))}
         </fieldset>
         <label className="flex flex-col gap-1.5">
-          <span className="text-[12px] text-muted">More details (optional)</span>
+          <span className="text-[13px] text-muted">More details (optional)</span>
           <textarea
             value={details}
             onChange={(e) => setDetails(e.target.value)}
             maxLength={300}
             rows={2}
-            className="glass-chip w-full rounded-2xl px-4 py-3 text-[16px] text-ink outline-none focus-visible:ring-2 focus-visible:ring-gain/70"
+            className="w-full rounded-xl bg-raised px-3 py-2.5 text-[16px] outline-none focus:ring-2 focus:ring-accent"
           />
         </label>
-        <div className="flex gap-2">
-          <button type="button" onClick={() => setStep("menu")} className="glass-chip min-h-12 flex-1 rounded-2xl text-[15px] text-ink-soft">
-            Back
-          </button>
-          <button
-            type="submit"
-            disabled={busy}
-            className="glass-gain pressable min-h-12 flex-[2] rounded-2xl text-[12px] font-bold text-gain disabled:opacity-50"
-          >
+        <div className="flex justify-end gap-2">
+          <Button onClick={() => setStep("menu")}>Back</Button>
+          <Button type="submit" variant="primary" disabled={busy}>
             {busy ? "Sending…" : "Send report"}
-          </button>
+          </Button>
         </div>
       </form>
     );
@@ -159,108 +173,69 @@ function OptionsBody({
     return (
       <div className="flex flex-col gap-4">
         <div>
-          <h2 className="text-[18px] leading-6 font-semibold text-ink">
-            {block ? `Block @${authorName}?` : "Delete this message?"}
-          </h2>
-          <p className="text-[14px] leading-relaxed text-ink-soft">
+          <h2 className="text-[18px] leading-6 font-semibold">{block ? `Block @${authorName}?` : "Delete this message?"}</h2>
+          <p className="text-[14px] leading-relaxed text-muted">
             {block
-              ? "You won't see their messages in any room. They won't be told. You can undo it right after."
+              ? "You won't see their messages in any room, and they can't reach you. They won't be told. You can undo it right after."
               : mine
                 ? "It's removed for everyone. This can't be undone."
                 : "As a moderator you're removing it for everyone. This can't be undone."}
           </p>
         </div>
-        <div className="flex gap-2">
-          <button type="button" onClick={() => setStep("menu")} className="glass-chip min-h-12 flex-1 rounded-2xl text-[15px] text-ink-soft">
-            Cancel
-          </button>
-          <button
-            type="button"
-            data-autofocus
-            onClick={() => {
-              if (block) onBlock();
-              else onDelete();
-              onClose();
-            }}
-            className="min-h-12 flex-[2] rounded-2xl border border-loss-line/50 bg-loss/15 text-[12px] font-bold text-loss"
-          >
+        <div className="flex justify-end gap-2">
+          <Button onClick={() => setStep("menu")}>Cancel</Button>
+          <Button variant="danger" onClick={run(block ? actions.onBlock : actions.onDelete)}>
             {block ? "Block" : "Delete"}
-          </button>
+          </Button>
         </div>
       </div>
     );
   }
 
+  const copy = () => {
+    const { play, text } = decodeMessageBody(message.body);
+    const value = play ? [`${sharedPlaySummary(play)}: ${play.text}`, text].filter(Boolean).join("\n") : text;
+    void navigator.clipboard?.writeText(value).catch(() => {});
+  };
+
   return (
     <div className="flex flex-col gap-3">
       {!message.deleted && (
-        <div>
-          <p className="px-1 pb-2 text-[12px] text-muted">React</p>
-          <div className="grid grid-cols-6 gap-1.5">
-            {REACTIONS.map((emoji) => {
-              const pressed = message.reactions.some((r) => r.userId === me && r.emoji === emoji);
-              return (
-                <button
-                  key={emoji}
-                  type="button"
-                  aria-pressed={pressed}
-                  aria-label={REACTION_LABELS[emoji]}
-                  onClick={() => {
-                    onReact(emoji);
-                    onClose();
-                  }}
-                  className={`pressable flex h-12 items-center justify-center rounded-2xl text-[22px] ${pressed ? "glass-gain" : "glass-chip"}`}
-                >
-                  {emoji}
-                </button>
-              );
-            })}
-          </div>
+        <div className="grid grid-cols-9 gap-0.5" role="group" aria-label="React">
+          {REACTIONS.map((emoji) => {
+            const pressed = message.reactions.some((r) => r.userId === me && r.emoji === emoji);
+            return (
+              <button
+                key={emoji}
+                type="button"
+                aria-pressed={pressed}
+                aria-label={REACTION_LABELS[emoji]}
+                onClick={run(() => actions.onReact(emoji))}
+                className={`pressable grid h-11 place-items-center rounded-xl text-[20px] ${pressed ? "bg-well" : "hover:bg-raised"}`}
+              >
+                {emoji}
+              </button>
+            );
+          })}
         </div>
       )}
       <ul className="flex flex-col">
-        {!message.deleted && message.body && (
-          <li>
-            <button
-              type="button"
-              className={`${ROW} text-ink`}
-              onClick={() => {
-                const { play, text } = decodeMessageBody(message.body);
-                const copy = play ? [`${sharedPlaySummary(play)}: ${play.text}`, text].filter(Boolean).join("\n") : text;
-                void navigator.clipboard?.writeText(copy).catch(() => {});
-                onClose();
-              }}
-            >
-              Copy text
-            </button>
-          </li>
-        )}
-        {!mine && !message.deleted && (
-          <li>
-            <button type="button" className={`${ROW} text-ink`} onClick={() => setStep("report")}>
-              Report message
-            </button>
-          </li>
-        )}
+        {!message.deleted && <Row icon="reply" label="Reply" onClick={run(actions.onReply)} />}
+        {!message.deleted && actions.onThread && <Row icon="thread" label="Reply in thread" onClick={run(actions.onThread)} />}
+        {!message.deleted && message.body && <Row icon="copy" label="Copy text" onClick={run(copy)} />}
+        {!mine && <Row icon="user" label={`View @${authorName}`} onClick={run(() => openUser(authorName))} />}
+        {!mine && !message.deleted && <Row icon="flag" label="Report message" onClick={() => setStep("report")} />}
         {!mine && (
-          <li>
-            <button type="button" className={`${ROW} text-alert`} onClick={() => setStep("block")}>
-              Block @{authorName}
-            </button>
-          </li>
+          <Row
+            icon="mute"
+            label={muted ? `Unmute @${authorName}` : `Mute @${authorName}`}
+            onClick={run(muted ? actions.onUnmute : actions.onMute)}
+          />
         )}
+        {!mine && <Row icon="shield" label={`Block @${authorName}`} tone="negative" onClick={() => setStep("block")} />}
         {canDelete && (
-          <li>
-            <button type="button" className={`${ROW} text-loss`} onClick={() => setStep("delete")}>
-              Delete message{!mine ? " (moderator)" : ""}
-            </button>
-          </li>
+          <Row icon="trash" label={`Delete message${!mine ? " (moderator)" : ""}`} tone="negative" onClick={() => setStep("delete")} />
         )}
-        <li>
-          <button type="button" className={`${ROW} text-muted`} onClick={onClose}>
-            Cancel
-          </button>
-        </li>
       </ul>
     </div>
   );

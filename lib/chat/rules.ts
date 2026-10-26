@@ -9,7 +9,7 @@ export const COMMUNITY_RULES = [
   { title: "No hate, threats or harassment", body: "Nothing about anyone's race, religion, gender, sexuality or disability. Ever." },
   { title: "No spam or ads", body: "One message a second, up to 500 characters. Links to scams get you removed." },
   { title: "Keep it about football (mostly)", body: "Plays, players, fantasy pain. Go wild." },
-  { title: "Report it, block it", body: "Tap ⋯ on any message to report it or block the sender. Moderators review every report." },
+  { title: "Report it, block it", body: "Tap ⋯ on any message to report it, or mute or block the sender. Moderators review every report." },
 ] as const;
 
 const KEY = "fantasylab:chat-rules:v1";

@@ -1,40 +1,60 @@
 "use client";
 
+import { useState } from "react";
+import { Button } from "@/components/ui/Button";
+import { Sheet } from "@/components/ui/Sheet";
 import { acceptRules, COMMUNITY_RULES, useRulesAccepted } from "@/lib/chat/rules";
-import { Sheet } from "./Sheet";
 
-/** The house rules, shown once per device before the first message. */
+/**
+ * The house rules. Until this device has agreed to them, a line above the message box says
+ * so; tapping it shows the rules with "I'm in". Reading chat never needs it, posting does.
+ */
 export function CommunityRules() {
   const accepted = useRulesAccepted();
+  const [open, setOpen] = useState(false);
+  if (accepted) return null;
   return (
-    <Sheet open={!accepted} onClose={acceptRules} label="Chat rules" dismissable={false}>
-      <div className="flex flex-col gap-4">
-        <div>
-          <p className="text-[12px] text-gain">Before you jump in</p>
-          <h2 className="text-[20px] leading-7 font-semibold text-ink">House rules</h2>
-        </div>
-        <ol className="flex flex-col gap-2.5">
+    <>
+      <div className="flex items-center gap-3 rounded-xl bg-raised px-3 py-2.5 text-[13px]">
+        <span className="min-w-0 flex-1 text-muted">Agree to the house rules to start posting.</span>
+        <Button size="sm" variant="primary" onClick={() => setOpen(true)}>
+          Read the rules
+        </Button>
+      </div>
+      <Sheet
+        open={open}
+        onClose={() => setOpen(false)}
+        title="House rules"
+        description="Real people, real takes. Five rules keep it fun."
+        footer={
+          <div className="flex justify-end gap-2">
+            <Button onClick={() => setOpen(false)}>Not now</Button>
+            <Button
+              variant="primary"
+              onClick={() => {
+                acceptRules();
+                setOpen(false);
+              }}
+            >
+              I&apos;m in
+            </Button>
+          </div>
+        }
+      >
+        <ol className="flex flex-col gap-2">
           {COMMUNITY_RULES.map((rule, i) => (
-            <li key={rule.title} className="glass-chip flex gap-3 rounded-2xl p-3">
-              <span className="text-2xl leading-none font-bold text-gain" aria-hidden="true">
+            <li key={rule.title} className="flex gap-3 rounded-xl bg-raised p-3">
+              <span className="tabular w-5 shrink-0 text-[15px] font-semibold text-muted" aria-hidden="true">
                 {i + 1}
               </span>
-              <div>
-                <p className="text-[15px] font-semibold text-ink">{rule.title}</p>
-                <p className="text-[13.5px] leading-snug text-ink-soft">{rule.body}</p>
-              </div>
+              <span>
+                <span className="block text-[15px] font-medium">{rule.title}</span>
+                <span className="block text-[14px] text-muted">{rule.body}</span>
+              </span>
             </li>
           ))}
         </ol>
-        <button
-          type="button"
-          data-autofocus
-          onClick={acceptRules}
-          className="glass-gain pressable min-h-12 rounded-2xl text-[12px] font-bold text-gain"
-        >
-          Got it, I&apos;m in
-        </button>
-      </div>
-    </Sheet>
+      </Sheet>
+    </>
   );
 }

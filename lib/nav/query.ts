@@ -13,8 +13,11 @@ export function setQueryParams(updates: Record<string, string | null>, { push = 
     else url.searchParams.set(key, value);
   }
   const next = `${url.pathname}${url.search}${url.hash}`;
-  if (push) window.history.pushState({ ...window.history.state, __fl: true }, "", next);
-  else window.history.replaceState(window.history.state, "", next);
+  // Only our own marker goes in: Next.js copies its internal state over itself, and skips syncing
+  // useSearchParams for any state that already carries it (node_modules/next/dist/client/components/app-router.js).
+  const ours = (window.history.state as { __fl?: boolean } | null)?.__fl ? { __fl: true } : null;
+  if (push) window.history.pushState({ __fl: true }, "", next);
+  else window.history.replaceState(ours, "", next);
 }
 
 /** Open the canonical player profile over the current screen (deep-linkable: ?player=<id>). */

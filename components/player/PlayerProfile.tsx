@@ -239,6 +239,9 @@ export function PlayerProfile({ playerId, inSheet = false }: { playerId: string;
               Trade away
             </ButtonLink>
           )}
+          <ButtonLink href={`/chat/player-${playerId}`} size="sm" icon="chat">
+            Player chat
+          </ButtonLink>
           {news.length > 0 && (
             <a href="#player-news" className="pressable inline-flex h-8 items-center gap-1.5 rounded-full px-3 text-[13px] text-muted hover:text-ink">
               <Icon name="news" size={16} /> News
