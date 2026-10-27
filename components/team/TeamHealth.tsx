@@ -55,9 +55,10 @@ export function TeamHealth({
   const concerns = weaknesses.filter((w) => w.area === "INJURIES" || w.area === "BYES");
 
   return (
-    <div className="flex flex-col gap-4">
-      <div className="flex flex-wrap items-end gap-x-6 gap-y-2">
-        <div>
+    <div className="@container flex flex-col gap-4">
+      {/* A narrow card (phone, desktop side column): the rating, then the two tiles in their own row. A wide card: side by side. */}
+      <div className="flex flex-col gap-3 @lg:flex-row @lg:items-end @lg:gap-6">
+        <div className="min-w-0">
           <p className="text-[12px] text-muted">Team rating</p>
           <p className="flex items-baseline gap-2">
             <span className="text-accent text-[40px] leading-[44px] font-semibold tracking-[-0.03em]">{rating.overall.toFixed(1)}</span>
@@ -65,22 +66,22 @@ export function TeamHealth({
           </p>
           <p className="text-[12px] text-faint">50 = an average team in your league</p>
         </div>
-        <div className="grid flex-1 grid-cols-2 gap-2 sm:min-w-[260px]">
+        <div className="grid min-w-0 grid-cols-2 gap-2 @lg:min-w-[260px] @lg:flex-1">
           {strongest && (
-            <div className="well p-3">
-              <p className="flex items-center gap-1 text-[12px] text-positive">
+            <div className="well min-w-0 p-3">
+              <p className="flex items-center gap-1 text-[12px] whitespace-nowrap text-positive">
                 <Icon name="arrowUp" size={14} /> Strongest
               </p>
-              <p className="mt-0.5 text-[15px] font-semibold">{slotLabel(strongest.slot)}</p>
+              <p className="mt-0.5 truncate text-[15px] font-semibold">{slotLabel(strongest.slot)}</p>
               <p className="text-[11px] text-faint">{gradeLabel(strongest.score)}</p>
             </div>
           )}
           {top && (
-            <div className="well p-3">
-              <p className="flex items-center gap-1 text-[12px] text-negative">
+            <div className="well min-w-0 p-3">
+              <p className="flex items-center gap-1 text-[12px] whitespace-nowrap text-negative">
                 <Icon name="arrowDown" size={14} /> Biggest need
               </p>
-              <p className="mt-0.5 line-clamp-1 text-[15px] font-semibold">{top.fix?.positions.map((p) => slotLabel(p)).join("/") || top.title}</p>
+              <p className="mt-0.5 truncate text-[15px] font-semibold">{top.fix?.positions.map((p) => slotLabel(p)).join("/") || top.title}</p>
               <p className="text-[11px] text-faint">{top.priority} priority</p>
             </div>
           )}
