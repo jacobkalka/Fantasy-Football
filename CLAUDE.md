@@ -10,8 +10,8 @@ why (one row per decision, superseded ones struck through). Don't duplicate it h
 1. Read this file, `AGENTS.md`, then the relevant sections of `DECISIONS.md`.
 2. `git status`, `git log --oneline -15`, `git worktree list`. Vercel deploys branch
    `claude/epic-lamport-wvbbwz` to https://fantasy-football-xi-ecru.vercel.app. The 2026-10-26
-   session worked on `claude/keen-lamport-ibcbi9` (it holds everything below; it is not deployed
-   until merged or Vercel is pointed at it). Push only the branch your session was given; don't
+   session worked on `claude/keen-lamport-ibcbi9` and fast-forwarded `claude/epic-lamport-wvbbwz`
+   to it on 2026-10-27, so both hold everything below and the live site deploys it. Push only the branch your session was given; don't
    open PRs unless asked.
 3. Read the code you'll touch before changing it. Look before you build (fetch ESPN, save a
    sample under `samples/`, build against it).
@@ -144,8 +144,8 @@ scratch-only Playwright fake of Supabase (REST/Auth/Realtime); real use needs a 
 
 ## Current state (2026-10-27)
 
-Branch `claude/keen-lamport-ibcbi9`, pushed, not yet deployed (Vercel deploys
-`claude/epic-lamport-wvbbwz`). The owner's big upgrade brief (fantasy-first Home, multiple
+Branch `claude/keen-lamport-ibcbi9`, merged (fast-forward) into `claude/epic-lamport-wvbbwz`,
+which Vercel deploys. The owner's big upgrade brief (fantasy-first Home, multiple
 teams and ESPN leagues, matchup, live tabs and tracker, news, community chat, public profiles,
 Admin Mode, GSAP-only motion, full QA) is built and validated as listed above.
 
@@ -164,7 +164,6 @@ Admin Mode, GSAP-only motion, full QA) is built and validated as listed above.
 
 ## Suggested next work (recommendation, not confirmed requirements)
 
-1. Deploy: merge `claude/keen-lamport-ibcbi9` (or point Vercel at it), then follow
-   docs/SETUP.md parts 4, 4b and 4c.
+1. Follow docs/SETUP.md parts 4, 4b and 4c (Supabase, private leagues, Admin Mode secrets).
 2. A real game-day check of live parsing, chat Realtime and freshness.
 3. Push notifications for your players' touchdowns, if the owner wants them.
