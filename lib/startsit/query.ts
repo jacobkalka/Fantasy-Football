@@ -1,14 +1,15 @@
 /** Reading and checking /api/startsit's query string. Pure, so it's easy to test. */
-import { SCORING_FORMATS, type ScoringFormat } from "@/lib/scoring";
+import { SCORING_FORMATS, type ScoringFormat, type ScoringRules } from "@/lib/scoring";
+import { parseRules } from "@/lib/scoring/spec";
 
 export const MIN_PLAYERS = 2;
 export const MAX_PLAYERS = 4;
 
 export type StartSitQuery =
-  | { ok: true; ids: string[]; format: ScoringFormat; explain: boolean }
+  | { ok: true; ids: string[]; format: ScoringFormat; rules: ScoringRules | null; explain: boolean }
   | { ok: false; error: string };
 
-/** `?ids=4362628,4426515&format=ppr[&explain=1]` */
+/** `?ids=4362628,4426515&format=ppr[&rules=…][&explain=1]` (rules: a league's own scoring, lib/scoring/spec.ts) */
 export function parseStartSitQuery(params: URLSearchParams): StartSitQuery {
   const raw = (params.get("ids") ?? "")
     .split(",")
@@ -26,5 +27,5 @@ export function parseStartSitQuery(params: URLSearchParams): StartSitQuery {
     return { ok: false, error: "Scoring format must be standard, half or ppr." };
   }
   const format = (formatParam ?? "ppr") as ScoringFormat;
-  return { ok: true, ids, format, explain: params.get("explain") === "1" };
+  return { ok: true, ids, format, rules: parseRules(params.get("rules")), explain: params.get("explain") === "1" };
 }

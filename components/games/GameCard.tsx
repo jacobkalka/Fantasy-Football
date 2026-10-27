@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { AnimatedNumber } from "@/components/motion/AnimatedNumber";
-import { TiltCard } from "@/components/motion/TiltCard";
 import { LiveDot } from "@/components/ui/bits";
 import { TeamLogo } from "@/components/ui/TeamLogo";
 import { kickoffLabel } from "@/lib/format";
@@ -47,7 +46,7 @@ function SideRow({
   );
 }
 
-/** A game on the scoreboard: a glass card that tilts toward your finger and opens Game Center. */
+/** A game on the scoreboard: score, clock and who has the ball. Opens Game Center. */
 export function GameCard({ game }: { game: Game }) {
   const hydrated = useHydrated();
   const live = game.state === "in";
@@ -56,25 +55,21 @@ export function GameCard({ game }: { game: Game }) {
   const redZone = live && game.situation?.isRedZone;
   const homeLeads = game.home.score > game.away.score;
   const awayLeads = game.away.score > game.home.score;
-  const glowTeam = possession === game.away.team.id ? game.away.team : game.home.team;
 
   const status = live ? (
-    <span className="inline-flex items-center gap-1.5 text-gain">
+    <span className="inline-flex items-center gap-1.5 text-live">
       <LiveDot />
       {game.statusText}
     </span>
   ) : game.state === "pre" ? (
-    <span className="text-ink-soft">{hydrated ? kickoffLabel(game.kickoff) : game.statusText}</span>
+    <span className="text-muted">{hydrated ? kickoffLabel(game.kickoff) : game.statusText}</span>
   ) : (
     <span className="text-muted">{game.statusText}</span>
   );
 
   return (
-    <Link href={`/games/${game.id}`} className="block">
-      <TiltCard
-        className="glass flex flex-col gap-3 p-4"
-        style={{ "--glow": live ? `${glowTeam.color}cc` : "transparent" } as React.CSSProperties}
-      >
+    <Link href={`/games/${game.id}`} className="pressable block rounded-[20px]">
+      <div className="card flex flex-col gap-3 p-4 transition-colors hover:bg-raised">
         <>
           <div className="flex flex-col gap-2.5">
             <div className="flex items-center justify-between text-[12px]">
@@ -92,16 +87,16 @@ export function GameCard({ game }: { game: Game }) {
           </div>
         </>
         {live && (game.situation?.downDistance || redZone) && (
-          <div className="flex items-center gap-2 border-t border-line-soft pt-2.5 text-[12px] text-ink-soft">
+          <div className="flex items-center gap-2 border-t border-rule pt-2.5 text-[12px] text-muted">
             {redZone && (
-              <span className="rounded-md bg-redzone/20 px-1.5 py-0.5 text-[12px] font-bold text-redzone ring-1 ring-redzone/50">
+              <span className="rounded-md bg-negative-soft px-1.5 py-0.5 text-[12px] font-semibold text-negative">
                 Red zone
               </span>
             )}
             <span className="truncate">{game.situation?.downDistance}</span>
           </div>
         )}
-      </TiltCard>
+      </div>
     </Link>
   );
 }

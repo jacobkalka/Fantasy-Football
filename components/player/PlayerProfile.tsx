@@ -445,7 +445,7 @@ export function PlayerProfile({ playerId, inSheet = false }: { playerId: string;
           {analysis.labels.length > 0 && (
             <div className="mt-4 flex flex-wrap gap-1.5">
               {analysis.labels.map((l) => (
-                <span key={l.id} title={l.reason} className="glass-chip rounded-full px-2.5 py-1 text-[12px] text-ink">
+                <span key={l.id} title={l.reason} className="bg-raised rounded-full px-2.5 py-1 text-[12px] text-ink">
                   {l.label}
                 </span>
               ))}

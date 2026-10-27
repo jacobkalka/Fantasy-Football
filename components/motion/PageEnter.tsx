@@ -7,6 +7,16 @@ import { gsap, MOTION, prefersReducedMotion, ScrollTrigger, useGSAP } from "@/li
 const TARGETS = ".card, [data-animate]";
 
 /**
+ * Has React taken over this element yet? Streamed server HTML waits in the page until React
+ * hydrates its part; styling it before then makes React's hydration check fail. Those elements
+ * are shown as they are instead of animated.
+ */
+function reactOwned(el: Element) {
+  for (const key in el) if (key.startsWith("__reactFiber$")) return true;
+  return false;
+}
+
+/**
  * Every screen's entrance (app/template.tsx wraps each page in this):
  * - the screen fades in and its title rises,
  * - the cards on screen cascade in one after another,
@@ -44,9 +54,10 @@ export function PageEnter({ children }: { children: React.ReactNode }) {
 
       /** Animate new targets: the visible ones cascade now, the rest wait for scroll. */
       const enter = (elements: Element[], baseDelay = 0) => {
-        const fresh = elements.filter((el) => !done.has(el) && !el.closest("dialog"));
+        const candidates = elements.filter((el) => !done.has(el) && !el.closest("dialog"));
+        candidates.forEach((el) => done.add(el));
+        const fresh = candidates.filter(reactOwned);
         if (!fresh.length) return;
-        fresh.forEach((el) => done.add(el));
         const now = fresh.filter(inView);
         const later = fresh.filter((el) => !inView(el));
         if (now.length) {
@@ -86,7 +97,8 @@ export function PageEnter({ children }: { children: React.ReactNode }) {
       // The screen itself, then its title, then the cards.
       gsap.fromTo(page, { autoAlpha: 0 }, { autoAlpha: 1, duration: MOTION.base, onComplete: show });
       const title = page.querySelector("h1");
-      if (title) gsap.from(title.parentElement ?? title, { y: 14, autoAlpha: 0, duration: 0.5, ease: "power3.out" });
+      const heading = title?.parentElement ?? title;
+      if (heading && reactOwned(heading)) gsap.from(heading, { y: 14, autoAlpha: 0, duration: 0.5, ease: "power3.out" });
       enter(Array.from(page.querySelectorAll(TARGETS)), 0.08);
 
       // Content loading above a waiting card moves it; re-measure so it still triggers in view.

@@ -3,7 +3,7 @@
 /**
  * Your preferences and personal lists, saved on this device:
  * - league size (team ratings and "likely available" depend on it),
- * - visual effects (liquid glass on or off),
+ * - visual effects (liquid glass on or off) and the touchdown sound,
  * - a watchlist of players you're keeping an eye on,
  * - players you've marked as already taken in your league (so pickups skip them).
  * The scoring format lives with the roster (it belongs to the team).
@@ -22,13 +22,15 @@ export interface AppSettings {
   glass: "auto" | "off";
   /** Animations: follow the device's Reduce Motion setting, or always full / always reduced. */
   motion: MotionPreference;
+  /** A short sound when one of your players scores a touchdown (off unless switched on). */
+  tdSound: "off" | "on";
   watchlist: string[];
   taken: string[];
 }
 
 
 export function defaultSettings(): AppSettings {
-  return { version: 1, leagueSize: 12, glass: "auto", motion: "device", watchlist: [], taken: [] };
+  return { version: 1, leagueSize: 12, glass: "auto", motion: "device", tdSound: "off", watchlist: [], taken: [] };
 }
 
 const ids = (value: unknown, max: number) =>
@@ -45,6 +47,7 @@ export function migrateSettings(raw: unknown): AppSettings | null {
     leagueSize: LEAGUE_SIZES.includes(r.leagueSize as LeagueSize) ? (r.leagueSize as LeagueSize) : base.leagueSize,
     glass: r.glass === "off" ? "off" : "auto",
     motion: r.motion === "full" || r.motion === "reduced" ? r.motion : "device",
+    tdSound: r.tdSound === "on" ? "on" : "off",
     watchlist: ids(r.watchlist, 100),
     taken: ids(r.taken, 400),
   };
@@ -72,6 +75,9 @@ export const settingsActions = {
   setMotion(motion: MotionPreference) {
     settingsStore.set((s) => ({ ...s, motion }));
     applyMotionPreference(motion);
+  },
+  setTdSound(tdSound: "off" | "on") {
+    settingsStore.set((s) => ({ ...s, tdSound }));
   },
   toggleWatch(playerId: string) {
     settingsStore.set((s) => ({ ...s, watchlist: toggle(s.watchlist, playerId) }));

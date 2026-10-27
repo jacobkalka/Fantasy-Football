@@ -9,12 +9,18 @@ describe("parseStartSitQuery", () => {
       ok: true,
       ids: ["4362628", "4426515"],
       format: "half",
+      rules: null,
       explain: true,
     });
   });
 
+  it("carries a league's own scoring rules", () => {
+    const q = parse("ids=1,2&format=ppr&rules=" + encodeURIComponent("passTd:6,rec:0.5"));
+    expect(q.ok && q.rules?.passTd).toBe(6);
+  });
+
   it("defaults to PPR, trims spaces and drops duplicates", () => {
-    expect(parse("ids= 1 ,2,1")).toEqual({ ok: true, ids: ["1", "2"], format: "ppr", explain: false });
+    expect(parse("ids= 1 ,2,1")).toEqual({ ok: true, ids: ["1", "2"], format: "ppr", rules: null, explain: false });
   });
 
   it("rejects bad input with a message a person can read", () => {

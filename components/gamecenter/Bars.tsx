@@ -1,44 +1,34 @@
 "use client";
 
-import { motion } from "motion/react";
 import { Football } from "@/components/games/Football";
+import { useTweenTo } from "@/components/motion/useTweenTo";
 import { visibleTeamColor } from "@/lib/color";
 import type { FieldPosition } from "@/lib/live/game-view";
 import type { Team } from "@/lib/providers/types";
-
-const spring = { type: "spring" as const, stiffness: 120, damping: 20 };
 
 /** Who's likely to win, as a two-color bar that slides as the game swings. */
 export function WinProbabilityBar({ away, home, homeWinPct }: { away: Team; home: Team; homeWinPct: number }) {
   const homePct = Math.round(homeWinPct * 100);
   const awayPct = 100 - homePct;
+  const bar = useTweenTo<HTMLDivElement>({ width: `${awayPct}%` }, [awayPct]);
   return (
-    <div className="glass flex flex-col gap-2 p-4">
+    <div className="card flex flex-col gap-2 p-4">
       <div className="flex items-center justify-between text-[12px]">
-        <span className={awayPct >= homePct ? "text-ink-strong" : "text-muted"}>
+        <span className={`tabular ${awayPct >= homePct ? "text-ink" : "text-muted"}`}>
           {away.abbr} {awayPct}%
         </span>
         <span className="text-muted">Win probability</span>
-        <span className={homePct > awayPct ? "text-ink-strong" : "text-muted"}>
+        <span className={`tabular ${homePct > awayPct ? "text-ink" : "text-muted"}`}>
           {homePct}% {home.abbr}
         </span>
       </div>
       <div
-        className="flex h-3 overflow-hidden rounded-full bg-white/5 ring-1 ring-line"
+        className="flex h-2.5 gap-0.5 overflow-hidden rounded-full bg-well"
         role="img"
         aria-label={`${away.abbr} ${awayPct} percent, ${home.abbr} ${homePct} percent chance to win`}
       >
-        <motion.div
-          className="h-full"
-          style={{ background: visibleTeamColor(away), boxShadow: `0 0 16px ${visibleTeamColor(away)}` }}
-          initial={false}
-          animate={{ width: `${awayPct}%` }}
-          transition={spring}
-        />
-        <motion.div
-          className="h-full flex-1"
-          style={{ background: visibleTeamColor(home), boxShadow: `0 0 16px ${visibleTeamColor(home)}` }}
-        />
+        <div ref={bar} className="h-full rounded-l-full" style={{ background: visibleTeamColor(away) }} />
+        <div className="h-full flex-1 rounded-r-full" style={{ background: visibleTeamColor(home) }} />
       </div>
     </div>
   );
@@ -49,13 +39,14 @@ export function FieldBar({ away, home, field }: { away: Team; home: Team; field:
   const attackingHome = field.possessionTeamId === away.id; // the away offense drives toward the home goal
   const yardsToGo = attackingHome ? 100 - field.ballOn : field.ballOn;
   const redZone = yardsToGo <= 20;
+  const ball = useTweenTo<HTMLDivElement>({ left: `${8 + field.ballOn * 0.84}%` }, [field.ballOn]);
   return (
-    <div className="glass flex flex-col gap-2 p-4">
+    <div className="card flex flex-col gap-2 p-4">
       <div className="flex items-center justify-between text-[12px] text-muted">
         <span>Ball on the field</span>
-        <span className={redZone ? "text-redzone" : ""}>{yardsToGo} yds to the end zone</span>
+        <span className={redZone ? "text-negative" : ""}>{yardsToGo} yds to the end zone</span>
       </div>
-      <div className="relative h-12 overflow-hidden rounded-xl ring-1 ring-line" style={{ perspective: 400 }}>
+      <div className="relative h-12 overflow-hidden rounded-xl" style={{ perspective: 400 }}>
         <div
           className="absolute inset-0"
           style={{
@@ -71,19 +62,14 @@ export function FieldBar({ away, home, field }: { away: Team; home: Team; field:
           {/* Red zone shading near the goal the offense is attacking. */}
           {redZone && (
             <div
-              className={`absolute inset-y-0 w-[17%] bg-redzone/20 ${attackingHome ? "right-[8%]" : "left-[8%]"}`}
+              className={`absolute inset-y-0 w-[17%] bg-negative-soft ${attackingHome ? "right-[8%]" : "left-[8%]"}`}
               aria-hidden="true"
             />
           )}
         </div>
-        <motion.div
-          className="absolute top-1/2 -translate-x-1/2 -translate-y-1/2"
-          initial={false}
-          animate={{ left: `${8 + field.ballOn * 0.84}%` }}
-          transition={spring}
-        >
+        <div ref={ball} className="absolute top-1/2 -translate-x-1/2 -translate-y-1/2">
           <Football />
-        </motion.div>
+        </div>
       </div>
       <div className="flex justify-between text-[12px] text-muted">
         <span>{away.abbr} goal</span>

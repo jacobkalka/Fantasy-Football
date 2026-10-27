@@ -1,12 +1,9 @@
 "use client";
 
-import { motion } from "motion/react";
 import { Football } from "@/components/games/Football";
 import { AnimatedNumber } from "@/components/motion/AnimatedNumber";
-import { TiltCard } from "@/components/motion/TiltCard";
 import { LiveDot } from "@/components/ui/bits";
 import { TeamLogo } from "@/components/ui/TeamLogo";
-import { visibleTeamColor } from "@/lib/color";
 import { kickoffLabel } from "@/lib/format";
 import { useHydrated } from "@/lib/hooks/useHydrated";
 import type { Game, GameSide } from "@/lib/providers/types";
@@ -46,9 +43,7 @@ function Side({ side, score, showScore, leading, hasBall, align }: {
 }) {
   return (
     <div className={`flex flex-col gap-2 ${align === "right" ? "items-end text-right" : "items-start"}`}>
-      <span style={{ transform: "translateZ(40px)" }}>
-        <TeamLogo abbr={side.team.abbr} logo={side.team.logo} color={side.team.color} size={58} />
-      </span>
+      <TeamLogo abbr={side.team.abbr} logo={side.team.logo} color={side.team.color} size={58} />
       <div className={`flex items-center gap-1.5 ${align === "right" ? "flex-row-reverse" : ""}`}>
         <span className="text-[18px] leading-6 font-semibold">{side.team.abbr}</span>
         {hasBall && <Football />}
@@ -57,7 +52,6 @@ function Side({ side, score, showScore, leading, hasBall, align }: {
       {showScore && (
         <span
           className={`tabular text-[44px] leading-[48px] font-semibold tracking-[-0.02em] ${leading ? "text-ink" : "text-muted"}`}
-          style={{ transform: "translateZ(30px)" }}
         >
           <AnimatedNumber value={score} decimals={0} />
         </span>
@@ -66,14 +60,12 @@ function Side({ side, score, showScore, leading, hasBall, align }: {
   );
 }
 
-/** The big score header. It morphs out of the game's card on the Games screen. */
+/** The big score header: both teams, the score, the clock, and who has the ball. */
 export function Scorebug({ game, state }: { game: Game; state: ScoreState }) {
   const hydrated = useHydrated();
   const showScore = game.state !== "pre" || state.replay;
-  const glowTeam = state.possessionTeamId === game.away.team.id ? game.away.team : game.home.team;
-  const glow = state.isRedZone ? "#ff4d5e" : state.live ? visibleTeamColor(glowTeam) : "transparent";
   return (
-    <TiltCard className="glass p-5" max={6} style={{ "--glow": `${glow}cc` } as React.CSSProperties}>
+    <div className="card p-5">
       <>
         <div className="grid grid-cols-[1fr_auto_1fr] items-start gap-2">
           <Side
@@ -86,12 +78,12 @@ export function Scorebug({ game, state }: { game: Game; state: ScoreState }) {
           />
           <div className="flex min-w-24 flex-col items-center gap-2 pt-4 text-center">
             {state.replay && (
-              <span className="rounded-md bg-sky/15 px-2 py-0.5 text-[12px] font-bold text-sky ring-1 ring-sky/40">
+              <span className="rounded-md bg-well px-2 py-0.5 text-[12px] font-semibold text-muted">
                 REPLAY
               </span>
             )}
             <span
-              className={`inline-flex items-center gap-1.5 text-[12px] ${ state.live ? "text-gain" : "text-ink-soft" }`}
+              className={`inline-flex items-center gap-1.5 text-[12px] ${state.live ? "text-live" : "text-muted"}`}
             >
               {state.live && <LiveDot />}
               {game.state === "pre" && !state.replay && hydrated ? kickoffLabel(game.kickoff) : state.status}
@@ -100,13 +92,7 @@ export function Scorebug({ game, state }: { game: Game; state: ScoreState }) {
               <span className="text-[12px] leading-snug text-muted">{state.downDistance}</span>
             )}
             {state.isRedZone && state.live && (
-              <motion.span
-                className="rounded-md bg-redzone/20 px-2 py-0.5 text-[12px] font-bold text-redzone ring-1 ring-redzone/50"
-                animate={{ opacity: [1, 0.55, 1] }}
-                transition={{ duration: 1.4, repeat: Infinity }}
-              >
-                RED ZONE
-              </motion.span>
+              <span className="rounded-md bg-negative-soft px-2 py-0.5 text-[12px] font-semibold text-negative">RED ZONE</span>
             )}
             {game.state === "pre" && game.odds?.details && (
               <span className="text-[12px] text-muted">
@@ -126,13 +112,13 @@ export function Scorebug({ game, state }: { game: Game; state: ScoreState }) {
         </div>
       </>
       {(game.venue || game.broadcast) && (
-        <p className="mt-4 border-t border-line-soft pt-3 text-center text-[12px] text-muted">
+        <p className="mt-4 border-t border-rule pt-3 text-center text-[12px] text-muted">
           {[game.venue?.name, game.venue?.city, game.broadcast, game.weather?.temperature !== undefined && !game.venue?.indoor ? `${game.weather.temperature}°` : null]
             .filter(Boolean)
             .join(" · ")}
         </p>
       )}
-    </TiltCard>
+    </div>
   );
 }
 

@@ -157,7 +157,7 @@ export function LivePlayerCard({
                 </span>
               </div>
               <div className="min-w-0 flex-1">
-                <p className="text-[13px] leading-5 text-ink-soft">
+                <p className="text-[13px] leading-5 text-muted">
                   {p.isTouchdown && <span className="font-semibold text-accent">TD · </span>}
                   {p.text}
                 </p>

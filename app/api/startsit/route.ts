@@ -3,7 +3,7 @@ import { parseStartSitQuery } from "@/lib/startsit/query";
 import { buildStartSit, StartSitInputError } from "@/lib/startsit/service";
 
 /**
- * GET /api/startsit?ids=3915416,4362628&format=ppr[&explain=1]
+ * GET /api/startsit?ids=3915416,4362628&format=ppr[&rules=…][&explain=1]
  * Who to start among 2-4 players this week: each player's adjusted projection,
  * floor/ceiling and factors, plus the pick, a confidence level and the reasons.
  * With explain=1 it also asks Claude for a short friendly summary (when configured).
@@ -13,7 +13,7 @@ export async function GET(request: NextRequest) {
   if (!query.ok) return Response.json({ error: query.error }, { status: 400 });
 
   try {
-    const result = await buildStartSit(query.ids, query.format, { explain: query.explain });
+    const result = await buildStartSit(query.ids, query.format, { explain: query.explain, rules: query.rules });
     return Response.json(result);
   } catch (error) {
     if (error instanceof StartSitInputError) return Response.json({ error: error.message }, { status: 400 });

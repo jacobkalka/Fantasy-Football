@@ -11,7 +11,8 @@ import {
   getScoreboard,
   getTeams,
 } from "@/lib/data/sports";
-import type { ScoringFormat } from "@/lib/scoring";
+import type { ScoringFormat, ScoringRules } from "@/lib/scoring";
+import { specLabel } from "@/lib/scoring/spec";
 import { aiConfigured, aiSummary } from "./ai";
 import { assemblePlayerFactors, isOffense, throughWeekFor } from "./factors";
 import { decide } from "./model";
@@ -30,7 +31,7 @@ function logged<T>(label: string, fallback: T) {
 export async function buildStartSit(
   ids: string[],
   format: ScoringFormat,
-  { explain = false }: { explain?: boolean } = {},
+  { explain = false, rules = null }: { explain?: boolean; rules?: ScoringRules | null } = {},
 ): Promise<StartSitResult> {
   const board = await getScoreboard();
   const { season, week } = board;
@@ -52,12 +53,13 @@ export async function buildStartSit(
     return player;
   });
 
-  const factors = assemblePlayerFactors({ format, week, players: chosen, outlooks, scoreboard: board, byeWeeks, defense, teams });
-  const { players: verdicts, recommendation, noRecommendation } = decide(factors, format);
+  const factors = assemblePlayerFactors({ format, rules, week, players: chosen, outlooks, scoreboard: board, byeWeeks, defense, teams });
+  const { players: verdicts, recommendation, noRecommendation } = decide(factors, format, rules ? "league scoring" : undefined);
   const result: StartSitResult = {
     season,
     week,
     format,
+    scoringLabel: specLabel({ format, rules }),
     players: verdicts,
     recommendation,
     noRecommendation,

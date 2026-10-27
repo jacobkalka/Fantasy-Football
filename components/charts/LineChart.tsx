@@ -226,7 +226,7 @@ export function LineChart({
         {active !== null && (
           <div
             role="status"
-            className="glass-chip pointer-events-none absolute top-1 z-10 min-w-[120px] rounded-xl px-3 py-2 text-[12px] shadow-[0_12px_30px_-10px_rgb(0_0_0/0.9)]"
+            className="bg-raised pointer-events-none absolute top-1 z-10 min-w-[120px] rounded-xl px-3 py-2 text-[12px] shadow-[0_12px_30px_-10px_rgb(0_0_0/0.9)]"
             style={{ left: flip ? undefined : tooltipX + 10, right: flip ? width - tooltipX + 10 : undefined }}
           >
             <p className="mb-1 font-medium text-ink">{labels[active]}</p>

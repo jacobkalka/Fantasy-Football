@@ -309,7 +309,7 @@ function Calculator() {
                   key={p.id}
                   type="button"
                   onClick={() => setGet((g) => g.filter((x) => x !== p.id))}
-                  className="glass-chip inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-[12px]"
+                  className="bg-raised inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-[12px]"
                   aria-label={`Remove ${p.name}`}
                 >
                   {p.name} <Icon name="close" size={12} />

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Suspense } from "react";
 import { AccountButton } from "@/components/auth/AccountButton";
+import { AdminIndicator } from "./AdminIndicator";
 import { Icon } from "@/components/ui/Icon";
 import { BackButton } from "./BackButton";
 import { Wordmark } from "./Brand";
@@ -25,6 +26,7 @@ export function TopBar() {
             </Link>
           </div>
           <div className="flex items-center gap-0.5">
+            <AdminIndicator />
             <GlobalSearch variant="icon" />
             <Link
               href="/settings"
@@ -40,6 +42,7 @@ export function TopBar() {
       <header className="sticky top-0 z-30 hidden h-16 items-center gap-4 border-b border-line bg-ground px-10 lg:flex">
         <GlobalSearch variant="field" />
         <div className="flex-1" />
+        <AdminIndicator />
         <AccountButton />
       </header>
     </>

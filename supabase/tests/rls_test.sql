@@ -784,6 +784,41 @@ commit;
 
 
 -- -----------------------------------------------------------------------------
+\echo '12c. Admin Mode tables are server-only'
+-- -----------------------------------------------------------------------------
+begin;
+select test.login('alice');
+select test.fails($$select * from public.admin_attempts$$, 'a signed-in user cannot read admin attempts', '42501');
+select test.fails($$select * from public.admin_sessions$$, 'a signed-in user cannot read admin sessions', '42501');
+select test.fails($$insert into public.admin_sessions (id, user_id, token_hash, expires_at)
+  values (gen_random_uuid(), auth.uid(), repeat('a', 64), now() + interval '1 hour')$$,
+  'a signed-in user cannot create an admin session for themselves', '42501');
+select test.fails($$insert into public.admin_attempts (user_id, ip_hash, outcome) values (auth.uid(), repeat('a', 20), 'success')$$,
+  'a signed-in user cannot write to the attempt log', '42501');
+commit;
+
+begin;
+set local role anon;
+select test.fails($$select * from public.admin_sessions$$, 'a signed-out visitor cannot read admin sessions', '42501');
+commit;
+
+begin;
+set local role service_role;
+insert into public.admin_sessions (id, user_id, token_hash, expires_at)
+  values (gen_random_uuid(), test.id('alice'), repeat('b', 64), now() + interval '1 hour');
+insert into public.admin_attempts (user_id, ip_hash, outcome) values (test.id('alice'), repeat('c', 20), 'failure');
+select test.check((select count(*) from public.admin_sessions) = 1 and (select count(*) from public.admin_attempts) = 1,
+  'the server (secret key) keeps admin sessions and attempts');
+select test.fails($$insert into public.admin_sessions (id, user_id, token_hash, expires_at)
+  values (gen_random_uuid(), test.id('alice'), 'not-a-hash', now() + interval '1 hour')$$,
+  'admin sessions store only a token hash', '23514');
+commit;
+
+select test.check(not exists (select 1 from pg_policies where schemaname = 'public' and tablename in ('admin_attempts', 'admin_sessions')),
+  'the admin tables have no policies at all (server only)');
+
+
+-- -----------------------------------------------------------------------------
 \echo '13. Whole-database checks'
 -- -----------------------------------------------------------------------------
 select test.check(not exists (

@@ -7,11 +7,12 @@ import { Button, ButtonLink } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { Icon } from "@/components/ui/Icon";
 import { Segmented } from "@/components/ui/Segmented";
-import { useRoster } from "@/lib/roster/store";
+import { EspnLogin } from "@/components/teams/EspnLogin";
 import { LEAGUE_SIZES, settingsActions, useSettings, type LeagueSize } from "@/lib/settings/store";
+import { specLabel } from "@/lib/scoring/spec";
+import { teamsActions, useActiveTeam } from "@/lib/teams/store";
+import { AdminModeSection } from "./AdminModeSection";
 import { requestDurableStorage } from "@/lib/storage/persisted";
-
-const FORMAT_LABEL = { standard: "Standard", half: "Half PPR", ppr: "PPR" } as const;
 
 function Row({ label, hint, children }: { label: string; hint?: string; children: React.ReactNode }) {
   return (
@@ -73,8 +74,9 @@ function AppCard() {
 
 export function SettingsScreen() {
   const { value: settings, ready } = useSettings();
-  const { roster } = useRoster();
+  const { team } = useActiveTeam();
   const [durable, setDurable] = useState<boolean | null>(null);
+  const espn = team.espn;
 
   useEffect(() => {
     void navigator.storage?.persisted?.().then(setDurable).catch(() => setDurable(null));
@@ -83,35 +85,62 @@ export function SettingsScreen() {
   return (
     <div className="grid gap-4 lg:grid-cols-2 lg:items-start">
       <Card>
-        <h2 className="mb-4 text-[16px] leading-6 font-semibold">Your league</h2>
+        <h2 className="mb-1 text-[16px] leading-6 font-semibold">Your league</h2>
+        <p className="mb-4 text-[13px] text-muted">For {team.name}, the team selected on Home. Each team keeps its own.</p>
         <div className="flex flex-col divide-y divide-rule">
-          <Row label="Teams in your league" hint="Ratings and “likely available” pickups depend on it.">
-            <Segmented
-              options={LEAGUE_SIZES.map((n) => ({ value: String(n), label: String(n) }))}
-              value={String(settings.leagueSize)}
-              onChange={(v) => settingsActions.setLeagueSize(Number(v) as LeagueSize)}
-              label="Teams in your league"
-              size="sm"
-            />
+          <Row
+            label="Teams in your league"
+            hint={espn ? "From your ESPN league." : "Ratings and “likely available” pickups depend on it."}
+          >
+            {espn ? (
+              <span className="tabular text-[15px] font-medium">{team.leagueSize}</span>
+            ) : (
+              <Segmented
+                options={LEAGUE_SIZES.map((n) => ({ value: String(n), label: String(n) }))}
+                value={String(team.leagueSize)}
+                onChange={(v) => teamsActions.update(team.id, { leagueSize: Number(v) as LeagueSize })}
+                label="Teams in your league"
+                size="sm"
+              />
+            )}
           </Row>
-          <Row label="Scoring" hint={`${FORMAT_LABEL[roster.format]}. Set with your roster.`}>
-            <ButtonLink href="/team/edit" size="sm">
-              Change
-            </ButtonLink>
+          <Row label="Scoring" hint={`${specLabel({ format: team.format, rules: team.rules })}.${espn ? " From your ESPN league." : " Set with your roster."}`}>
+            {!espn && (
+              <ButtonLink href="/team/edit" size="sm">
+                Change
+              </ButtonLink>
+            )}
           </Row>
           <Row
             label="Players taken in your league"
-            hint={`${settings.taken.length} marked. Pickups skip them.`}
+            hint={espn ? `${team.taken.length} on other teams' rosters, from ESPN. Pickups skip them.` : `${team.taken.length} marked. Pickups skip them.`}
           >
-            <button
-              type="button"
-              disabled={!settings.taken.length}
-              onClick={settingsActions.clearTaken}
-              className="h-8 rounded-full px-3 text-[13px] text-muted hover:bg-raised hover:text-ink disabled:text-faint"
-            >
-              Clear list
-            </button>
+            {!espn && (
+              <button
+                type="button"
+                disabled={!team.taken.length}
+                onClick={() => teamsActions.update(team.id, { taken: [] })}
+                className="h-8 rounded-full px-3 text-[13px] text-muted hover:bg-raised hover:text-ink disabled:text-faint"
+              >
+                Clear list
+              </button>
+            )}
           </Row>
+        </div>
+      </Card>
+
+      <Card>
+        <h2 id="espn" className="mb-1 scroll-mt-20 text-[16px] leading-6 font-semibold">
+          ESPN connection
+        </h2>
+        <p className="mb-4 text-[13px] text-muted">
+          Public leagues need nothing. Private leagues (and private league chat) need your ESPN login, stored encrypted on the server.
+        </p>
+        <EspnLogin />
+        <div className="mt-4">
+          <ButtonLink href="/team/connect" size="sm" icon="link">
+            Connect a league
+          </ButtonLink>
         </div>
       </Card>
 
@@ -130,6 +159,18 @@ export function SettingsScreen() {
               value={ready ? settings.glass : "auto"}
               onChange={settingsActions.setGlass}
               label="Liquid glass"
+              size="sm"
+            />
+          </Row>
+          <Row label="Touchdown sound" hint="A short sound when one of your players scores, on the Live screen.">
+            <Segmented
+              options={[
+                { value: "off", label: "Off" },
+                { value: "on", label: "On" },
+              ]}
+              value={ready ? settings.tdSound : "off"}
+              onChange={settingsActions.setTdSound}
+              label="Touchdown sound"
               size="sm"
             />
           </Row>
@@ -153,6 +194,8 @@ export function SettingsScreen() {
       </Card>
 
       <AppCard />
+
+      <AdminModeSection />
 
       <Card>
         <h2 className="mb-4 text-[16px] leading-6 font-semibold">Your data</h2>

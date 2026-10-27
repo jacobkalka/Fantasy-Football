@@ -134,6 +134,8 @@ export interface StartSitResult {
   season: number;
   week: number;
   format: ScoringFormat;
+  /** "PPR", or "League scoring · PPR" when a league's own rules were used. */
+  scoringLabel?: string;
   /** Best first. */
   players: PlayerVerdict[];
   recommendation: Recommendation | null;

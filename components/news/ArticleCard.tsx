@@ -128,7 +128,7 @@ export function ArticleCard({
                 <PlayerLink
                   key={id}
                   id={id}
-                  className="glass-chip inline-flex items-center gap-1.5 rounded-full py-0.5 pr-2.5 pl-0.5 text-[12px] font-medium hover:bg-white/10"
+                  className="bg-raised inline-flex items-center gap-1.5 rounded-full py-0.5 pr-2.5 pl-0.5 text-[12px] font-medium hover:bg-well"
                 >
                   <PlayerAvatar name={nameOf(id)!} headshot={headshotUrl(id)} size={22} teamColor={visibleTeamColor(t)} />
                   {nameOf(id)}

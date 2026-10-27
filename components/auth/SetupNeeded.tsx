@@ -1,4 +1,3 @@
-import { TiltCard } from "@/components/motion/TiltCard";
 import { SUPABASE_SETUP_URL } from "@/lib/supabase/config";
 
 const COPY = {
@@ -19,21 +18,21 @@ const COPY = {
 export function SetupNeeded({ feature }: { feature: keyof typeof COPY }) {
   const copy = COPY[feature];
   return (
-    <TiltCard className="glass flex flex-col gap-4 p-6" max={5} style={{ "--glow": "rgb(94 230 255 / 0.35)" } as React.CSSProperties}>
-      <div className="flex items-center gap-3" style={{ transform: "translateZ(24px)" }}>
-        <span className="glass-chip flex size-11 items-center justify-center rounded-2xl text-sky" aria-hidden="true">
+    <div className="card flex flex-col gap-4 p-6">
+      <div className="flex items-center gap-3">
+        <span className="bg-raised flex size-11 items-center justify-center rounded-2xl text-muted" aria-hidden="true">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
             <ellipse cx="12" cy="6" rx="7" ry="3" />
             <path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6M5 12v6c0 1.7 3.1 3 7 3 1 0 2-.1 2.8-.3" />
             <path d="M18 16v5M15.5 18.5h5" />
           </svg>
         </span>
-        <p className="text-[12px] text-sky">Not connected yet</p>
+        <p className="text-[12px] text-muted">Not connected yet</p>
       </div>
       <div className="flex flex-col gap-2">
         <h2 className="text-[20px] leading-7 font-semibold text-ink">{copy.title}</h2>
-        <p className="text-[15px] leading-relaxed text-ink-soft">{copy.body}</p>
-        <p className="text-[15px] leading-relaxed text-ink-soft">
+        <p className="text-[15px] leading-relaxed text-muted">{copy.body}</p>
+        <p className="text-[15px] leading-relaxed text-muted">
           Everything else already works on this device: build your team, follow the live feed and watch the games.
         </p>
       </div>
@@ -41,14 +40,14 @@ export function SetupNeeded({ feature }: { feature: keyof typeof COPY }) {
         href={SUPABASE_SETUP_URL}
         target="_blank"
         rel="noreferrer"
-        className="glass-chip pressable flex min-h-11 items-center justify-between gap-3 rounded-2xl px-4 py-3 text-[14px] font-semibold text-ink"
+        className="tile pressable flex min-h-11 items-center justify-between gap-3 px-4 py-3 text-[14px] font-medium"
       >
         <span>How to connect it: setup guide, part 4</span>
-        <span aria-hidden="true" className="text-sky">
+        <span aria-hidden="true" className="text-muted">
           ↗
         </span>
         <span className="sr-only">(opens GitHub in a new tab)</span>
       </a>
-    </TiltCard>
+    </div>
   );
 }

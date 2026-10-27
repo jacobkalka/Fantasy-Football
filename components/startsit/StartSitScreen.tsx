@@ -11,6 +11,7 @@ import { usePoll } from "@/lib/hooks/usePoll";
 import { useTeams } from "@/lib/hooks/useTeams";
 import { isStarter } from "@/lib/roster/lineup";
 import { useRoster } from "@/lib/roster/store";
+import { specQuery } from "@/lib/scoring/spec";
 import type { ScoringFormat } from "@/lib/scoring";
 import { comparable, defaultPick, idsFromUrl, MAX_PICK, togglePick } from "@/lib/startsit/pick";
 import type { StartSitResult } from "@/lib/startsit/types";
@@ -48,7 +49,7 @@ function sameSet(a: string[], b: string[]) {
 }
 
 export function StartSitScreen() {
-  const { roster, ready } = useRoster();
+  const { roster, ready, team } = useRoster();
   const teams = useTeams();
   const params = useSearchParams();
   // Null until you tap a player: until then the URL (or a sensible default) decides.
@@ -76,7 +77,9 @@ export function StartSitScreen() {
 
   const fromUrl = idsFromUrl(params.get("ids"));
   const selection = picked ?? (fromUrl.length >= 2 ? fromUrl : defaultPick(roster.players));
-  const format = formatChoice ?? roster.format;
+  // The selected team's scoring: its league's exact rules unless you pick a format to compare in.
+  const format = formatChoice ?? team.format;
+  const rules = formatChoice === null || formatChoice === team.format ? team.rules : null;
 
   // Outside players named in the URL need their details from the full player list.
   const needsLookup = selection.some((id) => !mineIds.has(id) && !added.some((p) => p.playerId === id));
@@ -96,7 +99,7 @@ export function StartSitScreen() {
   const outsideIds = chosen.filter((p) => !p.onRoster).map((p) => p.playerId);
 
   // Sorted ids: A-vs-B and B-vs-A share one cached answer.
-  const query = selection.length >= 2 ? `ids=${[...selection].sort().join(",")}&format=${format}` : null;
+  const query = selection.length >= 2 ? `ids=${[...selection].sort().join(",")}&${specQuery({ format, rules })}` : null;
   const { data, error, refresh } = usePoll<StartSitResult>(query ? `/api/startsit?${query}` : null, {
     intervalMs: 5 * 60_000,
   });
@@ -152,7 +155,10 @@ export function StartSitScreen() {
       </Card>
 
       <div className="flex items-center justify-between gap-3">
-        <h2 className="text-[16px] leading-6 font-semibold">Head to head</h2>
+        <div className="min-w-0">
+          <h2 className="text-[16px] leading-6 font-semibold">Head to head</h2>
+          {rules && <p className="text-[12px] text-muted">Your league&apos;s exact scoring</p>}
+        </div>
         <Segmented options={FORMATS} value={format} onChange={setFormatChoice} label="Scoring format" size="sm" />
       </div>
 

@@ -171,7 +171,7 @@ export function BarChart({
         {activeBar && active !== null && (
           <div
             role="status"
-            className="glass-chip pointer-events-none absolute top-0 z-10 min-w-[128px] rounded-xl px-3 py-2 text-[12px] shadow-[0_12px_30px_-10px_rgb(0_0_0/0.9)]"
+            className="bg-raised pointer-events-none absolute top-0 z-10 min-w-[128px] rounded-xl px-3 py-2 text-[12px] shadow-[0_12px_30px_-10px_rgb(0_0_0/0.9)]"
             style={{ left: flip ? undefined : cxOf(active) + 12, right: flip ? width - cxOf(active) + 12 : undefined }}
           >
             <p className="font-medium text-ink">{activeBar.label}</p>

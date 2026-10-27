@@ -13,11 +13,11 @@ export function ComingUp({
       <h1 className="text-5xl leading-none font-bold">
         {title}
       </h1>
-      <div className="flex flex-col gap-2 border border-line bg-panel p-4">
-        <p className="text-[12px] text-gain">
+      <div className="card flex flex-col gap-2 p-4">
+        <p className="text-[13px] text-muted">
           Arrives in phase {phase}
         </p>
-        <div className="flex flex-col gap-2 text-[15px] leading-relaxed text-ink-soft">
+        <div className="flex flex-col gap-2 text-[15px] leading-relaxed text-muted">
           {children}
         </div>
       </div>

@@ -385,7 +385,7 @@ const COMPARE_TEXT: Partial<Record<FactorKey, (w: PlayerVerdict, r: PlayerVerdic
 };
 
 /** The reasons behind "start W over R", biggest difference in points first. */
-export function buildReasons(w: PlayerVerdict, r: PlayerVerdict, format: ScoringFormat): Reason[] {
+export function buildReasons(w: PlayerVerdict, r: PlayerVerdict, format: ScoringFormat, label: string = FORMAT_LABEL[format]): Reason[] {
   if (!r.playing) {
     return [
       {
@@ -398,7 +398,7 @@ export function buildReasons(w: PlayerVerdict, r: PlayerVerdict, format: Scoring
         key: "projection",
         impact: w.base,
         favors: w.playerId,
-        text: `${shortName(w.name)} is projected for ${one(w.score)} pts (${FORMAT_LABEL[format]}).`,
+        text: `${shortName(w.name)} is projected for ${one(w.score)} pts (${label}).`,
       },
     ];
   }
@@ -414,7 +414,7 @@ export function buildReasons(w: PlayerVerdict, r: PlayerVerdict, format: Scoring
     favors: favors(projDiff),
     text:
       noProjection.length === 0
-        ? `ESPN projects ${shortName(w.name)} for ${one(w.base)} pts and ${shortName(r.name)} for ${one(r.base)} (${FORMAT_LABEL[format]}).`
+        ? `ESPN projects ${shortName(w.name)} for ${one(w.base)} pts and ${shortName(r.name)} for ${one(r.base)} (${label}).`
         : `${noProjection.map((p) => shortName(p.name)).join(" and ")} ${noProjection.length > 1 ? "have" : "has"} no ESPN projection, so we started from the recent average: ${shortName(w.name)} ${one(w.base)}, ${shortName(r.name)} ${one(r.base)}.`,
   });
 
@@ -502,7 +502,7 @@ export function confidenceFor(chance: number): Confidence {
  * Scores and ranks 2+ players and recommends who to start.
  * Ties go to the higher floor (the safer play).
  */
-export function decide(players: PlayerFactors[], format: ScoringFormat) {
+export function decide(players: PlayerFactors[], format: ScoringFormat, label?: string) {
   const ranked = players
     .map(scorePlayer)
     .sort((a, b) => b.score - a.score || b.floor - a.floor || a.name.localeCompare(b.name));
@@ -533,7 +533,7 @@ export function decide(players: PlayerFactors[], format: ScoringFormat) {
     overId: r.playerId,
     confidence: confidenceFor(chance),
     chance: roundPoints(chance),
-    reasons: buildReasons(w, r, format),
+    reasons: buildReasons(w, r, format, label),
     notes: buildNotes(w, r),
   };
   return { players: ranked, recommendation, noRecommendation: undefined };

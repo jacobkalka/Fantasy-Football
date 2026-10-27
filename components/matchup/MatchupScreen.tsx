@@ -304,7 +304,7 @@ export function MatchupScreen() {
                 <h3 className="mt-4 mb-2 text-[13px] font-semibold">Driving the matchup</h3>
                 <div className="flex flex-wrap gap-1.5">
                   {reading.drivers.map(({ side, live: l }) => (
-                    <PlayerLink key={l.playerId} id={l.playerId} className="glass-chip inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[12px] hover:bg-white/10">
+                    <PlayerLink key={l.playerId} id={l.playerId} className="bg-raised inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[12px] hover:bg-well">
                       <span className={`size-1.5 rounded-full ${side === "me" ? "bg-[var(--color-chart-1)]" : "bg-[var(--color-chart-2)]"}`} aria-hidden="true" />
                       {shortName(l.name)} <span className="tabular font-semibold">{pts(l.points)}</span>
                     </PlayerLink>

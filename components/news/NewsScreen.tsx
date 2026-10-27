@@ -71,7 +71,7 @@ export function NewsScreen() {
             type="button"
             aria-pressed={category === c}
             onClick={() => setCategory(c)}
-            className={`pressable h-8 shrink-0 rounded-full px-3 text-[13px] ${category === c ? "bg-well font-medium text-ink" : "glass-chip text-muted hover:text-ink"}`}
+            className={`pressable h-8 shrink-0 rounded-full px-3 text-[13px] ${category === c ? "bg-well font-medium text-ink" : "bg-raised text-muted hover:text-ink"}`}
           >
             {c}
           </button>

@@ -13,7 +13,7 @@ import type {
   Scoreboard,
   Team,
 } from "@/lib/providers/types";
-import { roundPoints, rulesForFormat, scoreStatLine, type ScoringFormat } from "@/lib/scoring";
+import { roundPoints, rulesForFormat, scoreStatLine, type ScoringFormat, type ScoringRules } from "@/lib/scoring";
 import { MODEL } from "./model";
 import type { MatchupInput, PlayerFactors, VegasInput, WeatherInput } from "./types";
 
@@ -50,8 +50,8 @@ export interface PositionTable {
 export type DefenseTable = Record<OffensePosition, PositionTable>;
 
 /** Points allowed per game to each position, in this format, ranked 1 (toughest) to 32 (easiest). */
-export function rankDefenses(dvp: DefenseVsPosition, format: ScoringFormat): DefenseTable {
-  const rules = rulesForFormat(format);
+export function rankDefenses(dvp: DefenseVsPosition, format: ScoringFormat, custom?: Readonly<ScoringRules> | null): DefenseTable {
+  const rules = custom ?? rulesForFormat(format);
   const table = {} as DefenseTable;
   for (const position of OFFENSE_POSITIONS) {
     const rows = Object.entries(dvp.teams)
@@ -109,6 +109,8 @@ function weatherFor(game: Game): WeatherInput | null {
 
 export interface AssembleInput {
   format: ScoringFormat;
+  /** A league's own scoring (from an ESPN league), instead of the format's preset. */
+  rules?: Readonly<ScoringRules> | null;
   /** The week being decided. Only earlier weeks count as "recent form". */
   week: number;
   players: Player[];
@@ -124,8 +126,8 @@ export interface AssembleInput {
 
 /** One PlayerFactors per player, in the same order. Kickers and D/ST should be filtered out first. */
 export function assemblePlayerFactors(input: AssembleInput): PlayerFactors[] {
-  const rules = rulesForFormat(input.format);
-  const table = input.defense && input.defense.throughWeek > 0 ? rankDefenses(input.defense, input.format) : null;
+  const rules = input.rules ?? rulesForFormat(input.format);
+  const table = input.defense && input.defense.throughWeek > 0 ? rankDefenses(input.defense, input.format, input.rules) : null;
   const impliedAverage = weekImpliedAverage(input.scoreboard.games);
   const abbrById = new Map(input.teams.map((t) => [t.id, t.abbr]));
   const useInjuries = input.useInjuries ?? true;

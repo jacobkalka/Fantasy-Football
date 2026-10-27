@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "motion/react";
 import { UpdatedAgo } from "@/components/live/UpdatedAgo";
 import { WeekPicker } from "@/components/team/WeekPicker";
 import { Notice, SectionLabel } from "@/components/ui/bits";
@@ -32,24 +31,16 @@ function groupUpcoming(games: Game[], hydrated: boolean) {
   return [...groups.entries()];
 }
 
-const list = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.05 } },
-};
-const item = {
-  hidden: { opacity: 0, y: 18, scale: 0.98 },
-  show: { opacity: 1, y: 0, scale: 1, transition: { type: "spring" as const, stiffness: 260, damping: 24 } },
-};
-
+/** The cards arrive with the page (PageEnter animates every card). */
 function GameList({ games }: { games: Game[] }) {
   return (
-    <motion.ul className="flex flex-col gap-3" variants={list} initial="hidden" animate="show">
+    <ul className="flex flex-col gap-3">
       {games.map((game) => (
-        <motion.li key={game.id} variants={item} layout="position">
+        <li key={game.id}>
           <GameCard game={game} />
-        </motion.li>
+        </li>
       ))}
-    </motion.ul>
+    </ul>
   );
 }
 
@@ -78,7 +69,7 @@ export function GamesBoard({ initial, currentWeek }: { initial: Stamped<Scoreboa
 
       {live.length > 0 && (
         <section>
-          <SectionLabel className="text-gain">Live now</SectionLabel>
+          <SectionLabel className="text-live">Live now</SectionLabel>
           <GameList games={live} />
         </section>
       )}

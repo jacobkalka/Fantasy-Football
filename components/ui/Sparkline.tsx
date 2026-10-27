@@ -26,7 +26,7 @@ export function Sparkline({
       <polyline
         points={points}
         fill="none"
-        stroke={last >= 0 ? "var(--color-gain)" : "var(--color-loss)"}
+        stroke={last >= 0 ? "var(--color-positive)" : "var(--color-negative)"}
         strokeWidth="1.6"
         strokeLinejoin="round"
         strokeLinecap="round"
