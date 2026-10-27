@@ -15,7 +15,8 @@ import { ReactionPicker } from "./ReactionPicker";
 import { SharedPlayCard } from "./SharedPlayCard";
 
 /** The reactions offered one tap away on hover; the rest are in the picker. */
-const QUICK: Reaction[] = ["❤️", "🔥", "😂", "👀"];
+// These emoji are the chat's reaction set (content people send), not UI icons.
+const QUICK: Reaction[] = ["❤️", "🔥", "😂", "👀"]; // taste-skill-ignore
 
 export interface MessageHandlers {
   onReact: (message: ChatMessage, emoji: Reaction) => void;

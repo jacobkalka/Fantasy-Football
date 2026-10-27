@@ -28,7 +28,10 @@ export function SectionTabs({ section: sectionHref, current }: { section: string
       gsap.set(line, { width: 0 });
       return;
     }
-    const to = { x: target.offsetLeft + 12, width: target.offsetWidth - 24 };
+    const style = getComputedStyle(target);
+    const left = parseFloat(style.paddingLeft) || 0;
+    const right = parseFloat(style.paddingRight) || 0;
+    const to = { x: target.offsetLeft + left, width: target.offsetWidth - left - right };
     const reduce = prefersReducedMotion();
     if (last && last.section === sectionHref && !reduce && (last.x !== to.x || last.width !== to.width)) {
       gsap.fromTo(line, { x: last.x, width: last.width }, { ...to, duration: MOTION.base, ease: "power3.out" });
@@ -38,14 +41,15 @@ export function SectionTabs({ section: sectionHref, current }: { section: string
     last = { section: sectionHref, ...to };
     // Keep the active tab in view on narrow screens.
     if (target.offsetLeft + target.offsetWidth > root.scrollLeft + root.clientWidth || target.offsetLeft < root.scrollLeft) {
-      root.scrollLeft = target.offsetLeft - 16;
+      root.scrollLeft = target.offsetLeft;
     }
   }, [sectionHref, current]);
 
   if (!section?.children) return null;
   return (
-    <nav aria-label={`${section.label} pages`} className="-mx-4 mb-1 border-b border-line sm:mx-0">
-      <div ref={list} className="no-scrollbar relative flex overflow-x-auto px-1 sm:px-0">
+    // Inside the page's gutter, so on a phone the row scrolls without text reaching the screen edge.
+    <nav aria-label={`${section.label} pages`} className="mb-1 border-b border-line">
+      <div ref={list} className="no-scrollbar relative flex overflow-x-auto">
         {section.children.map((tab) => {
           const on = active?.href === tab.href;
           return (
@@ -53,7 +57,7 @@ export function SectionTabs({ section: sectionHref, current }: { section: string
               key={tab.href}
               href={tab.href}
               aria-current={on ? "page" : undefined}
-              className={`flex h-11 shrink-0 items-center px-3 text-[14px] whitespace-nowrap transition-colors ${
+              className={`flex h-11 shrink-0 items-center px-3 text-[14px] whitespace-nowrap transition-colors first:pl-0 last:pr-0 ${
                 on ? "font-medium text-ink" : "text-muted hover:text-ink"
               }`}
             >

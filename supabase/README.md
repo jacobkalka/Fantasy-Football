@@ -5,7 +5,7 @@ This folder is the blueprint for the app's database: which tables exist and, jus
 
 | Path | What it is |
 |------|------------|
-| `migrations/` | The blueprint itself, as SQL files. Each file is one step; they run in filename order (the number at the start is a date). Today there's one: `20261022000000_init.sql`. |
+| `migrations/` | The blueprint itself, as SQL files. Each file is one step; they run in filename order (the number at the start is a date). Today there are three: `20261022000000_init.sql` (tables, rosters, chat), `20261026000000_community.sql` (channels, threads, polls, unread counts, public profiles, verified league rooms) and `20261027000000_admin_mode.sql` (server-only Admin Mode tables). |
 | `tests/local_stub.sql` | A fake, bare-bones "Supabase" used **only** by the automatic tests. |
 | `tests/rls_test.sql` | The security tests: they sign in as pretend users and try to break every rule. |
 

@@ -28,9 +28,7 @@ function EventRow({ event }: { event: ChatEvent }) {
       <div className="min-w-0 flex-1">
         <p className="flex flex-wrap items-baseline gap-x-2 text-[12px] text-faint">
           <span className="font-semibold text-ink">{event.title}</span>
-          {event.detail && (
-            <span className="tabular text-muted">{event.detail}</span>
-          )}
+          {event.detail && <span className="tabular text-muted">{event.detail}</span>}
           <span>Scoring play · ESPN · {messageTime(event.at)}</span>
         </p>
         <p className="mt-0.5 text-[13px] leading-5 text-muted">{event.text}</p>
@@ -41,20 +39,13 @@ function EventRow({ event }: { event: ChatEvent }) {
 
 function LoadingRows() {
   return (
-    <div
-      className="flex flex-col gap-4 px-2 py-4"
-      role="status"
-      aria-label="Loading messages"
-    >
+    <div className="flex flex-col gap-4 px-2 py-4" role="status" aria-label="Loading messages">
       {[64, 40, 78, 52].map((width, i) => (
         <div key={i} className="flex gap-3" aria-hidden="true">
           <div className="skeleton size-9 shrink-0 rounded-full" />
           <div className="flex flex-1 flex-col gap-2">
             <div className="skeleton h-3.5 w-28 rounded" />
-            <div
-              className="skeleton h-4 rounded"
-              style={{ width: `${width}%` }}
-            />
+            <div className="skeleton h-4 rounded" style={{ width: `${width}%` }} />
           </div>
         </div>
       ))}
@@ -85,10 +76,7 @@ export function MessageList({
   /** Shown above the messages (a thread's first message). */
   top?: React.ReactNode;
   empty: React.ReactNode;
-  handlers: Omit<
-    MessageHandlers,
-    "onJumpTo" | "onVote" | "onRetry" | "onDiscard"
-  >;
+  handlers: Omit<MessageHandlers, "onJumpTo" | "onVote" | "onRetry" | "onDiscard">;
 }) {
   const scroller = useRef<HTMLDivElement>(null);
   const content = useRef<HTMLDivElement>(null);
@@ -103,12 +91,8 @@ export function MessageList({
   const sent = messages.filter((m) => !m.pending);
   const newest = sent.at(-1)?.createdAt ?? "";
   const last = messages.at(-1);
-  const timeline = now
-    ? buildTimeline(messages, me, new Date(now), events)
-    : [];
-  const unseen = sent.filter(
-    (m) => m.userId !== me && m.createdAt > seenAt,
-  ).length;
+  const timeline = now ? buildTimeline(messages, me, new Date(now), events) : [];
+  const unseen = sent.filter((m) => m.userId !== me && m.createdAt > seenAt).length;
   const latestOther = sent.findLast((m) => m.userId !== me && !m.deleted);
   const announcement = latestOther
     ? `New message from ${state.profiles[latestOther.userId]?.username ?? "someone"}: ${maskProfanity(decodeMessageBody(latestOther.body).text) || "shared something"}`
@@ -161,8 +145,7 @@ export function MessageList({
     const el = content.current;
     if (!el || typeof ResizeObserver === "undefined") return;
     const observer = new ResizeObserver(() => {
-      if (bottom.current && scroller.current)
-        scroller.current.scrollTop = scroller.current.scrollHeight;
+      if (bottom.current && scroller.current) scroller.current.scrollTop = scroller.current.scrollHeight;
     });
     observer.observe(el);
     return () => observer.disconnect();
@@ -171,8 +154,7 @@ export function MessageList({
   // Reached the newest (and the app is on screen): it's read.
   useEffect(() => {
     if (!ready || !atBottom || inThread) return;
-    const mark = () =>
-      document.visibilityState === "visible" && store.markSeen();
+    const mark = () => document.visibilityState === "visible" && store.markSeen();
     mark();
     document.addEventListener("visibilitychange", mark);
     return () => document.removeEventListener("visibilitychange", mark);
@@ -184,8 +166,7 @@ export function MessageList({
     const fromBottom = el.scrollHeight - el.scrollTop;
     await store.loadOlder();
     requestAnimationFrame(() => {
-      if (scroller.current)
-        scroller.current.scrollTop = scroller.current.scrollHeight - fromBottom;
+      if (scroller.current) scroller.current.scrollTop = scroller.current.scrollHeight - fromBottom;
     });
   }
 
@@ -196,8 +177,7 @@ export function MessageList({
     bottom.current = near;
     if (near !== atBottom) setAtBottom(near);
     if (near) setSeenAt(newest);
-    if (el.scrollTop < 200 && state.hasOlder && !state.loadingOlder)
-      void loadOlder();
+    if (el.scrollTop < 200 && state.hasOlder && !state.loadingOlder) void loadOlder();
   }
 
   function jumpTo(id: string) {
@@ -227,10 +207,7 @@ export function MessageList({
     onDiscard: (message) => store.discard(message.id),
   };
   const quoted = (message: ChatMessage) =>
-    message.replyTo
-      ? (state.messages.find((m) => m.id === message.replyTo) ??
-        state.quoted[message.replyTo])
-      : undefined;
+    message.replyTo ? (state.messages.find((m) => m.id === message.replyTo) ?? state.quoted[message.replyTo]) : undefined;
 
   return (
     <div className="relative flex min-h-0 flex-1 flex-col">
@@ -252,9 +229,7 @@ export function MessageList({
                 disabled={state.loadingOlder}
                 className="rounded-full px-3 py-1.5 text-[13px] text-muted hover:bg-raised hover:text-ink disabled:opacity-60"
               >
-                {state.loadingOlder
-                  ? "Loading earlier messages…"
-                  : "Load earlier messages"}
+                {state.loadingOlder ? "Loading earlier messages…" : "Load earlier messages"}
               </button>
             </div>
           )}
@@ -303,9 +278,7 @@ export function MessageList({
           onClick={() => scrollToBottom(true)}
           className="pressable absolute bottom-3 left-1/2 z-10 flex h-9 -translate-x-1/2 items-center gap-1.5 rounded-full bg-ink px-4 text-[13px] font-medium text-black shadow-[0_6px_20px_rgb(0_0_0/0.5)]"
         >
-          {unseen > 0
-            ? `${unseen} new ${unseen === 1 ? "message" : "messages"}`
-            : "Latest"}
+          {unseen > 0 ? `${unseen} new ${unseen === 1 ? "message" : "messages"}` : "Latest"}
           <Icon name="arrowDown" size={15} />
         </button>
       )}

@@ -430,13 +430,13 @@ try {
   let response = await page.goto(`${BASE}/feed`, { waitUntil: "load" });
   check(
     "Navigating to a visited page shows its saved copy",
-    response?.status() === 200 && response.fromServiceWorker() && (await page.title()).startsWith("Plays"),
+    response?.status() === 200 && response.fromServiceWorker() && (await page.title()).startsWith("Live"),
     `status ${response?.status()}, from service worker: ${response?.fromServiceWorker()}, title "${await page.title()}"`,
   );
   response = await page.reload({ waitUntil: "load" });
   check(
     "Reloading a visited page while offline works",
-    response?.fromServiceWorker() && (await page.title()).startsWith("Plays"),
+    response?.fromServiceWorker() && (await page.title()).startsWith("Live"),
     `title "${await page.title()}"`,
   );
   const offlineApi2 = await page.evaluate(async () => {
@@ -498,7 +498,7 @@ try {
   const elapsed = Date.now() - started;
   check(
     "A slow page falls back to its saved copy after about 3 s",
-    response?.fromServiceWorker() && elapsed < 5500 && (await page.title()).startsWith("Plays"),
+    response?.fromServiceWorker() && elapsed < 5500 && (await page.title()).startsWith("Live"),
     `shown after ${elapsed} ms (server answers after 6000 ms)`,
   );
   await page.waitForTimeout(4000); // let the slow response finish and refresh the saved copy

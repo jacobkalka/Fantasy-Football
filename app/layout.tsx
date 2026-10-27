@@ -10,11 +10,7 @@ import { LeagueSync } from "@/components/teams/LeagueSync";
 import { HydrationMarker } from "@/components/motion/hydration";
 import { MotionPreferenceSync } from "@/components/motion/MotionPreferenceSync";
 import { PwaRoot } from "@/components/pwa";
-import {
-  BottomBar,
-  BottomBarFrame,
-  BottomBarLinks,
-} from "@/components/shell/BottomBar";
+import { BottomBar, BottomBarFrame, BottomBarLinks } from "@/components/shell/BottomBar";
 import { Sidebar, SidebarFrame, SidebarNav } from "@/components/shell/Sidebar";
 import { TopBar } from "@/components/shell/TopBar";
 import { APP_DESCRIPTION, APP_NAME } from "@/lib/config";
@@ -38,11 +34,7 @@ export const viewport: Viewport = { ...pwaViewport };
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     // data-motion and data-standalone are set by the head scripts before React starts, hence suppressHydrationWarning.
-    <html
-      lang="en"
-      className={`${inter.variable} h-full antialiased`}
-      suppressHydrationWarning
-    >
+    <html lang="en" className={`${inter.variable} h-full antialiased`} suppressHydrationWarning>
       <head>
         {/* Decide full or reduced animations before anything paints (lib/motion/preference.ts). */}
         <script dangerouslySetInnerHTML={{ __html: MOTION_BOOT_SCRIPT }} />

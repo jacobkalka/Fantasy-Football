@@ -34,9 +34,9 @@ function groupUpcoming(games: Game[], hydrated: boolean) {
 /** The cards arrive with the page (PageEnter animates every card). */
 function GameList({ games }: { games: Game[] }) {
   return (
-    <ul className="flex flex-col gap-3">
+    <ul className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
       {games.map((game) => (
-        <li key={game.id}>
+        <li key={game.id} className="min-w-0">
           <GameCard game={game} />
         </li>
       ))}

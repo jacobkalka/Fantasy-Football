@@ -128,10 +128,45 @@ Supabase stores accounts, rosters and chat, and pushes live updates to everyone'
      application) with redirect URI `https://<project-ref>.supabase.co/auth/v1/callback`, then
      paste its ID and secret under **Authentication → Sign In / Providers → Google**. The Google
      button appears in FantasyLab by itself once this is on.
-9. **Realtime**: the migration already turns it on for chat. Check under **Database →
-   Publications** that `messages` and `message_reactions` are listed.
+9. **Realtime**: the migrations already turn it on for chat. Check under **Database →
+   Publications** that `messages`, `message_reactions`, `chat_poll_votes` and `chat_rooms` are
+   listed. (There are three migration files now: the original tables, the community chat and
+   public profiles, and Admin Mode. Run all three, oldest first.)
 10. Make yourself the chat moderator: in **SQL Editor** run
     `update public.profiles set is_admin = true where username = 'your-username';`
+### 4b. Private ESPN leagues and league chat
+
+Public ESPN leagues work with nothing extra. For **private** leagues (and the private league
+chat room, which checks with ESPN that you're really in the league), the server stores your ESPN
+login encrypted:
+
+1. Make a random key on your computer: open Terminal and run `openssl rand -base64 32`.
+2. Add it to Vercel as `ESPN_COOKIE_ENCRYPTION_KEY` (part 3). It needs `SUPABASE_SECRET_KEY` too.
+3. In the app: **Settings → ESPN connection**, or **Team → Connect a league**, and follow the
+   steps there to paste the two ESPN values (`espn_s2` and `SWID`).
+
+### 4c. Admin Mode (optional)
+
+Admin Mode is switched on in **Settings → Admin Mode** by typing the administrator code. The
+code is checked only on the server. It is never in the app's code, GitHub, or any file: you give
+the server a scrambled version of it (a "hash") that can check a typed code but can't be turned
+back into it.
+
+1. On your own computer, in the project folder, run `node scripts/admin-code-hash.mjs`. Type the
+   code when it asks (it isn't shown). It prints one line starting `ADMIN_ACCESS_CODE_HASH=`.
+2. In Vercel → Project → **Settings → Environment Variables**, add:
+   - `ADMIN_ACCESS_CODE_HASH` = the long value after the `=` from step 1.
+   - `ADMIN_SESSION_SECRET` = a new random value from `openssl rand -base64 32`.
+   Both must be plain names: never add `NEXT_PUBLIC_` to them.
+3. Make sure the Admin Mode migration ran (part 4, step 7) and `SUPABASE_SECRET_KEY` is set.
+4. Redeploy. If anything is missing, Admin Mode simply says it isn't set up: there's no
+   built-in code to fall back to.
+
+How it's protected: you must be signed in; every wrong code gets the same answer after the same
+delay; 5 wrong codes in 15 minutes (or 20 in a day) lock that account and that network for a
+while; a correct code gives this browser an 8-hour Admin Mode that the server re-checks on every
+request, and **Disable Admin Mode** ends it at once. To change the code, make a new hash and
+replace the Vercel value.
 
 ## 5. The live-data worker (Railway)
 

@@ -49,14 +49,12 @@ export function FieldBar({ away, home, field }: { away: Team; home: Team; field:
       <div className="relative h-12 overflow-hidden rounded-xl" style={{ perspective: 400 }}>
         <div
           className="absolute inset-0"
-          style={{
-            transform: "rotateX(28deg)",
-            transformOrigin: "50% 100%",
-            background:
-              // Yard lines every 10% on the nested-panel grey (no green turf: colour is for data).
-              "repeating-linear-gradient(90deg, rgb(255 255 255 / 0.14) 0 1px, transparent 1px 10%), var(--color-well)",
-          }}
+          style={{ transform: "rotateX(28deg)", transformOrigin: "50% 100%", background: "var(--color-well)" }}
         >
+          {/* Yard lines every 10 yards on the nested-panel grey (no green turf: colour is for data). */}
+          {Array.from({ length: 9 }, (_, i) => (
+            <span key={i} aria-hidden="true" className="absolute inset-y-0 w-px bg-control" style={{ left: `${8 + (i + 1) * 8.4}%` }} />
+          ))}
           <div className="absolute inset-y-0 left-0 w-[8%]" style={{ background: `${visibleTeamColor(away)}99` }} />
           <div className="absolute inset-y-0 right-0 w-[8%]" style={{ background: `${visibleTeamColor(home)}99` }} />
           {/* Red zone shading near the goal the offense is attacking. */}

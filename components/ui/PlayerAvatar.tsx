@@ -9,13 +9,13 @@ function initials(name: string) {
 }
 
 /**
- * A player's headshot on a dark disc with a thin ring in their team's colour. Falls back
- * to initials if ESPN has no photo (common for rookies and practice-squad players).
+ * A player's headshot on a flat grey disc (colour is kept for data, so no team tint or ring).
+ * Falls back to initials if ESPN has no photo (common for rookies and practice-squad players).
+ * `teamColor` is accepted from callers but not drawn.
  */
 export function PlayerAvatar({
   name,
   headshot,
-  teamColor = "#5a6570",
   size = 44,
   className = "",
 }: {
@@ -29,13 +29,8 @@ export function PlayerAvatar({
   const showPhoto = headshot && !failed;
   return (
     <span
-      className={`relative inline-flex shrink-0 items-end justify-center overflow-hidden rounded-full ${className}`}
-      style={{
-        width: size,
-        height: size,
-        background: `color-mix(in srgb, ${teamColor} 22%, #161616)`,
-        boxShadow: `inset 0 0 0 1.5px color-mix(in srgb, ${teamColor} 80%, transparent)`,
-      }}
+      className={`relative inline-flex shrink-0 items-end justify-center overflow-hidden rounded-full bg-well ${className}`}
+      style={{ width: size, height: size }}
     >
       {showPhoto ? (
         <Image

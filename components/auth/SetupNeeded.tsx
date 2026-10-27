@@ -3,11 +3,11 @@ import { SUPABASE_SETUP_URL } from "@/lib/supabase/config";
 const COPY = {
   accounts: {
     title: "Sign-in is almost here",
-    body: "Accounts save your team so it follows you to any phone or laptop, and they unlock chat. They switch on once the app's database (Supabase) is connected, which hasn't happened yet.",
+    body: "Accounts save your team so it follows you to any phone or laptop, and they're what chat runs on. They switch on once the app's database (Supabase) is connected, which hasn't happened yet.",
   },
   chat: {
     title: "Chat is almost here",
-    body: "A room for everyone, a room for every NFL game, and one for your league. Chat needs accounts, and accounts switch on once the app's database (Supabase) is connected, which hasn't happened yet.",
+    body: "Channels for start/sit, trades and waivers, a room for every NFL game and player, and one for your league. Chat needs accounts, and accounts switch on once the app's database (Supabase) is connected, which hasn't happened yet.",
   },
 } as const;
 
