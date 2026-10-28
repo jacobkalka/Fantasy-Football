@@ -1,6 +1,6 @@
 @AGENTS.md
 
-# FantasyLab: project handoff
+# Xpert (formerly FantasyLab): project handoff
 
 Durable facts for any new session. The code is the source of truth; `DECISIONS.md` holds the
 why (one row per decision, superseded ones struck through). Don't duplicate it here; link to it.
@@ -11,8 +11,10 @@ why (one row per decision, superseded ones struck through). Don't duplicate it h
 2. `git status`, `git log --oneline -15`, `git worktree list`. Vercel deploys branch
    `claude/epic-lamport-wvbbwz` to https://fantasy-football-xi-ecru.vercel.app. The 2026-10-26
    session worked on `claude/keen-lamport-ibcbi9` and fast-forwarded `claude/epic-lamport-wvbbwz`
-   to it on 2026-10-27, so both hold everything below and the live site deploys it. Push only the branch your session was given; don't
-   open PRs unless asked.
+   to it on 2026-10-27. The Xpert rename and phone app (2026-10-27/28) are on
+   `claude/keen-lamport-ibcbi9` only: **don't merge them into the deploy branch until the owner
+   confirms the web app still works** (their rule). Push only the branch your session was given;
+   don't open PRs unless asked.
 3. Read the code you'll touch before changing it. Look before you build (fetch ESPN, save a
    sample under `samples/`, build against it).
 4. After substantial work, update this file (state, unfinished list) and `DECISIONS.md`, so the
@@ -21,8 +23,10 @@ why (one row per decision, superseded ones struck through). Don't duplicate it h
 
 ## What it is
 
-FantasyLab is a mobile-first fantasy football web app/PWA for an owner with no coding
-experience. It turns live NFL data into decisions: what your team scored play by play, who to
+Xpert is a mobile-first fantasy football web app/PWA, plus an Android/iPhone app that wraps the
+live site, for an owner with no coding experience. It was called FantasyLab until 2026-10-27;
+that name survives only in internal identifiers (storage keys `fantasylab:*`, cache names,
+globals, comments), which must not be renamed. It turns live NFL data into decisions: what your team scored play by play, who to
 start, how good your roster is, and what to fix. Built on real ESPN data only (never fabricated
 numbers). Not affiliated with ESPN or the NFL.
 
@@ -32,7 +36,8 @@ Next.js 16.4.2 (App Router, `cacheComponents`, `"use cache: remote"` + custom `c
 profiles in `next.config.ts`), React 19.3 (React compiler lint rules), TypeScript, Tailwind 4
 (`@theme` tokens in `app/globals.css`), GSAP 3.15 + `@gsap/react` (the only animation library),
 Supabase (`@supabase/ssr`, Postgres + Auth + Realtime), Anthropic SDK (optional Start/Sit
-wording), zod, Vitest 5, Node ≥ 22. Hosting: Vercel (app), Railway (worker, optional).
+wording), zod, Vitest 5, Node ≥ 22. Hosting: Vercel (app), Railway (worker, optional). Phone app:
+Capacitor 8.5.3 (`@capacitor/core|android|ios|cli`, `@capacitor/app` 8.1.2) in `server.url` mode.
 
 ## Map
 
@@ -66,7 +71,13 @@ wording), zod, Vitest 5, Node ≥ 22. Hosting: Vercel (app), Railway (worker, op
 - `worker/`: Node live-data poller (ESPN → Supabase) for Railway, with replay mode; own README.
 - `samples/`: real, trimmed ESPN responses tests are built against (incl. an anonymized league).
 - `scripts/`: `test-db.sh`, `test-pwa.mjs`, `store-screenshots.mjs`, `admin-code-hash.mjs`.
-- `docs/SETUP.md`: click-by-click setup for Vercel, Supabase, private leagues, Admin Mode, Railway.
+- `docs/SETUP.md`: click-by-click setup for Vercel, Supabase, private leagues, Admin Mode, Railway,
+  and part 6, the phone app (sideloading, Android Studio, iPhone options, icon/splash swap).
+- Phone app: `capacitor.config.ts` (loads the production URL; app ID `com.xpertfantasy.app`),
+  `android/` and `ios/` (generated native projects, committed; `npx cap sync` after config or
+  plugin changes), `native/www/` (required stub + `offline.html`), `assets/` (icon/splash
+  sources from `scripts/native-assets.mjs`), `lib/native/platform.ts` (`isNativeApp()`, set by
+  the head script in `lib/pwa/boot.ts`), `.github/workflows/android-test-app.yml` (debug APK).
 
 ## Built and working
 
@@ -118,6 +129,13 @@ wording), zod, Vitest 5, Node ≥ 22. Hosting: Vercel (app), Railway (worker, op
   when caching rules change. Updates wait for the user's tap. Only production registers it.
 - **Analysis honesty:** ratings/trades/pickups come from `lib/analysis` with explained
   methods; "likely available" is an estimate; never fabricate player facts.
+- **Phone app:** one codebase. The app loads the production site; never fork screens into
+  native code. Native-only features check `isNativeApp()` (`lib/native/platform.ts`) and leave
+  the website unchanged; the website never depends on the app. Rename only visible text, never
+  storage keys, caches, env vars or tables. Never change the logo or design; regenerate
+  icons/splash only from `assets/` with `@capacitor/assets ... --android --ios` (without the
+  flags it overwrites website icons and adds a `public/manifest.webmanifest` that clashes with
+  `app/manifest.ts`). Never commit signing keys. Never handle an ESPN or Yahoo password.
 
 ## Data and scoring assumptions
 
@@ -137,6 +155,11 @@ this sandbox `PLAYWRIGHT_CORE=/opt/node22/lib/node_modules/playwright
 CHROME_PATH=/opt/pw-browsers/chromium-1243/chrome-linux64/chrome`).
 Last full run (2026-10-27): lint clean, 633 tests, build OK, 170 DB checks, PWA 48/48, Taste
 lint 0 FAIL and inspect 0 FAIL on the main screens. (PWA: 45/48 on the full run, the 3 misses were the test still expecting the old "Plays" title; fixed and re-run 40/40 with the update and dev rounds skipped, which had passed.)
+Phone app: after `npx cap sync`, `cd android && ANDROID_HOME=<sdk> ./gradlew assembleDebug`. The
+sandbox has no Android SDK by default (one session installed it at `/opt/android-sdk` from
+Google's cmdline-tools, checksum verified); Maven Central rate-limits this machine (HTTP 429), so
+pass a scratch `--init-script` that puts Google's mirror
+`https://maven-central.storage-download.googleapis.com/maven2/` first. iOS can't be built here.
 Sandbox: kill servers by process group, never `pkill` by pattern; a scratch copy with
 hard-linked `node_modules` is the safe place for builds while editing elsewhere. Root-layout
 changes may need a `next dev` restart to show. Chat can only be clicked through here against a

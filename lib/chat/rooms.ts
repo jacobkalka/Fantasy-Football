@@ -22,7 +22,7 @@ export const CHANNELS: readonly ChannelDef[] = [
   {
     key: "general",
     title: "General",
-    description: "The whole FantasyLab community: news, hot takes, predictions, anything fantasy.",
+    description: "The whole Xpert community: news, hot takes, predictions, anything fantasy.",
     icon: "hash",
     placeholder: "Message General",
   },

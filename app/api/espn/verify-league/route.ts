@@ -29,7 +29,7 @@ export async function POST(request: Request) {
     const saved = await readCredentials(user.id);
     if (!saved) {
       return Response.json(
-        { error: "Connect your ESPN account so FantasyLab can confirm you're in this league.", code: "connect" },
+        { error: "Connect your ESPN account so Xpert can confirm you're in this league.", code: "connect" },
         { status: 401, headers: noStore },
       );
     }

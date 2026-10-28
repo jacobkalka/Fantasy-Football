@@ -50,7 +50,7 @@ export function BringYourTeam() {
           Built your team in the browser?
         </h2>
         <p className="mt-1 text-[14px] leading-5 text-muted">
-          The Home Screen app keeps its own saved data, separate from your browser, so your team isn&apos;t here yet. Paste
+          This app keeps its own saved data, separate from your browser, so your team isn&apos;t here yet. Paste
           the team link you copied, or sign in if your team is saved to an account.
         </p>
       </div>

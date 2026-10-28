@@ -21,7 +21,7 @@ export function TopBar() {
             <Suspense fallback={null}>
               <BackButton />
             </Suspense>
-            <Link href="/" aria-label="FantasyLab home" className="-ml-1 rounded-lg p-1">
+            <Link href="/" aria-label="Xpert home" className="-ml-1 rounded-lg p-1">
               <Wordmark height={19} />
             </Link>
           </div>

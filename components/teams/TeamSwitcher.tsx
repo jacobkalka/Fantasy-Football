@@ -119,7 +119,7 @@ export function TeamSwitcher({ variant = "chip" }: { variant?: "hero" | "chip" }
                         <button
                           type="button"
                           onClick={() => {
-                            if (window.confirm(`Remove ${t.name} from FantasyLab on this device?`)) teamsActions.remove(t.id);
+                            if (window.confirm(`Remove ${t.name} from Xpert on this device?`)) teamsActions.remove(t.id);
                           }}
                           className="pressable grid size-10 shrink-0 place-items-center rounded-full text-negative hover:bg-negative-soft"
                           aria-label={`Remove ${t.name}`}

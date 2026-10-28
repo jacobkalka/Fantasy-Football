@@ -43,7 +43,7 @@ export function startHealthServer(
     }
     if (path === "/") {
       response.writeHead(200, { "content-type": "text/plain; charset=utf-8" });
-      response.end("FantasyLab live-data worker. Status: /health\n");
+      response.end("Xpert live-data worker. Status: /health\n");
       return;
     }
     response.writeHead(404).end();

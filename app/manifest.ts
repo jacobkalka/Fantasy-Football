@@ -69,7 +69,7 @@ export default function manifest(): MetadataRoute.Manifest {
         sizes: "1440x900",
         type: "image/png",
         form_factor: "wide",
-        label: "FantasyLab on a computer",
+        label: `${APP_NAME} on a computer`,
       },
     ],
     // Long-press the app icon (Android, desktop) to jump straight to these screens.

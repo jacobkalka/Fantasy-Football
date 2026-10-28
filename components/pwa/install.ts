@@ -1,13 +1,14 @@
 "use client";
 
 import { useSyncExternalStore } from "react";
+import { isNativeApp } from "@/lib/native/platform";
 import { INSTALL_EVENT } from "@/lib/pwa/boot";
 
 /**
- * How FantasyLab can be installed on the device you're using, if at all. Each browser does
+ * How Xpert can be installed on the device you're using, if at all. Each browser does
  * it differently, and only Chrome-family browsers let a site show the install dialog itself:
  *
- * - installed     running as the installed app right now
+ * - installed     running as the installed app right now (the web app, or the iPhone/Android app)
  * - just-installed installed from this browser tab a moment ago (the tab itself stays a tab)
  * - prompt        Chrome, Edge, Samsung Internet: our Install button opens the browser's dialog
  * - ios-safari    iPhone/iPad Safari: Share → Add to Home Screen (sites can't open it for you)
@@ -76,7 +77,7 @@ function subscribe(onChange: () => void) {
   const queries = DISPLAY_MODES.map((mode) => window.matchMedia(`(display-mode: ${mode})`));
   const onDisplayChange = () => {
     // Chrome on a computer can move this tab into the app window right after installing.
-    const standalone = queries.some((q) => q.matches);
+    const standalone = queries.some((q) => q.matches) || isNativeApp();
     document.documentElement.toggleAttribute("data-standalone", standalone);
     onChange();
   };

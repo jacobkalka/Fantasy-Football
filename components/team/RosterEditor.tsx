@@ -44,7 +44,7 @@ export function RosterEditor() {
     const url = teamLink(roster, window.location.origin);
     try {
       if (navigator.share && window.matchMedia("(pointer: coarse)").matches) {
-        await navigator.share({ title: `${roster.name || "My Team"} on FantasyLab`, url });
+        await navigator.share({ title: `${roster.name || "My Team"} on Xpert`, url });
         return;
       }
       await navigator.clipboard.writeText(url);

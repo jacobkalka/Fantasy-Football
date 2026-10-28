@@ -208,9 +208,9 @@ export function MatchupScreen() {
           </div>
         )}
         <p className="mt-2 text-[11px] text-faint">
-          Projected finish: {projected.source === "espn" ? "ESPN's live projection" : "FantasyLab estimate (points so far + projection for the time left)"}.
+          Projected finish: {projected.source === "espn" ? "ESPN's live projection" : "Xpert estimate (points so far + projection for the time left)"}.
           {me.espn.otherStarters + opponent.espn.otherStarters > 0 &&
-            ` Includes ${pts(me.espn.otherPoints)} and ${pts(opponent.espn.otherPoints)} from defensive players (IDP), which FantasyLab doesn't track play by play.`}
+            ` Includes ${pts(me.espn.otherPoints)} and ${pts(opponent.espn.otherPoints)} from defensive players (IDP), which Xpert doesn't track play by play.`}
         </p>
       </section>
 

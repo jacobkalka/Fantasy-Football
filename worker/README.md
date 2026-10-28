@@ -2,7 +2,7 @@
 
 ## What it is, in plain English
 
-Right now each phone running FantasyLab asks our website for fresh scores every few seconds, and
+Right now each phone running Xpert asks our website for fresh scores every few seconds, and
 the website asks ESPN. That works, but it doesn't scale well and everyone polls separately.
 
 The **worker** is a small program that runs all the time on a server (Railway). It is the only

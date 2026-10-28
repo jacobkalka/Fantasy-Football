@@ -70,10 +70,12 @@
   /* Heights of the fixed chrome, so content and sheets never sit under it. */
   --tabbar-height: 64px;
   --tabbar-gap: 10px;
-  --safe-top: env(safe-area-inset-top, 0px);
-  --safe-bottom: env(safe-area-inset-bottom, 0px);
-  --safe-left: env(safe-area-inset-left, 0px);
-  --safe-right: env(safe-area-inset-right, 0px);
+  /* Inside the Android app, Capacitor sets --safe-area-inset-* (right on every WebView version);
+     browsers never set them, so the web uses env() exactly as before (capacitor.config.ts). */
+  --safe-top: var(--safe-area-inset-top, env(safe-area-inset-top, 0px));
+  --safe-bottom: var(--safe-area-inset-bottom, env(safe-area-inset-bottom, 0px));
+  --safe-left: var(--safe-area-inset-left, env(safe-area-inset-left, 0px));
+  --safe-right: var(--safe-area-inset-right, env(safe-area-inset-right, 0px));
 }
 
 html {

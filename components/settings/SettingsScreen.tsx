@@ -205,7 +205,7 @@ export function SettingsScreen() {
             hint={
               durable
                 ? "Your browser has agreed to keep it, even when space runs low."
-                : "Kept until you clear this site's data. iPhone Safari may clear sites you haven't opened in 7 days; adding FantasyLab to your Home Screen avoids that."
+                : "Kept until you clear this site's data. iPhone Safari may clear sites you haven't opened in 7 days; adding Xpert to your Home Screen avoids that."
             }
           >
             {durable === false && (

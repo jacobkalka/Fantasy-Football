@@ -52,7 +52,7 @@ export function LeagueAccess({ leagueId, onVerified }: { leagueId: string; onVer
       <div>
         <h2 className="text-[18px] leading-6 font-semibold">Members only</h2>
         <p className="mt-1 text-[14px] leading-5 text-muted">
-          {team?.espn?.leagueName ?? "This league"}&apos;s room is just for its managers. FantasyLab confirms with ESPN, using your ESPN
+          {team?.espn?.leagueName ?? "This league"}&apos;s room is just for its managers. Xpert confirms with ESPN, using your ESPN
           login, that your account owns a team in it. Your league, roster and login are never shown in chat.
         </p>
       </div>

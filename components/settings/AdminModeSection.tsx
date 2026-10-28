@@ -118,7 +118,7 @@ export function AdminModeSection() {
       <h2 id="admin" className="mb-1 flex scroll-mt-20 items-center gap-2 text-[16px] leading-6 font-semibold">
         <Icon name="shield" size={18} className="text-muted" /> Admin Mode
       </h2>
-      <p className="mb-4 text-[13px] text-muted">For the app&apos;s administrators. Checked on FantasyLab&apos;s server; nothing changes for anyone else.</p>
+      <p className="mb-4 text-[13px] text-muted">For the app&apos;s administrators. Checked on Xpert&apos;s server; nothing changes for anyone else.</p>
       {body}
     </Card>
   );

@@ -64,7 +64,7 @@ export function MatchupStrip({ view, href = "/team/matchup" }: { view: MatchupLi
         </div>
       )}
       <p className="mt-2 text-[11px] text-faint">
-        Projections: {projected.source === "espn" ? "ESPN live" : "FantasyLab estimate"} · <span className="group-hover:text-accent">Open matchup →</span>
+        Projections: {projected.source === "espn" ? "ESPN live" : "Xpert estimate"} · <span className="group-hover:text-accent">Open matchup →</span>
       </p>
     </Link>
   );

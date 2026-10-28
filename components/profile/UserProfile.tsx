@@ -55,7 +55,7 @@ export function UserProfile({ username }: { username: string }) {
   if (!signedIn) {
     return (
       <div className="card flex flex-col items-start gap-3 p-5">
-        <p className="text-[15px]">Sign in to see FantasyLab profiles.</p>
+        <p className="text-[15px]">Sign in to see Xpert profiles.</p>
         <ButtonLink href={`/auth/sign-in?next=${encodeURIComponent(`/u/${username}`)}`} variant="primary">
           Sign in
         </ButtonLink>
@@ -79,7 +79,7 @@ export function UserProfile({ username }: { username: string }) {
   }
   if (state.status === "error") return <ErrorState what="Couldn't load this profile." onRetry={() => setTick((t) => t + 1)} />;
   const { profile, teams } = state;
-  if (!profile) return <p className="text-[15px] text-muted">No one on FantasyLab goes by @{username}.</p>;
+  if (!profile) return <p className="text-[15px] text-muted">No one on Xpert goes by @{username}.</p>;
 
   const mine = profile.id === auth.user.id;
   const shown = mine ? teams : profile.isPublic ? teams.filter((t) => t.isVisible) : [];

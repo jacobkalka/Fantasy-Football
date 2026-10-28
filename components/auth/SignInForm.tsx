@@ -5,6 +5,7 @@ import { Icon } from "@/components/ui/Icon";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useInstallRoute } from "@/components/pwa/install";
+import { isNativeApp } from "@/lib/native/platform";
 import { Skeleton } from "@/components/ui/bits";
 import { fetchSignInOptions, sendSignInEmail, signInWithGoogle, useAuth, verifySignInCode } from "@/lib/supabase/auth";
 import { friendlyAuthError } from "@/lib/supabase/auth-errors";
@@ -47,7 +48,8 @@ export function SignInForm() {
   useEffect(() => {
     if (auth.status === "disabled") return;
     let alive = true;
-    void fetchSignInOptions().then((options) => alive && setGoogleOn(options?.google ?? false));
+    // Google refuses sign-in inside apps' built-in web views, so the Xpert app offers email only.
+    void fetchSignInOptions().then((options) => alive && setGoogleOn((options?.google ?? false) && !isNativeApp()));
     return () => {
       alive = false;
     };
@@ -163,7 +165,7 @@ export function SignInForm() {
               <p className="text-[15px] leading-relaxed text-muted">
                 We sent a sign-in link to <strong className="text-ink">{email}</strong>.{" "}
                 {installedApp
-                  ? "Type the code from the email here: in the Home Screen app, the link would open your browser instead."
+                  ? "Type the code from the email here: in the app, the link would open your browser instead."
                   : "Open it on this device. If the email shows a code, you can type it here instead."}
               </p>
             </div>

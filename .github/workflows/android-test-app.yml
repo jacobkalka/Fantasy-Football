@@ -1,0 +1,45 @@
+# Builds the Xpert Android test app (a debug APK) on GitHub's computers, so it can be installed
+# without Android Studio. It runs by itself when the phone app's files change, and from
+# Actions → "Android test app" → Run workflow (that button appears once this file is on the
+# default branch). The APK is under the run's "Artifacts". Nothing here touches the website or
+# Vercel. docs/SETUP.md part 6.
+name: Android test app
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "android/**"
+      - "native/**"
+      - "capacitor.config.ts"
+      - ".github/workflows/android-test-app.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  apk:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: 21
+      - name: Install packages
+        run: npm ci
+      - name: Copy the app settings into the Android project
+        run: npx cap sync android
+      - name: Build the APK
+        working-directory: android
+        run: ./gradlew --no-daemon assembleDebug
+      - uses: actions/upload-artifact@v4
+        with:
+          name: xpert-android-test
+          path: android/app/build/outputs/apk/debug/app-debug.apk
+          retention-days: 30

@@ -1,4 +1,4 @@
-# FantasyLab
+# Xpert
 
 A live fantasy football tracker. ESPN's app tells you your score; this tells you **what
 happened**: every play that moved your players' points, in plain English, as it happens.
@@ -7,7 +7,7 @@ happened**: every play that moved your players' points, in plain English, as it 
 
 ## Install it on your phone
 
-FantasyLab installs like an app: its own Home Screen icon, full screen, and screens you've
+Xpert installs like an app: its own Home Screen icon, full screen, and screens you've
 opened still show without a connection (live scores, projections and news always load fresh).
 
 - **iPhone / iPad:** open the site in Safari → Share → **Add to Home Screen** → Add. The app

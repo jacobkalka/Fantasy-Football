@@ -1,5 +1,5 @@
 /** The app's name, in one place. */
-export const APP_NAME = "FantasyLab";
+export const APP_NAME = "Xpert";
 
 export const APP_DESCRIPTION =
   "Your fantasy football lab: team rating, start/sit, trades, pickups and live scoring, built on real NFL data.";

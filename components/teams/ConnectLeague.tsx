@@ -46,7 +46,7 @@ export function ConnectLeague() {
       }
       setStep({ kind: "error", message: err.error ?? "Couldn't load that league." });
     } catch {
-      setStep({ kind: "error", message: "Couldn't reach FantasyLab. Check your connection and try again." });
+      setStep({ kind: "error", message: "Couldn't reach Xpert. Check your connection and try again." });
     }
   }
 
@@ -164,7 +164,7 @@ export function ConnectLeague() {
             <EspnLogin onConnected={() => void lookUp(step.leagueId, step.season)} />
           ) : auth.status === "disabled" ? (
             <p className="text-[14px] text-muted">
-              Private leagues need accounts, which aren&apos;t set up on this copy of FantasyLab yet. Public leagues work now.
+              Private leagues need accounts, which aren&apos;t set up on this copy of Xpert yet. Public leagues work now.
             </p>
           ) : (
             <ButtonLink href={`/auth/sign-in?next=${encodeURIComponent(`/team/connect?league=${step.leagueId}`)}`} variant="primary" icon="user">

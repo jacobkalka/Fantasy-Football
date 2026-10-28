@@ -94,7 +94,7 @@ export function EspnLogin({ onConnected }: { onConnected?: () => void }) {
             <li>Open the browser&apos;s developer tools (F12 or ⌥⌘I), then Application (Chrome) or Storage (Firefox, Safari) → Cookies → espn.com.</li>
             <li>Copy the values of <span className="text-ink">espn_s2</span> (a long string) and <span className="text-ink">SWID</span> (in curly braces).</li>
           </ol>
-          <p className="mt-2">They let FantasyLab read your private leagues, nothing else. They&apos;re encrypted on our server and you can disconnect any time.</p>
+          <p className="mt-2">They let Xpert read your private leagues, nothing else. They&apos;re encrypted on our server and you can disconnect any time.</p>
         </details>
         <label className="flex flex-col gap-1 text-[13px] text-muted">
           espn_s2

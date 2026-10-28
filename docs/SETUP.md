@@ -10,6 +10,7 @@ build reaches it; you don't need everything on day one.
 | [3](#3-environment-variables-in-plain-english) | Environment variables, explained | Read once |
 | [4](#4-create-the-database-supabase) | Create the database (Supabase) | Phase 3–4 |
 | [5](#5-the-live-data-worker-railway) | The live-data worker (Railway) | Phase 3 |
+| [6](#6-the-xpert-phone-app-android-and-iphone) | The Xpert phone app (Android and iPhone) | Optional; the website keeps working without it |
 
 ---
 
@@ -119,15 +120,16 @@ Supabase stores accounts, rosters and chat, and pushes live updates to everyone'
    - **Email**: Supabase's built-in email sender only delivers to members of your Supabase
      project, and only a few per hour. For friends to sign in, set up an email service under
      **Authentication → SMTP Settings** (Resend has a free plan), or add their emails as project
-     members while testing.
+     members while testing. Set **Sender name** to `Xpert` so the emails come from Xpert.
    - Optional but recommended, **Email Templates**: add `{{ .Token }}` to the "Magic Link" and
      "Confirm signup" emails so the 6-digit code works when the email opens in a different app,
-     and in the iPhone Home Screen app (there the link opens Safari, so typing the code is the
-     way to sign in).
+     in the iPhone Home Screen app and in the Xpert phone app (there the link opens your
+     browser, so typing the code is the way to sign in). While you're there, change any subject
+     line that says "Supabase" to something like `Your Xpert sign-in link`.
    - Optional, **Google sign-in**: in Google Cloud Console create an OAuth client (Web
      application) with redirect URI `https://<project-ref>.supabase.co/auth/v1/callback`, then
      paste its ID and secret under **Authentication → Sign In / Providers → Google**. The Google
-     button appears in FantasyLab by itself once this is on.
+     button appears in Xpert by itself once this is on.
 9. **Realtime**: the migrations already turn it on for chat. Check under **Database →
    Publications** that `messages`, `message_reactions`, `chat_poll_votes` and `chat_rooms` are
    listed. (There are three migration files now: the original tables, the community chat and
@@ -200,3 +202,133 @@ plays, points and injury changes to Supabase. One worker serves every user.
 Supabase's **Table Editor**, `teams` has 32 rows, `games` has this week's games and `players`
 about 1,050. Under **Settings → Networking → Generate Domain**, visiting `/health` shows `ok`.
 Optional tuning variables are listed in `.env.example` and `worker/README.md`.
+
+## 6. The Xpert phone app (Android and iPhone)
+
+*Optional. The website (and its Add to Home Screen version) keeps working exactly as before;
+the phone app is an extra way in, not a replacement.*
+
+The app is a window onto the live website (Capacitor, `capacitor.config.ts`): it opens
+`https://fantasy-football-xi-ecru.vercel.app` full screen. Every website update shows up in the
+app straight away, with no App Store or Play Store update. What's different inside the app:
+there's no "install the app" banner, Google sign-in is hidden (Google blocks it inside apps;
+sign in with the emailed code instead), Android's Back button goes back a screen, and when
+there's no connection the app shows its own "Xpert didn't load" page with **Try again**.
+
+App name **Xpert**, app ID `com.xpertfantasy.app` (permanent once it's in a store).
+
+### 6a. Put the test app on an Android phone (no accounts needed)
+
+1. Get the file `Xpert-test.apk` (Claude sends it, or see 6c). Open it on the phone: from the
+   Files app, Downloads, or by tapping it in your email or chat.
+2. Android asks whether that app (Chrome, Files, Gmail…) may install apps. Tap **Settings**,
+   switch on **Allow from this source**, go back, then tap **Install**.
+3. If Play Protect warns about an unknown app, tap **More details** → **Install anyway**. It
+   says that because test apps don't come from the Play Store.
+4. Open **Xpert** from your app list.
+
+Updating: open a newer APK and tap **Update**. If Android says **App not installed** (or that
+it conflicts with an existing app), the new file was made on a different computer, so its test
+signature doesn't match. Uninstall Xpert first, then install. Uninstalling erases teams saved
+only in the app; sign in (Settings → Account) or use a team link to bring them back.
+
+### 6b. Build the APK yourself on Windows (Android Studio)
+
+You need three free programs. Install each with its default options.
+
+1. **Node.js**: go to **nodejs.org**, download the **LTS** version for Windows (22 or newer),
+   run it, click **Next** until **Finish**.
+2. **Git**: go to **git-scm.com**, click **Download for Windows**, run it, keep clicking
+   **Next**, then **Install**.
+3. **Android Studio**: go to **developer.android.com/studio**, click **Download Android
+   Studio** (version Otter 2025.2.1 or newer), run it, choose **Standard** setup. The first
+   start downloads the Android tools; let it finish.
+4. Get the code. Press the **Windows** key, type `cmd`, press Enter, then paste these lines
+   one at a time (Enter after each). Git may open a browser window to sign in to GitHub.
+   ```
+   cd %USERPROFILE%\Documents
+   git clone https://github.com/jacobkalka/Fantasy-Football.git
+   cd Fantasy-Football
+   git checkout claude/keen-lamport-ibcbi9
+   npm install
+   npx cap sync android
+   ```
+   (Use the branch Claude tells you; after the phone app is merged it's the main branch and
+   you can skip the `git checkout` line. Next time, just run `git pull`, `npm install` and
+   `npx cap sync android` inside `Documents\Fantasy-Football`.)
+5. In Android Studio click **Open**, pick the folder `Documents\Fantasy-Football\android`
+   (the `android` folder, not the one above it) and click **OK**. Trust the project if asked.
+   Wait until the bar at the bottom stops saying **Gradle sync** (several minutes the first
+   time). If it offers to upgrade the "Android Gradle Plugin", say no for now.
+6. Menu **Build** → **Generate App Bundles or APKs** → **Generate APKs**. When the message
+   "APK(s) generated successfully" appears, click **locate**. The file is
+   `android\app\build\outputs\apk\debug\app-debug.apk`. Copy it to your phone (USB cable,
+   Google Drive, or email it to yourself) and follow 6a.
+7. Or install it straight onto your phone: on the phone open **Settings → About phone** and tap
+   **Build number** 7 times (Samsung: **About phone → Software information**), then **Settings →
+   System → Developer options** (Samsung: at the bottom of Settings) → turn on **USB
+   debugging**. Plug the phone into the computer, allow the prompt on the phone, choose your
+   phone in the device list at the top of Android Studio and click the green **▶ Run** button.
+
+### 6c. Get the APK without installing anything (GitHub)
+
+GitHub builds the test app by itself whenever the phone app's files change
+(`.github/workflows/android-test-app.yml`). On github.com open the repository → **Actions** →
+**Android test app** → the newest run with a green tick → scroll to **Artifacts** →
+**xpert-android-test**. That downloads a zip; inside is `app-debug.apk` (follow 6a). Once the
+workflow is on the main branch there's also a **Run workflow** button to build one on demand.
+Each of these builds has its own test signature, so uninstall before installing a newer one
+(see 6a, Updating).
+
+### 6d. iPhone: what's realistic without a Mac
+
+iPhone apps can only be built on a Mac with Xcode 26 or newer; Windows can't do it, and neither
+can the cloud computer Claude works on. The iOS project is ready in `ios/` for whichever option
+you choose:
+
+- **Codemagic** (recommended to start): a build service with cloud Macs. Its free plan for one
+  person includes 500 Mac build minutes a month (checked October 2026). Sign in
+  with GitHub, add this repository, and it builds the app and can send it to TestFlight.
+- **Ionic Appflow** (made by Capacitor's company; paid), **GitHub Actions** Mac computers (they
+  use up free minutes 10 times faster), or renting a cloud Mac by the hour (for example
+  MacinCloud). Borrowing a friend's Mac with Xcode also works.
+- To install on any iPhone you need the **Apple Developer Program: $99 a year**
+  (developer.apple.com/programs). Then TestFlight puts test builds on your phone and up to 100
+  people on your team. A free Apple account only works from a Mac, and those installs expire
+  after 7 days.
+- Honest warning about the App Store: Apple rejects apps that are "just a website" (App Review
+  Guideline 4.2). The phone-only features planned next (one-tap ESPN and Yahoo sign-in) help,
+  but approval isn't guaranteed. TestFlight testing is much less strict.
+- Until then, iPhone users can use the website's **Share → Add to Home Screen** app, which
+  already works.
+
+### 6e. Google Play (when you're ready to publish)
+
+- A Google Play developer account costs **US$25 once** (play.google.com/console).
+- New personal accounts must run a **closed test with at least 12 testers for 14 days in a
+  row** before Google allows a public release.
+- Publishing needs a permanent signing key (a "release keystore"). Ask Claude to set it up
+  then; it gets stored as a GitHub or Play Console secret, never pasted into a chat.
+
+### 6f. Changing the app icon or splash screen later
+
+Today's icon and splash are made from your existing logo, unchanged (`scripts/native-assets.mjs`
+made them from `public/brand/icon-1024.png` and `public/brand/mark.svg`). To use new artwork,
+replace these five files in `assets/` with PNGs of the same size and name:
+
+| File | Size | What it is |
+|------|------|------------|
+| `assets/icon-only.png` | 1024 × 1024 | The whole icon (iPhone, and older Android phones) |
+| `assets/icon-foreground.png` | 1024 × 1024, transparent | Just the logo for Android's shaped icons; keep it inside the middle two-thirds |
+| `assets/icon-background.png` | 1024 × 1024 | The colour behind that logo |
+| `assets/splash.png` | 2732 × 2732 | Launch screen: the logo centred on black |
+| `assets/splash-dark.png` | 2732 × 2732 | The same for dark mode |
+
+Then run this in the `Fantasy-Football` folder (or ask Claude to) and build again (6b or 6c):
+
+```
+npx @capacitor/assets@3.0.5 generate --android --ios --iconBackgroundColor "#14161e" --iconBackgroundColorDark "#14161e" --splashBackgroundColor "#000000" --splashBackgroundColorDark "#000000"
+```
+
+Keep `--android --ios` in it: without them the tool also writes website icons, and the website's
+icons live separately in `public/brand/` and `public/splash/`.

@@ -65,7 +65,7 @@ export function Sidebar() {
 export function SidebarFrame({ nav, footer }: { nav: React.ReactNode; footer: React.ReactNode }) {
   return (
     <aside className="sticky top-0 hidden h-dvh w-[232px] shrink-0 flex-col border-r border-line px-3 pt-6 pb-4 lg:flex">
-      <Link href="/" className="mb-7 block rounded-lg px-3 py-1" aria-label="FantasyLab home">
+      <Link href="/" className="mb-7 block rounded-lg px-3 py-1" aria-label="Xpert home">
         <Wordmark height={21} />
       </Link>
       <div className="min-h-0 flex-1 overflow-y-auto">{nav}</div>

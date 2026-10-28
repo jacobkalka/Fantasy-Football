@@ -262,7 +262,7 @@ export function PlayerProfile({ playerId, inSheet = false }: { playerId: string;
             <StatTile
               label={live.game?.state === "in" ? "On pace for" : "Projected finish"}
               value={pts(projection?.projected ?? null)}
-              sub={live.game?.state === "in" ? "FantasyLab estimate" : undefined}
+              sub={live.game?.state === "in" ? "Xpert estimate" : undefined}
             />
           </div>
           {live.game?.state === "in" && (

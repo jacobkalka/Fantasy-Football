@@ -9,7 +9,7 @@ export const metadata: Metadata = { title: "Profile" };
 async function Profile({ params }: { params: PageProps<"/u/[username]">["params"] }) {
   const { username } = await params;
   const name = decodeURIComponent(username).toLowerCase();
-  if (!/^[a-z0-9_]{3,24}$/.test(name)) return <p className="card p-5 text-[15px]">That isn&apos;t a FantasyLab username.</p>;
+  if (!/^[a-z0-9_]{3,24}$/.test(name)) return <p className="card p-5 text-[15px]">That isn&apos;t an Xpert username.</p>;
   return <UserProfile username={name} />;
 }
 

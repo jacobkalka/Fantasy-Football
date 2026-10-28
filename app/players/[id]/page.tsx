@@ -10,7 +10,7 @@ export const metadata: Metadata = { title: "Player" };
 async function Profile({ params }: { params: PageProps<"/players/[id]">["params"] }) {
   const { id } = await params;
   if (!/^-?\d{1,12}$/.test(id)) {
-    return <p className="card p-5 text-[15px]">That isn&apos;t a player link FantasyLab recognizes.</p>;
+    return <p className="card p-5 text-[15px]">That isn&apos;t a player link Xpert recognizes.</p>;
   }
   return <PlayerProfile playerId={id} />;
 }

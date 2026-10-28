@@ -6,7 +6,7 @@ import { gsap, MOTION, prefersReducedMotion } from "@/lib/motion/gsap";
 /**
  * Win probability as a tug-of-war bar: your share from the left in the brand colour, the
  * opponent's from the right. The number is always written out (never colour alone), with
- * whose estimate it is ("ESPN" or "FantasyLab estimate").
+ * whose estimate it is ("ESPN" or "Xpert estimate").
  */
 export function WinMeter({
   probability,
@@ -49,7 +49,7 @@ export function WinMeter({
       >
         <span ref={fill} className="block h-full rounded-full bg-accent" style={{ width: "50%" }} />
       </div>
-      <p className="mt-1 text-[11px] text-faint">{source === "espn" ? "Win probability from ESPN" : "FantasyLab estimate"}</p>
+      <p className="mt-1 text-[11px] text-faint">{source === "espn" ? "Win probability from ESPN" : "Xpert estimate"}</p>
     </div>
   );
 }
