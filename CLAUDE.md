@@ -153,8 +153,12 @@ reference 6 h. In this sandbox, server-side ESPN fetches need `NODE_USE_ENV_PROX
 changes also `node scripts/test-pwa.mjs` (needs playwright-core + Chromium; see its header; in
 this sandbox `PLAYWRIGHT_CORE=/opt/node22/lib/node_modules/playwright
 CHROME_PATH=/opt/pw-browsers/chromium-1243/chrome-linux64/chrome`).
-Last full run (2026-10-27): lint clean, 633 tests, build OK, 170 DB checks, PWA 48/48, Taste
-lint 0 FAIL and inspect 0 FAIL on the main screens. (PWA: 45/48 on the full run, the 3 misses were the test still expecting the old "Plays" title; fixed and re-run 40/40 with the update and dev rounds skipped, which had passed.)
+Last full run (2026-10-28, Xpert phase 1): lint clean, tsc clean, 633 tests, build OK, 170 DB
+checks, PWA 48/48, debug APK built (aapt: label Xpert, `com.xpertfantasy.app`, INTERNET only), and
+a scratch Playwright check of the site with the app's user agent / an injected Capacitor bridge
+(native marked, install card hidden, Settings "Installed", Capacitor insets drive `--safe-top`,
+browser unchanged, manifest Xpert). Taste checks last ran 2026-10-27 (0 FAIL); phase 1 changed
+only text, so they weren't re-run.
 Phone app: after `npx cap sync`, `cd android && ANDROID_HOME=<sdk> ./gradlew assembleDebug`. The
 sandbox has no Android SDK by default (one session installed it at `/opt/android-sdk` from
 Google's cmdline-tools, checksum verified); Maven Central rate-limits this machine (HTTP 429), so
@@ -165,12 +169,27 @@ hard-linked `node_modules` is the safe place for builds while editing elsewhere.
 changes may need a `next dev` restart to show. Chat can only be clicked through here against a
 scratch-only Playwright fake of Supabase (REST/Auth/Realtime); real use needs a Supabase project.
 
-## Current state (2026-10-27)
+## Current state (2026-10-28)
 
-Branch `claude/keen-lamport-ibcbi9`, merged (fast-forward) into `claude/epic-lamport-wvbbwz`,
-which Vercel deploys. The owner's big upgrade brief (fantasy-first Home, multiple
-teams and ESPN leagues, matchup, live tabs and tracker, news, community chat, public profiles,
-Admin Mode, GSAP-only motion, full QA) is built and validated as listed above.
+The owner's big upgrade brief (fantasy-first Home, multiple teams and ESPN leagues, matchup,
+live tabs and tracker, news, community chat, public profiles, Admin Mode, GSAP-only motion,
+full QA) is live on `claude/epic-lamport-wvbbwz`.
+
+The **Xpert brief** (2026-10-27) is in five phases, each stopping for the owner to test:
+1. ✅ Rename to Xpert + Capacitor app + Android APK (commit 24cf021 on `claude/keen-lamport-ibcbi9`,
+   **not merged**: the owner merges after confirming the web app still works).
+2. Sign in with ESPN, app only: in-app browser to the ESPN/Disney login, read `espn_s2`/`SWID`
+   (HttpOnly) from the native cookie store, POST to `/api/espn/connection` (encrypted with
+   `ESPN_COOKIE_ENCRYPTION_KEY`), never log them or put them in URLs, never touch the password,
+   detect expiry and ask to sign in again. Research the cookie-store plugin first.
+3. Sleeper (username → league and season; rosters, matchups, live scoring, players/injuries,
+   transactions) mapped into the same model and screens. Check current API docs and limits.
+4. Yahoo (OAuth 2.0 on web and in the app; tokens encrypted server-side with refresh; walk the
+   owner through the Yahoo developer app named Xpert and its Redirect URI).
+5. One provider abstraction for ESPN/Sleeper/Yahoo, several leagues across services, and a
+   Connect screen with three big options; the web ESPN cookie method under "Advanced" with the
+   tip that commissioners can make a league public. Keep the existing look.
+At the end: a checklist of the owner's manual tasks and the list of every logo/branding file.
 
 ## Unfinished / known issues
 
@@ -184,6 +203,11 @@ Admin Mode, GSAP-only motion, full QA) is built and validated as listed above.
 - Push notifications: not built (need VAPID keys, a subscriptions table, the worker running).
 - `lib/players/search.ts` powers GlobalSearch, chat and pickers; PlayerBrowser was replaced by
   Rankings.
+- Phone app: not yet run on a real phone or emulator (no emulator here); iOS never built (needs
+  a Mac/Codemagic and the $99 Apple program). Test APKs are debug-signed per machine. The old
+  name is still drawn inside `public/brand/wordmark*.svg` (shown in the top bar/sidebar) and in
+  `public/screenshots/*.png`; the owner said to leave logo art alone. `APP_DESCRIPTION` still
+  says "Your fantasy football lab" (the owner may want new wording).
 
 ## Suggested next work (recommendation, not confirmed requirements)
 
